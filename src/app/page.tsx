@@ -318,8 +318,10 @@ export default function Home() {
     const [orderStatus, setOrderStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
     const [showAllProjects, setShowAllProjects] = useState(false);
     const [showAllCerts, setShowAllCerts] = useState(false);
+    const [showAllExperience, setShowAllExperience] = useState(false);
     const initialProjectsToShow = 4;
     const initialCertsToShow = 4;
+    const initialExperienceToShow = 4;
 
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm<OrderFormData>({
@@ -930,7 +932,7 @@ export default function Home() {
           <h2 className="text-3xl font-bold text-center mb-12"><TranslatedText text="Work Experience" /></h2>
           <div className="max-w-3xl mx-auto">
             <Accordion type="single" collapsible className="w-full">
-              {experiences.map((exp, index) => (
+              {(showAllExperience ? experiences : experiences.slice(0, initialExperienceToShow)).map((exp, index) => (
                 <AccordionItem value={`item-${index}`} key={index}>
                   <AccordionTrigger>
                     <div className="text-left">
@@ -947,6 +949,14 @@ export default function Home() {
                 </AccordionItem>
               ))}
             </Accordion>
+            {!showAllExperience && experiences.length > initialExperienceToShow && (
+                <div className="text-center mt-8">
+                    <Button variant="secondary" onClick={() => setShowAllExperience(true)}>
+                        <TranslatedText text="View All Experience" />
+                        <ChevronDown className="ml-2 h-4 w-4" />
+                    </Button>
+                </div>
+            )}
           </div>
         </section>
         
