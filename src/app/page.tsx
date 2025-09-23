@@ -97,18 +97,8 @@ const projects = [
 const experiences = [
     {
         title: "Software Engineer for AI Training Data",
-        company: "Invisible Technologies",
-        duration: "June 2025 – Present",
-        details: [
-            "Evaluated AI-generated code quality and provided human-readable summaries.",
-            "Solved coding problems with functional and efficient solutions.",
-            "Wrote robust test cases to confirm code effectiveness."
-        ]
-    },
-    {
-        title: "Software Engineer for AI Training Data",
-        company: "Outlier",
-        duration: "Feb 2024 – Feb 2025",
+        company: "Invisible Technologies & Outlier",
+        duration: "Feb 2024 – Present",
         details: [
             "Evaluated AI-generated code quality and provided human-readable summaries.",
             "Solved coding problems with functional and efficient solutions.",
@@ -412,7 +402,7 @@ export default function Home() {
                     email: "musondasalim@gmail.com",
                     phone1: "+260 977 288 260",
                     phone2: "+260 979 287 496",
-                    linkedin: "linkedin.com/in/musonda-salimu-a4a0b31b9",
+                    linkedin: "linkedin.com/in/musonda-salimu-a4a0b31b9/",
                     github: "github.com/MS0C54073",
                 },
                 about: "A results-driven IT professional with an MSc in Informatics and hands-on experience in software engineering, system administration, and AI model training. Proven ability to evaluate and improve AI-generated code, develop efficient software solutions, and manage complex IT systems. Seeking to leverage a strong foundation in Python, cybersecurity, and modern web frameworks to build innovative and scalable AI-powered applications.",
@@ -542,9 +532,9 @@ export default function Home() {
                     { title: "Python (Basic) Certificate", issuer: "HackerRank", type: "Certificate", date: "Issued Aug 2020", credentialId: "6E56080D33F3" },
                 ]
             };
-
+            
             const doc = new jsPDF({ unit: 'px', format: 'a4' });
-            doc.setFont('helvetica');
+            doc.setFont('Helvetica', 'normal');
 
             // --- Document Settings ---
             const pageHeight = doc.internal.pageSize.getHeight();
@@ -552,7 +542,7 @@ export default function Home() {
             const margin = 30;
             const contentWidth = pageWidth - margin * 2;
             const lineHeight = 1.15;
-            let y = 0; // Y position tracker
+            let y = 0;
 
             // --- Helper Functions ---
             const checkPageBreak = (heightNeeded: number) => {
@@ -561,30 +551,31 @@ export default function Home() {
                     y = margin;
                 }
             };
+            
             const addSectionTitle = (title: string) => {
                 checkPageBreak(30);
-                y += 10; // Extra space before section
+                y += 10;
                 doc.setFontSize(12);
-                doc.setFont('helvetica', 'bold');
-                doc.setTextColor('#2563EB'); // Primary color
+                doc.setFont('Helvetica', 'bold');
+                doc.setTextColor('#2563EB');
                 doc.text(title.toUpperCase(), margin, y);
                 y += 5;
                 doc.setDrawColor(220, 220, 220);
                 doc.setLineWidth(0.5);
                 doc.line(margin, y, margin + contentWidth, y);
-                y += 12;
+                y += 12 * lineHeight;
             };
 
             // --- Header ---
-            y = margin; // Start from top margin
+            y = margin;
             doc.setFontSize(24);
-            doc.setFont('helvetica', 'bold');
+            doc.setFont('Helvetica', 'bold');
             doc.setTextColor('#000000');
             doc.text(cvData.name, margin, y);
             y += 20;
             
             doc.setFontSize(11);
-            doc.setFont('helvetica', 'normal');
+            doc.setFont('Helvetica', 'normal');
             doc.setTextColor('#555555');
             doc.text(cvData.jobTitle, margin, y);
             y += 15;
@@ -599,7 +590,7 @@ export default function Home() {
             // --- Summary ---
             addSectionTitle("Summary");
             doc.setFontSize(9);
-            doc.setFont('helvetica', 'normal');
+            doc.setFont('Helvetica', 'normal');
             doc.setTextColor('#333333');
             const aboutLines = doc.splitTextToSize(cvData.about, contentWidth);
             doc.text(aboutLines, margin, y);
@@ -615,6 +606,7 @@ export default function Home() {
                 const colSkills = cvData.skills.slice(i * skillsPerCol, (i + 1) * skillsPerCol);
                 let currentY = y;
                 colSkills.forEach(skill => {
+                    checkPageBreak(9 * lineHeight);
                     doc.text(`•  ${skill}`, margin + i * colWidth, currentY);
                     currentY += 9 * lineHeight;
                 });
@@ -627,30 +619,30 @@ export default function Home() {
             cvData.experience.forEach(exp => {
                 checkPageBreak(40);
                 doc.setFontSize(10);
-                doc.setFont('helvetica', 'bold');
+                doc.setFont('Helvetica', 'bold');
                 doc.setTextColor('#000000');
                 doc.text(exp.title, margin, y);
 
-                doc.setFont('helvetica', 'normal');
+                doc.setFont('Helvetica', 'normal');
                 doc.setTextColor('#555555');
                 doc.text(exp.duration, pageWidth - margin, y, { align: 'right' });
                 y += 10 * lineHeight;
 
                 doc.setFontSize(9);
-                doc.setFont('helvetica', 'italic');
+                doc.setFont('Helvetica', 'italic');
                 doc.text(exp.company, margin, y);
                 y += 12;
                 
                 doc.setFontSize(9);
-                doc.setFont('helvetica', 'normal');
+                doc.setFont('Helvetica', 'normal');
                 doc.setTextColor('#333333');
                 exp.details.forEach(detail => {
                     const detailLines = doc.splitTextToSize(`•  ${detail}`, contentWidth - 10);
-                    checkPageBreak(detailLines.length * 9 * lineHeight + 2);
+                    checkPageBreak(detailLines.length * 9 * lineHeight);
                     doc.text(detailLines, margin + 5, y);
-                    y += detailLines.length * 9 * lineHeight + 2;
+                    y += detailLines.length * 9 * lineHeight;
                 });
-                y += 4; // Space between entries
+                y += 4;
             });
 
             // --- Education ---
@@ -658,57 +650,53 @@ export default function Home() {
             cvData.education.forEach(edu => {
                 checkPageBreak(edu.details ? 35 : 25);
                 doc.setFontSize(10);
-                doc.setFont('helvetica', 'bold');
+                doc.setFont('Helvetica', 'bold');
                 doc.setTextColor('#000000');
                 doc.text(edu.degree, margin, y);
 
-                doc.setFont('helvetica', 'normal');
+                doc.setFont('Helvetica', 'normal');
                 doc.setTextColor('#555555');
                 doc.text(edu.duration, pageWidth - margin, y, { align: 'right' });
                 y += 10 * lineHeight;
 
                 doc.setFontSize(9);
-                doc.setFont('helvetica', 'italic');
+                doc.setFont('Helvetica', 'italic');
                 doc.text(edu.university, margin, y);
                 y += 10 * lineHeight;
 
                 if (edu.details) {
                     doc.setFontSize(8);
-                    doc.setFont('helvetica', 'normal');
+                    doc.setFont('Helvetica', 'normal');
                     const detailLines = doc.splitTextToSize(edu.details, contentWidth - 5);
                     checkPageBreak(detailLines.length * 8 * lineHeight);
                     doc.text(detailLines, margin + 5, y);
                     y += detailLines.length * 8 * lineHeight;
                 }
-                y += 4; // Space between entries
+                y += 4;
             });
 
             // --- Licenses & Certifications ---
             addSectionTitle("Licenses & Certifications");
             cvData.certifications.forEach(cert => {
                 checkPageBreak(cert.courses ? 35 : 25);
-                // Line 1: Title
                 doc.setFontSize(10);
-                doc.setFont('helvetica', 'bold');
+                doc.setFont('Helvetica', 'bold');
                 doc.setTextColor('#000000');
                 doc.text(cert.title, margin, y);
                 y += 10 * lineHeight;
 
-                // Line 2: Issuer & Type
                 doc.setFontSize(9);
-                doc.setFont('helvetica', 'normal');
+                doc.setFont('Helvetica', 'normal');
                 doc.setTextColor('#555555');
                 const issuerLine = `${cert.issuer} · ${cert.type}`;
                 doc.text(issuerLine, margin, y);
                 
-                // Line 3: Date
                 doc.text(cert.date, pageWidth - margin, y, { align: 'right' });
                 y += 10 * lineHeight;
 
-                // Line 4: Details (Courses)
                 if (cert.courses) {
                     doc.setFontSize(8);
-                    doc.setFont('helvetica', 'italic');
+                    doc.setFont('Helvetica', 'italic');
                     const coursesText = `Relevant Coursework: ${cert.courses.join(', ')}`;
                     const courseLines = doc.splitTextToSize(coursesText, contentWidth);
                     checkPageBreak(courseLines.length * 8 * lineHeight);
@@ -718,44 +706,21 @@ export default function Home() {
                 
                 if (cert.credentialId) {
                     doc.setFontSize(8);
-                    doc.setFont('helvetica', 'italic');
+                    doc.setFont('Helvetica', 'italic');
                     doc.text(`Credential ID: ${cert.credentialId}`, margin, y);
                     y += 8 * lineHeight;
                 }
-                y += 4; // Space between entries
+                y += 4;
             });
 
             // --- References ---
             doc.addPage();
             y = margin;
             addSectionTitle("References");
-            references.forEach((ref, index) => {
-                checkPageBreak(40);
-                doc.setFontSize(10);
-                doc.setFont('helvetica', 'bold');
-                doc.setTextColor('#000000');
-                doc.text(ref.name, margin, y);
-                y += 10 * lineHeight;
-
-                doc.setFontSize(9);
-                doc.setFont('helvetica', 'normal');
-                doc.setTextColor('#555555');
-                doc.text(`${ref.title}, ${ref.company}`, margin, y);
-                y += 10 * lineHeight;
-
-                if (ref.email) {
-                    doc.text(`Email: ${ref.email}`, margin, y);
-                    y += 10 * lineHeight;
-                }
-                if (ref.phone) {
-                    doc.text(`Phone: ${ref.phone}`, margin, y);
-                    y += 10 * lineHeight;
-                }
-
-                if (index < references.length - 1) {
-                    y += 8; // Add space between references
-                }
-            });
+            doc.setFontSize(10);
+            doc.setFont('Helvetica', 'normal');
+            doc.setTextColor('#333333');
+            doc.text("Available upon request.", margin, y);
 
 
             // --- Final Output ---
@@ -1137,7 +1102,7 @@ export default function Home() {
                         <TranslatedText text="Submitted!" />
                       </>
                     ) : (
-                      <TranslatedText text="Submit Request" />
+                      <TranslatedText text="Send Project Details" />
                     )}
                   </Button>
                 </div>
@@ -1153,3 +1118,5 @@ export default function Home() {
       </div>
   );
 }
+
+    
