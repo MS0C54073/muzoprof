@@ -319,6 +319,7 @@ export default function Home() {
     const [showAllProjects, setShowAllProjects] = useState(false);
     const [showAllCerts, setShowAllCerts] = useState(false);
     const [showAllExperience, setShowAllExperience] = useState(false);
+    const [openAccordionItems, setOpenAccordionItems] = useState<string[]>([]);
     const initialProjectsToShow = 4;
     const initialCertsToShow = 4;
     const initialExperienceToShow = 4;
@@ -931,7 +932,12 @@ export default function Home() {
         <section id="experience" className="py-20 border-t">
           <h2 className="text-3xl font-bold text-center mb-12"><TranslatedText text="Work Experience" /></h2>
           <div className="max-w-3xl mx-auto">
-            <Accordion type="single" collapsible className="w-full">
+            <Accordion 
+              type="multiple"
+              className="w-full"
+              value={openAccordionItems}
+              onValueChange={setOpenAccordionItems}
+            >
               {(showAllExperience ? experiences : experiences.slice(0, initialExperienceToShow)).map((exp, index) => (
                 <AccordionItem value={`item-${index}`} key={index}>
                   <AccordionTrigger>
@@ -951,7 +957,13 @@ export default function Home() {
             </Accordion>
             {!showAllExperience && experiences.length > initialExperienceToShow && (
                 <div className="text-center mt-8">
-                    <Button variant="secondary" onClick={() => setShowAllExperience(true)}>
+                    <Button 
+                        variant="secondary" 
+                        onClick={() => {
+                            setShowAllExperience(true);
+                            setOpenAccordionItems(experiences.map((_, index) => `item-${index}`));
+                        }}
+                    >
                         <TranslatedText text="View All Experience" />
                         <ChevronDown className="ml-2 h-4 w-4" />
                     </Button>
@@ -1180,3 +1192,4 @@ export default function Home() {
 }
 
     
+
