@@ -320,9 +320,11 @@ export default function Home() {
     const [showAllCerts, setShowAllCerts] = useState(false);
     const [showAllExperience, setShowAllExperience] = useState(false);
     const [openAccordionItems, setOpenAccordionItems] = useState<string[]>([]);
+    const [showAllEducation, setShowAllEducation] = useState(false);
     const initialProjectsToShow = 4;
     const initialCertsToShow = 4;
     const initialExperienceToShow = 4;
+    const initialEducationToShow = 4;
 
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm<OrderFormData>({
@@ -977,7 +979,7 @@ export default function Home() {
           <h2 className="text-3xl font-bold text-center mb-12"><TranslatedText text="Education" /></h2>
           <div className="max-w-3xl mx-auto relative pl-8">
             <div className="absolute left-0 top-0 h-full w-0.5 bg-border"></div>
-            {education.map((edu, index) => (
+            {(showAllEducation ? education : education.slice(0, initialEducationToShow)).map((edu, index) => (
               <div key={index} className="mb-12 relative">
                 <div className="absolute left-[-34px] top-1.5 w-4 h-4 bg-primary rounded-full border-4 border-background"></div>
                 <p className="text-sm text-muted-foreground">{edu.duration}</p>
@@ -986,6 +988,14 @@ export default function Home() {
               </div>
             ))}
           </div>
+          {!showAllEducation && education.length > initialEducationToShow && (
+              <div className="text-center mt-8">
+                  <Button variant="secondary" onClick={() => setShowAllEducation(true)}>
+                      <TranslatedText text="View All Education" />
+                      <ChevronDown className="ml-2 h-4 w-4" />
+                  </Button>
+              </div>
+          )}
         </section>
 
         {/* Awards Section */}
@@ -1192,4 +1202,5 @@ export default function Home() {
 }
 
     
+
 
