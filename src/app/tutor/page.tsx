@@ -128,7 +128,7 @@ export default function TutorPage() {
             <Card className="shadow-lg h-full">
               <CardHeader className="p-0">
                   <Image
-                    src="https://picsum.photos/seed/tutoring/800/400"
+                    src="https://drive.google.com/uc?id=1dteuS0zoNLTLo_oVjkFlPPW5CCyn2Wd9"
                     alt="Online Tutoring Session"
                     width={800}
                     height={400}
