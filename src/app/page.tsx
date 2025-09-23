@@ -247,8 +247,6 @@ const awards = [
 const certifications = [
     { title: 'Introduction to Cybersecurity', issuer: 'SMART ZAMBIA INSTITUTE (Cisco Networking Academy)', date: 'Jul 2025', skills: ['Cybersecurity'] },
     { title: 'AI Agents and Agentic AI in Python: Powered by Generative AI', issuer: 'Vanderbilt University', date: 'Aug 2025', credentialId: 'K42YL24QMRT3' },
-    { title: 'EF SET English Certificate', issuer: 'EF SET', date: 'Sep 2024' },
-    { title: 'Teacher Of English To Speakers Of Other Languages (TEFL)', issuer: 'Teacher Record', date: 'Sep 2023', credentialId: 'TR2672252278' },
     { title: 'Automate Cybersecurity Tasks with Python', issuer: 'Google', date: 'Aug 2023', credentialId: 'C7XRV7CQNCQM', skills: ['PEP 8 style guide'] },
     { title: 'Assets, Threats, and Vulnerabilities', issuer: 'Google', date: 'Aug 2023', credentialId: 'VX5TA2Q2S67K' },
     { title: 'Connect and Protect: Networks and Network Security', issuer: 'Google', date: 'Aug 2023', credentialId: 'QTMMW72GVFNR' },
@@ -273,7 +271,9 @@ const certifications = [
     { title: 'Foundations: Data, Data, Everywhere', issuer: 'Google', date: 'Feb 2022', credentialId: 'J5KRN8LFPNPK' },
     { title: 'Introduction to Cybersecurity Tools & Cyber Attacks', issuer: 'IBM', date: 'Feb 2022', credentialId: 'RJR6MQHGE65M' },
     { title: 'C++ (Basic) Certificate', issuer: 'HackerRank', date: 'Sep 2020', credentialId: 'DEA4F08FE541' },
-    { title: 'Python (Basic) Certificate', issuer: 'HackerRank', date: 'Aug 2020', credentialId: '6E56080D33F3' }
+    { title: 'Python (Basic) Certificate', issuer: 'HackerRank', date: 'Aug 2020', credentialId: '6E56080D33F3' },
+    { title: 'EF SET English Certificate', issuer: 'EF SET', date: 'Sep 2024' },
+    { title: 'Teacher Of English To Speakers Of Other Languages (TEFL)', issuer: 'Teacher Record', date: 'Sep 2023', credentialId: 'TR2672252278' },
 ];
 
 const references = [
@@ -574,6 +574,8 @@ export default function Home() {
                     },
                     { title: "C++ (Basic) Certificate", issuer: "HackerRank", type: "Certificate", date: "Issued Sep 2020", credentialId: "DEA4F08FE541" },
                     { title: "Python (Basic) Certificate", issuer: "HackerRank", type: "Certificate", date: "Issued Aug 2020", credentialId: "6E56080D33F3" },
+                    { title: 'EF SET English Certificate', issuer: 'EF SET', type: "Certificate", date: 'Issued Sep 2024' },
+                    { title: 'Teacher Of English To Speakers Of Other Languages (TEFL)', issuer: 'Teacher Record', type: "Certificate", date: 'Issued Sep 2023', credentialId: 'TR2672252278' },
                 ]
             };
             
@@ -1212,3 +1214,4 @@ export default function Home() {
 
 
     
+
