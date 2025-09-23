@@ -280,13 +280,6 @@ const references = [
         phone: "+260 97 9793999"
     },
     {
-        name: "Kaumba Samazaka",
-        title: "First Secretary Political",
-        company: "Embassy of the Republic of Zambia in Moscow, Russia",
-        email: null,
-        phone: "+79858902623"
-    },
-    {
         name: "Innocent Mukupa",
         title: "ICT Manager",
         company: "Pensions & Insurance Authority",
