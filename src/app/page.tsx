@@ -11,11 +11,11 @@ import { ArrowRight, Award, BrainCircuit, Calendar, Code, Download, Eye, Externa
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
 import { jsPDF } from 'jspdf';
 import { useState, type ComponentType } from 'react';
 import { getAnalytics, logEvent } from "firebase/analytics";
@@ -117,7 +117,7 @@ const experiences = [
     },
     {
         title: "System Administrator",
-        company: "Embassy of the Republic of Zambia in Moscow, Russia | Hybrid",
+        company: "Embassy of the Republic of Zambia in Moscow, Russia",
         duration: "Temporal Contract",
         details: [
             "Maintained embassy IT systems and integration of the SmartZambia portal.",
@@ -442,7 +442,7 @@ export default function Home() {
                     },
                     {
                         title: "System Administrator",
-                        company: "Embassy of the Republic of Zambia in Moscow, Russia | Hybrid",
+                        company: "Embassy of the Republic of Zambia in Moscow, Russia",
                         duration: "Temporal Contract",
                         details: [
                             "Maintained embassy IT systems and integration of the SmartZambia portal.",
@@ -749,7 +749,6 @@ export default function Home() {
 
             // --- References ---
             doc.addPage();
-            // Vertically center the references section on the new page
             const centeredY = pageHeight / 2;
             doc.setFontSize(11);
             doc.setFont('Helvetica', 'bold');
@@ -929,19 +928,25 @@ export default function Home() {
         {/* Experience Section */}
         <section id="experience" className="py-20 border-t">
           <h2 className="text-3xl font-bold text-center mb-12"><TranslatedText text="Work Experience" /></h2>
-          <div className="max-w-3xl mx-auto relative pl-8">
-            <div className="absolute left-0 top-0 h-full w-0.5 bg-border"></div>
-            {experiences.map((exp, index) => (
-              <div key={index} className="mb-12 relative">
-                  <div className="absolute left-[-34px] top-1.5 w-4 h-4 bg-primary rounded-full border-4 border-background"></div>
-                  <p className="text-sm text-muted-foreground">{exp.duration}</p>
-                  <h3 className="text-xl font-bold text-accent"><TranslatedText text={exp.title}/></h3>
-                  <p className="font-semibold text-foreground mb-2">{exp.company}</p>
-                  <ul className="list-disc list-inside text-muted-foreground space-y-1">
-                    {exp.details.map((d, i) => <li key={i}>{d}</li>)}
-                  </ul>
-              </div>
-            ))}
+          <div className="max-w-3xl mx-auto">
+            <Accordion type="single" collapsible className="w-full">
+              {experiences.map((exp, index) => (
+                <AccordionItem value={`item-${index}`} key={index}>
+                  <AccordionTrigger>
+                    <div className="text-left">
+                      <h3 className="text-xl font-bold text-accent"><TranslatedText text={exp.title}/></h3>
+                      <p className="font-semibold text-foreground">{exp.company}</p>
+                      <p className="text-sm text-muted-foreground">{exp.duration}</p>
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <ul className="list-disc list-inside text-muted-foreground space-y-1 pl-4">
+                      {exp.details.map((d, i) => <li key={i}>{d}</li>)}
+                    </ul>
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
           </div>
         </section>
         
