@@ -49,7 +49,7 @@ const skills = [
 const projects = [
   {
     title: 'Personal/Portfolio Website',
-    link: 'https://github.com/MS0C54073/Bilingual-AI-Personal-Website',
+    link: 'https://github.com/MS0C54073/muzoprof',
     demo: 'https://tinyurl.com/muzoslim',
   },
   {
@@ -759,16 +759,16 @@ export default function Home() {
 
             // --- References ---
             doc.addPage();
-            const centeredY = pageHeight / 2;
+            y = pageHeight / 2;
             doc.setFontSize(11);
             doc.setFont('Helvetica', 'bold');
             doc.setTextColor(37, 99, 235);
-            doc.text("REFERENCES", pageWidth / 2, centeredY - 10, { align: 'center' });
+            doc.text("REFERENCES", pageWidth / 2, y - 10, { align: 'center' });
 
             doc.setFontSize(10);
             doc.setFont('Helvetica', 'normal');
             doc.setTextColor(51, 65, 85);
-            doc.text("Available upon request.", pageWidth / 2, centeredY + 5, { align: 'center' });
+            doc.text("Available upon request.", pageWidth / 2, y + 5, { align: 'center' });
 
             if (outputType === 'preview') {
                 doc.output('dataurlnewwindow');
