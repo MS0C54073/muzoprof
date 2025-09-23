@@ -48,6 +48,11 @@ const skills = [
 
 const projects = [
   {
+    title: 'Personal/Portfolio Website',
+    link: 'https://github.com/MS0C54073/Bilingual-AI-Personal-Website',
+    demo: 'https://tinyurl.com/muzoslim',
+  },
+  {
     title: 'AquaView Water Quality Monitoring System',
     link: 'https://github.com/MS0C54073/AquaAnalys',
   },
@@ -195,6 +200,11 @@ const education = [
         duration: "Sep 2022 - Jul 2024",
     },
     {
+        degree: "Bachelor's of Science, Software and Administration of Information Systems",
+        university: "Kursk State University | Kursk, Russia",
+        duration: "Sep 2017 - Jul 2021",
+    },
+    {
         degree: "Diploma of Professional Retraining, Management in the Digital Economy",
         university: "Novosibirsk State Technical University",
         duration: "Sep 2023 - Dec 2023",
@@ -213,11 +223,6 @@ const education = [
         degree: "Diploma of Professional Retraining, Management of High Tech Programs and Projects",
         university: "Pskov State University",
         duration: "Sep 2023 - Dec 2023",
-    },
-    {
-        degree: "Bachelor's of Science, Software and Administration of Information Systems",
-        university: "Kursk State University | Kursk, Russia",
-        duration: "Sep 2017 - Jul 2021",
     },
     {
         degree: "Russian language and preparatory program, Russian language and Culture",
@@ -523,6 +528,11 @@ export default function Home() {
                         university: "Novosibirsk State Technical University, Russia",
                         duration: "Sep 2022 - Jul 2024",
                     },
+                    {
+                        degree: "Bachelor's of Science, Software and Administration of Information Systems",
+                        university: "Kursk State University, Russia",
+                        duration: "Sep 2017 - Jul 2021",
+                    },
                      {
                         degree: "Multiple Diplomas of Professional Retraining",
                         university: "Novosibirsk & Pskov State Universities",
@@ -530,11 +540,6 @@ export default function Home() {
                         details: "Specializations in Digital Economy Management, Technological Entrepreneurship, Digital Twins, and High-Tech Project Management."
                     },
                     {
-                        degree: "BSc, Software and Administration of Information Systems",
-                        university: "Kursk State University, Russia",
-                        duration: "Sep 2017 - Jul 2021",
-                    },
-                     {
                         degree: "Russian Language and Preparatory Program",
                         university: "Belgorod State University",
                         duration: "Oct 2016 - Jul 2017",
@@ -1204,3 +1209,6 @@ export default function Home() {
     
 
 
+
+
+    
