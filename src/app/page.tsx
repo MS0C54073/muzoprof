@@ -96,7 +96,7 @@ const projects = [
 
 const experiences = [
     {
-        title: "Software Engineer for AI Training Data",
+        title: "Software Developer for AI Training Data",
         company: "Invisible Technologies & Outlier",
         duration: "Feb 2024 – Present",
         details: [
@@ -156,7 +156,7 @@ const experiences = [
         ]
     },
     {
-        title: "Software Engineer Intern",
+        title: "Software Developer Intern",
         company: "Kursk State University, Russia",
         duration: "Sep 2019 – Jun 2021",
         details: [
@@ -412,7 +412,7 @@ export default function Home() {
             
             const cvData = {
                 name: "Musonda Salimu",
-                jobTitle: "IT Professional | Software Engineer | AI Enthusiast",
+                jobTitle: "IT Professional | Software Developer | AI",
                 contact: {
                     email: "musondasalim@gmail.com",
                     phone1: "+260 977 288 260",
@@ -420,7 +420,7 @@ export default function Home() {
                     linkedin: "linkedin.com/in/musonda-salimu-a4a0b31b9",
                     github: "github.com/MS0C54073",
                 },
-                summary: "A results-driven IT professional with an MSc in Informatics and hands-on experience in software engineering, system administration, and AI model training. Proven ability to evaluate and improve AI-generated code, develop efficient software solutions, and manage complex IT systems. Seeking to leverage a strong foundation in Python, cybersecurity, and modern web frameworks to build innovative and scalable AI-powered applications.",
+                summary: "A results-driven IT professional with an MSc in Informatics and hands-on experience in software development, system administration, and AI model training. Proven ability to evaluate and improve AI-generated code, develop efficient software solutions, and manage complex IT systems. Seeking to leverage a strong foundation in Python, cybersecurity, and modern web frameworks to build innovative and scalable AI-powered applications.",
                 skills: [
                     "Python & Django", "AI Development (Genkit)", "Next.js, React, TypeScript",
                     "Cybersecurity (SIEM, IDS)", "System & Network Admin", "Databases (SQL & NoSQL)",
@@ -428,8 +428,8 @@ export default function Home() {
                 ],
                 experience: [
                     {
-                        title: "Software Engineer for AI Training Data",
-                        company: "Invisible Technologies & Outlier",
+                        title: "Software Developer for AI Training Data",
+                        company: "Invisible Technologies / Outlier",
                         duration: "Feb 2024 – Present",
                         details: [
                             "Evaluated AI-generated code against quality metrics, authoring human-readable summaries to guide model improvement.",
@@ -474,7 +474,7 @@ export default function Home() {
                             "Provided ICT support and foundational training to staff members to improve digital literacy.",
                         ]
                     },
-                    {
+                     {
                         title: "Customer Care Assistant",
                         company: "VITALITE Group",
                         duration: "Aug 2021 – Apr 2022",
@@ -484,7 +484,7 @@ export default function Home() {
                         ]
                     },
                     {
-                        title: "Software Engineer (Intern)",
+                        title: "Software Developer (Intern)",
                         company: "Kursk State University, Russia",
                         duration: "Sep 2019 – Jun 2021",
                         details: [
@@ -507,7 +507,7 @@ export default function Home() {
                            "Assisted customers with PC software, provided various cafe services, and troubleshooted hardware/software issues.",
                         ]
                     },
-                ],
+                ].sort((a, b) => new Date(b.duration.split(' – ')[1] === 'Present' ? Date.now() : b.duration.split(' – ')[1] || 0).getTime() - new Date(a.duration.split(' – ')[1] === 'Present' ? Date.now() : a.duration.split(' – ')[1] || 0).getTime()),
                 education: [
                      {
                         degree: "MSc, Informatics and Computer Engineering",
@@ -525,14 +525,14 @@ export default function Home() {
                         university: "Kursk State University, Russia",
                         duration: "Sep 2017 - Jul 2021",
                     },
-                    {
+                     {
                         degree: "Russian Language and Preparatory Program",
-                        university: "Belgorod State University, Russia",
+                        university: "Belgorod State University",
                         duration: "Oct 2016 - Jul 2017",
                     },
                     {
                         degree: "General Certificate in Education (O-Levels)",
-                        university: "Arakan Boys Secondary School, Zambia",
+                        university: "Arakan Boys Secondary School",
                         duration: "2011 - 2013",
                     },
                 ],
@@ -544,6 +544,7 @@ export default function Home() {
                         courses: ["AI Agents and Agentic AI Architecture in Python", "AI Agents and Agentic AI with Python & Generative AI"]
                     },
                     { title: "Prompt Engineering for ChatGPT", issuer: "Vanderbilt University", type: "Course", date: "Completed Aug 2025" },
+                    { title: "Introduction to Cybersecurity", issuer: "SMART ZAMBIA INSTITUTE (Cisco Networking Academy)", type: "Course", date: "Issued Jul 2025" },
                     {
                         title: "Google Cybersecurity Professional Certificate",
                         issuer: "Google", type: "Specialization",
@@ -557,7 +558,6 @@ export default function Home() {
                         date: "Completed Jun 2022",
                         courses: ["Operating Systems: Overview, Administration, and Security", "Cybersecurity Compliance Framework, Standards & Regulations", "Computer Networks and Network Security"]
                     },
-                    { title: "Introduction to Cybersecurity", issuer: "SMART ZAMBIA INSTITUTE (Cisco Networking Academy)", type: "Course", date: "Issued Jul 2025" },
                     { title: "C++ (Basic) Certificate", issuer: "HackerRank", type: "Certificate", date: "Issued Sep 2020", credentialId: "DEA4F08FE541" },
                     { title: "Python (Basic) Certificate", issuer: "HackerRank", type: "Certificate", date: "Issued Aug 2020", credentialId: "6E56080D33F3" },
                 ]
@@ -791,7 +791,7 @@ export default function Home() {
             <TranslatedText text="Musonda Salimu" />
           </h1>
           <p className="text-xl md:text-2xl text-muted-foreground mt-2">
-            <TranslatedText text="IT Professional | Software Engineer | AI Enthusiast" />
+            <TranslatedText text="IT Professional | Software Developer | AI" />
           </p>
           <p className="max-w-2xl mx-auto mt-4 text-foreground">
             <TranslatedText text="A versatile IT professional with an MSc in Informatics and system administration experience. Skilled in Python, cybersecurity, and modern web development. Actively expanding expertise in Django and AI tools to build innovative, efficient solutions." />
