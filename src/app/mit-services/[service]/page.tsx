@@ -10,16 +10,15 @@ import Image from 'next/image';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { db, storage }from '@/lib/firebase';
+import { app, storage }from '@/lib/firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { getFunctions, httpsCallable } from 'firebase/functions';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
 import { useState, type ComponentType } from 'react';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
-import type { Order } from '@/lib/types';
 import { SocialIcons } from '@/components/social-icons';
 
 
@@ -144,8 +143,8 @@ export default function ServiceDetailPage() {
     setOrderStatus('submitting');
     try {
       const file = data.attachment?.[0];
-      let attachmentName = null;
       let attachmentUrl = null;
+      let attachmentName = null;
 
       if (file) {
         attachmentName = file.name;
@@ -154,34 +153,44 @@ export default function ServiceDetailPage() {
         attachmentUrl = await getDownloadURL(uploadTask.ref);
       }
       
-      const orderPayload: Omit<Order, 'id' | 'userId'> = {
+      const functions = getFunctions(app);
+      const processOrder = httpsCallable(functions, 'processOrder');
+
+      const orderPayload = {
         name: data.name,
         email: data.email || '', 
         phone: data.phone || '', 
-        details: data.details || '', 
-        status: 'pending',
-        attachmentName: attachmentName,
-        attachmentUrl: attachmentUrl,
-        timestamp: serverTimestamp(),
+        details: data.details || `Interested in the ${service?.title} service.`,
+        attachmentName,
+        attachmentUrl,
       };
-      const docRef = await addDoc(collection(db, 'orders'), orderPayload);
-      toast({ 
-        variant: 'success', 
-        title: 'Request Submitted!', 
-        description: `Thank you for your interest in the ${service?.title} service. I will get back to you shortly.` 
-      });
-      setOrderStatus('success');
-      reset(); 
-      setTimeout(() => setOrderStatus('idle'), 4000);
+
+      const result = await processOrder(orderPayload);
+      const resultData = result.data as { success: boolean, orderId?: string, message: string };
+
+      if (resultData.success) {
+        toast({ 
+          variant: 'success', 
+          title: 'Request Submitted!', 
+          description: `Thank you for your interest. I will get back to you shortly.` 
+        });
+        setOrderStatus('success');
+        reset(); 
+      } else {
+        throw new Error(resultData.message || 'Function execution failed');
+      }
+
     } catch (error) {
       console.error("Error submitting order: ", error);
+      const errorMessage = error instanceof Error ? error.message : 'An unexpected error occurred. Please try again.';
       toast({ 
         variant: 'destructive', 
         title: 'Submission Failed', 
-        description: 'An unexpected error occurred. Please try again.'
+        description: errorMessage
       });
       setOrderStatus('error');
-      setTimeout(() => setOrderStatus('idle'), 3000);
+    } finally {
+        setTimeout(() => setOrderStatus('idle'), 4000);
     }
   };
 
