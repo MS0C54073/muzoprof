@@ -420,7 +420,7 @@ export default function Home() {
                     linkedin: "linkedin.com/in/musonda-salimu-a4a0b31b9",
                     github: "github.com/MS0C54073",
                 },
-                about: "A results-driven IT professional with an MSc in Informatics and hands-on experience in software engineering, system administration, and AI model training. Proven ability to evaluate and improve AI-generated code, develop efficient software solutions, and manage complex IT systems. Seeking to leverage a strong foundation in Python, cybersecurity, and modern web frameworks to build innovative and scalable AI-powered applications.",
+                summary: "A results-driven IT professional with an MSc in Informatics and hands-on experience in software engineering, system administration, and AI model training. Proven ability to evaluate and improve AI-generated code, develop efficient software solutions, and manage complex IT systems. Seeking to leverage a strong foundation in Python, cybersecurity, and modern web frameworks to build innovative and scalable AI-powered applications.",
                 skills: [
                     "Python & Django", "AI Development (Genkit)", "Next.js, React, TypeScript",
                     "Cybersecurity (SIEM, IDS)", "System & Network Admin", "Databases (SQL & NoSQL)",
@@ -442,18 +442,36 @@ export default function Home() {
                         company: "Remote",
                         duration: "Jan 2023 – Present",
                         details: [
-                            "Provide remote and on-site technical assistance to individuals and businesses, resolving hardware, software, and network issues.",
-                            "Document troubleshooting procedures and solutions, creating a knowledge base for client reference.",
+                            "Provide remote and on-site technical assistance, resolving hardware, software, and network issues.",
+                            "Document troubleshooting procedures and solutions to build a reusable knowledge base for clients.",
                         ]
                     },
                     {
                         title: "System Administrator",
                         company: "Embassy of the Republic of Zambia, Moscow",
-                        duration: "Temporal Contract",
+                        duration: "Jun 2023 – Dec 2023 (Contract)",
                         details: [
                             "Maintained all embassy IT systems and managed the integration of the SmartZambia government portal.",
-                            "Implemented and enforced cybersecurity protocols to protect sensitive data; optimized system performance.",
+                            "Implemented and enforced cybersecurity protocols to protect sensitive data and optimized system performance.",
                             "Provided dedicated technical support to all embassy staff to ensure seamless digital operations.",
+                        ]
+                    },
+                     {
+                        title: "AI Training Methods Researcher (Intern)",
+                        company: "Novosibirsk State Technical University",
+                        duration: "May 2022 – Oct 2022",
+                        details: [
+                            "Tested and evaluated novel training algorithms for Spiking Neural Networks (SNNs).",
+                            "Managed and preprocessed large datasets for training and validating SNN models.",
+                        ]
+                    },
+                    {
+                        title: "System Administrator (Intern)",
+                        company: "Pensions and Insurance Authority, Zambia",
+                        duration: "May 2022 – Oct 2022",
+                        details: [
+                            "Assisted in maintaining and securing critical IT systems and optimizing website performance.",
+                            "Provided ICT support and foundational training to staff members to improve digital literacy.",
                         ]
                     },
                     {
@@ -463,24 +481,6 @@ export default function Home() {
                         details: [
                             "Delivered professional customer support by promptly responding to inquiries and resolving complaints.",
                             "Processed orders, forms, and applications while maintaining accurate records of customer interactions.",
-                        ]
-                    },
-                    {
-                        title: "AI Training Methods Researcher (Intern)",
-                        company: "Novosibirsk State Technical University",
-                        duration: "May 2022 – Oct 2022",
-                        details: [
-                            "Tested and evaluated novel training algorithms for Spiking Neural Networks (SNNs).",
-                            "Managed and preprocessed large datasets for training and validating SNN models.",
-                        ]
-                    },
-                     {
-                        title: "System Administrator (Intern)",
-                        company: "Pensions and Insurance Authority, Zambia",
-                        duration: "May 2022 – Oct 2022",
-                        details: [
-                            "Assisted in maintaining and securing critical IT systems and optimizing website performance.",
-                            "Provided ICT support and foundational training to staff members to improve digital literacy.",
                         ]
                     },
                     {
@@ -507,7 +507,7 @@ export default function Home() {
                            "Assisted customers with PC software, provided various cafe services, and troubleshooted hardware/software issues.",
                         ]
                     },
-                ].sort((a, b) => new Date(b.duration.split(' – ')[1] === 'Present' ? '2100-01-01' : b.duration.split(' – ')[1]) - new Date(a.duration.split(' – ')[1] === 'Present' ? '2100-01-01' : a.duration.split(' – ')[1])),
+                ],
                 education: [
                      {
                         degree: "MSc, Informatics and Computer Engineering",
@@ -518,7 +518,7 @@ export default function Home() {
                         degree: "Multiple Diplomas of Professional Retraining",
                         university: "Novosibirsk & Pskov State Universities",
                         duration: "2023",
-                        details: "Specializations: Management in the Digital Economy, Technological Entrepreneurship, Development of Digital Twins, and Management of High-Tech Projects."
+                        details: "Specializations in Digital Economy Management, Technological Entrepreneurship, Digital Twins, and High-Tech Project Management."
                     },
                     {
                         degree: "BSc, Software and Administration of Information Systems",
@@ -537,12 +537,27 @@ export default function Home() {
                     },
                 ],
                 certifications: [
-                    { title: "Introduction to Cybersecurity", issuer: "SMART ZAMBIA INSTITUTE (Cisco Networking Academy)", type: "Course", date: "Issued Jul 2025"},
-                    { title: "AI Agents and Agentic AI in Python: Powered by Generative AI", issuer: "Vanderbilt University", type: "Specialization", date: "Completed Aug 2025", courses: ["AI Agents and Agentic AI Architecture in Python", "AI Agents and Agentic AI with Python & Generative AI"] },
-                    { title: "Prompt Engineering for ChatGPT", issuer: "Vanderbilt University", type: "Course", date: "Completed Aug 2025"},
-                    { title: "Google Cybersecurity Professional Certificate", issuer: "Google", type: "Specialization", date: "Completed Aug 2023", courses: ["Automate Cybersecurity Tasks with Python", "Sound the Alarm: Detection and Response", "Put It to Work: Prepare for Cybersecurity Jobs"] },
+                    {
+                        title: "AI Agents and Agentic AI in Python: Powered by Generative AI",
+                        issuer: "Vanderbilt University", type: "Specialization",
+                        date: "Completed Aug 2025",
+                        courses: ["AI Agents and Agentic AI Architecture in Python", "AI Agents and Agentic AI with Python & Generative AI"]
+                    },
+                    { title: "Prompt Engineering for ChatGPT", issuer: "Vanderbilt University", type: "Course", date: "Completed Aug 2025" },
+                    {
+                        title: "Google Cybersecurity Professional Certificate",
+                        issuer: "Google", type: "Specialization",
+                        date: "Completed Aug 2023",
+                        courses: ["Automate Cybersecurity Tasks with Python", "Sound the Alarm: Detection and Response", "Put It to Work: Prepare for Cybersecurity Jobs"]
+                    },
                     { title: "Key Technologies for Business Specialization", issuer: "IBM", type: "Specialization", date: "Completed Aug 2023" },
-                    { title: "IT Fundamentals for Cybersecurity Specialization", issuer: "IBM", type: "Specialization", date: "Completed Jun 2022", courses: ["Operating Systems: Overview, Administration, and Security", "Cybersecurity Compliance Framework, Standards & Regulations", "Computer Networks and Network Security"] },
+                    {
+                        title: "IT Fundamentals for Cybersecurity Specialization",
+                        issuer: "IBM", type: "Specialization",
+                        date: "Completed Jun 2022",
+                        courses: ["Operating Systems: Overview, Administration, and Security", "Cybersecurity Compliance Framework, Standards & Regulations", "Computer Networks and Network Security"]
+                    },
+                    { title: "Introduction to Cybersecurity", issuer: "SMART ZAMBIA INSTITUTE (Cisco Networking Academy)", type: "Course", date: "Issued Jul 2025" },
                     { title: "C++ (Basic) Certificate", issuer: "HackerRank", type: "Certificate", date: "Issued Sep 2020", credentialId: "DEA4F08FE541" },
                     { title: "Python (Basic) Certificate", issuer: "HackerRank", type: "Certificate", date: "Issued Aug 2020", credentialId: "6E56080D33F3" },
                 ]
@@ -565,18 +580,17 @@ export default function Home() {
                 }
             };
             
-            const addSectionTitle = (title: string) => {
-                checkPageBreak(30);
-                y += 10;
-                doc.setFontSize(12);
+            const addSectionTitle = (title: string, yPos: number) => {
+                doc.setFontSize(11);
                 doc.setFont('Helvetica', 'bold');
                 doc.setTextColor(37, 99, 235); // #2563EB
-                doc.text(title.toUpperCase(), margin, y);
-                y += 5;
+                doc.text(title.toUpperCase(), margin, yPos);
+                const titleHeight = 11;
+                const lineY = yPos + titleHeight / 2 + 1;
                 doc.setDrawColor(226, 232, 240); // slate-200
                 doc.setLineWidth(0.5);
-                doc.line(margin, y, margin + contentWidth, y);
-                y += 12 * lineHeight;
+                doc.line(margin + doc.getTextWidth(title) + 5, lineY, pageWidth - margin, lineY);
+                return yPos + titleHeight + 4; // Return new y position
             };
 
             // --- Header ---
@@ -599,18 +613,19 @@ export default function Home() {
             y += 12;
             const socialLine = `${cvData.contact.linkedin}  •  ${cvData.contact.github}`;
             doc.text(socialLine, margin, y);
+            y += 5;
             
             // --- Summary ---
-            addSectionTitle("Summary");
+            y = addSectionTitle("Summary", y + 15);
             doc.setFontSize(9);
             doc.setFont('Helvetica', 'normal');
             doc.setTextColor(51, 65, 85); // slate-700
-            const aboutLines = doc.splitTextToSize(cvData.about, contentWidth);
-            doc.text(aboutLines, margin, y);
-            y += aboutLines.length * 9 * lineHeight;
+            const summaryLines = doc.splitTextToSize(cvData.summary, contentWidth);
+            doc.text(summaryLines, margin, y);
+            y += summaryLines.length * 9 * lineHeight;
 
             // --- Core Competencies ---
-            addSectionTitle("Core Competencies");
+            y = addSectionTitle("Core Competencies", y);
             doc.setFontSize(9);
             const colWidth = contentWidth / 3;
             const skillsPerCol = Math.ceil(cvData.skills.length / 3);
@@ -628,7 +643,7 @@ export default function Home() {
             y = maxSkillY;
 
             // --- Work Experience ---
-            addSectionTitle("Work Experience");
+            y = addSectionTitle("Work Experience", y);
             cvData.experience.forEach(exp => {
                 checkPageBreak(40);
                 doc.setFontSize(10);
@@ -644,24 +659,24 @@ export default function Home() {
                 doc.setFontSize(9);
                 doc.setFont('Helvetica', 'italic');
                 doc.text(exp.company, margin, y);
-                y += 12;
+                y += 10;
                 
                 doc.setFontSize(9);
                 doc.setFont('Helvetica', 'normal');
                 doc.setTextColor(51, 65, 85);
                 exp.details.forEach(detail => {
                     const detailLines = doc.splitTextToSize(`•  ${detail}`, contentWidth - 10);
-                    checkPageBreak(detailLines.length * 9 * lineHeight);
+                    checkPageBreak(detailLines.length * 9 * lineHeight + 2);
                     doc.text(detailLines, margin + 5, y);
                     y += detailLines.length * 9 * lineHeight;
                 });
-                y += 4;
+                y += 6;
             });
 
             // --- Education ---
-            addSectionTitle("Education");
+            y = addSectionTitle("Education", y);
             cvData.education.forEach(edu => {
-                checkPageBreak(edu.details ? 35 : 25);
+                checkPageBreak(edu.details ? 30 : 20);
                 doc.setFontSize(10);
                 doc.setFont('Helvetica', 'bold');
                 doc.setTextColor(0, 0, 0);
@@ -675,7 +690,7 @@ export default function Home() {
                 doc.setFontSize(9);
                 doc.setFont('Helvetica', 'italic');
                 doc.text(edu.university, margin, y);
-                y += 10 * lineHeight;
+                y += 10;
 
                 if (edu.details) {
                     doc.setFontSize(8);
@@ -689,9 +704,12 @@ export default function Home() {
             });
 
             // --- Licenses & Certifications ---
-            addSectionTitle("Licenses & Certifications");
+            checkPageBreak(50); // check for space before starting the section
+            y = addSectionTitle("Licenses & Certifications", y);
             cvData.certifications.forEach(cert => {
-                checkPageBreak(cert.courses ? 35 : 25);
+                const requiredHeight = (cert.courses ? 28 : 18) + (cert.credentialId ? 8 : 0);
+                checkPageBreak(requiredHeight);
+
                 doc.setFontSize(10);
                 doc.setFont('Helvetica', 'bold');
                 doc.setTextColor(0, 0, 0);
@@ -703,9 +721,8 @@ export default function Home() {
                 doc.setTextColor(82, 82, 91);
                 const issuerLine = `${cert.issuer} · ${cert.type}`;
                 doc.text(issuerLine, margin, y);
-                
                 doc.text(cert.date, pageWidth - margin, y, { align: 'right' });
-                y += 10 * lineHeight;
+                y += 10;
 
                 if (cert.courses) {
                     doc.setFontSize(8);
@@ -721,25 +738,29 @@ export default function Home() {
                     doc.setFontSize(8);
                     doc.setFont('Helvetica', 'italic');
                     doc.text(`Credential ID: ${cert.credentialId}`, margin, y);
-                    y += 8 * lineHeight;
+                    y += 8;
                 }
                 y += 4;
             });
 
             // --- References ---
             doc.addPage();
-            y = margin;
-            addSectionTitle("References");
+            // Vertically center the references section on the new page
+            const centeredY = pageHeight / 2;
+            doc.setFontSize(11);
+            doc.setFont('Helvetica', 'bold');
+            doc.setTextColor(37, 99, 235);
+            doc.text("REFERENCES", pageWidth / 2, centeredY - 10, { align: 'center' });
+
             doc.setFontSize(10);
             doc.setFont('Helvetica', 'normal');
             doc.setTextColor(51, 65, 85);
-            doc.text("Available upon request.", margin, y);
-
+            doc.text("Available upon request.", pageWidth / 2, centeredY + 5, { align: 'center' });
 
             if (outputType === 'preview') {
                 doc.output('dataurlnewwindow');
             } else {
-                doc.save('Musonda_Salimu_CV_ATS.pdf');
+                doc.save('Musonda_Salimu_CV.pdf');
             }
         } catch (error) {
             console.error("Error generating PDF:", error);
