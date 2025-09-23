@@ -30,19 +30,20 @@ export async function translateBatch(input: TranslateBatchInput): Promise<Transl
   // Create a numbered list of texts for the prompt.
   const numberedTexts = texts.map((text, index) => `${index + 1}. "${text}"`).join('\n');
 
+  if (!process.env.PROMPT_TRANSLATE_BATCH) {
+    console.error("PROMPT_TRANSLATE_BATCH environment variable not set.");
+    return { translations: texts }; // Fallback
+  }
+
+  // Replace placeholders in the prompt template.
+  const promptText = process.env.PROMPT_TRANSLATE_BATCH
+      .replace('{{targetLanguage}}', targetLanguage)
+      .replace('{{numberedTexts}}', numberedTexts);
+
   try {
     const response = await ai.generate({
       model: 'googleai/gemini-1.5-flash',
-      prompt: `You are an expert translation engine.
-Translate the following numbered list of texts into ${targetLanguage}.
-Provide a numbered list of translations that corresponds exactly to the original list.
-Return ONLY the translated texts in the 'translations' field, as a JSON array of strings. Do not add extra commentary.
-If a text is untranslatable (e.g., a name or code), return it in its original form in the list.
-
-Original Texts:
-"""
-${numberedTexts}
-"""`,
+      prompt: promptText,
       output: {
         schema: TranslateBatchOutputSchema,
       },

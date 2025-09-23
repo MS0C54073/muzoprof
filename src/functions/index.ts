@@ -82,30 +82,29 @@ export const processOrder = onCall(async (request) => {
     // Even if email fails, we return success because the order was saved.
     return { success: true, orderId, message: "Order saved, but email notification is disabled." };
   }
+  
+  if (!process.env.EMAIL_SUBJECT_TEMPLATE || !process.env.EMAIL_BODY_TEMPLATE) {
+      logger.error("Email template environment variables (EMAIL_SUBJECT_TEMPLATE, EMAIL_BODY_TEMPLATE) are not set.");
+      return { success: true, orderId, message: "Order saved, but email templates are not configured." };
+  }
 
   try {
+    // Build email content from templates
+    const subject = process.env.EMAIL_SUBJECT_TEMPLATE.replace('{{name}}', name);
+    const emailBody = process.env.EMAIL_BODY_TEMPLATE
+        .replace('{{name}}', name)
+        .replace('{{email}}', email ? `<li><strong>Email:</strong> ${email}</li>` : "")
+        .replace('{{phone}}', phone ? `<li><strong>Phone:</strong> ${phone}</li>` : "")
+        .replace('{{details}}', details)
+        .replace('{{attachment}}', attachmentUrl ? `<p><strong>Attachment:</strong> <a href="${attachmentUrl}" target="_blank">${attachmentName || "View Attachment"}</a></p>` : "")
+        .replace('{{orderId}}', orderId);
+
+
     const { data: emailData, error: emailError } = await resend.emails.send({
       from: "Project Request <onboarding@resend.dev>", // Must be a verified domain in Resend
       to: ["musondasalim@gmail.com"],
-      subject: `New Project Request from ${name}`,
-      html: `
-        <div style="font-family: sans-serif; line-height: 1.6;">
-          <h2>New Project Request Received</h2>
-          <p>You have a new project request submitted through your portfolio website.</p>
-          <hr>
-          <h3>Requester Details:</h3>
-          <ul>
-            <li><strong>Name:</strong> ${name}</li>
-            ${email ? `<li><strong>Email:</strong> ${email}</li>` : ""}
-            ${phone ? `<li><strong>Phone:</strong> ${phone}</li>` : ""}
-          </ul>
-          <h3>Project Details:</h3>
-          <p style="white-space: pre-wrap; background-color: #f4f4f5; padding: 10px; border-radius: 5px;">${details}</p>
-          ${attachmentUrl ? `<p><strong>Attachment:</strong> <a href="${attachmentUrl}" target="_blank">${attachmentName || "View Attachment"}</a></p>` : ""}
-          <hr>
-          <p><em>This email was sent automatically from your portfolio contact form. Order ID: ${orderId}</em></p>
-        </div>
-      `,
+      subject: subject,
+      html: emailBody,
     });
 
     if (emailError) {
