@@ -354,7 +354,7 @@ export default function Home() {
                 name: data.name,
                 email: data.email || '', 
                 phone: data.phone || '', 
-                details: data.details || '', 
+                details: data.details, 
                 attachmentName: attachmentName,
                 attachmentUrl: attachmentUrl,
             };
@@ -405,7 +405,7 @@ export default function Home() {
             
             const cvData = {
                 name: "Musonda Salimu",
-                jobTitle: "IT Professional | Software Developer | AI",
+                jobTitle: "IT Professional | Software Developer | AI | Tutor",
                 contact: {
                     email: "musondasalim@gmail.com",
                     phone1: "+260 977 288 260",
@@ -783,8 +783,16 @@ export default function Home() {
           <h1 className="text-4xl md:text-5xl font-bold text-primary">
             <TranslatedText text="Musonda Salimu" />
           </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground mt-2">
-            <TranslatedText text="IT Professional | Software Developer | AI" />
+          <p className="text-xl md:text-2xl text-muted-foreground mt-2 flex items-center justify-center gap-x-2 flex-wrap">
+            <TranslatedText text="IT Professional" />
+            <span className="text-primary">|</span>
+            <TranslatedText text="Software Developer" />
+            <span className="text-primary">|</span>
+            <TranslatedText text="AI" />
+            <span className="text-primary">|</span>
+            <Button variant="link" asChild className="text-xl md:text-2xl p-0 h-auto">
+                <Link href="/tutor"><TranslatedText text="Tutor" /></Link>
+            </Button>
           </p>
           <p className="max-w-2xl mx-auto mt-4 text-foreground">
             <TranslatedText text="A versatile IT professional with an MSc in Informatics and system administration experience. Skilled in Python, cybersecurity, and modern web development. Actively expanding expertise in Django and AI tools to build innovative, efficient solutions." />

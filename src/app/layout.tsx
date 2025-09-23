@@ -43,10 +43,10 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Muzo Salimu - Personal Portfolio",
   description:
-    'Muzo Salimu - Software Engineer, Tech Enthusiast, and Educator',
+    'Muzo Salimu - Software Developer, Tech Enthusiast, and Educator',
   keywords: [
     'Muzo Salimu',
-    'Software Engineer',
+    'Software Developer',
     'Portfolio',
     'React Developer',
     'Next.js',
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Muzo Salimu - Personal Portfolio",
     description:
-      'Muzo Salimu - Software Engineer, Tech Enthusiast, and Educator',
+      'Muzo Salimu - Software Developer, Tech Enthusiast, and Educator',
     url: 'https://muzosniche.com',
     siteName: "Muzo Salimu's Portfolio",
     images: [
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: "Muzo Salimu - Personal Portfolio",
     description:
-      'Muzo Salimu - Software Engineer, Tech Enthusiast, and Educator',
+      'Muzo Salimu - Software Developer, Tech Enthusiast, and Educator',
     images: ['https://placehold.co/1200x630.png'],
     creator: '@MuzoSalim',
   },
@@ -105,6 +105,7 @@ const navLinks = [
     { href: '/#projects', text: 'Projects' },
     { href: '/#experience', text: 'Experience' },
     { href: '/#education', text: 'Education' },
+    { href: '/tutor', text: 'Tutor' },
     { href: '/#awards', text: 'Awards' },
     { href: '/#certifications', text: 'Certifications' },
     { href: '/it-service-calculator', text: 'IT Service Calculator' },
