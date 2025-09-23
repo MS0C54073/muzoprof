@@ -1,0 +1,148 @@
+
+@import './backgrounds.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%; /* White */
+    --foreground: 0 0% 3.9%; /* Dark */
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 217.2 91.2% 59.8%;  /* Blue */
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 28.1 96.5% 54.9%; /* Orange */
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --success: 140 70% 90%; /* Light green background for toast */
+    --success-foreground: 140 70% 25%; /* Dark green text for toast */
+    --button-success-background: 142.1 76.2% 36.3%; /* Solid green for button bg */
+    --button-success-foreground: 0 0% 98%; /* White/light text for button */
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 217.2 91.2% 59.8%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+    --highlight: 203 58% 75%; /* Light blue (#87CEEB) in HSL */
+  }
+  .dark {
+    --background: 0 0% 3.9%; /* Dark */
+    --foreground: 0 0% 98%; /* White */
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 217.2 91.2% 59.8%; /* Blue */
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 28.1 96.5% 54.9%; /* Orange */
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --success: 140 40% 25%; /* Dark green background for toast */
+    --success-foreground: 140 70% 90%; /* Light green text for toast */
+    --button-success-background: 142.1 76.2% 36.3%; /* Solid green for button bg in dark mode */
+    --button-success-foreground: 0 0% 98%; /* White/light text for button */
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 217.2 91.2% 59.8%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+     --highlight: 203 58% 25%; /* Darkened light blue for dark mode */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+/* Custom success styles for Tailwind JIT */
+.bg-button-success {
+  background-color: hsl(var(--button-success-background));
+}
+.text-button-success-foreground {
+  color: hsl(var(--button-success-foreground));
+}
+.hover\:bg-button-success\/90:hover {
+  background-color: hsla(var(--button-success-background), 0.9);
+}
+
+.border-success {
+  border-color: hsl(var(--success)) !important; /* Ensure high specificity if needed */
+}
+.bg-success {
+  background-color: hsl(var(--success)) !important;
+}
+.text-success-foreground {
+  color: hsl(var(--success-foreground)) !important;
+}
+
+/* Custom view mode simulation styles */
+/* We only apply these styles on screens that are tablet-sized or larger. */
+@media (min-width: 768px) {
+  /* This creates a backdrop for the simulation */
+  body:has(.view-mode-mobile-simulation) {
+    background-color: hsl(var(--muted));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 2rem;
+  }
+  
+  /* This is the container being simulated as a mobile device */
+  .view-mode-mobile-simulation {
+    max-width: 420px;
+    width: 100%;
+    height: clamp(600px, 85vh, 900px); /* A phone-like height */
+    border: 8px solid hsl(var(--border));
+    border-radius: 1.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    overflow-y: auto;
+    background-color: hsl(var(--background));
+  }
+}

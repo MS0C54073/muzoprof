@@ -1,0 +1,41 @@
+.portfolio-rotation {
+    display: flex;
+    gap: 1.25rem; /* 20px */
+    overflow-x: auto;
+    width: 100%;
+    padding: 1rem 0.5rem;
+    position: relative;
+    /* Hide scrollbar for clean look and enable smooth scrolling */
+    scroll-behavior: smooth;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
+}
+
+.portfolio-rotation::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, and Opera */
+}
+
+.portfolio-item {
+    flex: 0 0 320px;
+    width: 320px;
+    scroll-snap-align: start;
+}
+
+/* Base class for fancy shapes */
+.fancy-shape {
+    transition: clip-path 0.4s cubic-bezier(0.25, 1, 0.5, 1), transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    transform: scale(1);
+}
+
+/* Different starting shapes, cycling through them */
+.fancy-shape-1 {
+    clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+}
+
+.fancy-shape-2 {
+    clip-path: circle(50% at 50% 50%);
+}
+
+.fancy-shape-3 {
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+}
