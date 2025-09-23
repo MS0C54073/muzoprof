@@ -4,6 +4,7 @@ import { initializeApp, getApps, type FirebaseApp } from 'firebase/app';
 import { getFirestore, type Firestore } from 'firebase/firestore';
 import { getStorage, type FirebaseStorage } from 'firebase/storage';
 import { getAuth, type Auth } from 'firebase/auth';
+import { getFunctions } from 'firebase/functions';
 
 // Your web app's Firebase configuration
 // It's recommended to store these in environment variables
@@ -40,5 +41,7 @@ if (getApps().length === 0) {
 db = getFirestore(app);
 storage = getStorage(app);
 auth = getAuth(app);
+// Initialize Cloud Functions and get a reference to the service
+const functions = getFunctions(app);
 
-export { app, db, storage, auth };
+export { app, db, storage, auth, functions };

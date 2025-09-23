@@ -24,7 +24,7 @@ import { useForm, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { getFunctions, httpsCallable } from 'firebase/functions';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
 import { Input } from '@/components/ui/input';
@@ -341,45 +341,64 @@ export default function Home() {
     });
 
     const onOrderSubmit: SubmitHandler<OrderFormData> = async (data) => {
-      setOrderStatus('submitting');
-      try {
-        const file = data.attachment?.[0];
-        let attachmentName = null;
-        let attachmentUrl = null;
+        setOrderStatus('submitting');
+        try {
+            const file = data.attachment?.[0];
+            let attachmentUrl = null;
+            let attachmentName = null;
 
-        if (file) {
-          attachmentName = file.name;
-          const storageRef = ref(storage, `orders/${Date.now()}_${attachmentName}`);
-          const uploadTask = await uploadBytes(storageRef, file);
-          attachmentUrl = await getDownloadURL(uploadTask.ref);
+            if (file) {
+                attachmentName = file.name;
+                // Note: We upload the file from the client, get the URL, and pass the URL to the function.
+                const storageRef = ref(storage, `orders/${Date.now()}_${attachmentName}`);
+                const uploadTask = await uploadBytes(storageRef, file);
+                attachmentUrl = await getDownloadURL(uploadTask.ref);
+            }
+            
+            // Get a reference to the callable function
+            const functions = getFunctions(app);
+            const processOrder = httpsCallable(functions, 'processOrder');
+
+            const orderPayload = {
+                name: data.name,
+                email: data.email || '', 
+                phone: data.phone || '', 
+                details: data.details || '', 
+                attachmentName: attachmentName,
+                attachmentUrl: attachmentUrl,
+            };
+
+            const result = await processOrder(orderPayload);
+            
+            const resultData = result.data as { success: boolean, orderId?: string, message: string };
+
+            if (resultData.success) {
+                toast({ 
+                    variant: 'success', 
+                    title: 'Success!', 
+                    description: `Your request has been submitted! Order ID: ${resultData.orderId}` 
+                });
+                setOrderStatus('success');
+                reset(); 
+            } else {
+                throw new Error(resultData.message || 'Function execution failed');
+            }
+
+        } catch (error) {
+            console.error("Error submitting order: ", error);
+            const errorMessage = error instanceof Error ? error.message : 'Failed to submit your request. Please try again.';
+            toast({ 
+                variant: 'destructive', 
+                title: 'Error', 
+                description: errorMessage
+            });
+            setOrderStatus('error');
+        } finally {
+            // Reset status after a few seconds
+            setTimeout(() => setOrderStatus('idle'), 4000);
         }
-        
-        const orderPayload: Omit<Order, 'id' | 'userId'> = {
-          name: data.name,
-          email: data.email || '', 
-          phone: data.phone || '', 
-          details: data.details || '', 
-          status: 'pending',
-          attachmentName: attachmentName,
-          attachmentUrl: attachmentUrl,
-          timestamp: serverTimestamp(),
-        };
-        const docRef = await addDoc(collection(db, 'orders'), orderPayload);
-        toast({ 
-          variant: 'success', 
-          title: 'Success!', 
-          description: `Your request has been submitted! Order ID: ${docRef.id}` 
-        });
-        setOrderStatus('success');
-        reset(); 
-        setTimeout(() => setOrderStatus('idle'), 3000);
-      } catch (error) {
-        console.error("Error submitting order: ", error);
-        toast({ variant: 'destructive', title: 'Error', description: 'Failed to submit your request. Please try again.'});
-        setOrderStatus('error');
-        setTimeout(() => setOrderStatus('idle'), 3000);
-      }
     };
+
 
     const generateCv = (outputType: 'preview' | 'download') => {
         setIsGenerating(true);
@@ -394,7 +413,6 @@ export default function Home() {
                 }
             }
             
-            // --- CV DATA (ATS-FRIENDLY & RESTRUCTURED) ---
             const cvData = {
                 name: "Musonda Salimu",
                 jobTitle: "IT Professional | Software Engineer | AI Enthusiast",
@@ -402,7 +420,7 @@ export default function Home() {
                     email: "musondasalim@gmail.com",
                     phone1: "+260 977 288 260",
                     phone2: "+260 979 287 496",
-                    linkedin: "linkedin.com/in/musonda-salimu-a4a0b31b9/",
+                    linkedin: "linkedin.com/in/musonda-salimu-a4a0b31b9",
                     github: "github.com/MS0C54073",
                 },
                 about: "A results-driven IT professional with an MSc in Informatics and hands-on experience in software engineering, system administration, and AI model training. Proven ability to evaluate and improve AI-generated code, develop efficient software solutions, and manage complex IT systems. Seeking to leverage a strong foundation in Python, cybersecurity, and modern web frameworks to build innovative and scalable AI-powered applications.",
@@ -441,15 +459,6 @@ export default function Home() {
                             "Provided dedicated technical support to all embassy staff to ensure seamless digital operations.",
                         ]
                     },
-                     {
-                        title: "AI Training Methods Researcher (Intern)",
-                        company: "Novosibirsk State Technical University",
-                        duration: "May 2022 – Oct 2022",
-                        details: [
-                            "Tested and evaluated novel training algorithms for Spiking Neural Networks (SNNs).",
-                            "Managed and preprocessed large datasets for training and validating SNN models.",
-                        ]
-                    },
                     {
                         title: "Customer Care Assistant",
                         company: "VITALITE Group",
@@ -457,6 +466,15 @@ export default function Home() {
                         details: [
                             "Delivered professional customer support by promptly responding to inquiries and resolving complaints.",
                             "Processed orders, forms, and applications while maintaining accurate records of customer interactions.",
+                        ]
+                    },
+                    {
+                        title: "AI Training Methods Researcher (Intern)",
+                        company: "Novosibirsk State Technical University",
+                        duration: "May 2022 – Oct 2022",
+                        details: [
+                            "Tested and evaluated novel training algorithms for Spiking Neural Networks (SNNs).",
+                            "Managed and preprocessed large datasets for training and validating SNN models.",
                         ]
                     },
                      {
@@ -492,9 +510,9 @@ export default function Home() {
                            "Assisted customers with PC software, provided various cafe services, and troubleshooted hardware/software issues.",
                         ]
                     },
-                ],
+                ].sort((a, b) => new Date(b.duration.split(' – ')[1] === 'Present' ? '2100-01-01' : b.duration.split(' – ')[1]) - new Date(a.duration.split(' – ')[1] === 'Present' ? '2100-01-01' : a.duration.split(' – ')[1])),
                 education: [
-                    {
+                     {
                         degree: "MSc, Informatics and Computer Engineering",
                         university: "Novosibirsk State Technical University, Russia",
                         duration: "Sep 2022 - Jul 2024",
@@ -522,9 +540,9 @@ export default function Home() {
                     },
                 ],
                 certifications: [
+                    { title: "Introduction to Cybersecurity", issuer: "SMART ZAMBIA INSTITUTE (Cisco Networking Academy)", type: "Course", date: "Issued Jul 2025"},
                     { title: "AI Agents and Agentic AI in Python: Powered by Generative AI", issuer: "Vanderbilt University", type: "Specialization", date: "Completed Aug 2025", courses: ["AI Agents and Agentic AI Architecture in Python", "AI Agents and Agentic AI with Python & Generative AI"] },
                     { title: "Prompt Engineering for ChatGPT", issuer: "Vanderbilt University", type: "Course", date: "Completed Aug 2025"},
-                    { title: "Introduction to Cybersecurity", issuer: "SMART ZAMBIA INSTITUTE (Cisco Networking Academy)", type: "Course", date: "Issued Jul 2025"},
                     { title: "Google Cybersecurity Professional Certificate", issuer: "Google", type: "Specialization", date: "Completed Aug 2023", courses: ["Automate Cybersecurity Tasks with Python", "Sound the Alarm: Detection and Response", "Put It to Work: Prepare for Cybersecurity Jobs"] },
                     { title: "Key Technologies for Business Specialization", issuer: "IBM", type: "Specialization", date: "Completed Aug 2023" },
                     { title: "IT Fundamentals for Cybersecurity Specialization", issuer: "IBM", type: "Specialization", date: "Completed Jun 2022", courses: ["Operating Systems: Overview, Administration, and Security", "Cybersecurity Compliance Framework, Standards & Regulations", "Computer Networks and Network Security"] },
@@ -536,7 +554,6 @@ export default function Home() {
             const doc = new jsPDF({ unit: 'px', format: 'a4' });
             doc.setFont('Helvetica', 'normal');
 
-            // --- Document Settings ---
             const pageHeight = doc.internal.pageSize.getHeight();
             const pageWidth = doc.internal.pageSize.getWidth();
             const margin = 30;
@@ -544,7 +561,6 @@ export default function Home() {
             const lineHeight = 1.15;
             let y = 0;
 
-            // --- Helper Functions ---
             const checkPageBreak = (heightNeeded: number) => {
                 if (y + heightNeeded > pageHeight - margin) {
                     doc.addPage();
@@ -557,10 +573,10 @@ export default function Home() {
                 y += 10;
                 doc.setFontSize(12);
                 doc.setFont('Helvetica', 'bold');
-                doc.setTextColor('#2563EB');
+                doc.setTextColor(37, 99, 235); // #2563EB
                 doc.text(title.toUpperCase(), margin, y);
                 y += 5;
-                doc.setDrawColor(220, 220, 220);
+                doc.setDrawColor(226, 232, 240); // slate-200
                 doc.setLineWidth(0.5);
                 doc.line(margin, y, margin + contentWidth, y);
                 y += 12 * lineHeight;
@@ -570,13 +586,13 @@ export default function Home() {
             y = margin;
             doc.setFontSize(24);
             doc.setFont('Helvetica', 'bold');
-            doc.setTextColor('#000000');
+            doc.setTextColor(0, 0, 0);
             doc.text(cvData.name, margin, y);
             y += 20;
             
             doc.setFontSize(11);
             doc.setFont('Helvetica', 'normal');
-            doc.setTextColor('#555555');
+            doc.setTextColor(82, 82, 91); // zinc-600
             doc.text(cvData.jobTitle, margin, y);
             y += 15;
 
@@ -591,7 +607,7 @@ export default function Home() {
             addSectionTitle("Summary");
             doc.setFontSize(9);
             doc.setFont('Helvetica', 'normal');
-            doc.setTextColor('#333333');
+            doc.setTextColor(51, 65, 85); // slate-700
             const aboutLines = doc.splitTextToSize(cvData.about, contentWidth);
             doc.text(aboutLines, margin, y);
             y += aboutLines.length * 9 * lineHeight;
@@ -620,11 +636,11 @@ export default function Home() {
                 checkPageBreak(40);
                 doc.setFontSize(10);
                 doc.setFont('Helvetica', 'bold');
-                doc.setTextColor('#000000');
+                doc.setTextColor(0, 0, 0);
                 doc.text(exp.title, margin, y);
 
                 doc.setFont('Helvetica', 'normal');
-                doc.setTextColor('#555555');
+                doc.setTextColor(82, 82, 91);
                 doc.text(exp.duration, pageWidth - margin, y, { align: 'right' });
                 y += 10 * lineHeight;
 
@@ -635,7 +651,7 @@ export default function Home() {
                 
                 doc.setFontSize(9);
                 doc.setFont('Helvetica', 'normal');
-                doc.setTextColor('#333333');
+                doc.setTextColor(51, 65, 85);
                 exp.details.forEach(detail => {
                     const detailLines = doc.splitTextToSize(`•  ${detail}`, contentWidth - 10);
                     checkPageBreak(detailLines.length * 9 * lineHeight);
@@ -651,11 +667,11 @@ export default function Home() {
                 checkPageBreak(edu.details ? 35 : 25);
                 doc.setFontSize(10);
                 doc.setFont('Helvetica', 'bold');
-                doc.setTextColor('#000000');
+                doc.setTextColor(0, 0, 0);
                 doc.text(edu.degree, margin, y);
 
                 doc.setFont('Helvetica', 'normal');
-                doc.setTextColor('#555555');
+                doc.setTextColor(82, 82, 91);
                 doc.text(edu.duration, pageWidth - margin, y, { align: 'right' });
                 y += 10 * lineHeight;
 
@@ -681,13 +697,13 @@ export default function Home() {
                 checkPageBreak(cert.courses ? 35 : 25);
                 doc.setFontSize(10);
                 doc.setFont('Helvetica', 'bold');
-                doc.setTextColor('#000000');
+                doc.setTextColor(0, 0, 0);
                 doc.text(cert.title, margin, y);
                 y += 10 * lineHeight;
 
                 doc.setFontSize(9);
                 doc.setFont('Helvetica', 'normal');
-                doc.setTextColor('#555555');
+                doc.setTextColor(82, 82, 91);
                 const issuerLine = `${cert.issuer} · ${cert.type}`;
                 doc.text(issuerLine, margin, y);
                 
@@ -719,11 +735,10 @@ export default function Home() {
             addSectionTitle("References");
             doc.setFontSize(10);
             doc.setFont('Helvetica', 'normal');
-            doc.setTextColor('#333333');
+            doc.setTextColor(51, 65, 85);
             doc.text("Available upon request.", margin, y);
 
 
-            // --- Final Output ---
             if (outputType === 'preview') {
                 doc.output('dataurlnewwindow');
             } else {
@@ -1118,5 +1133,3 @@ export default function Home() {
       </div>
   );
 }
-
-    
