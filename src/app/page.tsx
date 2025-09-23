@@ -349,13 +349,11 @@ export default function Home() {
 
             if (file) {
                 attachmentName = file.name;
-                // Note: We upload the file from the client, get the URL, and pass the URL to the function.
                 const storageRef = ref(storage, `orders/${Date.now()}_${attachmentName}`);
                 const uploadTask = await uploadBytes(storageRef, file);
                 attachmentUrl = await getDownloadURL(uploadTask.ref);
             }
             
-            // Get a reference to the callable function
             const functions = getFunctions(app);
             const processOrder = httpsCallable(functions, 'processOrder');
 
@@ -375,8 +373,8 @@ export default function Home() {
             if (resultData.success) {
                 toast({ 
                     variant: 'success', 
-                    title: 'Success!', 
-                    description: `Your request has been submitted! Order ID: ${resultData.orderId}` 
+                    title: 'Request Submitted!', 
+                    description: "Thank you for your request! I will get back to you shortly."
                 });
                 setOrderStatus('success');
                 reset(); 
@@ -386,15 +384,14 @@ export default function Home() {
 
         } catch (error) {
             console.error("Error submitting order: ", error);
-            const errorMessage = error instanceof Error ? error.message : 'Failed to submit your request. Please try again.';
+            const errorMessage = error instanceof Error ? error.message : 'An unexpected error occurred. Please try again.';
             toast({ 
                 variant: 'destructive', 
-                title: 'Error', 
+                title: 'Submission Failed', 
                 description: errorMessage
             });
             setOrderStatus('error');
         } finally {
-            // Reset status after a few seconds
             setTimeout(() => setOrderStatus('idle'), 4000);
         }
     };

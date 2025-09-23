@@ -167,15 +167,19 @@ export default function ServiceDetailPage() {
       const docRef = await addDoc(collection(db, 'orders'), orderPayload);
       toast({ 
         variant: 'success', 
-        title: 'Success!', 
-        description: `Your request has been submitted! Order ID: ${docRef.id}` 
+        title: 'Request Submitted!', 
+        description: `Thank you for your interest in the ${service?.title} service. I will get back to you shortly.` 
       });
       setOrderStatus('success');
       reset(); 
-      setTimeout(() => setOrderStatus('idle'), 3000);
+      setTimeout(() => setOrderStatus('idle'), 4000);
     } catch (error) {
       console.error("Error submitting order: ", error);
-      toast({ variant: 'destructive', title: 'Error', description: 'Failed to submit your request. Please try again.'});
+      toast({ 
+        variant: 'destructive', 
+        title: 'Submission Failed', 
+        description: 'An unexpected error occurred. Please try again.'
+      });
       setOrderStatus('error');
       setTimeout(() => setOrderStatus('idle'), 3000);
     }
