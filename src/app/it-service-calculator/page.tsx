@@ -30,9 +30,15 @@ const serviceConfig = {
       baseRate: 10,
       unit: 'hour',
       features: [
-        { id: 'specialized_topic', name: 'Specialized Topic (e.g., IT, Business)', price: 5 },
         { id: 'group_session', name: 'Group Session Discount (per person)', price: -2 },
         { id: 'exam_prep', name: 'Intensive Exam Preparation', price: 3 },
+      ],
+      lessonTypes: [
+        { id: 'general_english', name: 'General English', price: 0 },
+        { id: 'business_english', name: 'Business English', price: 5 },
+        { id: 'it_english', name: 'IT English', price: 5 },
+        { id: 'python_programming', name: 'Python Programming', price: 7 },
+        { id: 'web_dev_intro', name: 'Web Development (Intro)', price: 7 },
       ],
     },
      lesson_packages: {
@@ -42,7 +48,13 @@ const serviceConfig = {
       features: [
         { id: 'add_1_hour', name: 'Add 1 extra lesson-hour per week', price: 40 },
         { id: 'add_2_hours', name: 'Add 2 extra lesson-hours per week', price: 80 },
-        { id: 'specialized_topic_pack', name: 'Specialized Topic Course (IT, Business)', price: 15 },
+      ],
+      lessonTypes: [
+        { id: 'general_english_pack', name: 'General English', price: 0 },
+        { id: 'business_english_pack', name: 'Business English', price: 15 },
+        { id: 'it_english_pack', name: 'IT English', price: 15 },
+        { id: 'python_programming_pack', name: 'Python Programming', price: 25 },
+        { id: 'web_dev_intro_pack', name: 'Web Development (Intro)', price: 25 },
       ],
     },
     web_development: {
@@ -176,10 +188,11 @@ export default function ItServiceCalculatorPage() {
   const [customFeatures, setCustomFeatures] = useState('');
   const [selectedSla, setSelectedSla] = useState<SlaId>('standard');
   const [selectedFeatures, setSelectedFeatures] = useState<Record<string, boolean>>({});
+  const [selectedLessonType, setSelectedLessonType] = useState<string>('');
   const [selectedCurrency, setSelectedCurrency] = useState<CurrencyId>('USD');
   const [totalCost, setTotalCost] = useState({ subtotal: 0, vat: 0, total: 0 });
 
-  const currentService = serviceConfig.services[selectedService];
+  const currentService = serviceConfig.services[selectedService] as (typeof serviceConfig.services)[ServiceId] & { lessonTypes?: any[] };
   const currencyInfo = serviceConfig.currencies[selectedCurrency];
 
   const isLessonService = useMemo(() => 
@@ -189,19 +202,26 @@ export default function ItServiceCalculatorPage() {
 
   useEffect(() => {
     const currencyRate = serviceConfig.currencies[selectedCurrency].rate;
-    const slaMultiplier = serviceConfig.slaTiers[selectedSla].multiplier;
+    const slaMultiplier = isLessonService ? 1 : serviceConfig.slaTiers[selectedSla].multiplier;
     
     // All base prices are in USD, so we calculate in USD first
     const baseForQuantityUSD = currentService.baseRate * quantity;
 
-    const featuresCostUSD = currentService.features.reduce((acc, feature) => {
+    const featuresCostUSD = (currentService.features || []).reduce((acc, feature) => {
       if (selectedFeatures[feature.id]) {
         return acc + feature.price;
       }
       return acc;
     }, 0);
 
-    const subtotalBeforeSlaUSD = baseForQuantityUSD + featuresCostUSD;
+    const lessonTypeCostUSD = (currentService.lessonTypes || []).reduce((acc, lessonType) => {
+        if (selectedLessonType === lessonType.id) {
+            return acc + lessonType.price;
+        }
+        return acc;
+    }, 0);
+
+    const subtotalBeforeSlaUSD = baseForQuantityUSD + featuresCostUSD + lessonTypeCostUSD;
     const finalSubtotalUSD = subtotalBeforeSlaUSD * slaMultiplier;
 
     // Convert to selected currency
@@ -214,13 +234,14 @@ export default function ItServiceCalculatorPage() {
       vat: vatAmount,
       total: finalTotal,
     });
-  }, [selectedService, quantity, selectedSla, selectedFeatures, selectedCurrency, currentService]);
+  }, [selectedService, quantity, selectedSla, selectedFeatures, selectedLessonType, selectedCurrency, currentService, isLessonService]);
 
   const handleServiceChange = (value: string) => {
     const newServiceId = value as ServiceId;
     setSelectedService(newServiceId);
     setQuantity(1); // Reset quantity
     setSelectedFeatures({}); // Reset features
+    setSelectedLessonType('');
     setCustomServiceName('');
     setCustomFeatures('');
     setSelectedSla('standard'); // Reset SLA
@@ -241,22 +262,27 @@ export default function ItServiceCalculatorPage() {
       serviceName = `${customServiceName} (Custom)`;
     }
 
-    const featureLines = currentService.features
+    const featureLines = (currentService.features || [])
       .filter(f => selectedFeatures[f.id])
       .map(f => `- ${f.name}`)
       .join(nl);
       
+    const lessonType = (currentService.lessonTypes || []).find(l => l.id === selectedLessonType);
+    const lessonTypeLine = lessonType ? `${nl}Lesson Type: ${lessonType.name}` : '';
+
     const customFeatureLines = selectedService === 'other' && customFeatures ? `${nl}Custom Requirements:${nl}${customFeatures}` : '';
     
     const slaTier = serviceConfig.slaTiers[selectedSla];
+    const priorityLine = !isLessonService ? `Priority: ${slaTier.name}` : '';
 
     return [
       `*Quote Summary*`,
       `Service: ${serviceName}`,
       `Quantity: ${quantity} ${currentService.unit}(s)`,
       ...(featureLines ? [`Features:${nl}${featureLines}`] : []),
+      lessonTypeLine,
       customFeatureLines,
-      `Priority: ${slaTier.name}`,
+      priorityLine,
       `Currency: ${selectedCurrency}`,
       `------------------`,
       `Subtotal: ${symbol}${totalCost.subtotal.toFixed(2)}`,
@@ -302,10 +328,23 @@ export default function ItServiceCalculatorPage() {
 
         addLine('Service:', serviceName);
         addLine('Quantity:', `${quantity} ${currentService.unit}(s)`);
-        addLine('Priority Level:', serviceConfig.slaTiers[selectedSla].name);
+        if (!isLessonService) {
+          addLine('Priority Level:', serviceConfig.slaTiers[selectedSla].name);
+        }
         y += 5;
 
-        const selectedFeatureList = currentService.features.filter(f => selectedFeatures[f.id]);
+        const lessonType = (currentService.lessonTypes || []).find(l => l.id === selectedLessonType);
+        if (lessonType) {
+            doc.setFont('helvetica', 'bold');
+            doc.text('Lesson Type:', 15, y);
+            y += 8;
+            doc.setFont('helvetica', 'normal');
+            doc.text(`- ${lessonType.name}`, 20, y);
+            y += 6;
+            y+= 4;
+        }
+
+        const selectedFeatureList = (currentService.features || []).filter(f => selectedFeatures[f.id]);
         if (selectedFeatureList.length > 0) {
             doc.setFont('helvetica', 'bold');
             doc.text('Selected Features:', 15, y);
@@ -453,8 +492,28 @@ export default function ItServiceCalculatorPage() {
                 />
               </div>
 
+              {/* Lesson Type Radio Group */}
+              {isLessonService && currentService.lessonTypes && currentService.lessonTypes.length > 0 && (
+                 <div className="space-y-2">
+                    <Label><TranslatedText text="Lesson Type" /></Label>
+                    <RadioGroup value={selectedLessonType} onValueChange={setSelectedLessonType} className="rounded-md border p-4 space-y-2">
+                        {currentService.lessonTypes.map(lesson => (
+                            <div key={lesson.id} className="flex items-center space-x-2">
+                                <RadioGroupItem value={lesson.id} id={`lesson-${lesson.id}`} />
+                                <Label htmlFor={`lesson-${lesson.id}`} className="font-normal w-full">
+                                    <div className="flex justify-between">
+                                        {lesson.name}
+                                        <span className="text-muted-foreground text-xs">{(lesson.price > 0 ? '+' : '')}{currencyInfo.symbol}{(lesson.price * currencyInfo.rate).toFixed(2)}</span>
+                                    </div>
+                                </Label>
+                            </div>
+                        ))}
+                    </RadioGroup>
+                 </div>
+              )}
+
               {/* Features Checkboxes */}
-              {currentService.features.length > 0 && (
+              {currentService.features && currentService.features.length > 0 && (
                 <div className="space-y-2">
                   <Label><TranslatedText text="Additional Features" /></Label>
                   <div className="space-y-2 rounded-md border p-4">
@@ -537,6 +596,9 @@ export default function ItServiceCalculatorPage() {
                   </a>
                 </Button>
               </div>
+              <p className="text-xs text-muted-foreground text-center mt-2 px-4">
+                <TranslatedText text="For more specific requirements or questions, please feel free to reach out directly on WhatsApp!" />
+              </p>
             </CardFooter>
           </Card>
         </div>
