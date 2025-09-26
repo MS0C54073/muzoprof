@@ -8,7 +8,7 @@ import { useForm, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { getFunctions, httpsCallable } from 'firebase/functions';
-import { app, storage } from '@/lib/firebase';
+import { app, storage } from '@/lib/firebase-client';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
@@ -17,9 +17,13 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
-import { ArrowLeft, BookOpen, Check, Loader2, Mail, Send } from 'lucide-react';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { ArrowLeft, BookOpen, Check, Loader2, Mail, Send, Bot, Code } from 'lucide-react';
 import TranslatedText from '@/app/components/translated-text';
 import { SocialIcons } from '@/components/social-icons';
+import { englishMaterials, type Material } from './teaching-materials';
+
 
 const requestSchema = z.object({
   name: z.string().min(1, { message: 'Name is required' }),
@@ -45,6 +49,37 @@ const offerings = [
     'Customized learning programs (conversation, grammar, test prep, business English)',
     'Patient, supportive, and student-focused approach',
 ];
+
+const programmingOfferings = [
+    { title: 'Roblox Studio', icon: <Bot className="h-5 w-5 mr-2 text-primary" />, description: 'Learn to create your own games and experiences on the Roblox platform.' },
+    { title: 'Python', icon: <Code className="h-5 w-5 mr-2 text-primary" />, description: 'Master the fundamentals of Python, one of the most popular and versatile programming languages.' },
+    { title: 'Unity', icon: <Bot className="h-5 w-5 mr-2 text-primary" />, description: 'Dive into game development with Unity, a powerful engine for creating 2D and 3D games.' },
+    { title: 'Figma', icon: <Bot className="h-5 w-5 mr-2 text-primary" />, description: 'Develop skills in UI/UX design using Figma, a leading tool for interface design and prototyping.' },
+];
+
+const MaterialsAccordion = ({ materials }: { materials: Material[] }) => {
+    if (!materials || materials.length === 0) {
+        return null;
+    }
+
+    return (
+        <Accordion type="multiple" className="w-full">
+            {materials.map((material, index) => (
+                <AccordionItem value={`${material.title}-${index}`} key={`${material.title}-${index}`}>
+                    <AccordionTrigger>{material.title}</AccordionTrigger>
+                    <AccordionContent className="pl-4">
+                        {material.children && material.children.length > 0 ? (
+                            <MaterialsAccordion materials={material.children} />
+                        ) : (
+                            <p className="text-muted-foreground italic">End of section.</p>
+                        )}
+                    </AccordionContent>
+                </AccordionItem>
+            ))}
+        </Accordion>
+    );
+};
+
 
 export default function TutorPage() {
   const { toast } = useToast();
@@ -165,7 +200,53 @@ export default function TutorPage() {
           </div>
         </section>
 
-        <section id="contact-tutor" className="py-20 border-t mt-20">
+        <section id="materials" className="py-20 border-t mt-20">
+            <h2 className="text-3xl font-bold text-center mb-12">
+                <TranslatedText text="Teaching Areas & Materials" />
+            </h2>
+            <Tabs defaultValue="english" className="w-full max-w-4xl mx-auto">
+                <TabsList className="grid w-full grid-cols-2">
+                    <TabsTrigger value="english">English</TabsTrigger>
+                    <TabsTrigger value="programming">Programming</TabsTrigger>
+                </TabsList>
+                <TabsContent value="english">
+                    <Card>
+                        <CardHeader>
+                            <CardTitle><TranslatedText text="English Teaching Materials" /></CardTitle>
+                            <CardDescription>
+                                <TranslatedText text="A selection of the books and resources I use, tailored to different levels and needs." />
+                            </CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                            <MaterialsAccordion materials={englishMaterials} />
+                        </CardContent>
+                    </Card>
+                </TabsContent>
+                <TabsContent value="programming">
+                    <Card>
+                        <CardHeader>
+                            <CardTitle><TranslatedText text="Programming & Tech Courses" /></CardTitle>
+                            <CardDescription>
+                                <TranslatedText text="Introduction to programming and technology concepts, taught in English." />
+                            </CardDescription>
+                        </CardHeader>
+                        <CardContent className="space-y-4">
+                            {programmingOfferings.map(p => (
+                                <div key={p.title} className="flex items-start">
+                                    {p.icon}
+                                    <div>
+                                        <h4 className="font-semibold">{p.title}</h4>
+                                        <p className="text-sm text-muted-foreground">{p.description}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </CardContent>
+                    </Card>
+                </TabsContent>
+            </Tabs>
+        </section>
+
+        <section id="contact-tutor" className="py-20 border-t mt-12">
           <div className="text-center max-w-2xl mx-auto">
             <h2 className="text-3xl font-bold"><TranslatedText text="Start Your Learning Journey" /></h2>
             <p className="text-muted-foreground mt-4 mb-8">
@@ -232,3 +313,5 @@ export default function TutorPage() {
     </div>
   );
 }
+
+    
