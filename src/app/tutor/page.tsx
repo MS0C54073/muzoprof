@@ -19,7 +19,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { ArrowLeft, BookOpen, Check, Loader2, Mail, Send, Bot, Code } from 'lucide-react';
+import { ArrowLeft, BookOpen, Check, Loader2, Mail, Send, Bot, Code, Globe, BrainCircuit, Smartphone, Database, Server, Shield, Terminal } from 'lucide-react';
 import TranslatedText from '@/app/components/translated-text';
 import { SocialIcons } from '@/components/social-icons';
 import { englishMaterials, type Material } from './teaching-materials';
@@ -51,10 +51,17 @@ const offerings = [
 ];
 
 const programmingOfferings = [
-    { title: 'Roblox Studio', icon: <Bot className="h-5 w-5 mr-2 text-primary" />, description: 'Learn to create your own games and experiences on the Roblox platform.' },
     { title: 'Python', icon: <Code className="h-5 w-5 mr-2 text-primary" />, description: 'Master the fundamentals of Python, one of the most popular and versatile programming languages.' },
+    { title: 'Web Development', icon: <Globe className="h-5 w-5 mr-2 text-primary" />, description: 'Build modern websites and web applications using technologies like Next.js and React.' },
+    { title: 'Agent Development', icon: <BrainCircuit className="h-5 w-5 mr-2 text-primary" />, description: 'Learn to create intelligent AI agents and chatbots with modern frameworks.' },
+    { title: 'App Development', icon: <Smartphone className="h-5 w-5 mr-2 text-primary" />, description: 'Create mobile applications for iOS and Android.' },
+    { title: 'Roblox Studio', icon: <Bot className="h-5 w-5 mr-2 text-primary" />, description: 'Learn to create your own games and experiences on the Roblox platform.' },
     { title: 'Unity', icon: <Bot className="h-5 w-5 mr-2 text-primary" />, description: 'Dive into game development with Unity, a powerful engine for creating 2D and 3D games.' },
     { title: 'Figma', icon: <Bot className="h-5 w-5 mr-2 text-primary" />, description: 'Develop skills in UI/UX design using Figma, a leading tool for interface design and prototyping.' },
+    { title: 'Databases', icon: <Database className="h-5 w-5 mr-2 text-primary" />, description: 'Understand how to design, use, and manage SQL and NoSQL databases.' },
+    { title: 'IT Support', icon: <Server className="h-5 w-5 mr-2 text-primary" />, description: 'Gain practical skills for troubleshooting hardware, software, and network issues.' },
+    { title: 'Introduction to Cybersecurity', icon: <Shield className="h-5 w-5 mr-2 text-primary" />, description: 'Learn the basic principles of protecting systems and data from cyber threats.' },
+    { title: 'Linux', icon: <Terminal className="h-5 w-5 mr-2 text-primary" />, description: 'Get comfortable with the Linux command line and operating system fundamentals.' },
 ];
 
 const MaterialsAccordion = ({ materials }: { materials: Material[] }) => {
@@ -230,7 +237,7 @@ export default function TutorPage() {
                                 <TranslatedText text="Introduction to programming and technology concepts, taught in English." />
                             </CardDescription>
                         </CardHeader>
-                        <CardContent className="space-y-4">
+                        <CardContent className="space-y-4 pt-6">
                             {programmingOfferings.map(p => (
                                 <div key={p.title} className="flex items-start">
                                     {p.icon}
@@ -313,5 +320,3 @@ export default function TutorPage() {
     </div>
   );
 }
-
-    
