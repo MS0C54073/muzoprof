@@ -167,15 +167,29 @@ export const englishMaterials: Material[] = [
     { title: 'Gold Experience C1' },
     { title: 'Lesson Plans (B2+)' },
     {
-        title: 'MORE English',
+        title: 'Cambridge Exam Preparations',
         children: [
-            { title: 'Exam Preps' },
-            { title: 'Course Units (B1 to B2+)' },
+            { title: 'Advanced Trainer' },
+            { title: 'B1 Preliminary 1' },
+            { title: 'B1 Preliminary for Schools Trainer' },
+            { title: 'CAE Practice Tests 1' },
+            { title: 'First for Schools 1' },
+            { title: 'First for Schools Trainer' },
+            {
+                title: 'MiniMovers',
+                children: [{ title: 'A1 Mini Movers' }],
+            },
+            {
+                title: 'Starters2',
+                children: [{ title: 'Starters 2' }],
+            },
+            {
+                title: 'Starters3',
+                children: [{ title: 'Starters 3' }],
+            },
         ],
     },
     { title: 'Wider World 2' },
     { title: 'WW (series, unspecified)' },
     { title: 'WW 4' },
 ];
-
-    
