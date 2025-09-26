@@ -26,13 +26,23 @@ const serviceConfig = {
   },
   services: {
     lesson_enrollment: {
-      name: 'Lesson Enrollment',
+      name: 'Lesson Enrollment (Single Hour)',
       baseRate: 10,
       unit: 'hour',
       features: [
         { id: 'specialized_topic', name: 'Specialized Topic (e.g., IT, Business)', price: 5 },
         { id: 'group_session', name: 'Group Session Discount (per person)', price: -2 },
         { id: 'exam_prep', name: 'Intensive Exam Preparation', price: 3 },
+      ],
+    },
+     lesson_packages: {
+      name: 'Lesson Course Packages',
+      baseRate: 80, // Base for 1 month (2 lessons/week * 4 weeks * $10/hr)
+      unit: 'month',
+      features: [
+        { id: 'add_1_hour', name: 'Add 1 extra lesson-hour per week', price: 40 },
+        { id: 'add_2_hours', name: 'Add 2 extra lesson-hours per week', price: 80 },
+        { id: 'specialized_topic_pack', name: 'Specialized Topic Course (IT, Business)', price: 15 },
       ],
     },
     web_development: {
@@ -146,21 +156,15 @@ const serviceConfig = {
     },
   },
   slaTiers: {
-    standard: {
-      name: 'Standard',
-      multiplier: 1,
-      description: 'Business hours support (8-12 working days)',
-    },
-    priority: {
-      name: 'Priority',
-      multiplier: 1.5,
-      description: 'Extended hours & faster response (3-7 working days)',
-    },
-    after_hours: {
-      name: 'After-Hours',
-      multiplier: 2,
-      description: '24/7 support for critical issues (1-2 working days)',
-    },
+    // For projects
+    standard: { name: 'Standard', multiplier: 1, description: 'Business hours support (8-12 working days)' },
+    priority: { name: 'Priority', multiplier: 1.5, description: 'Extended hours & faster response (3-7 working days)' },
+    after_hours: { name: 'After-Hours', multiplier: 2, description: '24/7 support for critical issues (1-2 working days)' },
+    // For lesson packages
+    p_2_3: { name: '2-3 Months', multiplier: 1, description: 'Standard package, 2 lessons/week.' },
+    p_5_6: { name: '5-6 Months', multiplier: 0.95, description: '5% discount. Includes bi-weekly progress reports.' },
+    p_8_9: { name: '8-9 Months', multiplier: 0.9, description: '10% discount. Includes progress reports & monthly goals review.' },
+    p_12: { name: '1 Year (Of Course)', multiplier: 0.85, description: '15% discount. Full support & long-term planning.' },
   },
 };
 // --- End Configuration ---
@@ -182,6 +186,26 @@ export default function ItServiceCalculatorPage() {
 
   const currentService = serviceConfig.services[selectedService];
   const currencyInfo = serviceConfig.currencies[selectedCurrency];
+
+  // Determine which SLA/Package tiers to show based on the selected service
+  const isLessonPackage = selectedService === 'lesson_packages';
+  const availableTiers = useMemo(() => {
+    const tierIds = Object.keys(serviceConfig.slaTiers) as SlaId[];
+    if (isLessonPackage) {
+      return tierIds.filter(id => id.startsWith('p_'));
+    }
+    return tierIds.filter(id => !id.startsWith('p_'));
+  }, [isLessonPackage]);
+  
+  // Effect to reset SLA/Package selection when service changes
+  useEffect(() => {
+      if (isLessonPackage) {
+          setSelectedSla('p_2_3');
+      } else {
+          setSelectedSla('standard');
+      }
+  }, [selectedService, isLessonPackage]);
+
 
   useEffect(() => {
     const currencyRate = serviceConfig.currencies[selectedCurrency].rate;
@@ -213,7 +237,8 @@ export default function ItServiceCalculatorPage() {
   }, [selectedService, quantity, selectedSla, selectedFeatures, selectedCurrency, currentService]);
 
   const handleServiceChange = (value: string) => {
-    setSelectedService(value as ServiceId);
+    const newServiceId = value as ServiceId;
+    setSelectedService(newServiceId);
     setQuantity(1); // Reset quantity
     setSelectedFeatures({}); // Reset features
     setCustomServiceName('');
@@ -241,6 +266,8 @@ export default function ItServiceCalculatorPage() {
       .join(nl);
       
     const customFeatureLines = selectedService === 'other' && customFeatures ? `${nl}Custom Requirements:${nl}${customFeatures}` : '';
+    
+    const tierLabel = isLessonPackage ? 'Package' : 'SLA';
 
     return [
       `*Quote Summary*`,
@@ -248,7 +275,7 @@ export default function ItServiceCalculatorPage() {
       `Quantity: ${quantity} ${currentService.unit}(s)`,
       ...(featureLines ? [`Features:${nl}${featureLines}`] : []),
       customFeatureLines,
-      `SLA: ${serviceConfig.slaTiers[selectedSla].name}`,
+      `${tierLabel}: ${serviceConfig.slaTiers[selectedSla].name}`,
       `Currency: ${selectedCurrency}`,
       `------------------`,
       `Subtotal: ${symbol}${totalCost.subtotal.toFixed(2)}`,
@@ -294,7 +321,8 @@ export default function ItServiceCalculatorPage() {
 
         addLine('Service:', serviceName);
         addLine('Quantity:', `${quantity} ${currentService.unit}(s)`);
-        addLine('Service Level (SLA):', serviceConfig.slaTiers[selectedSla].name);
+        const tierLabel = isLessonPackage ? 'Package:' : 'Service Level (SLA):';
+        addLine(tierLabel, serviceConfig.slaTiers[selectedSla].name);
         y += 5;
 
         const selectedFeatureList = currentService.features.filter(f => selectedFeatures[f.id]);
@@ -467,22 +495,29 @@ export default function ItServiceCalculatorPage() {
                 </div>
               )}
               
-              {/* SLA Tiers */}
+              {/* SLA Tiers or Lesson Packages */}
               <div className="space-y-2">
-                <Label><TranslatedText text="Priority / Service Level (SLA)" /></Label>
+                <Label><TranslatedText text={isLessonPackage ? "Choose Your Package" : "Priority / Service Level (SLA)"} /></Label>
                 <RadioGroup value={selectedSla} onValueChange={(value) => setSelectedSla(value as SlaId)} className="rounded-md border p-4 space-y-2">
-                  {Object.entries(serviceConfig.slaTiers).map(([id, { name, description }]) => (
-                    <div key={id} className="flex items-center space-x-2">
-                      <RadioGroupItem value={id} id={`sla-${id}`} />
-                      <Label htmlFor={`sla-${id}`} className="font-normal w-full">
-                        <div className="flex justify-between">
-                            {name}
-                            <span className="text-muted-foreground text-xs">({serviceConfig.slaTiers[id as SlaId].multiplier}x cost)</span>
+                  {availableTiers.map((id) => {
+                    const { name, description, multiplier } = serviceConfig.slaTiers[id as SlaId];
+                    const multiplierText = isLessonPackage 
+                        ? (multiplier < 1 ? `${((1 - multiplier) * 100).toFixed(0)}% off` : '') 
+                        : `${multiplier}x cost`;
+
+                    return (
+                        <div key={id} className="flex items-center space-x-2">
+                            <RadioGroupItem value={id} id={`sla-${id}`} />
+                            <Label htmlFor={`sla-${id}`} className="font-normal w-full">
+                                <div className="flex justify-between">
+                                    {name}
+                                    {multiplierText && <span className="text-muted-foreground text-xs">({multiplierText})</span>}
+                                </div>
+                                <p className="text-xs text-muted-foreground">{description}</p>
+                            </Label>
                         </div>
-                        <p className="text-xs text-muted-foreground">{description}</p>
-                      </Label>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </RadioGroup>
               </div>
             </CardContent>
