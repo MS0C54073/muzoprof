@@ -25,7 +25,7 @@ The portfolio covers sections on my work experience, education, technical skills
 To set up and run the project locally, follow these steps:
 1. **Clone the repository:**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/MS0C54073/muzoprof
    ```
 2. **Navigate to the project directory:**
    ```bash
