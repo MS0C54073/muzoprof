@@ -6,39 +6,34 @@ export interface Material {
 
 export const englishMaterials: Material[] = [
     {
-        title: 'Core Book Series',
+        title: 'Adults Courses',
         children: [
             {
-                title: 'Adults Courses',
+                title: 'Market Leader Series (Business English)',
                 children: [
-                    {
-                        title: 'Market Leader Series (Business English)',
-                        children: [
-                            { title: 'Elementary' },
-                            { title: 'Pre-Intermediate' },
-                            { title: 'Intermediate' },
-                            { title: 'Upper-Intermediate' },
-                            { title: 'Advanced' },
-                        ],
-                    },
-                    {
-                        title: 'Life Series (General English)',
-                        children: [
-                            { title: 'Beginner' },
-                            { title: 'Elementary' },
-                            { title: 'Pre-Intermediate' },
-                            { title: 'Intermediate' },
-                            { title: 'Upper-Intermediate' },
-                            { title: 'Advanced' },
-                        ],
-                    },
-                    {
-                        title: 'Summer Course Materials',
-                        children: [
-                            { title: 'Adults Summer Course (A1-C1 levels)' },
-                            { title: 'Adults Life Club materials' },
-                        ],
-                    },
+                    { title: 'Elementary' },
+                    { title: 'Pre-Intermediate' },
+                    { title: 'Intermediate' },
+                    { title: 'Upper-Intermediate' },
+                    { title: 'Advanced' },
+                ],
+            },
+            {
+                title: 'Life Series (General English)',
+                children: [
+                    { title: 'Beginner' },
+                    { title: 'Elementary' },
+                    { title: 'Pre-Intermediate' },
+                    { title: 'Intermediate' },
+                    { title: 'Upper-Intermediate' },
+                    { title: 'Advanced' },
+                ],
+            },
+            {
+                title: 'Summer Course Materials',
+                children: [
+                    { title: 'Adults Summer Course (A1-C1 levels)' },
+                    { title: 'Adults Life Club materials' },
                 ],
             },
         ],
