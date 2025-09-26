@@ -25,6 +25,16 @@ const serviceConfig = {
     ZMW: { name: 'Zambian Kwacha', symbol: 'K', rate: 25.50 }, // Example rate, updatable
   },
   services: {
+    lesson_enrollment: {
+      name: 'Lesson Enrollment',
+      baseRate: 10,
+      unit: 'hour',
+      features: [
+        { id: 'specialized_topic', name: 'Specialized Topic (e.g., IT, Business)', price: 5 },
+        { id: 'group_session', name: 'Group Session Discount (per person)', price: -2 },
+        { id: 'exam_prep', name: 'Intensive Exam Preparation', price: 3 },
+      ],
+    },
     web_development: {
       name: 'Web Development',
       baseRate: 500,
@@ -449,7 +459,7 @@ export default function ItServiceCalculatorPage() {
                          />
                          <Label htmlFor={`feature-${feature.id}`} className="font-normal flex justify-between w-full">
                            {feature.name}
-                           <span className="text-muted-foreground text-xs">+{currencyInfo.symbol}{(feature.price * currencyInfo.rate).toFixed(2)}</span>
+                           <span className="text-muted-foreground text-xs">{(feature.price >= 0 ? '+' : '')}{currencyInfo.symbol}{(feature.price * currencyInfo.rate).toFixed(2)}</span>
                          </Label>
                        </div>
                      ))}
@@ -524,3 +534,5 @@ export default function ItServiceCalculatorPage() {
     </div>
   );
 }
+
+    
