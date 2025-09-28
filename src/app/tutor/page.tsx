@@ -364,7 +364,7 @@ export default function TutorPage() {
                 </CardHeader>
                 <CardContent>
                     <p className="text-muted-foreground">
-                        <TranslatedText text="As a patient and adaptable TEFL-certified educator with over 6 years of experience, I specialize in creating customized online learning experiences. I have a passion for teaching both English and technology to a diverse range of learners, from young children to professionals. My expertise covers General English (using the Life series), Business English (Market Leader series), and comprehensive exam preparation. I am experienced in teaching all age groups, including children, teenagers, and adults, and I'm committed to building a supportive and confident learning environment for every student."/>
+                        <TranslatedText text="As a patient and adaptable TEFL-certified educator with over 6 years of experience, I specialize in creating customized online learning experiences. I have a passion for teaching both English and technology to a diverse range of learners, from young children to professionals. My expertise covers General English (using the Life series), Business English (Market Leader series), and comprehensive exam preparation for Cambridge exams. I am experienced in teaching all age groups, including children, teenagers, and adults, and I'm committed to building a supportive and confident learning environment for every student."/>
                     </p>
                 </CardContent>
             </Card>
@@ -564,3 +564,4 @@ export default function TutorPage() {
   );
 }
 
+    
