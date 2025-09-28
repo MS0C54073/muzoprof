@@ -424,7 +424,7 @@ export default function Home() {
                     linkedin: "linkedin.com/in/musonda-salimu-a4a0b31b9",
                     github: "github.com/MS0C54073",
                 },
-                summary: "A results-driven IT professional with an MSc in Informatics and hands-on experience in software development, system administration, and AI model training. Proven ability to evaluate and improve AI-generated code, develop efficient software solutions, and manage complex IT systems. Seeking to leverage a strong foundation in Python, cybersecurity, and modern web frameworks to build innovative and scalable AI-powered applications.",
+                summary: "A results-driven IT professional with an MSc in Informatics and hands-on experience in software development, system administration, and AI model training. Also brings over 6 years of teaching experience. Proven ability to evaluate and improve AI-generated code, develop efficient software solutions, and manage complex IT systems. Seeking to leverage a strong foundation in Python, cybersecurity, and modern web frameworks to build innovative and scalable AI-powered applications.",
                 skills: [
                     "Python & Django", "AI Development (Genkit)", "Next.js, React, TypeScript",
                     "Cybersecurity (SIEM, IDS)", "System & Network Admin", "Databases (SQL & NoSQL)",
@@ -1216,5 +1216,6 @@ export default function Home() {
 
 
     
+
 
 

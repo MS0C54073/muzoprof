@@ -1,4 +1,5 @@
 
+
 'use client';
 
 import { useState } from 'react';
@@ -110,7 +111,7 @@ export default function TutorPage() {
                     phone2: "+260 979 287 496",
                     linkedin: "linkedin.com/in/musonda-salimu-a4a0b31b9",
                 },
-                summary: "A patient and adaptable educator with a Master's degree in Informatics and TEFL certification. Experienced in teaching English (General, Business, IT) and technology (Python, Web Dev, Game Design) to a diverse range of learners online. Proven ability to create customized learning plans, simplify complex topics, and foster a supportive environment that builds student confidence and achieves learning objectives.",
+                summary: "A patient and adaptable educator with a Master's degree in Informatics, TEFL certification, and over 6 years of teaching experience. Experienced in teaching English (General, Business, IT) and technology (Python, Web Dev, Game Design) to a diverse range of learners online. Proven ability to create customized learning plans, simplify complex topics, and foster a supportive environment that builds student confidence and achieves learning objectives.",
                 skills: [
                     "English Language Teaching (TEFL)", "Curriculum & Lesson Planning", "Student Assessment & Feedback",
                     "Python Programming", "Web Development (HTML, CSS, JS)", "Roblox & Unity Game Design",
@@ -131,6 +132,7 @@ export default function TutorPage() {
                 certifications: [
                     { title: 'Teacher Of English To Speakers Of Other Languages (TEFL)', issuer: 'Teacher Record', date: 'Issued Sep 2023', credentialId: 'TR2672252278' },
                     { title: 'EF SET English Certificate', issuer: 'EF SET', date: 'Issued Sep 2024' },
+                    { title: 'Teach English Now! Foundational Principles', issuer: 'Arizona State University (via Coursera)', date: 'Completed Sep 2024' },
                 ]
             };
 
