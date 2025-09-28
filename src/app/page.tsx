@@ -274,6 +274,7 @@ const certifications = [
     { title: 'Python (Basic) Certificate', issuer: 'HackerRank', date: 'Aug 2020', credentialId: '6E56080D33F3' },
     { title: 'EF SET English Certificate', issuer: 'EF SET', date: 'Sep 2024' },
     { title: 'Teacher Of English To Speakers Of Other Languages (TEFL)', issuer: 'Teacher Record', date: 'Sep 2023', credentialId: 'TR2672252278' },
+    { title: 'Teach English Now! Foundational Principles', issuer: 'Arizona State University (via Coursera)', date: 'Sep 2024' },
 ];
 
 const references = [
@@ -415,7 +416,7 @@ export default function Home() {
             
             const cvData = {
                 name: "Musonda Salimu",
-                jobTitle: "IT Professional | Software Developer | AI | Tutor",
+                jobTitle: "IT Professional | Software Developer | AI | English Tutor",
                 contact: {
                     email: "musondasalim@gmail.com",
                     phone1: "+260 977 288 260",
@@ -565,6 +566,7 @@ export default function Home() {
                         date: "Completed Aug 2023",
                         courses: ["Automate Cybersecurity Tasks with Python", "Sound the Alarm: Detection and Response", "Put It to Work: Prepare for Cybersecurity Jobs"]
                     },
+                    { title: 'Teach English Now! Foundational Principles', issuer: 'Arizona State University (via Coursera)', type: 'Course', date: 'Completed Sep 2024' },
                     { title: "Key Technologies for Business Specialization", issuer: "IBM", type: "Specialization", date: "Completed Aug 2023" },
                     {
                         title: "IT Fundamentals for Cybersecurity Specialization",
@@ -813,7 +815,7 @@ export default function Home() {
             <TranslatedText text="AI" />
             <span className="text-primary">|</span>
             <Button variant="link" asChild className="text-xl md:text-2xl p-0 h-auto">
-                <Link href="/tutor"><TranslatedText text="Tutor" /></Link>
+                <Link href="/tutor"><TranslatedText text="English Tutor" /></Link>
             </Button>
           </p>
           <p className="max-w-2xl mx-auto mt-4 text-foreground">
@@ -1214,4 +1216,5 @@ export default function Home() {
 
 
     
+
 
