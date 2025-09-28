@@ -118,7 +118,7 @@ export default function TutorPage() {
                     phone2: "+260 979 287 496",
                     linkedin: "linkedin.com/in/musonda-salimu-a4a0b31b9",
                 },
-                summary: "A patient and adaptable educator with a Master's degree in Informatics, TEFL certification, and over 6 years of teaching experience. Experienced in teaching English (General, Business, IT) and technology (Python, Web Dev, Game Design) to a diverse range of learners online. Proven ability to create customized learning plans, simplify complex topics, and foster a supportive environment that builds student confidence and achieves learning objectives.",
+                summary: "A patient and adaptable TEFL-certified educator with a Master's degree and over 6 years of experience teaching English and technology online. Proven ability to create customized learning plans for a diverse range of learners, from children to adults. Specializes in Business English (Market Leader series), General English (Life series), and exam preparation. Fosters a supportive environment that builds student confidence and achieves learning objectives.",
                 skills: [
                     "English Language Teaching (TEFL)", "Curriculum & Lesson Planning", "Student Assessment & Feedback",
                     "Python Programming", "Web Development (HTML, CSS, JS)", "Roblox & Unity Game Design",
@@ -356,6 +356,20 @@ export default function TutorPage() {
       </header>
 
       <main className="flex-grow">
+      
+        <section className="mb-12">
+            <Card className="shadow-lg">
+                <CardHeader>
+                    <CardTitle><TranslatedText text="About My Teaching"/></CardTitle>
+                </CardHeader>
+                <CardContent>
+                    <p className="text-muted-foreground">
+                        <TranslatedText text="As a patient and adaptable TEFL-certified educator with over 6 years of experience, I specialize in creating customized online learning experiences. I have a passion for teaching both English and technology to a diverse range of learners, from young children to professionals. My expertise covers General English (using the Life series), Business English (Market Leader series), and comprehensive exam preparation. I am experienced in teaching all age groups, including children, teenagers, and adults, and I'm committed to building a supportive and confident learning environment for every student."/>
+                    </p>
+                </CardContent>
+            </Card>
+        </section>
+
         <section className="grid md:grid-cols-5 gap-8">
           <div className="md:col-span-3">
             <Card className="shadow-lg h-full">
@@ -549,3 +563,4 @@ export default function TutorPage() {
     </div>
   );
 }
+
