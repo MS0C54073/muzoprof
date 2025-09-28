@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
+import { jsPDF } from 'jspdf';
 import { getFunctions, httpsCallable } from 'firebase/functions';
 import { app, storage } from '@/lib/firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
@@ -19,7 +20,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { ArrowLeft, BookOpen, Check, Loader2, Mail, Send, Bot, Code, Globe, BrainCircuit, Smartphone, Database, Server, Shield, Terminal } from 'lucide-react';
+import { ArrowLeft, BookOpen, Check, Loader2, Mail, Send, Bot, Code, Globe, BrainCircuit, Smartphone, Database, Server, Shield, Terminal, Eye, Download } from 'lucide-react';
 import TranslatedText from '@/app/components/translated-text';
 import { SocialIcons } from '@/components/social-icons';
 import { englishMaterials, type Material } from './teaching-materials';
@@ -91,10 +92,191 @@ const MaterialsAccordion = ({ materials }: { materials: Material[] }) => {
 export default function TutorPage() {
   const { toast } = useToast();
   const [requestStatus, setRequestStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [isGenerating, setIsGenerating] = useState(false);
 
   const { register, handleSubmit, reset, formState: { errors } } = useForm<RequestFormData>({
     resolver: zodResolver(requestSchema),
   });
+  
+  const generateTutorCv = (outputType: 'preview' | 'download') => {
+        setIsGenerating(true);
+        try {
+            const cvData = {
+                name: "Musonda Salimu",
+                jobTitle: "English & Technology Tutor | TEFL Certified",
+                contact: {
+                    email: "musondasalim@gmail.com",
+                    phone1: "+260 977 288 260",
+                    phone2: "+260 979 287 496",
+                    linkedin: "linkedin.com/in/musonda-salimu-a4a0b31b9",
+                },
+                summary: "A patient and adaptable educator with a Master's degree in Informatics and TEFL certification. Experienced in teaching English (General, Business, IT) and technology (Python, Web Dev, Game Design) to a diverse range of learners online. Proven ability to create customized learning plans, simplify complex topics, and foster a supportive environment that builds student confidence and achieves learning objectives.",
+                skills: [
+                    "English Language Teaching (TEFL)", "Curriculum & Lesson Planning", "Student Assessment & Feedback",
+                    "Python Programming", "Web Development (HTML, CSS, JS)", "Roblox & Unity Game Design",
+                    "One-on-One & Group Tutoring", "Online Teaching Platforms", "Communication & Interpersonal Skills"
+                ],
+                experience: [
+                    { title: 'Specialized English Teacher', company: 'Online', duration: '2021 – Present', details: 'Focused on Business English, IT English, and Aviation English, tailoring lessons to individual student needs.' },
+                    { title: 'Programming Teacher', company: 'Online', duration: '2021 – Present', details: 'Conducted lessons in English for Roblox Studio, Python, Unity, and Figma, integrating technology and creativity.' },
+                    { title: 'Online English Tutor', company: 'Multiple Platforms', duration: '2020 – Present', details: 'Extensive experience teaching different age groups and developing personalized learning plans.' },
+                    { title: 'EF Education First & CME', company: 'St. Petersburg, Russia', duration: '2019 – 2020', details: 'Taught English to children and teenagers, planned lessons, provided assessments, and organized engaging extracurriculars.' },
+                    { title: 'Oxford Linguistic Centre', company: 'Kursk, Russia', duration: 'Summer 2019', details: 'Led English Summer Programs, creating safe and fun language immersion experiences.' },
+                    { title: 'FillCamp', company: 'Kursk, Russia', duration: 'Summer 2018', details: 'Conducted group English lessons and supervised educational activities for children.' },
+                ],
+                education: [
+                    { degree: "MSc, Informatics and Computer Engineering", university: "Novosibirsk State Technical University", duration: "2022 - 2024" },
+                    { degree: "BSc, Software and Administration of Information Systems", university: "Kursk State University", duration: "2017 - 2021" },
+                ],
+                certifications: [
+                    { title: 'Teacher Of English To Speakers Of Other Languages (TEFL)', issuer: 'Teacher Record', date: 'Issued Sep 2023', credentialId: 'TR2672252278' },
+                    { title: 'EF SET English Certificate', issuer: 'EF SET', date: 'Issued Sep 2024' },
+                ]
+            };
+
+            const doc = new jsPDF({ unit: 'px', format: 'a4' });
+            const pageHeight = doc.internal.pageSize.getHeight();
+            const pageWidth = doc.internal.pageSize.getWidth();
+            const margin = 30;
+            const contentWidth = pageWidth - margin * 2;
+            const lineHeight = 1.15;
+            let y = 0;
+            
+            const checkPageBreak = (heightNeeded: number) => {
+                if (y + heightNeeded > pageHeight - margin) {
+                    doc.addPage();
+                    y = margin;
+                }
+            };
+            
+            const addSectionTitle = (title: string, yPos: number) => {
+                doc.setFontSize(11);
+                doc.setFont('Helvetica', 'bold');
+                doc.setTextColor(37, 99, 235);
+                doc.text(title.toUpperCase(), margin, yPos);
+                const titleHeight = 11;
+                const lineY = yPos + titleHeight / 2 + 1;
+                doc.setDrawColor(226, 232, 240);
+                doc.setLineWidth(0.5);
+                doc.line(margin + doc.getTextWidth(title) + 5, lineY, pageWidth - margin, lineY);
+                return yPos + titleHeight + 4;
+            };
+
+            // --- Header ---
+            y = margin;
+            doc.setFontSize(24);
+            doc.setFont('Helvetica', 'bold');
+            doc.setTextColor(0, 0, 0);
+            doc.text(cvData.name, margin, y);
+            y += 20;
+            
+            doc.setFontSize(11);
+            doc.setFont('Helvetica', 'normal');
+            doc.setTextColor(82, 82, 91);
+            doc.text(cvData.jobTitle, margin, y);
+            y += 15;
+
+            doc.setFontSize(9);
+            doc.text(`${cvData.contact.email}  •  ${cvData.contact.phone1}  •  ${cvData.contact.linkedin}`, margin, y);
+            y += 5;
+            
+            // --- Summary ---
+            y = addSectionTitle("Professional Summary", y + 15);
+            doc.setFontSize(9);
+            doc.setFont('Helvetica', 'normal');
+            doc.setTextColor(51, 65, 85);
+            const summaryLines = doc.splitTextToSize(cvData.summary, contentWidth);
+            doc.text(summaryLines, margin, y);
+            y += summaryLines.length * 9 * lineHeight;
+
+            // --- Core Competencies ---
+            y = addSectionTitle("Skills & Competencies", y);
+            doc.setFontSize(9);
+            const colWidth = contentWidth / 3;
+            const skillsPerCol = Math.ceil(cvData.skills.length / 3);
+            let maxSkillY = y;
+            for (let i = 0; i < 3; i++) {
+                const colSkills = cvData.skills.slice(i * skillsPerCol, (i + 1) * skillsPerCol);
+                let currentY = y;
+                colSkills.forEach(skill => {
+                    checkPageBreak(9 * lineHeight);
+                    doc.text(`•  ${skill}`, margin + i * colWidth, currentY);
+                    currentY += 9 * lineHeight;
+                });
+                maxSkillY = Math.max(maxSkillY, currentY);
+            }
+            y = maxSkillY;
+
+            // --- Teaching Experience ---
+            y = addSectionTitle("Teaching Experience", y);
+            cvData.experience.forEach(exp => {
+                checkPageBreak(30);
+                doc.setFontSize(10);
+                doc.setFont('Helvetica', 'bold');
+                doc.setTextColor(0, 0, 0);
+                doc.text(exp.title, margin, y);
+                doc.setFont('Helvetica', 'normal');
+                doc.setTextColor(82, 82, 91);
+                doc.text(exp.duration, pageWidth - margin, y, { align: 'right' });
+                y += 10 * lineHeight;
+
+                doc.setFontSize(9);
+                doc.setFont('Helvetica', 'italic');
+                doc.text(exp.company, margin, y);
+                y += 12;
+            });
+            
+            // --- Certifications ---
+            y = addSectionTitle("Certifications", y);
+            cvData.certifications.forEach(cert => {
+                checkPageBreak(25);
+                doc.setFontSize(10);
+                doc.setFont('Helvetica', 'bold');
+                doc.text(cert.title, margin, y);
+                y += 10 * lineHeight;
+                doc.setFontSize(9);
+                doc.setFont('Helvetica', 'normal');
+                doc.text(`${cert.issuer}  •  ${cert.date}`, margin, y);
+                 if (cert.credentialId) {
+                    y += 9 * lineHeight;
+                    doc.text(`Credential ID: ${cert.credentialId}`, margin, y);
+                }
+                y += 12;
+            });
+
+             // --- Education ---
+            y = addSectionTitle("Education", y);
+            cvData.education.forEach(edu => {
+                checkPageBreak(20);
+                doc.setFontSize(10);
+                doc.setFont('Helvetica', 'bold');
+                doc.text(edu.degree, margin, y);
+                doc.setFont('Helvetica', 'normal');
+                doc.text(edu.duration, pageWidth - margin, y, { align: 'right' });
+                y += 10 * lineHeight;
+                doc.setFontSize(9);
+                doc.setFont('Helvetica', 'italic');
+                doc.text(edu.university, margin, y);
+                y += 12;
+            });
+
+            if (outputType === 'preview') {
+                doc.output('dataurlnewwindow');
+            } else {
+                doc.save('Musonda_Salimu_Tutor_CV.pdf');
+            }
+
+        } catch (error) {
+            console.error("Error generating Tutor CV PDF:", error);
+            toast({
+                variant: 'destructive',
+                title: 'PDF Generation Failed',
+                description: 'There was an error creating the CV. Please try again.',
+            });
+        } finally {
+            setIsGenerating(false);
+        }
+    };
 
   const onSubmit: SubmitHandler<RequestFormData> = async (data) => {
     setRequestStatus('submitting');
@@ -202,6 +384,19 @@ export default function TutorPage() {
                         <li key={index} className="text-muted-foreground">{offer}</li>
                     ))}
                 </ul>
+                <div className="mt-6 pt-6 border-t">
+                    <CardTitle className="mb-4 text-lg"><TranslatedText text="Download My Tutoring CV"/></CardTitle>
+                     <div className="flex flex-col gap-3">
+                         <Button onClick={() => generateTutorCv('preview')} variant="outline" disabled={isGenerating}>
+                             {isGenerating ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Eye className="mr-2 h-4 w-4" />}
+                             <TranslatedText text="Preview CV" />
+                         </Button>
+                         <Button onClick={() => generateTutorCv('download')} disabled={isGenerating}>
+                             {isGenerating ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Download className="mr-2 h-4 w-4" />}
+                             <TranslatedText text="Download CV" />
+                         </Button>
+                    </div>
+                </div>
               </CardContent>
             </Card>
           </div>
