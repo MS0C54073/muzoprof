@@ -16,6 +16,7 @@ import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
@@ -64,6 +65,12 @@ const programmingOfferings = [
     { title: 'IT Support', icon: <Server className="h-5 w-5 mr-2 text-primary" />, description: 'Gain practical skills for troubleshooting hardware, software, and network issues.' },
     { title: 'Introduction to Cybersecurity', icon: <Shield className="h-5 w-5 mr-2 text-primary" />, description: 'Learn the basic principles of protecting systems and data from cyber threats.' },
     { title: 'Linux', icon: <Terminal className="h-5 w-5 mr-2 text-primary" />, description: 'Get comfortable with the Linux command line and operating system fundamentals.' },
+];
+
+const tutorCertifications = [
+    { title: 'Teacher Of English To Speakers Of Other Languages (TEFL)', issuer: 'Teacher Record', date: 'Issued Sep 2023', credentialId: 'TR2672252278' },
+    { title: 'EF SET English Certificate', issuer: 'EF SET', date: 'Issued Sep 2024', credentialId: null },
+    { title: 'Teach English Now! Foundational Principles', issuer: 'Arizona State University (via Coursera)', date: 'Completed Sep 2024', credentialId: null },
 ];
 
 const MaterialsAccordion = ({ materials }: { materials: Material[] }) => {
@@ -404,7 +411,32 @@ export default function TutorPage() {
           </div>
         </section>
 
-        <section id="materials" className="py-20 border-t mt-20">
+        <section id="certifications" className="py-20 border-t mt-12">
+            <h2 className="text-3xl font-bold text-center mb-12">
+                <TranslatedText text="Teaching Certifications" />
+            </h2>
+            <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+                {tutorCertifications.map((cert, index) => (
+                    <Card key={index} className="bg-card/50">
+                        <CardHeader>
+                            <CardTitle className="text-lg text-accent">{cert.title}</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                            <p className="text-sm text-muted-foreground">
+                                <TranslatedText text="Issued by "/> <strong>{cert.issuer}</strong> - {cert.date}
+                            </p>
+                            {cert.credentialId && (
+                                <p className="text-xs text-muted-foreground mt-1">
+                                    <TranslatedText text="Credential ID: "/> {cert.credentialId}
+                                </p>
+                            )}
+                        </CardContent>
+                    </Card>
+                ))}
+            </div>
+        </section>
+
+        <section id="materials" className="py-20 border-t mt-12">
             <h2 className="text-3xl font-bold text-center mb-12">
                 <TranslatedText text="Teaching Areas & Materials" />
             </h2>
