@@ -853,11 +853,11 @@ export default function Home() {
           <h2 className="text-3xl font-bold text-center mb-12"><TranslatedText text="Technical Skills" /></h2>
           <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
             {skills.map(skill => (
-              <div key={skill.name} className="flex flex-col items-center gap-2 text-center">
-                <div className="w-16 h-16 bg-background rounded-full flex items-center justify-center shadow-md text-primary">
+              <div key={skill.name} className="flex flex-col items-center justify-start gap-2 text-center h-28">
+                <div className="w-16 h-16 bg-background rounded-full flex items-center justify-center shadow-md text-primary flex-shrink-0">
                   {skill.icon}
                 </div>
-                <p className="font-semibold text-foreground"><TranslatedText text={skill.name} /></p>
+                <p className="font-semibold text-foreground text-sm leading-tight"><TranslatedText text={skill.name} /></p>
               </div>
             ))}
           </div>
@@ -1216,6 +1216,7 @@ export default function Home() {
 
 
     
+
 
 
 
