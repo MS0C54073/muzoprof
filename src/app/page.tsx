@@ -34,7 +34,7 @@ import type { Order } from '@/lib/types';
 
 
 const skills = [
-    { name: 'Python', icon: <Code className="h-6 w-6" /> },
+    { name: 'Data Analysis(Python & SQL)', icon: <Code className="h-6 w-6" /> },
     { name: 'Django', icon: <Server className="h-6 w-6" /> },
     { name: 'AI Development', icon: <BrainCircuit className="h-6 w-6" /> },
     { name: 'Next.js', icon: <Globe className="h-6 w-6" /> },
@@ -1216,6 +1216,7 @@ export default function Home() {
 
 
     
+
 
 
 
