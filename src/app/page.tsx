@@ -19,7 +19,7 @@ import {
 import { jsPDF } from 'jspdf';
 import { useState, type ComponentType } from 'react';
 import { getAnalytics, logEvent } from "firebase/analytics";
-import { app, storage } from '@/lib/firebase';
+import { app, storage }from '@/lib/firebase';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -310,8 +310,8 @@ const references = [
 
 const orderSchema = z.object({
   name: z.string().min(1, { message: 'Name is required' }),
-  email: z.string().email({ message: 'Invalid email address' }).optional().or(z.literal('')),
-  phone: z.string().optional(),
+  email: z.string().email({ message: 'A valid email is required' }),
+  phone: z.string().min(5, { message: 'A valid phone number is required' }),
   details: z.string().min(10, { message: 'Please provide some details about your project.' }),
   attachment: z.any().optional(), 
 });
@@ -1151,13 +1151,14 @@ export default function Home() {
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                     <div>
-                      <Label htmlFor="order-email" className="block text-foreground text-sm font-bold mb-2"><TranslatedText text="Email (Optional):" /></Label>
+                      <Label htmlFor="order-email" className="block text-foreground text-sm font-bold mb-2"><TranslatedText text="Email:" /></Label>
                       <Input type="email" id="order-email" {...register("email")} className="shadow appearance-none border rounded w-full py-2 px-3 bg-background/70 text-foreground leading-tight focus:outline-none focus:shadow-outline focus:ring-2 focus:ring-primary" />
                       {errors.email && <p className="text-destructive text-xs italic mt-1"><TranslatedText text={errors.email.message || ""} /></p>}
                     </div>
                     <div>
-                      <Label htmlFor="order-phone" className="block text-foreground text-sm font-bold mb-2"><TranslatedText text="Phone (Optional):" /></Label>
+                      <Label htmlFor="order-phone" className="block text-foreground text-sm font-bold mb-2"><TranslatedText text="Phone:" /></Label>
                       <Input type="tel" id="order-phone" {...register("phone")} className="shadow appearance-none border rounded w-full py-2 px-3 bg-background/70 text-foreground leading-tight focus:outline-none focus:shadow-outline focus:ring-2 focus:ring-primary" />
+                      {errors.phone && <p className="text-destructive text-xs italic mt-1"><TranslatedText text={errors.phone.message || ""} /></p>}
                     </div>
                 </div>
                 <div className="mb-4">
@@ -1208,3 +1209,5 @@ export default function Home() {
       </div>
   );
 }
+
+    
