@@ -19,7 +19,7 @@ import {
 import { jsPDF } from 'jspdf';
 import { useState, type ComponentType } from 'react';
 import { getAnalytics, logEvent } from "firebase/analytics";
-import { app, db, storage } from '@/lib/firebase';
+import { app, storage } from '@/lib/firebase';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -365,13 +365,12 @@ export default function Home() {
                 name: data.name,
                 email: data.email || '', 
                 phone: data.phone || '', 
-                details: data.details, 
-                attachmentName: attachmentName,
-                attachmentUrl: attachmentUrl,
+                details: data.details,
+                attachmentName,
+                attachmentUrl,
             };
 
             const result = await processOrder(orderPayload);
-            
             const resultData = result.data as { success: boolean, orderId?: string, message: string };
 
             if (resultData.success) {
@@ -424,7 +423,7 @@ export default function Home() {
                     linkedin: "linkedin.com/in/musonda-salimu-a4a0b31b9",
                     github: "github.com/MS0C54073",
                 },
-                summary: "A results-driven IT professional with an MSc in Informatics and hands-on experience in software development, system administration, and AI model training. Also brings over 6 years of teaching experience. Proven ability to evaluate and improve AI-generated code, develop efficient software solutions, and manage complex IT systems. Seeking to leverage a strong foundation in Python, cybersecurity, and modern web frameworks to build innovative and scalable AI-powered applications.",
+                summary: "A results-driven IT professional with an MSc in Informatics, hands-on experience in software development and system administration, and over 6 years of teaching experience. Proven ability to evaluate and improve AI-generated code, develop efficient software solutions, and manage complex IT systems. Seeking to leverage a strong foundation in Python, cybersecurity, and modern web frameworks to build innovative and scalable AI-powered applications.",
                 skills: [
                     "Python & Django", "AI Development (Genkit)", "Next.js, React, TypeScript",
                     "Cybersecurity (SIEM, IDS)", "System & Network Admin", "Databases (SQL & NoSQL)",
@@ -1209,15 +1208,3 @@ export default function Home() {
       </div>
   );
 }
-
-    
-
-
-
-
-    
-
-
-
-
-
