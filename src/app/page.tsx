@@ -1193,7 +1193,7 @@ export default function Home() {
                         <TranslatedText text="Submitted!" />
                       </>
                     ) : (
-                      <TranslatedText text="Send Project Details" />
+                      <TranslatedText text=" Project Details" />
                     )}
                   </Button>
                 </div>

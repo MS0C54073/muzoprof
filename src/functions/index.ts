@@ -2,7 +2,7 @@
 /**
  * Import function triggers from their respective submodules:
  *
- * import {onCall} from "firebase-functions/v2/https";
+ * import {onCall} from "firebase-functions/v2/ons";
  * import {onDocumentWritten} from "firebase-functions/v2/firestore";
  *
  * See a full list of supported triggers at https://firebase.google.com/docs/functions
@@ -101,7 +101,7 @@ export const processOrder = onCall(async (request) => {
 
 
     const { data: emailData, error: emailError } = await resend.emails.send({
-      from: "Project Request <onboarding@resend.dev>", // Must be a verified domain in Resend
+      from: "Project Request <noreply@muzos.dev>", // Must be a verified domain in Resend
       to: ["musondasalim@gmail.com"],
       subject: subject,
       html: emailBody,
