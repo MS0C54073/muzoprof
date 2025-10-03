@@ -1,25 +1,6 @@
 
 import { NextRequest, NextResponse } from 'next/server';
-import { initializeApp, getApps, cert } from 'firebase-admin/app';
-import { getFirestore, FieldValue } from 'firebase-admin/firestore';
 import { Resend } from 'resend';
-
-// Initialize Firebase Admin SDK
-// Check if the app is already initialized to avoid errors
-if (!getApps().length) {
-  try {
-    const serviceAccount = JSON.parse(
-      process.env.FIREBASE_SERVICE_ACCOUNT_KEY as string
-    );
-    initializeApp({
-      credential: cert(serviceAccount),
-    });
-  } catch (error) {
-    console.error('Error initializing Firebase Admin SDK:', error);
-  }
-}
-
-const db = getFirestore();
 
 interface OrderRequestData {
     name: string;
@@ -37,6 +18,7 @@ export async function POST(req: NextRequest) {
 
   const data: OrderRequestData = await req.json();
   const { name, email, phone, details, attachmentUrl, attachmentName } = data;
+  const orderId = `guest-request-${Date.now()}`;
 
   // --- 1. Validate Input Data ---
   if (!name || !details) {
@@ -46,55 +28,44 @@ export async function POST(req: NextRequest) {
         { status: 400 }
     );
   }
-
-  // --- 2. Save Data to Firestore ---
-  let docId: string;
-  try {
-    const payload = {
-      name,
-      email: email || "",
-      phone: phone || "",
-      comment: details, // Using 'comment' field to match the collection
-      attachmentUrl: attachmentUrl || null,
-      attachmentName: attachmentName || null,
-      status: "pending",
-      timestamp: FieldValue.serverTimestamp(),
-    };
-
-    const docRef = await db.collection("comments").add(payload);
-    docId = docRef.id;
-    console.log(`Data successfully saved to 'comments' collection with ID: ${docId}`);
-  } catch (error) {
-    console.error("Error saving data to Firestore:", error);
+  
+  if (!email && !phone) {
+    console.error("Validation failed: Email or phone is required.");
     return NextResponse.json(
-        { success: false, message: 'Failed to save your request. Please try again.' },
-        { status: 500 }
+        { success: false, message: 'An email or phone number is required.' },
+        { status: 400 }
     );
   }
 
-  // --- 3. Send Email Notification using Resend ---
+  // --- 2. Send Email Notification using Resend ---
   const resendApiKey = process.env.RESEND_API_KEY;
   if (!resendApiKey) {
-    console.warn("RESEND_API_KEY not set. Email notifications will be disabled.");
-    return NextResponse.json({ success: true, orderId: docId, message: "Order saved, but email notification is disabled." });
+    console.warn("RESEND_API_KEY not set. Email notifications are disabled.");
+    // Even if email fails, we can consider the request 'successful' from user's perspective
+    return NextResponse.json({ success: true, orderId: orderId, message: "Request noted, but email notification is disabled on server." });
   }
+  
   const resend = new Resend(resendApiKey);
   
-  if (!process.env.EMAIL_SUBJECT_TEMPLATE || !process.env.EMAIL_BODY_TEMPLATE) {
+  const emailSubjectTemplate = process.env.EMAIL_SUBJECT_TEMPLATE;
+  const emailBodyTemplate = process.env.EMAIL_BODY_TEMPLATE;
+
+  if (!emailSubjectTemplate || !emailBodyTemplate) {
       console.error("Email template environment variables (EMAIL_SUBJECT_TEMPLATE, EMAIL_BODY_TEMPLATE) are not set.");
-      return NextResponse.json({ success: true, orderId: docId, message: "Order saved, but email templates are not configured." });
+      // Gracefully handle missing templates
+      return NextResponse.json({ success: true, orderId: orderId, message: "Request noted, but email templates are not configured on server." });
   }
 
   try {
     // Build email content from templates
-    const subject = process.env.EMAIL_SUBJECT_TEMPLATE.replace('{{name}}', name);
-    const emailBody = process.env.EMAIL_BODY_TEMPLATE
+    const subject = emailSubjectTemplate.replace('{{name}}', name);
+    const emailBody = emailBodyTemplate
         .replace('{{name}}', name)
         .replace('{{email}}', email ? `<li><strong>Email:</strong> ${email}</li>` : "")
         .replace('{{phone}}', phone ? `<li><strong>Phone:</strong> ${phone}</li>` : "")
         .replace('{{details}}', details)
         .replace('{{attachment}}', attachmentUrl ? `<p><strong>Attachment:</strong> <a href="${attachmentUrl}" target="_blank">${attachmentName || "View Attachment"}</a></p>` : "")
-        .replace('{{orderId}}', docId);
+        .replace('{{orderId}}', orderId);
 
     const { data: emailData, error: emailError } = await resend.emails.send({
       from: "Project Request <noreply@muzos.dev>", 
@@ -105,15 +76,17 @@ export async function POST(req: NextRequest) {
 
     if (emailError) {
        console.error("Resend API error:", emailError);
-       return NextResponse.json({ success: true, orderId: docId, message: "Order saved, but failed to send email notification." });
+       // The request was submitted, but email failed. Inform client but still count as success.
+       return NextResponse.json({ success: true, orderId: orderId, message: "Request received, but failed to send email notification." });
     }
 
     console.log(`Email notification sent successfully. Email ID: ${emailData?.id}`);
   } catch (error) {
     console.error("Error sending email notification:", error);
-    return NextResponse.json({ success: true, orderId: docId, message: "Order saved, but an unexpected error occurred while sending email." });
+    // Again, user's request is "in", but there was a server issue.
+    return NextResponse.json({ success: true, orderId: orderId, message: "Request received, but an unexpected error occurred while sending email." });
   }
   
-  // --- 4. Return Success Response ---
-  return NextResponse.json({ success: true, orderId: docId, message: "Your request has been submitted successfully!" });
+  // --- 3. Return Success Response ---
+  return NextResponse.json({ success: true, orderId: orderId, message: "Your request has been submitted successfully!" });
 }
