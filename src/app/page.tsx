@@ -19,18 +19,16 @@ import {
 import { jsPDF } from 'jspdf';
 import { useState, type ComponentType } from 'react';
 import { getAnalytics, logEvent } from "firebase/analytics";
-import { app, storage }from '@/lib/firebase';
+import { app }from '@/lib/firebase';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { getFunctions, httpsCallable } from 'firebase/functions';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
-import type { Order } from '@/lib/types';
 
 
 const skills = [
@@ -121,11 +119,11 @@ const experiences = [
         ]
     },
     {
-        title: "System Administrator",
+        title: "IT Support Specialist",
         company: "Embassy of the Republic of Zambia in Moscow, Russia",
         duration: "Temporal Contract",
         details: [
-            "Maintained embassy IT systems and integration of the SmartZambia portal.",
+            "Maintained and managed all embassy IT systems.",
             "Implemented cybersecurity protocols and optimized system performance.",
             "Provided technical support to ensure seamless digital operations."
         ]
@@ -353,9 +351,11 @@ export default function Home() {
 
             if (file) {
                 attachmentName = file.name;
+                const { getStorage, ref, uploadBytes, getDownloadURL } = await import('firebase/storage');
+                const storage = getStorage(app);
                 const storageRef = ref(storage, `orders/${Date.now()}_${attachmentName}`);
-                const uploadTask = await uploadBytes(storageRef, file);
-                attachmentUrl = await getDownloadURL(uploadTask.ref);
+                await uploadBytes(storageRef, file);
+                attachmentUrl = await getDownloadURL(storageRef);
             }
             
             const functions = getFunctions(app);
@@ -451,11 +451,11 @@ export default function Home() {
                         ]
                     },
                     {
-                        title: "System Administrator",
+                        title: "IT Support Specialist",
                         company: "Embassy of the Republic of Zambia in Moscow, Russia",
                         duration: "Temporal Contract",
                         details: [
-                            "Maintained embassy IT systems and integration of the SmartZambia portal.",
+                            "Maintained and managed all embassy IT systems.",
                             "Implemented cybersecurity protocols and optimized system performance.",
                             "Provided technical support to ensure seamless digital operations."
                         ]
@@ -1209,5 +1209,3 @@ export default function Home() {
       </div>
   );
 }
-
-    
