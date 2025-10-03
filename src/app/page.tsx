@@ -308,9 +308,9 @@ const references = [
 ];
 
 const orderSchema = z.object({
-  name: z.string().min(1, { message: 'Name is required' }),
-  email: z.string().email({ message: 'A valid email is required' }),
-  phone: z.string().min(5, { message: 'A valid phone number is required' }),
+  name: z.string().min(1, { message: 'Name is required.' }),
+  email: z.string().email({ message: 'A valid email is required.' }),
+  phone: z.string().min(10, { message: 'A valid phone number is required.' }),
   details: z.string().min(10, { message: 'Please provide some details about your project.' }),
   attachment: z.any().optional(), 
 });

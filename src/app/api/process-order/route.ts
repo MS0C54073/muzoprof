@@ -47,14 +47,21 @@ export async function POST(req: NextRequest) {
   
   const resend = new Resend(resendApiKey);
   
-  const emailSubjectTemplate = process.env.EMAIL_SUBJECT_TEMPLATE;
-  const emailBodyTemplate = process.env.EMAIL_BODY_TEMPLATE;
-
-  if (!emailSubjectTemplate || !emailBodyTemplate) {
-      console.error("Email template environment variables (EMAIL_SUBJECT_TEMPLATE, EMAIL_BODY_TEMPLATE) are not set.");
-      // Gracefully handle missing templates
-      return NextResponse.json({ success: true, orderId: orderId, message: "Request noted, but email templates are not configured on server." });
-  }
+  const emailSubjectTemplate = process.env.EMAIL_SUBJECT_TEMPLATE || `New Project Request from {{name}}`;
+  const emailBodyTemplate = process.env.EMAIL_BODY_TEMPLATE || `
+    <h1>New Project Request</h1>
+    <p>You have received a new project request. See the details below:</p>
+    <ul>
+        <li><strong>Name:</strong> {{name}}</li>
+        {{email}}
+        {{phone}}
+    </ul>
+    <h2>Details:</h2>
+    <p>{{details}}</p>
+    {{attachment}}
+    <hr>
+    <p>Request ID: {{orderId}}</p>
+  `;
 
   try {
     // Build email content from templates
