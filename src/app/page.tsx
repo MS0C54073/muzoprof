@@ -19,11 +19,10 @@ import {
 import { jsPDF } from 'jspdf';
 import { useState, type ComponentType } from 'react';
 import { getAnalytics, logEvent } from "firebase/analytics";
-import { app }from '@/lib/firebase';
+import { app, storage }from '@/lib/firebase';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { getFunctions, httpsCallable } from 'firebase/functions';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
 import { Input } from '@/components/ui/input';
@@ -358,9 +357,6 @@ export default function Home() {
                 attachmentUrl = await getDownloadURL(storageRef);
             }
             
-            const functions = getFunctions(app);
-            const processOrder = httpsCallable(functions, 'processOrder');
-
             const orderPayload = {
                 name: data.name,
                 email: data.email || '', 
@@ -370,10 +366,17 @@ export default function Home() {
                 attachmentUrl,
             };
 
-            const result = await processOrder(orderPayload);
-            const resultData = result.data as { success: boolean, orderId?: string, message: string };
+            const response = await fetch('/api/process-order', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(orderPayload),
+            });
 
-            if (resultData.success) {
+            const result = await response.json();
+
+            if (result.success) {
                 toast({ 
                     variant: 'success', 
                     title: 'Request Submitted!', 
@@ -382,7 +385,7 @@ export default function Home() {
                 setOrderStatus('success');
                 reset(); 
             } else {
-                throw new Error(resultData.message || 'Function execution failed');
+                throw new Error(result.message || 'An unknown error occurred.');
             }
 
         } catch (error) {
@@ -415,7 +418,7 @@ export default function Home() {
             
             const cvData = {
                 name: "Musonda Salimu",
-                jobTitle: "IT Professional | Software Developer | AI | English Tutor",
+                jobTitle: "IT Professional | Software Developer | AI | Tutor",
                 contact: {
                     email: "musondasalim@gmail.com",
                     phone1: "+260 977 288 260",
@@ -814,7 +817,7 @@ export default function Home() {
             <TranslatedText text="AI" />
             <span className="text-primary">|</span>
             <Button variant="link" asChild className="text-xl md:text-2xl p-0 h-auto">
-                <Link href="/tutor"><TranslatedText text="English Tutor" /></Link>
+                <Link href="/tutor"><TranslatedText text="Tutor" /></Link>
             </Button>
           </p>
           <p className="max-w-2xl mx-auto mt-4 text-foreground">
@@ -1193,7 +1196,7 @@ export default function Home() {
                         <TranslatedText text="Submitted!" />
                       </>
                     ) : (
-                      <TranslatedText text=" Project Details" />
+                      <TranslatedText text="Submit" />
                     )}
                   </Button>
                 </div>

@@ -12,7 +12,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { app, storage }from '@/lib/firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { getFunctions, httpsCallable } from 'firebase/functions';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
 import { useState, type ComponentType } from 'react';
@@ -153,9 +152,6 @@ export default function ServiceDetailPage() {
         attachmentUrl = await getDownloadURL(uploadTask.ref);
       }
       
-      const functions = getFunctions(app);
-      const processOrder = httpsCallable(functions, 'processOrder');
-
       const orderPayload = {
         name: data.name,
         email: data.email || '', 
@@ -165,10 +161,17 @@ export default function ServiceDetailPage() {
         attachmentUrl,
       };
 
-      const result = await processOrder(orderPayload);
-      const resultData = result.data as { success: boolean, orderId?: string, message: string };
+      const response = await fetch('/api/process-order', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(orderPayload),
+      });
 
-      if (resultData.success) {
+      const result = await response.json();
+
+      if (result.success) {
         toast({ 
           variant: 'success', 
           title: 'Request Submitted!', 
@@ -177,7 +180,7 @@ export default function ServiceDetailPage() {
         setOrderStatus('success');
         reset(); 
       } else {
-        throw new Error(resultData.message || 'Function execution failed');
+        throw new Error(result.message || 'An unknown error occurred.');
       }
 
     } catch (error) {

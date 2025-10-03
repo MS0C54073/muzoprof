@@ -9,7 +9,6 @@ import { useForm, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { jsPDF } from 'jspdf';
-import { getFunctions, httpsCallable } from 'firebase/functions';
 import { app, storage } from '@/lib/firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { useToast } from '@/hooks/use-toast';
@@ -300,9 +299,6 @@ export default function TutorPage() {
         await uploadBytes(storageRef, file);
         attachmentUrl = await getDownloadURL(storageRef);
       }
-
-      const functions = getFunctions(app);
-      const processOrder = httpsCallable(functions, 'processOrder');
       
       const payload = {
         name: data.name,
@@ -313,21 +309,35 @@ export default function TutorPage() {
         attachmentUrl,
       };
       
-      await processOrder(payload);
-
-      toast({
-        variant: 'success',
-        title: 'Request Sent!',
-        description: "Thank you for your interest! I'll get back to you shortly to discuss your learning journey.",
+      const response = await fetch('/api/process-order', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload),
       });
-      setRequestStatus('success');
-      reset();
+
+      const result = await response.json();
+
+      if (result.success) {
+        toast({
+          variant: 'success',
+          title: 'Request Sent!',
+          description: "Thank you for your interest! I'll get back to you shortly to discuss your learning journey.",
+        });
+        setRequestStatus('success');
+        reset();
+      } else {
+        throw new Error(result.message || 'An unknown error occurred.');
+      }
+
     } catch (error) {
       console.error("Error submitting tutoring request: ", error);
+      const errorMessage = error instanceof Error ? error.message : 'An unexpected error occurred. Please try again.';
       toast({
         variant: 'destructive',
         title: 'Submission Failed',
-        description: 'An unexpected error occurred. Please try again or contact me directly via email.',
+        description: errorMessage,
       });
       setRequestStatus('error');
     } finally {
@@ -347,7 +357,7 @@ export default function TutorPage() {
         <div className="flex items-center space-x-3">
           <BookOpen className="h-10 w-10 text-primary" />
           <h1 className="text-4xl font-bold text-primary">
-            <TranslatedText text="English & Tech Tutoring" />
+            <TranslatedText text="Tech & Language Tutoring" />
           </h1>
         </div>
         <p className="text-muted-foreground mt-2 text-lg">
