@@ -19,7 +19,8 @@ import {
 import { jsPDF } from 'jspdf';
 import { useState, type ComponentType } from 'react';
 import { getAnalytics, logEvent } from "firebase/analytics";
-import { app, storage }from '@/lib/firebase';
+import { app, storage, db }from '@/lib/firebase';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -28,6 +29,7 @@ import { cn } from '@/lib/utils';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
+import type { Order } from '@/lib/types';
 
 
 const skills = [
@@ -345,8 +347,8 @@ export default function Home() {
         setOrderStatus('submitting');
         try {
             const file = data.attachment?.[0];
-            let attachmentUrl = null;
-            let attachmentName = null;
+            let attachmentUrl: string | null = null;
+            let attachmentName: string | null = null;
 
             if (file) {
                 attachmentName = file.name;
@@ -357,36 +359,51 @@ export default function Home() {
                 attachmentUrl = await getDownloadURL(storageRef);
             }
             
-            const orderPayload = {
+            // 1. Save to Firestore
+            const orderPayload: Omit<Order, 'id'> = {
                 name: data.name,
-                email: data.email || '', 
-                phone: data.phone || '', 
+                email: data.email, 
+                phone: data.phone, 
                 details: data.details,
+                status: 'pending',
+                attachmentName,
+                attachmentUrl,
+                timestamp: serverTimestamp(),
+            };
+            await addDoc(collection(db, 'orders'), orderPayload);
+
+            // 2. Call API route to send email
+            const emailPayload = {
+                ...data,
                 attachmentName,
                 attachmentUrl,
             };
-
             const response = await fetch('/api/process-order', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(orderPayload),
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(emailPayload),
             });
 
             const result = await response.json();
 
-            if (result.success) {
+            if (!result.success) {
+                // The data is saved, but email failed. Inform user, but it's not a total failure.
+                console.warn("Firestore save succeeded, but email notification failed.", result.message);
                 toast({ 
+                    variant: 'default',
+                    title: 'Request Submitted (Email Failed)', 
+                    description: "Your request was saved, but the email notification could not be sent. I will still get back to you!"
+                });
+            } else {
+                 toast({ 
                     variant: 'success', 
                     title: 'Request Submitted!', 
-                    description: "Thank you for your request! I will get back to you shortly."
+                    description: "Thank you! Your request has been sent and I will get back to you shortly."
                 });
-                setOrderStatus('success');
-                reset(); 
-            } else {
-                throw new Error(result.message || 'An unknown error occurred.');
             }
+
+            setOrderStatus('success');
+            reset(); 
 
         } catch (error) {
             console.error("Error submitting order: ", error);
@@ -398,6 +415,7 @@ export default function Home() {
             });
             setOrderStatus('error');
         } finally {
+            // Reset status after a few seconds
             setTimeout(() => setOrderStatus('idle'), 4000);
         }
     };
@@ -855,11 +873,11 @@ export default function Home() {
           <h2 className="text-3xl font-bold text-center mb-12"><TranslatedText text="Technical Skills" /></h2>
           <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
             {skills.map(skill => (
-              <div key={skill.name} className="flex flex-col items-center justify-start gap-2 text-center h-28">
+              <div key={skill.name} className="flex flex-col items-center justify-start text-center gap-2 h-24">
                 <div className="w-16 h-16 bg-background rounded-full flex items-center justify-center shadow-md text-primary flex-shrink-0">
                   {skill.icon}
                 </div>
-                <p className="font-semibold text-foreground text-sm leading-tight"><TranslatedText text={skill.name} /></p>
+                <p className="font-semibold text-foreground text-sm leading-tight px-1"><TranslatedText text={skill.name} /></p>
               </div>
             ))}
           </div>

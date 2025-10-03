@@ -10,8 +10,9 @@ import Image from 'next/image';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { app, storage }from '@/lib/firebase';
+import { app, storage, db }from '@/lib/firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
 import { useState, type ComponentType } from 'react';
@@ -19,6 +20,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { SocialIcons } from '@/components/social-icons';
+import type { Order } from '@/lib/types';
 
 
 const orderSchema = z.object({
@@ -141,47 +143,61 @@ export default function ServiceDetailPage() {
   const onSubmit: SubmitHandler<OrderFormData> = async (data) => {
     setOrderStatus('submitting');
     try {
-      const file = data.attachment?.[0];
-      let attachmentUrl = null;
-      let attachmentName = null;
+        const file = data.attachment?.[0];
+        let attachmentUrl: string | null = null;
+        let attachmentName: string | null = null;
 
-      if (file) {
-        attachmentName = file.name;
-        const storageRef = ref(storage, `orders/${Date.now()}_${attachmentName}`);
-        const uploadTask = await uploadBytes(storageRef, file);
-        attachmentUrl = await getDownloadURL(uploadTask.ref);
-      }
-      
-      const orderPayload = {
-        name: data.name,
-        email: data.email || '', 
-        phone: data.phone || '', 
-        details: data.details || `Interested in the ${service?.title} service.`,
-        attachmentName,
-        attachmentUrl,
-      };
+        if (file) {
+            attachmentName = file.name;
+            const storageRef = ref(storage, `orders/${Date.now()}_${attachmentName}`);
+            await uploadBytes(storageRef, file);
+            attachmentUrl = await getDownloadURL(storageRef);
+        }
 
-      const response = await fetch('/api/process-order', {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(orderPayload),
-      });
+        // 1. Save to Firestore
+        const orderPayload: Omit<Order, 'id'> = {
+            name: data.name,
+            email: data.email || '',
+            phone: data.phone || '',
+            details: data.details || `Interested in the ${service?.title} service.`,
+            status: 'pending',
+            attachmentName,
+            attachmentUrl,
+            timestamp: serverTimestamp(),
+        };
+        await addDoc(collection(db, 'orders'), orderPayload);
 
-      const result = await response.json();
-
-      if (result.success) {
-        toast({ 
-          variant: 'success', 
-          title: 'Request Submitted!', 
-          description: `Thank you for your interest. I will get back to you shortly.` 
+        // 2. Call API route to send email
+        const emailPayload = {
+            ...data,
+            details: `SERVICE REQUEST: ${service?.title}\n\n${data.details}`,
+            attachmentName,
+            attachmentUrl,
+        };
+        const response = await fetch('/api/process-order', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(emailPayload),
         });
+        const result = await response.json();
+
+        if (!result.success) {
+            console.warn("Firestore save succeeded, but email notification failed.", result.message);
+            toast({
+                variant: 'default',
+                title: 'Request Submitted (Email Failed)',
+                description: "Your request was saved, but the email notification could not be sent. I will still get back to you!"
+            });
+        } else {
+            toast({
+                variant: 'success',
+                title: 'Request Submitted!',
+                description: `Thank you for your interest. I will get back to you shortly.`
+            });
+        }
+        
         setOrderStatus('success');
-        reset(); 
-      } else {
-        throw new Error(result.message || 'An unknown error occurred.');
-      }
+        reset();
 
     } catch (error) {
       console.error("Error submitting order: ", error);

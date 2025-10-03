@@ -9,8 +9,9 @@ import { useForm, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { jsPDF } from 'jspdf';
-import { app, storage } from '@/lib/firebase';
+import { app, storage, db } from '@/lib/firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -25,6 +26,7 @@ import { ArrowLeft, BookOpen, Check, Loader2, Mail, Send, Bot, Code, Globe, Brai
 import TranslatedText from '@/app/components/translated-text';
 import { SocialIcons } from '@/components/social-icons';
 import { englishMaterials, type Material } from './teaching-materials';
+import type { Order } from '@/lib/types';
 
 
 const requestSchema = z.object({
@@ -289,47 +291,61 @@ export default function TutorPage() {
   const onSubmit: SubmitHandler<RequestFormData> = async (data) => {
     setRequestStatus('submitting');
     try {
-      const file = data.attachment?.[0];
-      let attachmentUrl = null;
-      let attachmentName = null;
+        const file = data.attachment?.[0];
+        let attachmentUrl: string | null = null;
+        let attachmentName: string | null = null;
 
-      if (file) {
-        attachmentName = file.name;
-        const storageRef = ref(storage, `tutoring-requests/${Date.now()}_${attachmentName}`);
-        await uploadBytes(storageRef, file);
-        attachmentUrl = await getDownloadURL(storageRef);
-      }
+        if (file) {
+            attachmentName = file.name;
+            const storageRef = ref(storage, `tutoring-requests/${Date.now()}_${attachmentName}`);
+            await uploadBytes(storageRef, file);
+            attachmentUrl = await getDownloadURL(storageRef);
+        }
       
-      const payload = {
-        name: data.name,
-        email: data.email,
-        phone: data.phone || '',
-        details: `TUTORING REQUEST: ${data.details}`,
-        attachmentName,
-        attachmentUrl,
-      };
-      
-      const response = await fetch('/api/process-order', {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(payload),
-      });
+        // 1. Save to Firestore
+        const orderPayload: Omit<Order, 'id'> = {
+            name: data.name,
+            email: data.email,
+            phone: data.phone || '',
+            details: `TUTORING REQUEST: ${data.details}`,
+            status: 'pending',
+            attachmentName,
+            attachmentUrl,
+            timestamp: serverTimestamp(),
+        };
+        await addDoc(collection(db, 'orders'), orderPayload);
 
-      const result = await response.json();
-
-      if (result.success) {
-        toast({
-          variant: 'success',
-          title: 'Request Sent!',
-          description: "Thank you for your interest! I'll get back to you shortly to discuss your learning journey.",
+        // 2. Call API route to send email
+        const emailPayload = {
+            ...data,
+            details: `TUTORING REQUEST: ${data.details}`,
+            attachmentName,
+            attachmentUrl,
+        };
+        const response = await fetch('/api/process-order', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(emailPayload),
         });
+        const result = await response.json();
+        
+        if (!result.success) {
+            console.warn("Firestore save succeeded, but email notification failed.", result.message);
+            toast({
+                variant: 'default',
+                title: 'Request Submitted (Email Failed)',
+                description: "Your request was saved, but the email notification could not be sent. I will still get back to you!"
+            });
+        } else {
+             toast({
+                variant: 'success',
+                title: 'Request Sent!',
+                description: "Thank you for your interest! I'll get back to you shortly to discuss your learning journey.",
+            });
+        }
+
         setRequestStatus('success');
         reset();
-      } else {
-        throw new Error(result.message || 'An unknown error occurred.');
-      }
 
     } catch (error) {
       console.error("Error submitting tutoring request: ", error);
