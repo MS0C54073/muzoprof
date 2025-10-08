@@ -197,6 +197,7 @@ const education = [
         degree: "Master's of Science, Informatics and Computer Engineering",
         university: "Novosibirsk State Technical University | Novosibirsk, Russia",
         duration: "Sep 2022 - Jul 2024",
+        note: "Undergoing verification in Zambia."
     },
     {
         degree: "Bachelor's of Science, Software and Administration of Information Systems",
@@ -352,8 +353,6 @@ export default function Home() {
 
             if (file) {
                 attachmentName = file.name;
-                const { getStorage, ref, uploadBytes, getDownloadURL } = await import('firebase/storage');
-                const storage = getStorage(app);
                 const storageRef = ref(storage, `orders/${Date.now()}_${attachmentName}`);
                 await uploadBytes(storageRef, file);
                 attachmentUrl = await getDownloadURL(storageRef);
@@ -386,19 +385,19 @@ export default function Home() {
 
             const result = await response.json();
 
-            if (!result.success) {
+            if (!response.ok || !result.success) {
                 // The data is saved, but email failed. Inform user, but it's not a total failure.
                 console.warn("Firestore save succeeded, but email notification failed.", result.message);
                 toast({ 
                     variant: 'default',
                     title: 'Request Submitted (Email Failed)', 
-                    description: "Your request was saved, but the email notification could not be sent. I will still get back to you!"
+                    description: result.message || "Your request was saved, but the email notification could not be sent. I will still get back to you!"
                 });
             } else {
                  toast({ 
                     variant: 'success', 
                     title: 'Request Submitted!', 
-                    description: "Thank you! Your request has been sent and I will get back to you shortly."
+                    description: result.message || "Thank you! Your request has been sent and I will get back to you shortly."
                 });
             }
 
@@ -548,6 +547,7 @@ export default function Home() {
                         degree: "MSc, Informatics and Computer Engineering",
                         university: "Novosibirsk State Technical University, Russia",
                         duration: "Sep 2022 - Jul 2024",
+                        details: "Undergoing verification in Zambia."
                     },
                     {
                         degree: "Bachelor's of Science, Software and Administration of Information Systems",
@@ -1014,6 +1014,9 @@ export default function Home() {
                 <p className="text-sm text-muted-foreground">{edu.duration}</p>
                 <h3 className="text-xl font-bold text-accent">{edu.degree}</h3>
                 <p className="font-semibold text-foreground">{edu.university}</p>
+                {edu.note && (
+                  <p className="text-sm text-muted-foreground italic mt-1">{edu.note}</p>
+                )}
               </div>
             ))}
           </div>
