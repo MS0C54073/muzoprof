@@ -197,7 +197,7 @@ const education = [
         degree: "Master's of Science, Informatics and Computer Engineering",
         university: "Novosibirsk State Technical University | Novosibirsk, Russia",
         duration: "Sep 2022 - Jul 2024",
-        note: "Undergoing verification in Zambia."
+        note: "Undergoing certification in Zambia."
     },
     {
         degree: "Bachelor's of Science, Software and Administration of Information Systems",
@@ -347,10 +347,11 @@ export default function Home() {
     const onOrderSubmit: SubmitHandler<OrderFormData> = async (data) => {
         setOrderStatus('submitting');
         try {
+            // 1. Save to Firestore First
             const file = data.attachment?.[0];
             let attachmentUrl: string | null = null;
             let attachmentName: string | null = null;
-
+    
             if (file) {
                 attachmentName = file.name;
                 const storageRef = ref(storage, `orders/${Date.now()}_${attachmentName}`);
@@ -358,11 +359,10 @@ export default function Home() {
                 attachmentUrl = await getDownloadURL(storageRef);
             }
             
-            // 1. Save to Firestore
             const orderPayload: Omit<Order, 'id'> = {
                 name: data.name,
-                email: data.email, 
-                phone: data.phone, 
+                email: data.email,
+                phone: data.phone,
                 details: data.details,
                 status: 'pending',
                 attachmentName,
@@ -371,12 +371,13 @@ export default function Home() {
             };
             await addDoc(collection(db, 'orders'), orderPayload);
 
-            // 2. Call API route to send email
+            // 2. Then, call the API route to send the email
             const emailPayload = {
                 ...data,
                 attachmentName,
                 attachmentUrl,
             };
+
             const response = await fetch('/api/process-order', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -385,31 +386,30 @@ export default function Home() {
 
             const result = await response.json();
 
-            if (!response.ok || !result.success) {
-                // The data is saved, but email failed. Inform user, but it's not a total failure.
+            if (!result.success) {
                 console.warn("Firestore save succeeded, but email notification failed.", result.message);
-                toast({ 
-                    variant: 'default',
-                    title: 'Request Submitted (Email Failed)', 
-                    description: result.message || "Your request was saved, but the email notification could not be sent. I will still get back to you!"
+                toast({
+                    variant: 'default', // Not a destructive error since the data was saved
+                    title: 'Request Submitted (Email Failed)',
+                    description: "Your request was saved, but the email notification could not be sent. I will still get back to you!"
                 });
             } else {
-                 toast({ 
-                    variant: 'success', 
-                    title: 'Request Submitted!', 
-                    description: result.message || "Thank you! Your request has been sent and I will get back to you shortly."
+                 toast({
+                    variant: 'success',
+                    title: 'Request Submitted!',
+                    description: `Thank you for your interest. I will get back to you shortly.`
                 });
             }
-
+            
             setOrderStatus('success');
-            reset(); 
+            reset();
 
         } catch (error) {
             console.error("Error submitting order: ", error);
             const errorMessage = error instanceof Error ? error.message : 'An unexpected error occurred. Please try again.';
-            toast({ 
-                variant: 'destructive', 
-                title: 'Submission Failed', 
+            toast({
+                variant: 'destructive',
+                title: 'Submission Failed',
                 description: errorMessage
             });
             setOrderStatus('error');
@@ -547,7 +547,7 @@ export default function Home() {
                         degree: "MSc, Informatics and Computer Engineering",
                         university: "Novosibirsk State Technical University, Russia",
                         duration: "Sep 2022 - Jul 2024",
-                        details: "Undergoing verification in Zambia."
+                        details: "Undergoing certification in Zambia."
                     },
                     {
                         degree: "Bachelor's of Science, Software and Administration of Information Systems",
