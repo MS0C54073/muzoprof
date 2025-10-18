@@ -309,9 +309,9 @@ const references = [
 ];
 
 const orderSchema = z.object({
-  name: z.string().min(1, { message: 'Name is required.' }),
-  email: z.string().email({ message: 'A valid email is required.' }),
-  phone: z.string().min(10, { message: 'A valid phone number is required.' }),
+  name: z.string().min(1, { message: 'Name is required' }),
+  email: z.string().email({ message: 'A valid email is required' }),
+  phone: z.string().min(10, { message: 'A valid phone number is required' }),
   details: z.string().min(10, { message: 'Please provide some details about your project.' }),
   attachment: z.any().optional(), 
 });
@@ -347,11 +347,10 @@ export default function Home() {
     const onOrderSubmit: SubmitHandler<OrderFormData> = async (data) => {
         setOrderStatus('submitting');
         try {
-            // 1. Save to Firestore First
             const file = data.attachment?.[0];
             let attachmentUrl: string | null = null;
             let attachmentName: string | null = null;
-    
+            
             if (file) {
                 attachmentName = file.name;
                 const storageRef = ref(storage, `orders/${Date.now()}_${attachmentName}`);
@@ -359,6 +358,7 @@ export default function Home() {
                 attachmentUrl = await getDownloadURL(storageRef);
             }
             
+            // 1. Save to Firestore
             const orderPayload: Omit<Order, 'id'> = {
                 name: data.name,
                 email: data.email,
@@ -371,30 +371,29 @@ export default function Home() {
             };
             await addDoc(collection(db, 'orders'), orderPayload);
 
-            // 2. Then, call the API route to send the email
+            // 2. Call API route to send email
             const emailPayload = {
                 ...data,
+                details: data.details,
                 attachmentName,
                 attachmentUrl,
             };
-
             const response = await fetch('/api/process-order', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(emailPayload),
             });
-
             const result = await response.json();
 
             if (!result.success) {
                 console.warn("Firestore save succeeded, but email notification failed.", result.message);
                 toast({
-                    variant: 'default', // Not a destructive error since the data was saved
+                    variant: 'default',
                     title: 'Request Submitted (Email Failed)',
                     description: "Your request was saved, but the email notification could not be sent. I will still get back to you!"
                 });
             } else {
-                 toast({
+                toast({
                     variant: 'success',
                     title: 'Request Submitted!',
                     description: `Thank you for your interest. I will get back to you shortly.`
@@ -405,16 +404,15 @@ export default function Home() {
             reset();
 
         } catch (error) {
-            console.error("Error submitting order: ", error);
-            const errorMessage = error instanceof Error ? error.message : 'An unexpected error occurred. Please try again.';
-            toast({
-                variant: 'destructive',
-                title: 'Submission Failed',
-                description: errorMessage
-            });
-            setOrderStatus('error');
+          console.error("Error submitting order: ", error);
+          const errorMessage = error instanceof Error ? error.message : 'An unexpected error occurred. Please try again.';
+          toast({ 
+            variant: 'destructive', 
+            title: 'Submission Failed', 
+            description: errorMessage
+          });
+          setOrderStatus('error');
         } finally {
-            // Reset status after a few seconds
             setTimeout(() => setOrderStatus('idle'), 4000);
         }
     };
@@ -443,7 +441,7 @@ export default function Home() {
                     linkedin: "linkedin.com/in/musonda-salimu-a4a0b31b9",
                     github: "github.com/MS0C54073",
                 },
-                summary: "A results-driven IT professional with an MSc in Informatics, hands-on experience in software development and system administration, and over 6 years of teaching experience. Proven ability to evaluate and improve AI-generated code, develop efficient software solutions, and manage complex IT systems. Seeking to leverage a strong foundation in Python, cybersecurity, and modern web frameworks to build innovative and scalable AI-powered applications.",
+                summary: "A results-driven IT professional with an MSc in Informatics and hands-on experience in software development, system administration, and AI. I am actively exploring how to securely connect LLMs to company data, leveraging no-code tools like N8N, WeWeb, and Supabase for rapid development, and conceptualizing advanced 'Neuro-secretary' AI assistants.",
                 skills: [
                     "Python & Django", "AI Development (Genkit)", "Next.js, React, TypeScript",
                     "Cybersecurity (SIEM, IDS)", "System & Network Admin", "Databases (SQL & NoSQL)",
@@ -862,7 +860,7 @@ export default function Home() {
             <div className="flex flex-col md:flex-row items-center gap-10">
                 <div className="text-lg text-muted-foreground space-y-4">
                     <p><TranslatedText text="I am a versatile and experienced professional with a Master's degree in Informatics and a passion for technology. My journey has taken me through system administration, software engineering, and cutting-edge AI research."/></p>
-                    <p><TranslatedText text="I thrive on solving complex problems, whether optimizing IT infrastructure or developing efficient code. But I'm most excited about the future of development. I'm actively exploring new AI-driven development paradigms like Vibe Coding and leveraging powerful automation tools like n8n to build smarter, more efficient applications."/></p>
+                    <p><TranslatedText text="I thrive on solving complex problems and am particularly excited by the intersection of AI and practical business solutions. My current focus is on securely connecting LLMs like GPT to proprietary databases, leveraging no-code platforms (N8N, WeWeb, Supabase) for rapid development, and exploring advanced AI concepts like the 'Neuro-secretary' to automate complex workflows."/></p>
                     <p><TranslatedText text="Driven by a willingness to learn, I am continuously pushing the boundaries of what's possible, merging my skills in full-stack development and AI to create next-generation solutions."/></p>
                 </div>
             </div>
