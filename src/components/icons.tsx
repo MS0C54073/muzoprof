@@ -40,13 +40,13 @@ export function MuzoInTechLogo(props: React.SVGProps<SVGSVGElement>) {
         y="50%"
         dy=".1em"
         fill="hsl(var(--primary-foreground))"
-        fontSize="40"
+        fontSize="34"
         fontFamily="system-ui, sans-serif"
         fontWeight="bold"
         textAnchor="middle"
         dominantBaseline="middle"
       >
-        MIT
+        MUZO
       </text>
     </svg>
   );
