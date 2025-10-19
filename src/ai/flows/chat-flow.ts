@@ -12,7 +12,7 @@ const ChatInputSchema = z.object({
   message: z.string().describe('The user\'s message to the chatbot.'),
   history: z.array(z.object({
     role: z.enum(['user', 'model']),
-    content: z.string(),
+    content: z.array(z.object({ text: z.string() })),
   })).describe('The conversation history.'),
 });
 export type ChatInput = z.infer<typeof ChatInputSchema>;
@@ -40,12 +40,12 @@ export async function chatWithMuzo(input: ChatInput): Promise<ChatOutput> {
     `;
 
     const model = ai.model('googleai/gemini-1.5-flash');
-    const { text } = await ai.generate({
-        model,
-        prompt: message,
+    const chat = model.startChat({
         system: systemPrompt,
-        history,
+        history: history
     });
+    
+    const response = await chat.sendMessage(message);
 
-    return { response: text };
+    return { response: response.text };
 }

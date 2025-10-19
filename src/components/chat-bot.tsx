@@ -16,6 +16,13 @@ type Message = {
   content: string;
 };
 
+// This type matches the Genkit history format.
+type HistoryMessage = {
+    role: 'user' | 'model';
+    content: { text: string }[];
+};
+
+
 export function ChatBot() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
@@ -56,9 +63,15 @@ export function ChatBot() {
     setIsLoading(true);
     
     try {
+        // Convert the simple message history to the format Genkit's startChat expects
+        const historyForApi: HistoryMessage[] = messages.map(msg => ({
+            role: msg.role,
+            content: [{ text: msg.content }]
+        }));
+
         const chatInput: ChatInput = {
             message: input,
-            history: messages,
+            history: historyForApi,
         };
         const { response } = await chatWithMuzo(chatInput);
         
