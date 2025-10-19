@@ -26,7 +26,7 @@ export type ChatOutput = z.infer<typeof ChatOutputSchema>;
 export async function chatWithMuzo(input: ChatInput): Promise<ChatOutput> {
     const { message, history } = input;
 
-    const systemPrompt = `You are Muzo, a friendly and helpful AI assistant for Musonda Salimu's personal portfolio website. Your goal is to answer questions about Musonda's skills, experience, and projects.
+    const systemPrompt = `You are Muzo's AI assistant, a friendly and helpful guide for Musonda Salimu's personal portfolio website. Your goal is to answer questions about Musonda's skills, experience, and projects.
 
     Here is some information about Musonda:
     - Name: Musonda Salimu

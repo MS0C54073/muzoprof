@@ -28,7 +28,7 @@ export function ChatBot() {
         setIsLoading(true);
         setTimeout(() => {
             setMessages([
-                { role: 'model', content: "Hi! I'm Muzo, an AI assistant. How can I help you learn more about Musonda Salimu today?" }
+                { role: 'model', content: "Hi! I'm Muzo's AI assistant. How can I help you learn more about Musonda today?" }
             ]);
             setIsLoading(false);
         }, 1000);
@@ -111,7 +111,7 @@ export function ChatBot() {
         <div className="flex items-center justify-between p-4 border-b">
           <div className="flex items-center gap-2">
             <MuzoInTechLogo className="h-8 w-8" />
-            <h3 className="text-lg font-semibold">Muzo AI Assistant</h3>
+            <h3 className="text-lg font-semibold">Muzo's AI Assistant</h3>
           </div>
           <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)}>
             <X className="h-5 w-5" />
