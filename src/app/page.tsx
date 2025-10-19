@@ -1157,6 +1157,24 @@ export default function Home() {
             <div className="flex space-x-6 justify-center">
               <SocialIcons className="flex space-x-4 justify-center" />
             </div>
+
+            <div className="mt-12">
+              <h3 className="text-2xl font-bold text-foreground mb-4">
+                <TranslatedText text="My Location" />
+              </h3>
+              <div className="aspect-video w-full rounded-lg overflow-hidden border shadow-lg">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d246306.66573356066!2d28.1402289658392!3d-15.424626159670605!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1940f513a806e22f%3A0x153b817e06553805!2sLusaka%2C%20Zambia!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen={false}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Map of Lusaka, Zambia"
+                ></iframe>
+              </div>
+            </div>
           </div>
         </section>
         
