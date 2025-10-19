@@ -28,6 +28,7 @@ import {
 import { Menu, Calculator, ChevronDown } from 'lucide-react';
 import TranslatedText from './components/translated-text';
 import { FloatingCalculatorButton } from './components/floating-calculator-button';
+import { ChatBot } from '@/components/chat-bot'; // Import the chatbot
 import { useState } from 'react';
 
 
@@ -207,6 +208,7 @@ export default function RootLayout({
                 <ViewModeWrapper>
                    <SocialIcons className="social-bar" />
                    <FloatingCalculatorButton />
+                   <ChatBot />
                   <main className="pt-16 md:pt-20">
                       {children}
                   </main>
