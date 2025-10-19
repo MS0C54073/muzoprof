@@ -197,7 +197,7 @@ const education = [
         degree: "Master's of Science, Informatics and Computer Engineering",
         university: "Novosibirsk State Technical University | Novosibirsk, Russia",
         duration: "Sep 2022 - Jul 2024",
-        note: "Undergoing Professional Translation and Certification in Zambia."
+        note: "Awaiting Official Translation and Certification in Zambia."
     },
     {
         degree: "Bachelor's of Science, Software and Administration of Information Systems",
@@ -208,25 +208,25 @@ const education = [
         degree: "Diploma of Professional Retraining, Management in the Digital Economy",
         university: "Novosibirsk State Technical University",
         duration: "Sep 2023 - Dec 2023",
-        note: "Undergoing Professional Translation and Certification in Zambia."
+        note: "Awaiting Official Translation and Certification in Zambia."
     },
     {
         degree: "Diploma of Professional Retraining, Technological Entrepreneurship and Innovation Management",
         university: "Novosibirsk State Technical University",
         duration: "Sep 2023 - Dec 2023",
-        note: "Undergoing Professional Translation and Certification in Zambia."
+        note: "Awaiting Official Translation and Certification in Zambia."
     },
     {
         degree: "Diploma of Professional Retraining, Development of Digital Twins",
         university: "Novosibirsk State Technical University",
         duration: "Sep 2023 - Dec 2023",
-        note: "Undergoing Professional Translation and Certification in Zambia."
+        note: "Awaiting Official Translation and Certification in Zambia."
     },
     {
         degree: "Diploma of Professional Retraining, Management of High Tech Programs and Projects",
         university: "Pskov State University",
         duration: "Sep 2023 - Dec 2023",
-        note: "Undergoing Professional Translation and Certification in Zambia."
+        note: "Awaiting Official Translation and Certification in Zambia."
     },
     {
         degree: "Russian language and preparatory program, Russian language and Culture",
@@ -549,7 +549,7 @@ export default function Home() {
                         degree: "MSc, Informatics and Computer Engineering",
                         university: "Novosibirsk State Technical University, Russia",
                         duration: "Sep 2022 - Jul 2024",
-                        details: "Undergoing Professional Translation and Certification in Zambia."
+                        details: "Awaiting Official Translation and Certification in Zambia."
                     },
                     {
                         degree: "Bachelor's of Science, Software and Administration of Information Systems",
@@ -560,7 +560,7 @@ export default function Home() {
                         degree: "Multiple Diplomas of Professional Retraining",
                         university: "Novosibirsk & Pskov State Universities",
                         duration: "2023",
-                        details: "Undergoing Professional Translation and Certification in Zambia. Specializations in Digital Economy Management, Technological Entrepreneurship, Digital Twins, and High-Tech Project Management."
+                        details: "Awaiting Official Translation and Certification in Zambia. Specializations in Digital Economy Management, Technological Entrepreneurship, Digital Twins, and High-Tech Project Management."
                     },
                     {
                         degree: "Russian Language and Preparatory Program",
