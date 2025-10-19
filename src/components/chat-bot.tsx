@@ -9,6 +9,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { cn } from '@/lib/utils';
 import { chatWithMuzo, type ChatInput } from '@/ai/flows/chat-flow';
 import { MuzoInTechLogo } from './icons';
+import TranslatedText from '@/app/components/translated-text';
 
 type Message = {
   role: 'user' | 'model';
@@ -74,17 +75,28 @@ export function ChatBot() {
   return (
     <>
       <div className={cn(
-        "fixed bottom-6 z-50 transition-transform duration-300 ease-in-out",
-        isOpen ? 'right-[-100px]' : 'right-6',
+        "fixed bottom-6 z-50 transition-all duration-300 ease-in-out group",
+        isOpen ? 'right-[-200px] lg:right-[-250px]' : 'right-6',
         'lg:bottom-28 lg:right-8'
       )}>
         <Button
-          size="icon"
+          size="lg"
           onClick={() => setIsOpen(true)}
-          className="h-14 w-14 rounded-full shadow-xl bg-primary hover:bg-primary/90"
+          className={cn(
+            'h-14 rounded-full shadow-xl overflow-hidden',
+            'bg-primary hover:bg-primary/90 text-primary-foreground',
+            'hover:shadow-2xl active:scale-95',
+            'transition-all duration-300 ease-in-out',
+            'w-14 group-hover:w-52' // Expand width on hover
+          )}
           aria-label="Open chatbot"
         >
-          <Bot className="h-7 w-7" />
+          <div className="flex items-center justify-start pl-0.5">
+            <Bot className="h-7 w-7 flex-shrink-0" />
+            <span className="whitespace-nowrap pl-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 delay-150">
+                <TranslatedText text="Chat with Muzo" />
+            </span>
+          </div>
         </Button>
       </div>
 
