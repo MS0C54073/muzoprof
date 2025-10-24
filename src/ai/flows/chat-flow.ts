@@ -43,12 +43,12 @@ export async function chatWithMuzo(input: ChatInput): Promise<ChatOutput> {
     - System & Network Administration
 
     **3. Professional Experience (Summary):**
-    - **Software Developer for AI Training Data (Invisible Technologies & Outlier, 2024-Present):** Evaluates AI-generated code, solves coding problems, and writes robust test cases.
-    - **IT Support Freelancer (2017-Present):** Provides remote and on-site technical assistance for hardware, software, and network issues.
-    - **IT Support Specialist (Zambian Embassy, Moscow):** Managed embassy IT systems, implemented cybersecurity, and provided technical support.
-    - **AI Training Methods Researcher (Internship, Novosibirsk State Technical University, 2022-2024):** Tested algorithms for Spiking Neural Networks (SNNs).
-    - **System Administrator (Internship, Pensions and Insurance Authority, Zambia, 2022):** Maintained IT systems and provided ICT support.
-    - Other roles include Customer Care at VITALITE Group and Airtel, and Software Development internship at Kursk State University.
+    - **AI Content Evaluation Specialist (Project-Based) (Invisible Technologies & Outlier, Aug 2024 – Sep 2025):** Evaluated AI-generated content (code, text, images), solved coding problems, and developed test cases.
+    - **IT Support Volunteer / Technical Assistant (Zambian Embassy, Moscow, May 2025 – Jul 2025):** Managed embassy IT systems and provided technical support.
+    - **System Administrator Intern (Pensions and Insurance Authority, Zambia, May 2022 – Oct 2022):** Maintained IT systems, optimized the website, and provided ICT support.
+    - **IT Intern / Trainee (Kursk State University, Russia, May 2019 – Jul 2021):** Assisted in networking, system setup, and built applications using C++, Python, and C#.
+    - **Customer Care Associate (Tech Mahindra for Airtel Zambia, Aug 2015 - Oct 2016):** Handled customer relationship management, query resolution, and promoted brand image.
+    - **Internet Cafe Operator (AbduTech InterNet Cafe, Dec 2013 - Aug 2015):** Assisted customers with various software, hardware, and provided IT services.
 
     **4. Education:**
     - **MSc, Informatics and Computer Engineering:** Novosibirsk State Technical University, Russia (2022-2024). *Note: Awaiting Official Translation and Certification in Zambia.*
@@ -78,3 +78,5 @@ export async function chatWithMuzo(input: ChatInput): Promise<ChatOutput> {
 
     return { response: response.text };
 }
+
+    

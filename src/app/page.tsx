@@ -100,78 +100,53 @@ const projects = [
 
 const experiences = [
     {
-        title: "Software Developer for AI Training Data",
-        company: "Invisible Technologies & Outlier | Hybrid",
-        duration: "2024 – Present",
+        title: "AI Content Evaluation Specialist (Project-Based)",
+        company: "Invisible Technologies & Outlier",
+        duration: "Aug 2024 – Sep 2025",
         details: [
-            "Evaluated AI-generated code quality and provided human-readable summaries.",
-            "Solved coding problems with functional and efficient solutions.",
-            "Wrote robust test cases to confirm code effectiveness."
-        ]
-    },
-     {
-        title: "IT Support Freelancer",
-        company: "Hybrid",
-        duration: "2017 – Present",
-        details: [
-            "Providing remote or on-site technical assistance to individuals or businesses.",
-            "Resolving hardware, software, and network issues via phone, email, or chat.",
-            "Documenting solutions for clients."
+            "Evaluated AI-generated content, including code, text, images, and videos, providing clear, human-readable summaries.",
+            "Solved coding problems and ensured all technical outputs were functional, efficient, and reliable.",
+            "Developed test cases and verification methods to confirm content quality and accuracy.",
+            "Provided actionable feedback to improve AI content generation processes."
         ]
     },
     {
-        title: "IT Support Specialist",
+        title: "IT Support Volunteer / Technical Assistant",
         company: "Embassy of the Republic of Zambia in Moscow, Russia",
-        duration: "Temporal Contract",
+        duration: "May 2025 – Jul 2025",
         details: [
-            "Maintained and managed all embassy IT systems.",
-            "Implemented cybersecurity protocols and optimized system performance.",
-            "Provided technical support to ensure seamless digital operations."
+            "Maintained and managed embassy IT systems.",
+            "Provided Technical Support to ensure seamless digital operations."
         ]
     },
     {
-        title: "Customer Care Assistant",
-        company: "VITALITE Group",
-        duration: "2021 (Temporal Contract)",
+        title: "System Administrator Intern",
+        company: "Pensions and Insurance Authority",
+        duration: "May 2022 – Oct 2022",
         details: [
-            "Delivered professional customer support by responding promptly to inquiries and resolving complaints.",
-            "Communicated with customers across multiple channels, ensuring a positive and empathetic experience.",
-            "Processed orders, forms, and applications while maintaining accurate records of transactions and feedback.",
-            "Collaborated with colleagues to coordinate effective customer service solutions.",
+            "Assisted in maintaining, securing, and optimizing the Authority’s IT infrastructure and websites.",
+            "Contributed to the maintenance and development of the Authority’s official website to improve functionality and accessibility.",
+            "Monitored system performance and resolved software, hardware, and network issues to ensure reliable operations.",
+            "Provided ICT support and user training to staff, enhancing technical efficiency and digital literacy.",
+            "Supported data backup, system updates."
         ]
     },
     {
-        title: "AI Training Methods Researcher (Internship)",
-        company: "Novosibirsk State Technical University",
-        duration: "2022 – 2024",
+        title: "IT Intern / Trainee (Software Development & Networking Support)",
+        company: "Kursk State University",
+        duration: "May 2019 – Jul 2021",
         details: [
-            "Tested new training algorithms specifically for Spiking Neural Networks (SNNs).",
-            "Conducted experiments to evaluate the performance of various SNN training approaches.",
-            "Managed and preprocessed datasets for training and evaluating SNN models."
-        ]
-    },
-    {
-        title: "System Administrator (Internship)",
-        company: "Pensions and Insurance Authority, Zambia",
-        duration: "2022 – 2022",
-        details: [
-            "Maintained and secured IT systems, optimized websites, and troubleshooted issues.",
-            "Provided ICT support and training to staff members."
-        ]
-    },
-    {
-        title: "Software Developer Intern",
-        company: "Kursk State University, Russia",
-        duration: "2019 – 2021",
-        details: [
-            "Built, tested, and optimized software in C++, Python, and C#.",
-            "Utilized automated debugging and performance enhancement techniques."
+            "Participated in university-organized summer and winter trainee programs in partnership with various IT companies.",
+            "Assisted in networking support, system setup, and maintenance of lab environments.",
+            "Built, tested, and optimized software applications using C++, Python, and C#.",
+            "Utilized automated debugging tools and performance optimization techniques to enhance application efficiency.",
+            "Collaborated with industry professionals and mentors, gaining hands-on experience in real-world software development and IT support environments."
         ]
     },
     {
         title: "Customer Care Associate",
-        company: "Airtel Zambia PLC",
-        duration: "2015 - 2016",
+        company: "Tech Mahindra - outsourcing (Airtel Zambia PLC) services",
+        duration: "Aug 2015 - Oct 2016",
         details: [
             "Ensured Customer Satisfaction through consistent standards of service excellence through implementation of continuous improvement initiatives.",
             "Provided excellent customer relationship management by resolving customer queries, selling, retention and relationship building.",
@@ -181,10 +156,10 @@ const experiences = [
     },
     {
         title: "Internet Cafe Operator",
-        company: "AbduTech Net Cafe",
-        duration: "2013 - 2015",
+        company: "AbduTech InterNet Cafe",
+        duration: "Dec 2013 - Aug 2015",
         details: [
-            "Assisted customers with PC software including Microsoft Office, Adobe suites, and other cafe applications.",
+            "Assisted customers with PC software including Microsoft Office, Adobe suites, Windows operating system installation, and other essential programs.",
             "Provided services such as encoding, printing, photocopying, typing, and downloading.",
             "Troubleshooted various computer applications, hardware, and software issues.",
             "Provided excellent customer care and maintained store records and inventories."
@@ -453,78 +428,53 @@ export default function Home() {
                 ],
                 experience: [
                     {
-                        title: "Software Developer for AI Training Data",
-                        company: "Invisible Technologies & Outlier | Hybrid",
-                        duration: "2024 – Present",
+                        title: "AI Content Evaluation Specialist (Project-Based)",
+                        company: "Invisible Technologies & Outlier",
+                        duration: "Aug 2024 – Sep 2025",
                         details: [
-                            "Evaluated AI-generated code quality and provided human-readable summaries.",
-                            "Solved coding problems with functional and efficient solutions.",
-                            "Wrote robust test cases to confirm code effectiveness."
+                            "Evaluated AI-generated content, including code, text, images, and videos, providing clear, human-readable summaries.",
+                            "Solved coding problems and ensured all technical outputs were functional, efficient, and reliable.",
+                            "Developed test cases and verification methods to confirm content quality and accuracy.",
+                            "Provided actionable feedback to improve AI content generation processes."
                         ]
                     },
-                    {
-                        title: "IT Support Freelancer",
-                        company: "Hybrid",
-                        duration: "2017 – Present",
-                        details: [
-                            "Providing remote or on-site technical assistance to individuals or businesses.",
-                            "Resolving hardware, software, and network issues via phone, email, or chat.",
-                            "Documenting solutions for clients."
-                        ]
-                    },
-                    {
-                        title: "IT Support Specialist",
+                     {
+                        title: "IT Support Volunteer / Technical Assistant",
                         company: "Embassy of the Republic of Zambia in Moscow, Russia",
-                        duration: "Temporal Contract",
+                        duration: "May 2025 – Jul 2025",
                         details: [
-                            "Maintained and managed all embassy IT systems.",
-                            "Implemented cybersecurity protocols and optimized system performance.",
-                            "Provided technical support to ensure seamless digital operations."
+                           "Maintained and managed embassy IT systems.",
+                           "Provided Technical Support to ensure seamless digital operations."
                         ]
                     },
                     {
-                        title: "Customer Care Assistant",
-                        company: "VITALITE Group",
-                        duration: "2021 (Temporal Contract)",
+                        title: "System Administrator Intern",
+                        company: "Pensions and Insurance Authority",
+                        duration: "May 2022 – Oct 2022",
                         details: [
-                            "Delivered professional customer support by responding promptly to inquiries and resolving complaints.",
-                            "Communicated with customers across multiple channels, ensuring a positive and empathetic experience.",
-                            "Processed orders, forms, and applications while maintaining accurate records of transactions and feedback.",
-                            "Collaborated with colleagues to coordinate effective customer service solutions.",
+                            "Assisted in maintaining, securing, and optimizing the Authority’s IT infrastructure and websites.",
+                            "Contributed to the maintenance and development of the Authority’s official website to improve functionality and accessibility.",
+                            "Monitored system performance and resolved software, hardware, and network issues to ensure reliable operations.",
+                            "Provided ICT support and user training to staff, enhancing technical efficiency and digital literacy.",
+                            "Supported data backup, system updates."
                         ]
                     },
                     {
-                        title: "AI Training Methods Researcher (Internship)",
-                        company: "Novosibirsk State Technical University",
-                        duration: "2022 – 2024",
+                        title: "IT Intern / Trainee (Software Development & Networking Support)",
+                        company: "Kursk State University",
+                        duration: "May 2019 – Jul 2021",
                         details: [
-                            "Tested new training algorithms specifically for Spiking Neural Networks (SNNs).",
-                            "Conducted experiments to evaluate the performance of various SNN training approaches.",
-                            "Managed and preprocessed datasets for training and evaluating SNN models."
-                        ]
-                    },
-                    {
-                        title: "System Administrator (Internship)",
-                        company: "Pensions and Insurance Authority, Zambia",
-                        duration: "2022 – 2022",
-                        details: [
-                            "Maintained and secured IT systems, optimized websites, and troubleshooted issues.",
-                            "Provided ICT support and training to staff members."
-                        ]
-                    },
-                    {
-                        title: "Software Developer Intern",
-                        company: "Kursk State University, Russia",
-                        duration: "2019 – 2021",
-                        details: [
-                            "Built, tested, and optimized software in C++, Python, and C#.",
-                            "Utilized automated debugging and performance enhancement techniques."
+                           "Participated in university-organized summer and winter trainee programs in partnership with various IT companies.",
+                           "Assisted in networking support, system setup, and maintenance of lab environments.",
+                           "Built, tested, and optimized software applications using C++, Python, and C#.",
+                           "Utilized automated debugging tools and performance optimization techniques to enhance application efficiency.",
+                           "Collaborated with industry professionals and mentors, gaining hands-on experience in real-world software development and IT support environments."
                         ]
                     },
                     {
                         title: "Customer Care Associate",
-                        company: "Airtel Zambia PLC",
-                        duration: "2015 - 2016",
+                        company: "Tech Mahindra - outsourcing (Airtel Zambia PLC) services",
+                        duration: "Aug 2015 - Oct 2016",
                         details: [
                             "Ensured Customer Satisfaction through consistent standards of service excellence through implementation of continuous improvement initiatives.",
                             "Provided excellent customer relationship management by resolving customer queries, selling, retention and relationship building.",
@@ -534,13 +484,13 @@ export default function Home() {
                     },
                     {
                         title: "Internet Cafe Operator",
-                        company: "AbduTech Net Cafe",
-                        duration: "2013 - 2015",
+                        company: "AbduTech InterNet Cafe",
+                        duration: "Dec 2013 - Aug 2015",
                         details: [
-                           "Assisted customers with PC software including Microsoft Office, Adobe suites, and other cafe applications.",
-                           "Provided services such as encoding, printing, photocopying, typing, and downloading.",
-                           "Troubleshooted various computer applications, hardware, and software issues.",
-                           "Provided excellent customer care and maintained store records and inventories."
+                            "Assisted customers with PC software including Microsoft Office, Adobe suites, Windows operating system installation, and other essential programs.",
+                            "Provided services such as encoding, printing, photocopying, typing, and downloading.",
+                            "Troubleshooted various computer applications, hardware, and software issues.",
+                            "Provided excellent customer care and maintained store records and inventories."
                         ]
                     },
                 ].sort((a, b) => new Date(b.duration.split(' – ')[1] === 'Present' ? Date.now() : b.duration.split(' – ')[1] || 0).getTime() - new Date(a.duration.split(' – ')[1] === 'Present' ? Date.now() : a.duration.split(' – ')[1] || 0).getTime()),
@@ -841,7 +791,7 @@ export default function Home() {
             </Button>
           </p>
           <p className="max-w-2xl mx-auto mt-4 text-foreground">
-            <TranslatedText text="A versatile IT professional with an MSc in Informatics and hands-on experience in software development, system administration, and AI. Actively exploring how to securely connect LLMs to company data, leveraging no-code tools like N8N, WeWeb, and Supabase for rapid development, and conceptualizing advanced 'Neuro-secretary' AI assistants." />
+            <TranslatedText text="A results-driven IT professional with an MSc in Informatics and hands-on experience in software development, system administration, and AI. Actively exploring how to securely connect LLMs to company data, leveraging no-code tools like N8N, WeWeb, and Supabase for rapid development, and conceptualizing advanced 'Neuro-secretary' AI assistants." />
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <Button asChild size="lg">
@@ -1253,3 +1203,5 @@ export default function Home() {
       </div>
   );
 }
+
+    
