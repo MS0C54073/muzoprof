@@ -120,6 +120,16 @@ const experiences = [
         ]
     },
     {
+        title: "AI Training Methods Researcher (Internship)",
+        company: "Novosibirsk State Technical University",
+        duration: "2022 – 2024",
+        details: [
+          "Tested new training algorithms specifically for Spiking Neural Networks (SNNs).",
+          "Conducted experiments to evaluate the performance of various SNN training approaches.",
+          "Managed and preprocessed datasets for training and evaluating SNN models."
+        ]
+    },
+    {
         title: "System Administrator Intern",
         company: "Pensions and Insurance Authority",
         duration: "May 2022 – Oct 2022",
@@ -132,6 +142,17 @@ const experiences = [
         ]
     },
     {
+      title: "Customer Care Assistant",
+      company: "VITALITE Group",
+      duration: "2021 (Temporal Contract)",
+      details: [
+        "Delivered professional customer support by responding promptly to inquiries and resolving complaints.",
+        "Communicated with customers across multiple channels, ensuring a positive and empathetic experience.",
+        "Processed orders, forms, and applications while maintaining accurate records of transactions and feedback.",
+        "Collaborated with colleagues to coordinate effective customer service solutions."
+      ]
+    },
+    {
         title: "IT Intern / Trainee (Software Development & Networking Support)",
         company: "Kursk State University",
         duration: "May 2019 – Jul 2021",
@@ -142,6 +163,16 @@ const experiences = [
             "Utilized automated debugging tools and performance optimization techniques to enhance application efficiency.",
             "Collaborated with industry professionals and mentors, gaining hands-on experience in real-world software development and IT support environments."
         ]
+    },
+    {
+      title: "IT Support Freelancer",
+      company: "Hybrid",
+      duration: "2017 – Present",
+      details: [
+        "Providing remote or on-site technical assistance to individuals or businesses.",
+        "Resolving hardware, software, and network issues via phone, email, or chat.",
+        "Documenting solutions for clients."
+      ]
     },
     {
         title: "Customer Care Associate",
@@ -448,6 +479,16 @@ export default function Home() {
                         ]
                     },
                     {
+                        title: "AI Training Methods Researcher (Internship)",
+                        company: "Novosibirsk State Technical University",
+                        duration: "2022 – 2024",
+                        details: [
+                          "Tested new training algorithms specifically for Spiking Neural Networks (SNNs).",
+                          "Conducted experiments to evaluate the performance of various SNN training approaches.",
+                          "Managed and preprocessed datasets for training and evaluating SNN models."
+                        ]
+                    },
+                    {
                         title: "System Administrator Intern",
                         company: "Pensions and Insurance Authority",
                         duration: "May 2022 – Oct 2022",
@@ -458,6 +499,17 @@ export default function Home() {
                             "Provided ICT support and user training to staff, enhancing technical efficiency and digital literacy.",
                             "Supported data backup, system updates."
                         ]
+                    },
+                     {
+                      title: "Customer Care Assistant",
+                      company: "VITALITE Group",
+                      duration: "2021 (Temporal Contract)",
+                      details: [
+                        "Delivered professional customer support by responding promptly to inquiries and resolving complaints.",
+                        "Communicated with customers across multiple channels, ensuring a positive and empathetic experience.",
+                        "Processed orders, forms, and applications while maintaining accurate records of transactions and feedback.",
+                        "Collaborated with colleagues to coordinate effective customer service solutions."
+                      ]
                     },
                     {
                         title: "IT Intern / Trainee (Software Development & Networking Support)",
@@ -470,6 +522,16 @@ export default function Home() {
                            "Utilized automated debugging tools and performance optimization techniques to enhance application efficiency.",
                            "Collaborated with industry professionals and mentors, gaining hands-on experience in real-world software development and IT support environments."
                         ]
+                    },
+                    {
+                      title: "IT Support Freelancer",
+                      company: "Hybrid",
+                      duration: "2017 – Present",
+                      details: [
+                        "Providing remote or on-site technical assistance to individuals or businesses.",
+                        "Resolving hardware, software, and network issues via phone, email, or chat.",
+                        "Documenting solutions for clients."
+                      ]
                     },
                     {
                         title: "Customer Care Associate",
@@ -1203,5 +1265,3 @@ export default function Home() {
       </div>
   );
 }
-
-    
