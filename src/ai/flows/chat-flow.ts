@@ -9,10 +9,9 @@ import { ai } from '@/ai/ai-instance';
 import { z } from 'genkit';
 
 const ChatInputSchema = z.object({
-  message: z.string().describe('The user\'s message to the chatbot.'),
   history: z.array(z.object({
     role: z.enum(['user', 'model']),
-    content: z.array(z.object({ text: z.string() })),
+    content: z.string(),
   })).describe('The conversation history.'),
 });
 export type ChatInput = z.infer<typeof ChatInputSchema>;
@@ -24,7 +23,7 @@ export type ChatOutput = z.infer<typeof ChatOutputSchema>;
 
 
 export async function chatWithMuzo(input: ChatInput): Promise<ChatOutput> {
-    const { message, history } = input;
+    const { history } = input;
 
     const systemPrompt = `You are Muzo's AI assistant, a friendly and helpful guide for Musonda Salimu's personal portfolio website. Your goal is to answer questions about Musonda's skills, experience, and projects based on the information provided below.
 
@@ -72,12 +71,19 @@ export async function chatWithMuzo(input: ChatInput): Promise<ChatOutput> {
     `;
 
     const model = ai.model('googleai/gemini-1.5-flash');
-    const chat = model.startChat({
-        system: systemPrompt,
-        history: history
-    });
     
-    const response = await chat.sendMessage(message);
+    // Transform the simple history to the format expected by `generate`
+    const historyForApi = history.map(msg => ({
+      role: msg.role,
+      content: [{ text: msg.content }]
+    }));
+    
+    const response = await ai.generate({
+        model,
+        prompt: historyForApi[historyForApi.length - 1].content[0].text, // The last message is the prompt
+        system: systemPrompt,
+        history: historyForApi.slice(0, -1), // The rest is history
+    });
 
     return { response: response.text };
 }
