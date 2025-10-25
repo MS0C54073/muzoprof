@@ -415,13 +415,13 @@ export default function ItServiceCalculatorPage() {
           </h1>
         </div>
          <div className="mt-4 flex gap-4">
-          <Button asChild>
+          <Button asChild className="hover:bg-primary/90 hover:text-black">
             <a href="https://forms.gle/CteNoni4yi8XCFEx8" target="_blank" rel="noopener noreferrer">
               <Send className="mr-2 h-4 w-4" />
               <TranslatedText text="Tell us about your project" />
             </a>
           </Button>
-          <Button asChild style={{ backgroundColor: 'hsl(var(--accent))', color: 'hsl(var(--accent-foreground))' }}>
+          <Button asChild variant="outline" className="border-accent text-accent hover:bg-accent hover:text-black">
             <a href="https://forms.gle/btbiX7F7n4JndgGy7" target="_blank" rel="noopener noreferrer">
               <GraduationCap className="mr-2 h-4 w-4" />
               <TranslatedText text="Enroll for Lessons" />
@@ -622,6 +622,8 @@ export default function ItServiceCalculatorPage() {
 }
 
     
+    
+
     
 
     
