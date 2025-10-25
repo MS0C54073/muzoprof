@@ -22,7 +22,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { ArrowLeft, BookOpen, Check, Loader2, Mail, Send, Bot, Code, Globe, BrainCircuit, Smartphone, Database, Server, Shield, Terminal, Eye, Download } from 'lucide-react';
+import { ArrowLeft, BookOpen, Check, Loader2, Mail, Send, Bot, Code, Globe, BrainCircuit, Smartphone, Database, Server, Shield, Terminal, Eye, Download, GraduationCap } from 'lucide-react';
 import TranslatedText from '@/app/components/translated-text';
 import { SocialIcons } from '@/components/social-icons';
 import { englishMaterials, type Material } from './teaching-materials';
@@ -379,6 +379,14 @@ export default function TutorPage() {
         <p className="text-muted-foreground mt-2 text-lg">
             <TranslatedText text="Personalized online lessons for children, teenagers, and adults." />
         </p>
+         <div className="mt-6">
+            <Button asChild size="lg" className="border-accent text-accent hover:bg-accent hover:text-black">
+                <a href="https://forms.gle/btbiX7F7n4JndgGy7" target="_blank" rel="noopener noreferrer">
+                    <GraduationCap className="mr-2 h-5 w-5" />
+                    <TranslatedText text="Enroll for Lessons" />
+                </a>
+            </Button>
+        </div>
       </header>
 
       <main className="flex-grow">
