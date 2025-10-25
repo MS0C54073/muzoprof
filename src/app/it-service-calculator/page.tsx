@@ -169,9 +169,9 @@ const serviceConfig = {
   },
   slaTiers: {
     // For projects & monthly services
-    standard: { name: 'Standard', multiplier: 1, description: 'Business hours support (8-12 working days delivery)' },
-    priority: { name: 'Priority', multiplier: 1.5, description: 'Extended hours & faster response (3-7 working days delivery)' },
-    after_hours: { name: 'After-Hours', multiplier: 2, description: '24/7 support for critical issues (1-2 working days delivery)' },
+    standard: { name: 'Standard', multiplier: 1, description: 'Flexible timeline (1-6 months for full projects)' },
+    priority: { name: 'Priority', multiplier: 1.5, description: 'Accelerated delivery (1-4 weeks for prototypes)' },
+    after_hours: { name: 'After-Hours', multiplier: 2, description: 'Urgent support & critical fixes (24-72 hours)' },
   },
 };
 // --- End Configuration ---
@@ -621,4 +621,5 @@ export default function ItServiceCalculatorPage() {
   );
 }
 
+    
     
