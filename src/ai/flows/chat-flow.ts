@@ -71,14 +71,11 @@ export async function chatWithMuzo(input: ChatInput): Promise<ChatOutput> {
     `;
 
     // The last message in the history is the user's new prompt.
-    const lastUserMessage = history[history.length - 1];
+    const lastUserMessage = history.pop();
     if (!lastUserMessage || lastUserMessage.role !== 'user') {
         return { response: "I'm sorry, I couldn't process that. Please try rephrasing your message." };
     }
     
-    // The rest of the array is the conversation history.
-    const conversationHistory = history.slice(0, -1);
-
     const model = 'googleai/gemini-1.5-flash';
 
     try {
@@ -86,7 +83,7 @@ export async function chatWithMuzo(input: ChatInput): Promise<ChatOutput> {
             model: model,
             prompt: lastUserMessage.content,
             system: systemPrompt,
-            history: conversationHistory,
+            history: history, // The rest of the array is the conversation history.
         });
 
         return { response: response.text };
