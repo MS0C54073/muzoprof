@@ -95,7 +95,7 @@ export function ChatBot() {
         setMessages(prev => [...prev, { role: 'model', content: response }]);
     } catch (error) {
         console.error("Chatbot error:", error);
-        setMessages(prev => [...prev, { role: 'model', content: "Sorry, I'm having trouble connecting right now. Please try again later." }]);
+        setMessages(prev => [...prev, { role: 'model', content: "Sorry, I'm having trouble connecting right now. Please Contact Muzo by selecting one of the floating social icons" }]);
     } finally {
         setIsLoading(false);
     }
