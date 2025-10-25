@@ -71,14 +71,14 @@ export async function chatWithMuzo(input: ChatInput): Promise<ChatOutput> {
     `;
 
     // The last message in the history is the user's new prompt.
-    const lastUserMessage = history.pop();
+    const lastUserMessage = history[history.length - 1];
     if (!lastUserMessage || lastUserMessage.role !== 'user') {
         // This case should ideally not be reached in a normal flow.
         return { response: "I'm sorry, I couldn't process that. Please try rephrasing your message." };
     }
     
     // The rest of the array is the conversation history.
-    const conversationHistory = history;
+    const conversationHistory = history.slice(0, -1);
 
     const response = await ai.generate({
         model: 'googleai/gemini-1.5-flash',
