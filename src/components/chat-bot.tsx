@@ -74,9 +74,8 @@ export function ChatBot() {
     setIsLoading(true);
     
     try {
-        // The history now directly matches the ChatInput schema
         const chatInput: ChatInput = {
-            history: newMessages,
+            history: newMessages, // Send the whole history
         };
         const { response } = await chatWithMuzo(chatInput);
         

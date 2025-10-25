@@ -70,19 +70,21 @@ export async function chatWithMuzo(input: ChatInput): Promise<ChatOutput> {
     - Do not make up information.
     `;
 
-    const model = ai.model('googleai/gemini-1.5-flash');
+    // The last message in the history is the user's new prompt.
+    const lastUserMessage = history.pop();
+    if (!lastUserMessage || lastUserMessage.role !== 'user') {
+        // This case should ideally not be reached in a normal flow.
+        return { response: "I'm sorry, I couldn't process that. Please try rephrasing your message." };
+    }
     
-    // Transform the simple history to the format expected by `generate`
-    const historyForApi = history.map(msg => ({
-      role: msg.role,
-      content: [{ text: msg.content }]
-    }));
-    
+    // The rest of the array is the conversation history.
+    const conversationHistory = history;
+
     const response = await ai.generate({
-        model,
-        prompt: historyForApi[historyForApi.length - 1].content[0].text, // The last message is the prompt
+        model: 'googleai/gemini-1.5-flash',
+        prompt: lastUserMessage.content,
         system: systemPrompt,
-        history: historyForApi.slice(0, -1), // The rest is history
+        history: conversationHistory,
     });
 
     return { response: response.text };
