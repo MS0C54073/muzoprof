@@ -13,7 +13,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Textarea } from '@/components/ui/textarea';
 import TranslatedText from '@/app/components/translated-text';
-import { ArrowLeft, Calculator, Download, Mail } from 'lucide-react';
+import { ArrowLeft, Calculator, Download, Mail, Send } from 'lucide-react';
 import { WhatsappIcon } from '@/components/icons';
 import { useToast } from '@/hooks/use-toast';
 
@@ -59,110 +59,110 @@ const serviceConfig = {
     },
     web_development: {
       name: 'Web Development',
-      baseRate: 250,
+      baseRate: 150,
       unit: 'project',
       features: [
-        { id: 'ui_design', name: 'UI/UX Design', price: 200 },
-        { id: 'auth', name: 'User Authentication', price: 150 },
-        { id: 'cms', name: 'CMS Integration', price: 180 },
-        { id: 'ecommerce', name: 'E-commerce Functionality', price: 400 },
+        { id: 'ui_design', name: 'UI/UX Design', price: 100 },
+        { id: 'auth', name: 'User Authentication', price: 80 },
+        { id: 'cms', name: 'CMS Integration', price: 120 },
+        { id: 'ecommerce', name: 'E-commerce Functionality', price: 250 },
       ],
     },
     software_development: {
       name: 'Software Development',
-      baseRate: 600,
+      baseRate: 400,
       unit: 'project',
       features: [
-        { id: 'api_dev', name: 'Custom API Development', price: 400 },
-        { id: 'db_design', name: 'Database Architecture', price: 300 },
-        { id: 'third_party_integration', name: 'Third-party Integrations', price: 250 },
+        { id: 'api_dev', name: 'Custom API Development', price: 200 },
+        { id: 'db_design', name: 'Database Architecture', price: 150 },
+        { id: 'third_party_integration', name: 'Third-party Integrations', price: 150 },
       ],
     },
     mobile_app_development: {
       name: 'Mobile App Development',
-      baseRate: 800,
+      baseRate: 500,
       unit: 'project',
       features: [
-        { id: 'ios', name: 'iOS App', price: 600 },
-        { id: 'android', name: 'Android App', price: 600 },
-        { id: 'push_notifications', name: 'Push Notifications', price: 150 },
-        { id: 'in_app_purchases', name: 'In-App Purchases', price: 200 },
+        { id: 'ios', name: 'iOS App', price: 400 },
+        { id: 'android', name: 'Android App', price: 400 },
+        { id: 'push_notifications', name: 'Push Notifications', price: 100 },
+        { id: 'in_app_purchases', name: 'In-App Purchases', price: 150 },
       ],
     },
     prototypes: {
       name: 'Prototypes (Web, Mobile, System Demos)',
-      baseRate: 150,
+      baseRate: 100,
       unit: 'prototype',
       features: [
-        { id: 'interactive_mockup', name: 'Interactive Mockup', price: 100 },
-        { id: 'basic_backend', name: 'Basic Backend Logic', price: 150 },
+        { id: 'interactive_mockup', name: 'Interactive Mockup', price: 80 },
+        { id: 'basic_backend', name: 'Basic Backend Logic', price: 100 },
       ],
     },
     full_systems: {
       name: 'Full Systems (End-to-End Solutions)',
-      baseRate: 2500,
+      baseRate: 1500,
       unit: 'system',
       features: [
-        { id: 'cloud_hosting', name: 'Cloud Hosting Setup', price: 250 },
-        { id: 'ci_cd', name: 'CI/CD Pipeline', price: 400 },
-        { id: 'ongoing_support', name: 'Ongoing Support Contract', price: 800 },
+        { id: 'cloud_hosting', name: 'Cloud Hosting Setup', price: 150 },
+        { id: 'ci_cd', name: 'CI/CD Pipeline', price: 250 },
+        { id: 'ongoing_support', name: 'Ongoing Support Contract', price: 500 },
       ],
     },
      ai_ml: {
       name: 'AI & Machine Learning',
-      baseRate: 800,
+      baseRate: 500,
       unit: 'project',
       features: [
-        { id: 'data_preprocessing', name: 'Data Preprocessing & Cleaning', price: 250 },
-        { id: 'model_training', name: 'Custom Model Training', price: 500 },
-        { id: 'api_deployment', name: 'Model API Deployment', price: 350 },
+        { id: 'data_preprocessing', name: 'Data Preprocessing & Cleaning', price: 150 },
+        { id: 'model_training', name: 'Custom Model Training', price: 300 },
+        { id: 'api_deployment', name: 'Model API Deployment', price: 200 },
       ],
     },
     data_analytics: {
       name: 'Data Analytics & BI',
-      baseRate: 400,
+      baseRate: 300,
       unit: 'project',
       features: [
-        { id: 'dashboard_dev', name: 'Interactive Dashboard Dev', price: 300 },
-        { id: 'data_warehousing', name: 'Data Warehousing', price: 500 },
-        { id: 'etl_pipelines', name: 'ETL Pipelines', price: 400 },
+        { id: 'dashboard_dev', name: 'Interactive Dashboard Dev', price: 200 },
+        { id: 'data_warehousing', name: 'Data Warehousing', price: 350 },
+        { id: 'etl_pipelines', name: 'ETL Pipelines', price: 250 },
       ],
     },
      ui_ux_design: {
       name: 'UI/UX Design',
-      baseRate: 200,
+      baseRate: 150,
       unit: 'project',
       features: [
-        { id: 'wireframing', name: 'Wireframing', price: 100 },
-        { id: 'high_fidelity_mockups', name: 'High-Fidelity Mockups', price: 200 },
-        { id: 'design_system', name: 'Design System Creation', price: 300 },
+        { id: 'wireframing', name: 'Wireframing', price: 80 },
+        { id: 'high_fidelity_mockups', name: 'High-Fidelity Mockups', price: 150 },
+        { id: 'design_system', name: 'Design System Creation', price: 200 },
       ],
     },
     seo_marketing: {
       name: 'SEO & Digital Marketing',
-      baseRate: 150,
+      baseRate: 100,
       unit: 'month',
       features: [
-        { id: 'keyword_research', name: 'Keyword Research', price: 80 },
-        { id: 'on_page_seo', name: 'On-Page SEO', price: 100 },
-        { id: 'content_strategy', name: 'Content Strategy', price: 120 },
+        { id: 'keyword_research', name: 'Keyword Research', price: 50 },
+        { id: 'on_page_seo', name: 'On-Page SEO', price: 80 },
+        { id: 'content_strategy', name: 'Content Strategy', price: 100 },
       ],
     },
     it_support: {
       name: 'IT Support / Maintenance',
-      baseRate: 30,
+      baseRate: 20,
       unit: 'hour',
       features: [],
     },
     consulting_training: {
       name: 'Consulting & Training',
-      baseRate: 40,
+      baseRate: 30,
       unit: 'hour',
       features: [],
     },
     other: {
       name: 'Other (Custom)',
-      baseRate: 35,
+      baseRate: 25,
       unit: 'hour',
       features: [],
     },
@@ -411,8 +411,16 @@ export default function ItServiceCalculatorPage() {
         <div className="flex items-center space-x-3">
           <Calculator className="h-10 w-10 text-primary" />
           <h1 className="text-4xl font-bold text-primary">
-            <TranslatedText text="IT Service Quotation Calculator" />
+            <TranslatedText text="Service Quotation Calculator" />
           </h1>
+        </div>
+         <div className="mt-4">
+          <Button asChild>
+            <a href="https://forms.gle/CteNoni4yi8XCFEx8" target="_blank" rel="noopener noreferrer">
+              <Send className="mr-2 h-4 w-4" />
+              <TranslatedText text="Tell us about your project" />
+            </a>
+          </Button>
         </div>
       </header>
 
@@ -607,5 +615,6 @@ export default function ItServiceCalculatorPage() {
   );
 }
 
+    
     
     
