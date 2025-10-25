@@ -13,7 +13,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Textarea } from '@/components/ui/textarea';
 import TranslatedText from '@/app/components/translated-text';
-import { ArrowLeft, Calculator, Download, Mail, Send } from 'lucide-react';
+import { ArrowLeft, Calculator, Download, GraduationCap, Mail, Send } from 'lucide-react';
 import { WhatsappIcon } from '@/components/icons';
 import { useToast } from '@/hooks/use-toast';
 
@@ -414,12 +414,18 @@ export default function ItServiceCalculatorPage() {
             <TranslatedText text="Service Quotation Calculator" />
           </h1>
         </div>
-         <div className="mt-4">
+         <div className="mt-4 flex gap-4">
           <Button asChild>
             <a href="https://forms.gle/CteNoni4yi8XCFEx8" target="_blank" rel="noopener noreferrer">
               <Send className="mr-2 h-4 w-4" />
               <TranslatedText text="Tell us about your project" />
             </a>
+          </Button>
+          <Button asChild variant="secondary">
+            <Link href="/tutor#contact-tutor">
+              <GraduationCap className="mr-2 h-4 w-4" />
+              <TranslatedText text="Enroll for Lessons" />
+            </Link>
           </Button>
         </div>
       </header>
@@ -615,6 +621,4 @@ export default function ItServiceCalculatorPage() {
   );
 }
 
-    
-    
     
