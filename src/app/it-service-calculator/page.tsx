@@ -59,7 +59,7 @@ const serviceConfig = {
     },
     web_development: {
       name: 'Web Development',
-      baseRate: 150,
+      baseRate: 250,
       unit: 'project',
       features: [
         { id: 'ui_design', name: 'UI/UX Design', price: 100 },
@@ -70,7 +70,7 @@ const serviceConfig = {
     },
     software_development: {
       name: 'Software Development',
-      baseRate: 400,
+      baseRate: 500,
       unit: 'project',
       features: [
         { id: 'api_dev', name: 'Custom API Development', price: 200 },
@@ -80,7 +80,7 @@ const serviceConfig = {
     },
     mobile_app_development: {
       name: 'Mobile App Development',
-      baseRate: 500,
+      baseRate: 800,
       unit: 'project',
       features: [
         { id: 'ios', name: 'iOS App', price: 400 },
@@ -91,7 +91,7 @@ const serviceConfig = {
     },
     prototypes: {
       name: 'Prototypes (Web, Mobile, System Demos)',
-      baseRate: 100,
+      baseRate: 150,
       unit: 'prototype',
       features: [
         { id: 'interactive_mockup', name: 'Interactive Mockup', price: 80 },
@@ -100,7 +100,7 @@ const serviceConfig = {
     },
     full_systems: {
       name: 'Full Systems (End-to-End Solutions)',
-      baseRate: 1500,
+      baseRate: 2000,
       unit: 'system',
       features: [
         { id: 'cloud_hosting', name: 'Cloud Hosting Setup', price: 150 },
@@ -110,7 +110,7 @@ const serviceConfig = {
     },
      ai_ml: {
       name: 'AI & Machine Learning',
-      baseRate: 500,
+      baseRate: 600,
       unit: 'project',
       features: [
         { id: 'data_preprocessing', name: 'Data Preprocessing & Cleaning', price: 150 },
@@ -120,7 +120,7 @@ const serviceConfig = {
     },
     data_analytics: {
       name: 'Data Analytics & BI',
-      baseRate: 300,
+      baseRate: 400,
       unit: 'project',
       features: [
         { id: 'dashboard_dev', name: 'Interactive Dashboard Dev', price: 200 },
@@ -130,7 +130,7 @@ const serviceConfig = {
     },
      ui_ux_design: {
       name: 'UI/UX Design',
-      baseRate: 150,
+      baseRate: 200,
       unit: 'project',
       features: [
         { id: 'wireframing', name: 'Wireframing', price: 80 },
@@ -140,7 +140,7 @@ const serviceConfig = {
     },
     seo_marketing: {
       name: 'SEO & Digital Marketing',
-      baseRate: 100,
+      baseRate: 150,
       unit: 'month',
       features: [
         { id: 'keyword_research', name: 'Keyword Research', price: 50 },
@@ -150,19 +150,19 @@ const serviceConfig = {
     },
     it_support: {
       name: 'IT Support / Maintenance',
-      baseRate: 20,
+      baseRate: 25,
       unit: 'hour',
       features: [],
     },
     consulting_training: {
       name: 'Consulting & Training',
-      baseRate: 30,
+      baseRate: 40,
       unit: 'hour',
       features: [],
     },
     other: {
       name: 'Other (Custom)',
-      baseRate: 25,
+      baseRate: 30,
       unit: 'hour',
       features: [],
     },
@@ -415,7 +415,7 @@ export default function ItServiceCalculatorPage() {
           </h1>
         </div>
          <div className="mt-4 flex gap-4">
-          <Button asChild className="hover:bg-primary/90 hover:text-black">
+          <Button asChild className="bg-primary hover:bg-primary/90 text-primary-foreground hover:text-black">
             <a href="https://forms.gle/CteNoni4yi8XCFEx8" target="_blank" rel="noopener noreferrer">
               <Send className="mr-2 h-4 w-4" />
               <TranslatedText text="Tell us about your project" />
