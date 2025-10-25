@@ -862,7 +862,7 @@ export default function Home() {
             <Button asChild size="lg" variant="outline">
               <Link href="/it-service-calculator">
                   <Calculator className="mr-2 h-5 w-5" />
-                  <TranslatedText text="My Project Cost" />
+                  <TranslatedText text="Service Cost" />
               </Link>
             </Button>
             <Button onClick={() => generateCv('download')} size="lg" variant="secondary" disabled={isGenerating}>
