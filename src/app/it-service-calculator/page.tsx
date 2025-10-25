@@ -421,7 +421,7 @@ export default function ItServiceCalculatorPage() {
               <TranslatedText text="Tell us about your project" />
             </a>
           </Button>
-          <Button asChild variant="secondary">
+          <Button asChild style={{ backgroundColor: 'hsl(var(--accent))', color: 'hsl(var(--accent-foreground))' }}>
             <a href="https://forms.gle/btbiX7F7n4JndgGy7" target="_blank" rel="noopener noreferrer">
               <GraduationCap className="mr-2 h-4 w-4" />
               <TranslatedText text="Enroll for Lessons" />
@@ -622,4 +622,6 @@ export default function ItServiceCalculatorPage() {
 }
 
     
+    
+
     
