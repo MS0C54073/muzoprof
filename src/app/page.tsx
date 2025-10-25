@@ -7,7 +7,7 @@ import Link from 'next/link';
 import TranslatedText from '@/app/components/translated-text';
 import { Button } from '@/components/ui/button';
 import { SocialIcons } from '@/components/social-icons';
-import { ArrowRight, Award, BrainCircuit, Calendar, Code, Download, Eye, ExternalLink, Github, Globe, GraduationCap, Loader2, Mail, Network, Phone, Server, Shield, Smartphone, Star, Users, Check, UserCog, ChevronDown } from 'lucide-react';
+import { ArrowRight, Award, BrainCircuit, Calendar, Code, Download, Eye, ExternalLink, Github, Globe, GraduationCap, Loader2, Mail, Network, Phone, Server, Shield, Smartphone, Star, Users, Check, UserCog, ChevronDown, Calculator } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import {
@@ -141,7 +141,7 @@ const experiences = [
             "Supported data backup, system updates."
         ]
     },
-    {
+     {
       title: "Customer Care Assistant",
       company: "VITALITE Group",
       duration: "2021 (Temporal Contract)",
@@ -859,14 +859,16 @@ export default function Home() {
             <Button asChild size="lg">
               <a href="#contact"><TranslatedText text="Get in Touch" /></a>
             </Button>
-            <Button onClick={() => generateCv('preview')} size="lg" variant="outline" disabled={isGenerating}>
-                  {isGenerating ? <Loader2 className="mr-2 h-5 w-5 animate-spin" /> : <Eye className="mr-2 h-5 w-5" />}
-                  <TranslatedText text="Preview CV" />
-              </Button>
-              <Button onClick={() => generateCv('download')} size="lg" variant="secondary" disabled={isGenerating}>
+            <Button asChild size="lg" variant="outline">
+              <Link href="/it-service-calculator">
+                  <Calculator className="mr-2 h-5 w-5" />
+                  <TranslatedText text="My Project Cost" />
+              </Link>
+            </Button>
+            <Button onClick={() => generateCv('download')} size="lg" variant="secondary" disabled={isGenerating}>
                   {isGenerating ? <Loader2 className="mr-2 h-5 w-5 animate-spin" /> : <Download className="mr-2 h-5 w-5" />}
                   <TranslatedText text="Download CV" />
-              </Button>
+            </Button>
           </div>
         </section>
 
