@@ -422,10 +422,10 @@ export default function ItServiceCalculatorPage() {
             </a>
           </Button>
           <Button asChild variant="secondary">
-            <Link href="/tutor#contact-tutor">
+            <a href="https://forms.gle/btbiX7F7n4JndgGy7" target="_blank" rel="noopener noreferrer">
               <GraduationCap className="mr-2 h-4 w-4" />
               <TranslatedText text="Enroll for Lessons" />
-            </Link>
+            </a>
           </Button>
         </div>
       </header>
