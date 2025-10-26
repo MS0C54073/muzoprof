@@ -3,6 +3,7 @@
 
 import type {Metadata, Viewport} from 'next';
 import { Inter } from 'next/font/google';
+import Head from 'next/head';
 import './globals.css';
 import './social-bar.css'; // <--- Import the CSS file
 import {ModeToggle} from '@/components/mode-toggle';
@@ -28,7 +29,6 @@ import {
 import { Menu, Calculator, ChevronDown } from 'lucide-react';
 import TranslatedText from './components/translated-text';
 import { FloatingCalculatorButton } from './components/floating-calculator-button';
-import { ChatBot } from '@/components/chat-bot'; // Import the chatbot
 import { useState } from 'react';
 
 
@@ -124,6 +124,9 @@ export default function RootLayout({
 
   return (
     <html lang="en" suppressHydrationWarning style={{ scrollBehavior: 'smooth' }}>
+      <head>
+          <script defer src="https://app.fastbots.ai/embed.js" data-bot-id="cmh8c3c0903nhqq1lewbb5fyu"></script>
+      </head>
       <body className={`${inter.variable} antialiased`}>
         <ThemeProvider
           attribute="class"
@@ -208,7 +211,6 @@ export default function RootLayout({
                 <ViewModeWrapper>
                    <SocialIcons className="social-bar" />
                    <FloatingCalculatorButton />
-                   <ChatBot />
                   <main className="pt-16 md:pt-20">
                       {children}
                   </main>
