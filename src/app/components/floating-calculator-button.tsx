@@ -18,8 +18,8 @@ export function FloatingCalculatorButton() {
 
   return (
     <div className={cn(
-      'fixed bottom-24 right-6 z-50 group', // Increased bottom margin
-      'lg:bottom-28 lg:right-8'
+      'fixed bottom-32 right-6 z-50 group', // Increased bottom margin further
+      'lg:bottom-36 lg:right-8'
     )}>
       <Button
         asChild
