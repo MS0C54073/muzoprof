@@ -1115,12 +1115,12 @@ export default function Home() {
           )}
         </section>
 
-        {/* References Section (Hidden on page, used for PDF) */}
+        {/* References Section */}
         <section id="references" className="py-20 border-t bg-muted/50 rounded-lg">
           <h2 className="text-3xl font-bold text-center mb-12"><TranslatedText text="References"/></h2>
-          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
               {references.map((ref, index) => (
-                  <Card key={index} className="flex flex-col">
+                  <Card key={index} className="flex flex-col bg-card/80">
                       <CardHeader>
                           <CardTitle className="text-xl text-primary">{ref.name}</CardTitle>
                           <CardDescription>
