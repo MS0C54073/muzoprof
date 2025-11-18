@@ -7,7 +7,7 @@ import Link from 'next/link';
 import TranslatedText from '@/app/components/translated-text';
 import { Button } from '@/components/ui/button';
 import { SocialIcons } from '@/components/social-icons';
-import { ArrowRight, Award, BrainCircuit, Calendar, Code, Download, Eye, ExternalLink, Github, Globe, GraduationCap, Loader2, Mail, Network, Phone, Server, Shield, Smartphone, Star, Users, Check, UserCog, ChevronDown, Calculator, FileText } from 'lucide-react';
+import { ArrowRight, Award, BrainCircuit, Calendar, Code, Download, Eye, ExternalLink, Github, Globe, GraduationCap, Loader2, Mail, Network, Phone, Server, Shield, Smartphone, Star, Users, Check, UserCog, ChevronDown, Calculator } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import {
@@ -825,110 +825,6 @@ export default function Home() {
         }
     };
     
-    const generateWebsiteTextDoc = () => {
-        setIsGenerating(true);
-        try {
-            const doc = new jsPDF();
-            const pageWidth = doc.internal.pageSize.getWidth();
-            const margin = 15;
-            const contentWidth = pageWidth - margin * 2;
-            let y = margin;
-            
-            const addTitle = (title: string) => {
-                checkPageBreak(20);
-                doc.setFontSize(22);
-                doc.setFont('helvetica', 'bold');
-                doc.text(title, pageWidth / 2, y, { align: 'center' });
-                y += 15;
-            };
-
-            const addSectionTitle = (title: string) => {
-                checkPageBreak(15);
-                 doc.setFontSize(16);
-                doc.setFont('helvetica', 'bold');
-                doc.text(title, margin, y);
-                y += 10;
-            };
-
-            const addText = (text: string, isMuted = false) => {
-                doc.setFontSize(11);
-                doc.setFont('helvetica', isMuted ? 'italic' : 'normal');
-                doc.setTextColor(isMuted ? 128 : 0);
-                const lines = doc.splitTextToSize(text, contentWidth);
-                checkPageBreak(lines.length * 6 + 5);
-                doc.text(lines, margin, y);
-                y += lines.length * 6 + 5;
-                doc.setTextColor(0);
-            };
-            
-             const addListItem = (text: string) => {
-                doc.setFontSize(11);
-                doc.setFont('helvetica', 'normal');
-                const lines = doc.splitTextToSize(`• ${text}`, contentWidth - 5);
-                checkPageBreak(lines.length * 6 + 2);
-                doc.text(lines, margin + 5, y);
-                y += lines.length * 6 + 2;
-            };
-
-            const checkPageBreak = (heightNeeded: number) => {
-                if (y + heightNeeded > doc.internal.pageSize.getHeight() - margin) {
-                    doc.addPage();
-                    y = margin;
-                }
-            };
-            
-            // --- Content ---
-            addTitle('Musonda Salimu - Website Content');
-            
-            addSectionTitle('About Me');
-            addText("I am a versatile and experienced professional with a Master's degree in Informatics and a passion for technology. My journey has taken me through system administration, software engineering, and cutting-edge AI research.");
-            addText("I thrive on solving complex problems and am particularly excited by the intersection of AI and practical business solutions. My current focus is on securely connecting LLMs like GPT to proprietary databases, leveraging no-code platforms (N8N, WeWeb, Supabase) for rapid development, and exploring advanced AI concepts like the 'Neuro-secretary' to automate complex workflows.");
-            addText("Driven by a willingness to learn, I am continuously pushing the boundaries of what's possible, merging my skills in full-stack development and AI to create next-generation solutions.");
-
-            addSectionTitle('Technical Skills');
-            skills.forEach(skill => addListItem(skill.name));
-            y += 5;
-
-            addSectionTitle('Work Experience');
-            experiences.forEach(exp => {
-                addText(`${exp.title} | ${exp.company} (${exp.duration})`);
-                exp.details.forEach(detail => addListItem(detail));
-                y += 5;
-            });
-            
-            addSectionTitle('Education');
-            education.forEach(edu => {
-                addText(`${edu.degree}, ${edu.university} (${edu.duration})`);
-                if(edu.note) addText(edu.note, true);
-                y += 2;
-            });
-
-            addSectionTitle('Awards & Achievements');
-            awards.forEach(award => addListItem(`${award.title} - ${award.issuer} (${award.date})`));
-            y+=5;
-            
-            addSectionTitle('Licenses & Certifications');
-            certifications.forEach(cert => addListItem(`${cert.title} - ${cert.issuer} (${cert.date})`));
-            y+=5;
-            
-            addSectionTitle('References');
-            references.forEach(ref => addListItem(`${ref.name}, ${ref.title} at ${ref.company}`));
-            addText('Contact information available upon request.', true);
-
-            doc.save('Musonda_Salimu_Website_Content.pdf');
-
-        } catch (error) {
-            console.error("Error generating website content PDF:", error);
-            toast({
-                variant: 'destructive',
-                title: 'PDF Generation Failed',
-                description: 'There was an error creating the document. Please try again.',
-            });
-        } finally {
-            setIsGenerating(false);
-        }
-    };
-
 
   return (
       <div className="container mx-auto py-12 px-4 md:px-6 lg:px-8">
@@ -972,10 +868,6 @@ export default function Home() {
             <Button onClick={() => generateCv('download')} size="lg" variant="secondary" disabled={isGenerating}>
                   {isGenerating ? <Loader2 className="mr-2 h-5 w-5 animate-spin" /> : <Download className="mr-2 h-5 w-5" />}
                   <TranslatedText text="Download CV" />
-            </Button>
-             <Button onClick={generateWebsiteTextDoc} size="lg" variant="secondary" disabled={isGenerating}>
-                  {isGenerating ? <Loader2 className="mr-2 h-5 w-5 animate-spin" /> : <FileText className="mr-2 h-5 w-5" />}
-                  <TranslatedText text="Download Website Content" />
             </Button>
           </div>
         </section>
