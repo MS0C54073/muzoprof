@@ -1166,6 +1166,10 @@ export default function Home() {
                   <Phone className="h-4 w-4" />
                   <span>+260979287496</span>
                 </a>
+                <a href="tel:+260966882901" className="flex items-center gap-2 hover:text-primary">
+                  <Phone className="h-4 w-4" />
+                  <span>+260966882901</span>
+                </a>
               </div>
             </div>
             <div className="flex space-x-6 justify-center">
