@@ -7,9 +7,10 @@ import Link from 'next/link';
 import TranslatedText from '@/app/components/translated-text';
 import { Button } from '@/components/ui/button';
 import { SocialIcons } from '@/components/social-icons';
-import { ArrowRight, Award, BrainCircuit, Calendar, Code, Download, Eye, ExternalLink, Github, Globe, GraduationCap, Loader2, Mail, Network, Phone, Server, Shield, Smartphone, Star, Users, Check, UserCog, ChevronDown, Calculator } from 'lucide-react';
+import { ArrowRight, Award, BrainCircuit, Calendar, Code, Download, Eye, ExternalLink, Github, Globe, GraduationCap, Loader2, Mail, Network, Phone, Server, Shield, Smartphone, Star, Users, Check, UserCog, ChevronDown, Calculator, Terminal } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import {
   Accordion,
   AccordionContent,
@@ -972,6 +973,18 @@ export default function Home() {
                   </Button>
               </div>
           )}
+          <div className="max-w-4xl mx-auto mt-8">
+            <Alert variant="accent">
+              <Terminal className="h-4 w-4" />
+              <AlertTitle><TranslatedText text="Explore My Full Portfolio" /></AlertTitle>
+              <AlertDescription>
+                <TranslatedText text="For a deeper dive into my work, including more projects and code samples, please " />
+                <a href="https://github.com/MS0C54073" target="_blank" rel="noopener noreferrer" className="font-semibold text-accent underline">
+                  <TranslatedText text="visit my GitHub profile" />
+                </a>.
+              </AlertDescription>
+            </Alert>
+          </div>
         </section>
 
         {/* Experience Section */}
