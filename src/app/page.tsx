@@ -1,5 +1,4 @@
 
-
 'use client';
 
 import Image from 'next/image';
@@ -684,24 +683,39 @@ export default function Home() {
 
             // --- Header ---
             y = margin;
+            
+            const profileImg = document.getElementById('profile-pic-for-cv') as HTMLImageElement;
+            if (profileImg && profileImg.complete) {
+              try {
+                // Draw a circular clipping region
+                doc.save();
+                doc.circle(pageWidth - margin - 20, y + 20, 20);
+                doc.clip();
+                doc.addImage(profileImg, 'JPEG', pageWidth - margin - 40, y, 40, 40);
+                doc.restore();
+              } catch (e) {
+                console.error("Could not add profile image to PDF:", e);
+              }
+            }
+
             doc.setFontSize(24);
             doc.setFont('Helvetica', 'bold');
             doc.setTextColor(0, 0, 0);
-            doc.text(cvData.name, margin, y);
+            doc.text(cvData.name, margin, y + 5);
             y += 20;
             
             doc.setFontSize(11);
             doc.setFont('Helvetica', 'normal');
             doc.setTextColor(82, 82, 91); // zinc-600
-            doc.text(cvData.jobTitle, margin, y);
+            doc.text(cvData.jobTitle, margin, y + 5);
             y += 15;
 
             doc.setFontSize(9);
             const contactLine = `${cvData.contact.email}  •  ${cvData.contact.phone1}  •  ${cvData.contact.phone2}`;
-            doc.text(contactLine, margin, y);
+            doc.text(contactLine, margin, y + 5);
             y += 12;
             const socialLine = `GitHub: ${cvData.contact.github}  •  Portfolio: ${cvData.contact.portfolio}`;
-            doc.text(socialLine, margin, y);
+            doc.text(socialLine, margin, y + 5);
             y += 5;
             
             // --- Summary ---
@@ -883,12 +897,15 @@ export default function Home() {
         {/* Hero Section */}
         <section id="home" className="py-20 text-center">
           <Image
-            src="https://drive.google.com/uc?id=1SEG-a3e_1xHx0-P7gD6MUysCSt6kg96U"
+            id="profile-pic-for-cv"
+            src="https://drive.google.com/uc?id=18haKNolQwC6XQxH3weaKMkvFEV_rBYc6"
             alt="Muzo's Profile Picture"
             width={150}
             height={150}
             data-ai-hint="profile picture"
             className="rounded-full mx-auto mb-6 shadow-lg border-4 border-primary object-cover"
+            crossOrigin="anonymous"
+            priority
           />
           <h1 className="text-4xl md:text-5xl font-bold text-primary">
             <TranslatedText text="Musonda Salimu" />
@@ -1337,8 +1354,3 @@ export default function Home() {
       </div>
   );
 }
-
-    
-
-
-
