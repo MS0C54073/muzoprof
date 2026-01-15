@@ -1264,9 +1264,11 @@ export default function Home() {
         
         <footer className="text-center py-6 mt-8 border-t border-border">
             <p className="text-sm text-muted-foreground">
-                <TranslatedText text="© 2025 Musonda Salimu. All Rights Reserved." />
+                <TranslatedText text="© 2026 Musonda Salimu. All Rights Reserved." />
             </p>
         </footer>
       </div>
   );
 }
+
+    

@@ -590,10 +590,12 @@ export default function TutorPage() {
         <div className="flex flex-col items-center gap-4">
             <SocialIcons className="flex space-x-4 justify-center" />
             <p className="text-sm text-muted-foreground">
-                <TranslatedText text="© 2025 Musonda Salimu. All Rights Reserved." />
+                <TranslatedText text="© 2026 Musonda Salimu. All Rights Reserved." />
             </p>
         </div>
       </footer>
     </div>
   );
 }
+
+    
