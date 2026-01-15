@@ -46,6 +46,8 @@ const skills = [
     { name: 'Networking', icon: <Network className="h-6 w-6" /> },
     { name: 'Tableau/MS Excel', icon: <Code className="h-6 w-6" /> },
     { name: 'Design & Photo Editing', icon: <Eye className="h-6 w-6" /> },
+    { name: 'Microsoft 365/Office', icon: <UserCog className="h-6 w-6" /> },
+    { name: 'Cursor 2.0', icon: <Terminal className="h-6 w-6" /> },
 ];
 
 const projects = [
@@ -462,7 +464,7 @@ export default function Home() {
                     "Databases (SQL/NoSQL: PostgreSQL, MongoDB, Supabase)",
                     "Data Automation (n8n, Zapier, APIs, Forms)",
                     "Cloud (GCP, Firebase)", "CI/CD & Docker", "Project Management", "Tableau/MS Excel",
-                    "Design & Media (Photoshop, Premiere Pro, Canva)"
+                    "Design & Media (Photoshop, Premiere Pro, Canva)", "Microsoft 365/Office", "Cursor 2.0"
                 ],
                 experience: [
                     {
