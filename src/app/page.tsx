@@ -44,7 +44,7 @@ const skills = [
     { name: 'Cybersecurity', icon: <Shield className="h-6 w-6" /> },
     { name: 'System Admin', icon: <Server className="h-6 w-6" /> },
     { name: 'Networking', icon: <Network className="h-6 w-6" /> },
-    { name: 'Tableau (Foundational) / MS Excel', icon: <Code className="h-6 w-6" /> },
+    { name: 'Tableau (Foundational)', icon: <Code className="h-6 w-6" /> },
     { name: 'Design & Photo Editing', icon: <Eye className="h-6 w-6" /> },
     { name: 'Microsoft 365/Office', icon: <UserCog className="h-6 w-6" /> },
     { name: 'Cursor 2.0', icon: <Terminal className="h-6 w-6" /> },
@@ -457,13 +457,13 @@ export default function Home() {
                     github: "github.com/MS0C54073",
                     portfolio: "https://tinyurl.com/muzoslim",
                 },
-                summary: "A results-driven IT professional with a dynamic educational background that includes specializations in Technological Entrepreneurship, Digital Economy Management, and the Development of Digital Twins. This diverse expertise is applied to software development, system administration, and AI, with a special focus on securely connecting large language models to data and conceptualizing advanced AI assistants.",
+                summary: "A results-driven IT professional with a dynamic educational background in IT, Technological Entrepreneurship and Innovation Management, Management in the Digital Economy, Development of Digital Twins, and Management of High Tech Programs and Projects. This diverse expertise is applied to software development, system administration, and AI, with a special focus on securely connecting large language models to data and conceptualizing advanced AI assistants.",
                 skills: [
                     "Python & Django", "AI Development (Genkit)", "Next.js, React, TypeScript",
                     "Cybersecurity (SIEM, IDS)", "System & Network Admin", 
                     "Databases (SQL/NoSQL: PostgreSQL, MongoDB, Supabase)",
-                    "Data Automation (n8n, Zapier, APIs, Forms, Google AI Studio | Gemini API)",
-                    "Cloud (GCP, Firebase)", "CI/CD & Docker", "Project Management", "Tableau (Foundational) / MS Excel",
+                    "Data Automation (n8n, Zapier, Google AI Studio | Gemini API)",
+                    "Cloud (GCP, Firebase)", "CI/CD & Docker", "Project Management", "Tableau (Foundational)",
                     "Design & Media (Photoshop, Premiere Pro, Canva)", "Microsoft 365/Office", "Cursor 2.0"
                 ],
                 experience: [
@@ -910,7 +910,7 @@ export default function Home() {
             </Button>
           </p>
           <p className="max-w-2xl mx-auto mt-4 text-foreground">
-             <TranslatedText text="A results-driven IT professional with a dynamic educational background that includes specializations in Technological Entrepreneurship, Digital Economy Management, and the Development of Digital Twins. This diverse expertise is applied to software development, system administration, and AI, with a special focus on securely connecting large language models to data and conceptualizing advanced AI assistants." />
+             <TranslatedText text="A results-driven IT professional with a dynamic educational background in IT, Technological Entrepreneurship and Innovation Management, Management in the Digital Economy, Development of Digital Twins, and Management of High Tech Programs and Projects. This diverse expertise is applied to software development, system administration, and AI, with a special focus on securely connecting large language models to data and conceptualizing advanced AI assistants." />
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <Button asChild size="lg">
