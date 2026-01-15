@@ -448,7 +448,6 @@ export default function Home() {
                     email: "musondasalim@gmail.com",
                     phone1: "+260 977 288 260",
                     phone2: "+260 979 287 496",
-                    linkedin: "linkedin.com/in/musonda-salimu-a4a0b31b9",
                     github: "github.com/MS0C54073",
                 },
                 summary: "A results-driven IT professional with an MSc in Informatics and hands-on experience in software development, system administration, and AI. I am actively exploring how to securely connect LLMs to company data, leveraging no-code tools like N8N, WeWeb, and Supabase for rapid development, and conceptualizing advanced 'Neuro-secretary' AI assistants.",
@@ -663,7 +662,7 @@ export default function Home() {
             const contactLine = `${cvData.contact.email}  •  ${cvData.contact.phone1}  •  ${cvData.contact.phone2}`;
             doc.text(contactLine, margin, y);
             y += 12;
-            const socialLine = `${cvData.contact.linkedin}  •  ${cvData.contact.github}`;
+            const socialLine = `${cvData.contact.github}`;
             doc.text(socialLine, margin, y);
             y += 5;
             

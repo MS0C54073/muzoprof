@@ -18,7 +18,6 @@ export function SocialIcons({ className }: { className?: string }) {
   const iconClasses = "h-5 w-5";
 
   const socialLinks = [
-    { name: 'LinkedIn', href: 'https://www.linkedin.com/in/musonda-salimu-a4a0b31b9/', icon: <Linkedin className={`${iconClasses} text-white`} />, bgClass: 'bg-[#0077B5] hover:bg-[#005582]' },
     { name: 'GitHub', href: 'https://github.com/MS0C54073', icon: <Github className={`${iconClasses} text-background`} />, bgClass: 'bg-foreground hover:bg-muted-foreground' },
     { name: 'YouTube', href: 'https://www.youtube.com/@musondasalimu2986', icon: <Youtube className={`${iconClasses} text-white`} />, bgClass: 'bg-[#FF0000] hover:bg-[#CC0000]' },
     { name: 'Whatsapp', href: 'https://wa.me/260966882901', icon: <WhatsappIcon className={`${iconClasses} text-white`} />, bgClass: 'bg-[#25D366] hover:bg-[#1EAE54]' },
