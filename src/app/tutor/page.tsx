@@ -117,9 +117,8 @@ export default function TutorPage() {
                     email: "musondasalim@gmail.com",
                     phone1: "+260 977 288 260",
                     phone2: "+260 979 287 496",
-                    linkedin: "linkedin.com/in/musonda-salimu-a4a0b31b9",
                 },
-                summary: "A patient and adaptable TEFL-certified educator with a Master's degree and over 6 years of experience teaching English and technology online. Proven ability to create customized learning plans for a diverse range of learners, from children to adults. Specializes in Business English, General English, and exam preparation. Fosters a supportive environment that builds student confidence and achieves learning objectives.",
+                summary: "A patient and adaptable TEFL-certified educator with over 6 years of experience teaching English and technology online. Proven ability to create customized learning plans for a diverse range of learners, from children to adults. Specializes in Business English, General English, and exam preparation. Fosters a supportive environment that builds student confidence and achieves learning objectives.",
                 skills: [
                     "English Language Teaching (TEFL)", "Curriculum & Lesson Planning", "Student Assessment & Feedback",
                     "Python Programming", "Web Development (HTML, CSS, JS)", "Roblox & Unity Game Design",
@@ -134,7 +133,6 @@ export default function TutorPage() {
                     { title: 'FillCamp', company: 'Kursk, Russia', duration: 'Summer 2018', details: 'Conducted group English lessons and supervised educational activities for children.' },
                 ],
                 education: [
-                    { degree: "MSc, Informatics and Computer Engineering", university: "Novosibirsk State Technical University", duration: "2022 - 2024" },
                     { degree: "BSc, Software and Administration of Information Systems", university: "Kursk State University", duration: "2017 - 2021" },
                 ],
                 certifications: [
@@ -187,7 +185,7 @@ export default function TutorPage() {
             y += 15;
 
             doc.setFontSize(9);
-            doc.text(`${cvData.contact.email}  •  ${cvData.contact.phone1}  •  ${cvData.contact.linkedin}`, margin, y);
+            doc.text(`${cvData.contact.email}  •  ${cvData.contact.phone1}`, margin, y);
             y += 5;
             
             // --- Summary ---

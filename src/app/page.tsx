@@ -201,12 +201,6 @@ const experiences = [
 
 const education = [
     {
-        degree: "Master's of Science, Informatics and Computer Engineering",
-        university: "Novosibirsk State Technical University | Novosibirsk, Russia",
-        duration: "Sep 2022 - Jul 2024",
-        note: "Awaiting Official Translation and Certification in Zambia."
-    },
-    {
         degree: "Bachelor's of Science, Software and Administration of Information Systems",
         university: "Kursk State University | Kursk, Russia",
         duration: "Sep 2017 - Jul 2021",
@@ -451,7 +445,7 @@ export default function Home() {
                     phone2: "+260 979 287 496",
                     github: "github.com/MS0C54073",
                 },
-                summary: "A results-driven IT professional with an MSc in Informatics and hands-on experience in software development, system administration, and AI. I am actively exploring how to securely connect LLMs to company data, leveraging no-code tools like N8N, WeWeb, and Supabase for rapid development, and conceptualizing advanced 'Neuro-secretary' AI assistants.",
+                summary: "A results-driven IT professional with hands-on experience in software development, system administration, and AI. I am actively exploring how to securely connect LLMs to company data, leveraging no-code tools like N8N, WeWeb, and Supabase for rapid development, and conceptualizing advanced 'Neuro-secretary' AI assistants.",
                 skills: [
                     "Python & Django", "AI Development (Genkit)", "Next.js, React, TypeScript",
                     "Cybersecurity (SIEM, IDS)", "System & Network Admin", "Databases (SQL & NoSQL)",
@@ -557,12 +551,6 @@ export default function Home() {
                     },
                 ].sort((a, b) => new Date(b.duration.split(' – ')[1] === 'Present' ? Date.now() : b.duration.split(' – ')[1] || 0).getTime() - new Date(a.duration.split(' – ')[1] === 'Present' ? Date.now() : a.duration.split(' – ')[1] || 0).getTime()),
                 education: [
-                     {
-                        degree: "MSc, Informatics and Computer Engineering",
-                        university: "Novosibirsk State Technical University, Russia",
-                        duration: "Sep 2022 - Jul 2024",
-                        details: "Awaiting Official Translation and Certification in Zambia."
-                    },
                     {
                         degree: "Bachelor's of Science, Software and Administration of Information Systems",
                         university: "Kursk State University, Russia",
@@ -853,7 +841,7 @@ export default function Home() {
             </Button>
           </p>
           <p className="max-w-2xl mx-auto mt-4 text-foreground">
-            <TranslatedText text="A results-driven IT professional with an MSc in Informatics and hands-on experience in software development, system administration, and AI. Actively exploring how to securely connect LLMs to company data, leveraging no-code tools like N8N, WeWeb, and Supabase for rapid development, and conceptualizing advanced 'Neuro-secretary' AI assistants." />
+            <TranslatedText text="A results-driven IT professional with hands-on experience in software development, system administration, and AI. Actively exploring how to securely connect LLMs to company data, leveraging no-code tools like N8N, WeWeb, and Supabase for rapid development, and conceptualizing advanced 'Neuro-secretary' AI assistants." />
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <Button asChild size="lg">
@@ -877,7 +865,7 @@ export default function Home() {
             <h2 className="text-3xl font-bold text-center mb-12"><TranslatedText text="About Me"/></h2>
             <div className="flex flex-col md:flex-row items-center gap-10">
                 <div className="text-lg text-muted-foreground space-y-4">
-                    <p><TranslatedText text="I am a versatile and experienced professional with a Master's degree in Informatics and a passion for technology. My journey has taken me through system administration, software engineering, and cutting-edge AI research."/></p>
+                    <p><TranslatedText text="I am a versatile and experienced professional with a passion for technology. My journey has taken me through system administration, software engineering, and cutting-edge AI research."/></p>
                     <p><TranslatedText text="I thrive on solving complex problems and am particularly excited by the intersection of AI and practical business solutions. My current focus is on securely connecting LLMs like GPT to proprietary databases, leveraging no-code platforms (N8N, WeWeb, Supabase) for rapid development, and exploring advanced AI concepts like the 'Neuro-secretary' to automate complex workflows."/></p>
                     <p><TranslatedText text="Driven by a willingness to learn, I am continuously pushing the boundaries of what's possible, merging my skills in full-stack development and AI to create next-generation solutions."/></p>
                 </div>
