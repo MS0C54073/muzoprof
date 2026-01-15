@@ -298,13 +298,6 @@ const references = [
         phone: "+260 97 9793999"
     },
     {
-        name: "Ann Chibinga",
-        title: "Team Leader",
-        company: "VITALITE Zambia",
-        email: "ann.chibinga@vitalitegroup.com",
-        phone: "(+260) 777407124"
-    },
-    {
         name: "Mwansa Kapoka",
         title: "Team Leader",
         company: "TechMahindra Limited Zambia",
@@ -317,7 +310,14 @@ const references = [
         company: "Embassy of the Republic of Zambia in Moscow, Russia",
         email: null,
         phone: "+79855159011"
-    }
+    },
+    {
+        name: "Ann Chibinga",
+        title: "Team Leader",
+        company: "VITALITE Zambia",
+        email: "ann.chibinga@vitalitegroup.com",
+        phone: "(+260) 777407124"
+    },
 ];
 
 const orderSchema = z.object({
@@ -451,6 +451,7 @@ export default function Home() {
                     phone1: "+260966882901",
                     phone2: "+260979287496",
                     github: "github.com/MS0C54073",
+                    portfolio: "tinyurl.com/muzoslim",
                 },
                 summary: "A results-driven IT professional with a dynamic educational background spanning IT, Technological Entrepreneurship, Digital Economy Management, and the Development of Digital Twins. This diverse expertise is applied to software development, system administration, and AI, with a special focus on securely connecting large language models to data and conceptualizing advanced AI assistants.",
                 skills: [
@@ -607,6 +608,43 @@ export default function Home() {
                     { title: "Python (Basic) Certificate", issuer: "HackerRank", type: "Certificate", date: "Issued Aug 2020", credentialId: "6E56080D33F3" },
                     { title: 'EF SET English Certificate', issuer: 'EF SET', type: "Certificate", date: 'Issued Sep 2024' },
                     { title: 'Teacher Of English To Speakers Of Other Languages (TEFL)', issuer: 'Teacher Record', type: "Certificate", date: 'Issued Sep 2023', credentialId: 'TR2672252278' },
+                ],
+                references: [
+                    {
+                        name: "Innocent Mukupa",
+                        title: "ICT Manager",
+                        company: "Pensions & Insurance Authority",
+                        email: "Innocent.mukupa@pia.org.zm",
+                        phone: "+260-211-251401 | +260-211-251405 | Fax: +260-211-251492"
+                    },
+                    {
+                        name: "Prof. Aaron B. Zyambo",
+                        title: "CEO & Lead Consultant",
+                        company: "Mega Vision Logistics Int'l Ltd",
+                        email: "abzyambo@yahoo.com",
+                        phone: "+260 97 9793999"
+                    },
+                     {
+                        name: "Mwansa Kapoka",
+                        title: "Team Leader",
+                        company: "TechMahindra Limited Zambia",
+                        email: "mwansa.kapoka@sc.com",
+                        phone: "+260 978980443"
+                    },
+                    {
+                        name: "Allan Mwimbu",
+                        title: "Supervior | First Secretary Political",
+                        company: "Embassy of the Republic of Zambia in Moscow, Russia",
+                        email: null,
+                        phone: "+79855159011"
+                    },
+                    {
+                        name: "Ann Chibinga",
+                        title: "Team Leader",
+                        company: "VITALITE Zambia",
+                        email: "ann.chibinga@vitalitegroup.com",
+                        phone: "(+260) 777407124"
+                    },
                 ]
             };
             
@@ -658,7 +696,7 @@ export default function Home() {
             const contactLine = `${cvData.contact.email}  •  ${cvData.contact.phone1}  •  ${cvData.contact.phone2}`;
             doc.text(contactLine, margin, y);
             y += 12;
-            const socialLine = `${cvData.contact.github}`;
+            const socialLine = `GitHub: ${cvData.contact.github}  •  Portfolio: ${cvData.contact.portfolio}`;
             doc.text(socialLine, margin, y);
             y += 5;
             
@@ -789,19 +827,34 @@ export default function Home() {
                 }
                 y += 4;
             });
-
-            // --- References ---
+            
+             // --- References ---
             doc.addPage();
-            y = pageHeight / 2;
-            doc.setFontSize(11);
-            doc.setFont('Helvetica', 'bold');
-            doc.setTextColor(37, 99, 235);
-            doc.text("REFERENCES", pageWidth / 2, y - 10, { align: 'center' });
+            y = margin;
+            y = addSectionTitle("References", y);
+            cvData.references.forEach(ref => {
+                checkPageBreak(30);
+                doc.setFontSize(10);
+                doc.setFont('Helvetica', 'bold');
+                doc.text(ref.name, margin, y);
+                y += 10;
+                
+                doc.setFontSize(9);
+                doc.setFont('Helvetica', 'normal');
+                doc.text(`${ref.title}, ${ref.company}`, margin, y);
+                y += 9;
 
-            doc.setFontSize(10);
-            doc.setFont('Helvetica', 'normal');
-            doc.setTextColor(51, 65, 85);
-            doc.text("Available upon request.", pageWidth / 2, y + 5, { align: 'center' });
+                if (ref.email) {
+                    doc.text(`Email: ${ref.email}`, margin, y);
+                    y += 9;
+                }
+                 if (ref.phone) {
+                    doc.text(`Phone: ${ref.phone}`, margin, y);
+                    y += 9;
+                }
+                y += 8;
+            });
+
 
             if (outputType === 'preview') {
                 doc.output('dataurlnewwindow');
@@ -848,7 +901,7 @@ export default function Home() {
             </Button>
           </p>
           <p className="max-w-2xl mx-auto mt-4 text-foreground">
-            <TranslatedText text="A results-driven IT professional with a dynamic educational background spanning IT, Technological Entrepreneurship, Digital Economy Management, and the Development of Digital Twins. This diverse expertise is applied to software development, system administration, and AI, with a special focus on securely connecting large language models to data and conceptualizing advanced AI assistants." />
+            <TranslatedText text="A results-driven IT professional with a dynamic educational background in IT, Technological Entrepreneurship and Innovation Management, Management in the Digital Economy, Development of Digital Twins, and Management of High-Tech Programs and Projects. This diverse expertise is applied to software development, system administration, and AI, with a special focus on securely connecting large language models to data and conceptualizing advanced AI assistants." />
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <Button asChild size="lg">
@@ -1125,7 +1178,7 @@ export default function Home() {
         {/* References Section */}
         <section id="references" className="py-20 border-t bg-muted/50 rounded-lg">
           <h2 className="text-3xl font-bold text-center mb-12"><TranslatedText text="References"/></h2>
-          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {references.map((ref, index) => (
                   <Card key={index} className="flex flex-col bg-card/80">
                       <CardHeader>
@@ -1276,3 +1329,4 @@ export default function Home() {
 }
 
     
+
