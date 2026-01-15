@@ -6,7 +6,7 @@ import Link from 'next/link';
 import TranslatedText from '@/app/components/translated-text';
 import { Button } from '@/components/ui/button';
 import { SocialIcons } from '@/components/social-icons';
-import { ArrowRight, Award, BrainCircuit, Calendar, Code, Database, Download, Eye, ExternalLink, Github, Globe, GraduationCap, Loader2, Mail, Network, Phone, Server, Shield, Smartphone, Star, Users, Check, UserCog, ChevronDown, Calculator, Terminal } from 'lucide-react';
+import { ArrowRight, Award, BrainCircuit, Calendar, Code, Database, Download, Eye, ExternalLink, Github, Globe, GraduationCap, Loader2, Mail, Network, Phone, Server, Shield, Smartphone, Star, Users, Check, UserCog, ChevronDown, Calculator, Terminal, Gamepad, Film } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
@@ -39,12 +39,12 @@ const skills = [
     { name: 'Next.js', icon: <Globe className="h-6 w-6" /> },
     { name: 'TypeScript', icon: <Code className="h-6 w-6" /> },
     { name: 'React', icon: <Globe className="h-6 w-6" /> },
-    { name: 'Automation (n8n)', icon: <BrainCircuit className="h-6 w-6" /> },
+    { name: 'Automation (n8n, Google AI Studio | Gemini API)', icon: <BrainCircuit className="h-6 w-6" /> },
     { name: 'Databases', icon: <Database className="h-6 w-6" /> },
     { name: 'Cybersecurity', icon: <Shield className="h-6 w-6" /> },
     { name: 'System Admin', icon: <Server className="h-6 w-6" /> },
     { name: 'Networking', icon: <Network className="h-6 w-6" /> },
-    { name: 'Tableau/MS Excel', icon: <Code className="h-6 w-6" /> },
+    { name: 'Tableau (Foundational) / MS Excel', icon: <Code className="h-6 w-6" /> },
     { name: 'Design & Photo Editing', icon: <Eye className="h-6 w-6" /> },
     { name: 'Microsoft 365/Office', icon: <UserCog className="h-6 w-6" /> },
     { name: 'Cursor 2.0', icon: <Terminal className="h-6 w-6" /> },
@@ -457,13 +457,13 @@ export default function Home() {
                     github: "github.com/MS0C54073",
                     portfolio: "https://tinyurl.com/muzoslim",
                 },
-                summary: "A results-driven IT professional with a dynamic educational background spanning IT, Technological Entrepreneurship, Digital Economy Management, and the Development of Digital Twins. This diverse expertise is applied to software development, system administration, and AI, with a special focus on securely connecting large language models to data and conceptualizing advanced AI assistants.",
+                summary: "A results-driven IT professional with a dynamic educational background that includes specializations in Technological Entrepreneurship, Digital Economy Management, and the Development of Digital Twins. This diverse expertise is applied to software development, system administration, and AI, with a special focus on securely connecting large language models to data and conceptualizing advanced AI assistants.",
                 skills: [
                     "Python & Django", "AI Development (Genkit)", "Next.js, React, TypeScript",
                     "Cybersecurity (SIEM, IDS)", "System & Network Admin", 
                     "Databases (SQL/NoSQL: PostgreSQL, MongoDB, Supabase)",
-                    "Data Automation (n8n, Zapier, APIs, Forms)",
-                    "Cloud (GCP, Firebase)", "CI/CD & Docker", "Project Management", "Tableau/MS Excel",
+                    "Data Automation (n8n, Zapier, APIs, Forms, Google AI Studio | Gemini API)",
+                    "Cloud (GCP, Firebase)", "CI/CD & Docker", "Project Management", "Tableau (Foundational) / MS Excel",
                     "Design & Media (Photoshop, Premiere Pro, Canva)", "Microsoft 365/Office", "Cursor 2.0"
                 ],
                 experience: [
@@ -910,7 +910,7 @@ export default function Home() {
             </Button>
           </p>
           <p className="max-w-2xl mx-auto mt-4 text-foreground">
-            <TranslatedText text="A results-driven IT professional with a dynamic educational background spanning IT, Technological Entrepreneurship, Digital Economy Management, and the Development of Digital Twins. This diverse expertise is applied to software development, system administration, and AI, with a special focus on securely connecting large language models to data and conceptualizing advanced AI assistants." />
+             <TranslatedText text="A results-driven IT professional with a dynamic educational background that includes specializations in Technological Entrepreneurship, Digital Economy Management, and the Development of Digital Twins. This diverse expertise is applied to software development, system administration, and AI, with a special focus on securely connecting large language models to data and conceptualizing advanced AI assistants." />
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <Button asChild size="lg">
@@ -941,6 +941,40 @@ export default function Home() {
             </div>
         </section>
 
+        {/* Hobbies & Interests Section */}
+        <section id="hobbies" className="py-20 border-t">
+          <h2 className="text-3xl font-bold text-center mb-12"><TranslatedText text="Hobbies & Interests"/></h2>
+          <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+              <Card className="bg-card/50">
+                  <CardHeader>
+                      <Gamepad className="h-10 w-10 mx-auto text-primary" />
+                      <CardTitle className="mt-2"><TranslatedText text="Gaming"/></CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                      <p className="text-muted-foreground"><TranslatedText text="I enjoy immersive single-player adventures and competitive multiplayer games."/></p>
+                  </CardContent>
+              </Card>
+              <Card className="bg-card/50">
+                  <CardHeader>
+                      <Film className="h-10 w-10 mx-auto text-primary" />
+                      <CardTitle className="mt-2"><TranslatedText text="Documentaries"/></CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                      <p className="text-muted-foreground"><TranslatedText text="Exploring real-world stories and learning about history, science, and culture."/></p>
+                  </CardContent>
+              </Card>
+              <Card className="bg-card/50">
+                  <CardHeader>
+                      <BrainCircuit className="h-10 w-10 mx-auto text-primary" />
+                      <CardTitle className="mt-2"><TranslatedText text="AI Research"/></CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                      <p className="text-muted-foreground"><TranslatedText text="Staying up-to-date with the latest advancements and tools in artificial intelligence."/></p>
+                  </CardContent>
+              </Card>
+          </div>
+        </section>
+
         {/* Skills Section */}
         <section id="skills" className="py-20 border-t bg-muted/50 rounded-lg">
           <h2 className="text-3xl font-bold text-center mb-12"><TranslatedText text="Technical Skills" /></h2>
@@ -958,11 +992,11 @@ export default function Home() {
             <div>
               <h3 className="text-xl font-semibold text-foreground mb-2"><TranslatedText text="Data Tools & Automation" /></h3>
               <p className="text-muted-foreground">
-                <TranslatedText text="Data Collection: Google Forms, Microsoft Forms, REST APIs, webhooks. Databases: SQL/NoSQL (PostgreSQL, MySQL, MongoDB, Supabase). Workflow Automation: n8n, Zapier." />
+                <TranslatedText text="Data Collection: Google Forms, Microsoft Forms, REST APIs, webhooks. Databases: SQL/NoSQL (PostgreSQL, MySQL, MongoDB, Supabase). Workflow Automation: n8n, Zapier, Google AI Studio | Gemini API." />
               </p>
             </div>
             <div>
-              <h3 className="text-xl font-semibold text-foreground mb-2"><TranslatedText text="Design & Media Production" /></h3>
+              <h3 className="text-xl font-semibold text-foreground mb-2"><TranslatedText text="Design & Media" /></h3>
               <p className="text-muted-foreground">
                 <TranslatedText text="Creative Tools: Adobe Premiere Pro, Photoshop, Canva." />
               </p>
