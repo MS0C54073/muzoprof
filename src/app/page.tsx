@@ -720,28 +720,16 @@ export default function Home() {
             // --- Core Competencies ---
             y = addSectionTitle("Core Competencies", y);
             doc.setFontSize(9);
-            const colWidth = contentWidth / 3;
-            const skillsPerCol = Math.ceil(cvData.skills.length / 3);
-            const itemHeight = 9 * lineHeight;
+            doc.setFont('Helvetica', 'normal');
+            doc.setTextColor(51, 65, 85); // slate-700
+            
+            const skillsString = cvData.skills.map(skill => `• ${skill}`).join('      ');
+            const skillsLines = doc.splitTextToSize(skillsString, contentWidth);
+            
+            checkPageBreak(skillsLines.length * 9 * lineHeight);
+            doc.text(skillsLines, margin, y);
+            y += (skillsLines.length * 9 * lineHeight) + 4;
 
-            const col1 = cvData.skills.slice(0, skillsPerCol);
-            const col2 = cvData.skills.slice(skillsPerCol, skillsPerCol * 2);
-            const col3 = cvData.skills.slice(skillsPerCol * 2);
-
-            for (let i = 0; i < skillsPerCol; i++) {
-                checkPageBreak(itemHeight); // Check if a new row fits
-
-                if (col1[i]) {
-                    doc.text(`•  ${col1[i]}`, margin, y);
-                }
-                if (col2[i]) {
-                    doc.text(`•  ${col2[i]}`, margin + colWidth, y);
-                }
-                if (col3[i]) {
-                    doc.text(`•  ${col3[i]}`, margin + colWidth * 2, y);
-                }
-                y += itemHeight; // Move to the next line
-            }
 
             // --- Work Experience ---
             y = addSectionTitle("Work Experience", y);
