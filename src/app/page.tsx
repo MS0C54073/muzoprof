@@ -284,6 +284,13 @@ const certifications = [
 
 const references = [
     {
+        name: "Innocent Mukupa",
+        title: "ICT Manager",
+        company: "Pensions & Insurance Authority",
+        email: "Innocent.mukupa@pia.org.zm",
+        phone: "+260-211-251401 | +260-211-251405 | Fax: +260-211-251492"
+    },
+    {
         name: "Prof. Aaron B. Zyambo",
         title: "CEO & Lead Consultant",
         company: "Mega Vision Logistics Int'l Ltd",
@@ -291,11 +298,11 @@ const references = [
         phone: "+260 97 9793999"
     },
     {
-        name: "Innocent Mukupa",
-        title: "ICT Manager",
-        company: "Pensions & Insurance Authority",
-        email: "Innocent.mukupa@pia.org.zm",
-        phone: "+260-211-251401 | +260-211-251405 | Fax: +260-211-251492"
+        name: "Ann Chibinga",
+        title: "Team Leader",
+        company: "VITALITE Zambia",
+        email: "ann.chibinga@vitalitegroup.com",
+        phone: "(+260) 777407124"
     },
     {
         name: "Mwansa Kapoka",
