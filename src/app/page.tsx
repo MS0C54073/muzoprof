@@ -684,20 +684,6 @@ export default function Home() {
             // --- Header ---
             y = margin;
             
-            const profileImg = document.getElementById('profile-pic-for-cv') as HTMLImageElement;
-            if (profileImg && profileImg.complete) {
-              try {
-                // Draw a circular clipping region
-                doc.save();
-                doc.circle(pageWidth - margin - 20, y + 20, 20);
-                doc.clip();
-                doc.addImage(profileImg, 'JPEG', pageWidth - margin - 40, y, 40, 40);
-                doc.restore();
-              } catch (e) {
-                console.error("Could not add profile image to PDF:", e);
-              }
-            }
-
             doc.setFontSize(24);
             doc.setFont('Helvetica', 'bold');
             doc.setTextColor(0, 0, 0);
@@ -897,14 +883,12 @@ export default function Home() {
         {/* Hero Section */}
         <section id="home" className="py-20 text-center">
           <Image
-            id="profile-pic-for-cv"
             src="https://drive.google.com/uc?id=18haKNolQwC6XQxH3weaKMkvFEV_rBYc6"
             alt="Muzo's Profile Picture"
             width={150}
             height={150}
             data-ai-hint="profile picture"
             className="rounded-full mx-auto mb-6 shadow-lg border-4 border-primary object-cover"
-            crossOrigin="anonymous"
             priority
           />
           <h1 className="text-4xl md:text-5xl font-bold text-primary">
@@ -969,7 +953,7 @@ export default function Home() {
            <div className="max-w-3xl mx-auto mt-12 text-center">
             <h3 className="text-xl font-semibold text-foreground mb-3"><TranslatedText text="Data Tools & Automation" /></h3>
             <p className="text-muted-foreground">
-                <TranslatedText text="Proficient with data collection via Google/Microsoft Forms, REST APIs, and webhooks; managing SQL/NoSQL databases (PostgreSQL, MongoDB, Supabase); and creating automated workflows with tools like n8n and Zapier." />
+              <TranslatedText text="Data Collection: Google Forms, Microsoft Forms, REST APIs, webhooks. Databases: SQL/NoSQL (PostgreSQL, MySQL, MongoDB, Supabase). Workflow Automation: n8n, Zapier." />
             </p>
           </div>
         </section>
