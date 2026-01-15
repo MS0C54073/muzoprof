@@ -724,30 +724,24 @@ export default function Home() {
             const skillsPerCol = Math.ceil(cvData.skills.length / 3);
             const itemHeight = 9 * lineHeight;
 
-            let maxSkillsInCol = 0;
-            // Determine the maximum number of skills in any column to calculate required height
-            for (let i = 0; i < 3; i++) {
-                 const colSkills = cvData.skills.slice(i * skillsPerCol, (i + 1) * skillsPerCol);
-                 maxSkillsInCol = Math.max(maxSkillsInCol, colSkills.length);
-            }
-            
-            // Check if the whole section fits, otherwise move to a new page
-            const sectionHeight = maxSkillsInCol * itemHeight;
-            checkPageBreak(sectionHeight);
-            
-            const startY = y; // The Y position where the section starts
-            let endY = startY;
+            const col1 = cvData.skills.slice(0, skillsPerCol);
+            const col2 = cvData.skills.slice(skillsPerCol, skillsPerCol * 2);
+            const col3 = cvData.skills.slice(skillsPerCol * 2);
 
-            for (let i = 0; i < 3; i++) {
-                const colSkills = cvData.skills.slice(i * skillsPerCol, (i + 1) * skillsPerCol);
-                let currentY = startY;
-                colSkills.forEach(skill => {
-                    doc.text(`•  ${skill}`, margin + i * colWidth, currentY);
-                    currentY += itemHeight;
-                });
-                endY = Math.max(endY, currentY); // Keep track of the tallest column's end
+            for (let i = 0; i < skillsPerCol; i++) {
+                checkPageBreak(itemHeight); // Check if a new row fits
+
+                if (col1[i]) {
+                    doc.text(`•  ${col1[i]}`, margin, y);
+                }
+                if (col2[i]) {
+                    doc.text(`•  ${col2[i]}`, margin + colWidth, y);
+                }
+                if (col3[i]) {
+                    doc.text(`•  ${col3[i]}`, margin + colWidth * 2, y);
+                }
+                y += itemHeight; // Move to the next line
             }
-            y = endY;
 
             // --- Work Experience ---
             y = addSectionTitle("Work Experience", y);
@@ -908,6 +902,8 @@ export default function Home() {
             data-ai-hint="profile picture"
             className="rounded-full mx-auto mb-6 shadow-lg border-4 border-primary object-cover"
             priority
+            id="profile-pic"
+            crossOrigin="anonymous"
           />
           <h1 className="text-4xl md:text-5xl font-bold text-primary">
             <TranslatedText text="Musonda Salimu" />
