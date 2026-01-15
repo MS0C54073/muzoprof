@@ -452,7 +452,7 @@ export default function Home() {
                     phone1: "+260966882901",
                     phone2: "+260979287496",
                     github: "github.com/MS0C54073",
-                    portfolio: "tinyurl.com/muzoslim",
+                    portfolio: "https://tinyurl.com/muzoslim",
                 },
                 summary: "A results-driven IT professional with a dynamic educational background spanning IT, Technological Entrepreneurship, Digital Economy Management, and the Development of Digital Twins. This diverse expertise is applied to software development, system administration, and AI, with a special focus on securely connecting large language models to data and conceptualizing advanced AI assistants.",
                 skills: [
@@ -918,7 +918,7 @@ export default function Home() {
                   <TranslatedText text="Service Cost" />
               </Link>
             </Button>
-            <Button onClick={() => generateCv('download')} size="lg" variant="secondary" disabled={isGenerating}>
+            <Button onClick={() => generateCv('download')} size="lg" variant="outline" disabled={isGenerating}>
                   {isGenerating ? <Loader2 className="mr-2 h-5 w-5 animate-spin" /> : <Download className="mr-2 h-5 w-5" />}
                   <TranslatedText text="Download CV" />
             </Button>
