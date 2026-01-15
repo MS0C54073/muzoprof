@@ -44,6 +44,7 @@ const skills = [
     { name: 'Cybersecurity', icon: <Shield className="h-6 w-6" /> },
     { name: 'System Admin', icon: <Server className="h-6 w-6" /> },
     { name: 'Networking', icon: <Network className="h-6 w-6" /> },
+    { name: 'Tableau/MS Excel', icon: <Code className="h-6 w-6" /> },
 ];
 
 const projects = [
@@ -457,7 +458,7 @@ export default function Home() {
                 skills: [
                     "Python & Django", "AI Development (Genkit)", "Next.js, React, TypeScript",
                     "Cybersecurity (SIEM, IDS)", "System & Network Admin", "Databases (SQL & NoSQL)",
-                    "Cloud (GCP, Firebase)", "CI/CD & Docker", "Project Management"
+                    "Cloud (GCP, Firebase)", "CI/CD & Docker", "Project Management", "Tableau/MS Excel"
                 ],
                 experience: [
                     {
@@ -901,7 +902,7 @@ export default function Home() {
             </Button>
           </p>
           <p className="max-w-2xl mx-auto mt-4 text-foreground">
-            <TranslatedText text="A results-driven IT professional with a dynamic educational background in IT, Technological Entrepreneurship and Innovation Management, Management in the Digital Economy, Development of Digital Twins, and Management of High-Tech Programs and Projects. This diverse expertise is applied to software development, system administration, and AI, with a special focus on securely connecting large language models to data and conceptualizing advanced AI assistants." />
+            <TranslatedText text="A results-driven IT professional with a dynamic educational background spanning IT, Technological Entrepreneurship, Digital Economy Management, and the Development of Digital Twins. This diverse expertise is applied to software development, system administration, and AI, with a special focus on securely connecting large language models to data and conceptualizing advanced AI assistants." />
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <Button asChild size="lg">
@@ -1329,4 +1330,5 @@ export default function Home() {
 }
 
     
+
 
