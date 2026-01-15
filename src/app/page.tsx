@@ -722,18 +722,32 @@ export default function Home() {
             doc.setFontSize(9);
             const colWidth = contentWidth / 3;
             const skillsPerCol = Math.ceil(cvData.skills.length / 3);
-            let maxSkillY = y;
+            const itemHeight = 9 * lineHeight;
+
+            let maxSkillsInCol = 0;
+            // Determine the maximum number of skills in any column to calculate required height
+            for (let i = 0; i < 3; i++) {
+                 const colSkills = cvData.skills.slice(i * skillsPerCol, (i + 1) * skillsPerCol);
+                 maxSkillsInCol = Math.max(maxSkillsInCol, colSkills.length);
+            }
+            
+            // Check if the whole section fits, otherwise move to a new page
+            const sectionHeight = maxSkillsInCol * itemHeight;
+            checkPageBreak(sectionHeight);
+            
+            const startY = y; // The Y position where the section starts
+            let endY = startY;
+
             for (let i = 0; i < 3; i++) {
                 const colSkills = cvData.skills.slice(i * skillsPerCol, (i + 1) * skillsPerCol);
-                let currentY = y;
+                let currentY = startY;
                 colSkills.forEach(skill => {
-                    checkPageBreak(9 * lineHeight);
                     doc.text(`•  ${skill}`, margin + i * colWidth, currentY);
-                    currentY += 9 * lineHeight;
+                    currentY += itemHeight;
                 });
-                maxSkillY = Math.max(maxSkillY, currentY);
+                endY = Math.max(endY, currentY); // Keep track of the tallest column's end
             }
-            y = maxSkillY;
+            y = endY;
 
             // --- Work Experience ---
             y = addSectionTitle("Work Experience", y);
