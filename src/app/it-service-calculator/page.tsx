@@ -22,7 +22,7 @@ const serviceConfig = {
   vatRate: 0.16, // 16%
   currencies: {
     USD: { name: 'US Dollar', symbol: '$', rate: 1 },
-    ZMW: { name: 'Zambian Kwacha', symbol: 'K', rate: 25.50 }, // Example rate, updatable
+    ZMW: { name: 'Zambian Kwacha', symbol: 'K', rate: 19.77 }, // Example rate, updatable
   },
   services: {
     lesson_enrollment: {
@@ -620,12 +620,5 @@ export default function ItServiceCalculatorPage() {
     </div>
   );
 }
-
-    
-    
-
-    
-
-    
 
     
