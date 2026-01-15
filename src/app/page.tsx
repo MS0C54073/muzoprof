@@ -7,7 +7,7 @@ import Link from 'next/link';
 import TranslatedText from '@/app/components/translated-text';
 import { Button } from '@/components/ui/button';
 import { SocialIcons } from '@/components/social-icons';
-import { ArrowRight, Award, BrainCircuit, Calendar, Code, Download, Eye, ExternalLink, Github, Globe, GraduationCap, Loader2, Mail, Network, Phone, Server, Shield, Smartphone, Star, Users, Check, UserCog, ChevronDown, Calculator, Terminal } from 'lucide-react';
+import { ArrowRight, Award, BrainCircuit, Calendar, Code, Database, Download, Eye, ExternalLink, Github, Globe, GraduationCap, Loader2, Mail, Network, Phone, Server, Shield, Smartphone, Star, Users, Check, UserCog, ChevronDown, Calculator, Terminal } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
@@ -40,7 +40,8 @@ const skills = [
     { name: 'Next.js', icon: <Globe className="h-6 w-6" /> },
     { name: 'TypeScript', icon: <Code className="h-6 w-6" /> },
     { name: 'React', icon: <Globe className="h-6 w-6" /> },
-    { name: 'n8n', icon: <BrainCircuit className="h-6 w-6" /> },
+    { name: 'Automation (n8n)', icon: <BrainCircuit className="h-6 w-6" /> },
+    { name: 'Databases', icon: <Database className="h-6 w-6" /> },
     { name: 'Cybersecurity', icon: <Shield className="h-6 w-6" /> },
     { name: 'System Admin', icon: <Server className="h-6 w-6" /> },
     { name: 'Networking', icon: <Network className="h-6 w-6" /> },
@@ -457,7 +458,9 @@ export default function Home() {
                 summary: "A results-driven IT professional with a dynamic educational background spanning IT, Technological Entrepreneurship, Digital Economy Management, and the Development of Digital Twins. This diverse expertise is applied to software development, system administration, and AI, with a special focus on securely connecting large language models to data and conceptualizing advanced AI assistants.",
                 skills: [
                     "Python & Django", "AI Development (Genkit)", "Next.js, React, TypeScript",
-                    "Cybersecurity (SIEM, IDS)", "System & Network Admin", "Databases (SQL & NoSQL)",
+                    "Cybersecurity (SIEM, IDS)", "System & Network Admin", 
+                    "Databases (SQL/NoSQL: PostgreSQL, MongoDB, Supabase)",
+                    "Data Automation (n8n, Zapier, APIs, Forms)",
                     "Cloud (GCP, Firebase)", "CI/CD & Docker", "Project Management", "Tableau/MS Excel"
                 ],
                 experience: [
@@ -946,6 +949,12 @@ export default function Home() {
               </div>
             ))}
           </div>
+           <div className="max-w-3xl mx-auto mt-12 text-center">
+            <h3 className="text-xl font-semibold text-foreground mb-3"><TranslatedText text="Data Tools & Automation" /></h3>
+            <p className="text-muted-foreground">
+                <TranslatedText text="Proficient with data collection via Google/Microsoft Forms, REST APIs, and webhooks; managing SQL/NoSQL databases (PostgreSQL, MongoDB, Supabase); and creating automated workflows with tools like n8n and Zapier." />
+            </p>
+          </div>
         </section>
 
         {/* Projects Section */}
@@ -1330,5 +1339,6 @@ export default function Home() {
 }
 
     
+
 
 
