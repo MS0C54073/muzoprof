@@ -863,7 +863,7 @@ export default function Home() {
             if (outputType === 'preview') {
                 doc.output('dataurlnewwindow');
             } else {
-                doc.save('Musonda_Salimu_CV.pdf');
+                doc.save('MuzoSaliCV.pdf');
             }
         } catch (error) {
             console.error("Error generating PDF:", error);
