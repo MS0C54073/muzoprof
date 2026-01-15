@@ -445,7 +445,7 @@ export default function Home() {
                     phone2: "+260 979 287 496",
                     github: "github.com/MS0C54073",
                 },
-                summary: "A results-driven IT professional with hands-on experience in software development, system administration, and AI. I am actively exploring how to securely connect LLMs to company data, leveraging no-code tools like N8N, WeWeb, and Supabase for rapid development, and conceptualizing advanced 'Neuro-secretary' AI assistants.",
+                summary: "A results-driven IT professional with a diverse education in Technological Entrepreneurship, Digital Economy Management, and the Development of Digital Twins. I apply this broad knowledge to software development, system administration, and AI, with a focus on securely connecting LLMs to data and conceptualizing advanced 'Neuro-secretary' AI assistants.",
                 skills: [
                     "Python & Django", "AI Development (Genkit)", "Next.js, React, TypeScript",
                     "Cybersecurity (SIEM, IDS)", "System & Network Admin", "Databases (SQL & NoSQL)",
@@ -841,7 +841,7 @@ export default function Home() {
             </Button>
           </p>
           <p className="max-w-2xl mx-auto mt-4 text-foreground">
-            <TranslatedText text="A results-driven IT professional with hands-on experience in software development, system administration, and AI. Actively exploring how to securely connect LLMs to company data, leveraging no-code tools like N8N, WeWeb, and Supabase for rapid development, and conceptualizing advanced 'Neuro-secretary' AI assistants." />
+            <TranslatedText text="A results-driven IT professional with a diverse education in Technological Entrepreneurship, Digital Economy Management, and the Development of Digital Twins. I apply this broad knowledge to software development, system administration, and AI, with a focus on securely connecting LLMs to data and conceptualizing advanced 'Neuro-secretary' AI assistants." />
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <Button asChild size="lg">
