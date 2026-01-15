@@ -45,6 +45,7 @@ const skills = [
     { name: 'System Admin', icon: <Server className="h-6 w-6" /> },
     { name: 'Networking', icon: <Network className="h-6 w-6" /> },
     { name: 'Tableau/MS Excel', icon: <Code className="h-6 w-6" /> },
+    { name: 'Design & Photo Editing', icon: <Eye className="h-6 w-6" /> },
 ];
 
 const projects = [
@@ -460,7 +461,8 @@ export default function Home() {
                     "Cybersecurity (SIEM, IDS)", "System & Network Admin", 
                     "Databases (SQL/NoSQL: PostgreSQL, MongoDB, Supabase)",
                     "Data Automation (n8n, Zapier, APIs, Forms)",
-                    "Cloud (GCP, Firebase)", "CI/CD & Docker", "Project Management", "Tableau/MS Excel"
+                    "Cloud (GCP, Firebase)", "CI/CD & Docker", "Project Management", "Tableau/MS Excel",
+                    "Design & Media (Photoshop, Premiere Pro, Canva)"
                 ],
                 experience: [
                     {
@@ -918,7 +920,7 @@ export default function Home() {
                   <TranslatedText text="Service Cost" />
               </Link>
             </Button>
-            <Button onClick={() => generateCv('download')} size="lg" variant="outline" disabled={isGenerating}>
+            <Button onClick={() => generateCv('download')} size="lg" variant="outline" className="hover:bg-accent hover:text-accent-foreground" disabled={isGenerating}>
                   {isGenerating ? <Loader2 className="mr-2 h-5 w-5 animate-spin" /> : <Download className="mr-2 h-5 w-5" />}
                   <TranslatedText text="Download CV" />
             </Button>
@@ -950,11 +952,19 @@ export default function Home() {
               </div>
             ))}
           </div>
-           <div className="max-w-3xl mx-auto mt-12 text-center">
-            <h3 className="text-xl font-semibold text-foreground mb-3"><TranslatedText text="Data Tools & Automation" /></h3>
-            <p className="text-muted-foreground">
-              <TranslatedText text="Data Collection: Google Forms, Microsoft Forms, REST APIs, webhooks. Databases: SQL/NoSQL (PostgreSQL, MySQL, MongoDB, Supabase). Workflow Automation: n8n, Zapier." />
-            </p>
+           <div className="max-w-3xl mx-auto mt-12 text-center space-y-4">
+            <div>
+              <h3 className="text-xl font-semibold text-foreground mb-2"><TranslatedText text="Data Tools & Automation" /></h3>
+              <p className="text-muted-foreground">
+                <TranslatedText text="Data Collection: Google Forms, Microsoft Forms, REST APIs, webhooks. Databases: SQL/NoSQL (PostgreSQL, MySQL, MongoDB, Supabase). Workflow Automation: n8n, Zapier." />
+              </p>
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold text-foreground mb-2"><TranslatedText text="Design & Media Production" /></h3>
+              <p className="text-muted-foreground">
+                <TranslatedText text="Creative Tools: Adobe Premiere Pro, Photoshop, Canva." />
+              </p>
+            </div>
           </div>
         </section>
 
