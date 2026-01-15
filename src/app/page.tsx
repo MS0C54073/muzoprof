@@ -441,11 +441,11 @@ export default function Home() {
                 jobTitle: "IT Professional | Software Developer | AI | Tutor",
                 contact: {
                     email: "musondasalim@gmail.com",
-                    phone1: "+260 977 288 260",
-                    phone2: "+260 979 287 496",
+                    phone1: "+260966882901",
+                    phone2: "+260979287496",
                     github: "github.com/MS0C54073",
                 },
-                summary: "A results-driven IT professional with a diverse education in Technological Entrepreneurship, Digital Economy Management, and the Development of Digital Twins. I apply this broad knowledge to software development, system administration, and AI, with a focus on securely connecting LLMs to data and conceptualizing advanced 'Neuro-secretary' AI assistants.",
+                summary: "A results-driven IT professional with a dynamic educational background spanning IT, Technological Entrepreneurship, Digital Economy Management, and the Development of Digital Twins. This diverse expertise is applied to software development, system administration, and AI, with a special focus on securely connecting large language models to data and conceptualizing advanced AI assistants.",
                 skills: [
                     "Python & Django", "AI Development (Genkit)", "Next.js, React, TypeScript",
                     "Cybersecurity (SIEM, IDS)", "System & Network Admin", "Databases (SQL & NoSQL)",
@@ -841,7 +841,7 @@ export default function Home() {
             </Button>
           </p>
           <p className="max-w-2xl mx-auto mt-4 text-foreground">
-            <TranslatedText text="A results-driven IT professional with a diverse education in Technological Entrepreneurship, Digital Economy Management, and the Development of Digital Twins. I apply this broad knowledge to software development, system administration, and AI, with a focus on securely connecting LLMs to data and conceptualizing advanced 'Neuro-secretary' AI assistants." />
+            <TranslatedText text="A results-driven IT professional with a dynamic educational background spanning IT, Technological Entrepreneurship, Digital Economy Management, and the Development of Digital Twins. This diverse expertise is applied to software development, system administration, and AI, with a special focus on securely connecting large language models to data and conceptualizing advanced AI assistants." />
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <Button asChild size="lg">
@@ -1158,17 +1158,13 @@ export default function Home() {
                 <a href="mailto:musondasalim@gmail.com">musondasalim@gmail.com</a>
               </Button>
               <div className="flex flex-col sm:flex-row gap-x-6 gap-y-2 text-muted-foreground">
-                <a href="tel:+260977288260" className="flex items-center gap-2 hover:text-primary">
+                <a href="tel:+260966882901" className="flex items-center gap-2 hover:text-primary">
                   <Phone className="h-4 w-4" />
-                  <span>+260977288260</span>
+                  <span>+260966882901</span>
                 </a>
                 <a href="tel:+260979287496" className="flex items-center gap-2 hover:text-primary">
                   <Phone className="h-4 w-4" />
                   <span>+260979287496</span>
-                </a>
-                <a href="tel:+260966882901" className="flex items-center gap-2 hover:text-primary">
-                  <Phone className="h-4 w-4" />
-                  <span>+260966882901</span>
                 </a>
               </div>
             </div>
