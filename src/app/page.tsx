@@ -45,8 +45,8 @@ const skills = [
     { name: 'C++', icon: <Code className="h-6 w-6" /> },
     { name: 'Flutter', icon: <Smartphone className="h-6 w-6" /> },
     { name: 'Databases (PostgreSQL, Supabase, MongoDB, Firebase)', icon: <Database className="h-6 w-6" /> },
-    { name: 'AI Development', icon: <BrainCircuit className="h-6 w-6" /> },
-    { name: 'Automation (n8n, Google AI Studio | Gemini API)', icon: <BrainCircuit className="h-6 w-6" /> },
+    { name: 'AI & Automation', icon: <BrainCircuit className="h-6 w-6" /> },
+    { name: 'Firebase Studio', icon: <BrainCircuit className="h-6 w-6" /> },
     { name: 'Cybersecurity', icon: <Shield className="h-6 w-6" /> },
     { name: 'System Admin', icon: <Server className="h-6 w-6" /> },
     { name: 'Networking', icon: <Network className="h-6 w-6" /> },
@@ -474,7 +474,7 @@ export default function Home() {
                     "Frameworks: React, Next.js, Node.js/Express, Django, Laravel, .NET",
                     "Mobile: Flutter",
                     "Databases: PostgreSQL (Supabase), MongoDB, Firebase",
-                    "AI & Automation: AI Development (Genkit), Data Automation (n8n, Gemini API)",
+                    "AI & Automation: AI Development (Genkit, Firebase Studio), Data Automation (n8n, Google AI Studio | Gemini API)",
                     "Ops & Security: SysAdmin, Networking, Cybersecurity (SIEM, IDS), Cloud (GCP, Firebase)",
                     "Tools: Docker, Git, Tableau (Foundational), Cursor 2.0",
                     "Business: Project Management, Microsoft 365/Office",
@@ -742,7 +742,7 @@ export default function Home() {
             doc.setFont('Helvetica', 'normal');
             doc.setTextColor(51, 65, 85); // slate-700
             
-            const skillsString = cvData.skills.map(skill => `• ${skill}`).join('      ');
+            const skillsString = cvData.skills.map(skill => `• ${skill}`).join(' ');
             const skillsLines = doc.splitTextToSize(skillsString, contentWidth);
             
             checkPageBreak(skillsLines.length * 9 * lineHeight);
