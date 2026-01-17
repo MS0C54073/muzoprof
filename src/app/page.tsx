@@ -35,12 +35,18 @@ import type { Order } from '@/lib/types';
 const skills = [
     { name: 'Data Analysis(Python & SQL)', icon: <Code className="h-6 w-6" /> },
     { name: 'Django', icon: <Server className="h-6 w-6" /> },
-    { name: 'AI Development', icon: <BrainCircuit className="h-6 w-6" /> },
-    { name: 'Next.js', icon: <Globe className="h-6 w-6" /> },
+    { name: 'Laravel (PHP)', icon: <Server className="h-6 w-6" /> },
+    { name: '.NET (C#)', icon: <Server className="h-6 w-6" /> },
+    { name: 'Javascript', icon: <Code className="h-6 w-6" /> },
     { name: 'TypeScript', icon: <Code className="h-6 w-6" /> },
     { name: 'React', icon: <Globe className="h-6 w-6" /> },
+    { name: 'Next.js', icon: <Globe className="h-6 w-6" /> },
+    { name: 'Node.js/Express', icon: <Server className="h-6 w-6" /> },
+    { name: 'C++', icon: <Code className="h-6 w-6" /> },
+    { name: 'Flutter', icon: <Smartphone className="h-6 w-6" /> },
+    { name: 'Databases (PostgreSQL, Supabase, MongoDB, Firebase)', icon: <Database className="h-6 w-6" /> },
+    { name: 'AI Development', icon: <BrainCircuit className="h-6 w-6" /> },
     { name: 'Automation (n8n, Google AI Studio | Gemini API)', icon: <BrainCircuit className="h-6 w-6" /> },
-    { name: 'Databases', icon: <Database className="h-6 w-6" /> },
     { name: 'Cybersecurity', icon: <Shield className="h-6 w-6" /> },
     { name: 'System Admin', icon: <Server className="h-6 w-6" /> },
     { name: 'Networking', icon: <Network className="h-6 w-6" /> },
@@ -204,6 +210,11 @@ const experiences = [
 ];
 
 const education = [
+     {
+        degree: "Master's of Science, Computer Science",
+        university: "Novosibirsk State Technical University | Novosibirsk, Russia",
+        duration: "Sep 2021 - Jun 2023",
+    },
     {
         degree: "Bachelor's of Science, Software and Administration of Information Systems",
         university: "Kursk State University | Kursk, Russia",
@@ -459,12 +470,15 @@ export default function Home() {
                 },
                 summary: "A results-driven IT professional with a dynamic educational background in IT, Technological Entrepreneurship and Innovation Management, Management in the Digital Economy, Development of Digital Twins, and Management of High Tech Programs and Projects. This diverse expertise is applied to software development, system administration, and AI, with a special focus on securely connecting large language models to data and conceptualizing advanced AI assistants.",
                 skills: [
-                    "Python & Django", "AI Development (Genkit)", "Next.js, React, TypeScript",
-                    "Cybersecurity (SIEM, IDS)", "System & Network Admin", 
-                    "Databases (SQL/NoSQL: PostgreSQL, MongoDB, Supabase)",
-                    "Data Automation (n8n, Zapier, Google AI Studio | Gemini API)",
-                    "Cloud (GCP, Firebase)", "CI/CD & Docker", "Project Management", "Tableau (Foundational)",
-                    "Design & Media (Photoshop, Premiere Pro, Canva)", "Microsoft 365/Office", "Cursor 2.0"
+                    "Languages: Python, JavaScript, TypeScript, C++, C#, PHP, SQL",
+                    "Frameworks: React, Next.js, Node.js/Express, Django, Laravel, .NET",
+                    "Mobile: Flutter",
+                    "Databases: PostgreSQL (Supabase), MongoDB, Firebase",
+                    "AI & Automation: AI Development (Genkit), Data Automation (n8n, Gemini API)",
+                    "Ops & Security: SysAdmin, Networking, Cybersecurity (SIEM, IDS), Cloud (GCP, Firebase)",
+                    "Tools: Docker, Git, Tableau (Foundational), Cursor 2.0",
+                    "Business: Project Management, Microsoft 365/Office",
+                    "Creative: Design & Media (Photoshop, Premiere Pro, Canva)",
                 ],
                 experience: [
                     {
@@ -566,6 +580,11 @@ export default function Home() {
                     },
                 ].sort((a, b) => new Date(b.duration.split(' – ')[1] === 'Present' ? Date.now() : b.duration.split(' – ')[1] || 0).getTime() - new Date(a.duration.split(' – ')[1] === 'Present' ? Date.now() : a.duration.split(' – ')[1] || 0).getTime()),
                 education: [
+                    {
+                        degree: "Master's of Science, Computer Science",
+                        university: "Novosibirsk State Technical University, Russia",
+                        duration: "Sep 2021 - Jun 2023",
+                    },
                     {
                         degree: "Bachelor's of Science, Software and Administration of Information Systems",
                         university: "Kursk State University, Russia",
