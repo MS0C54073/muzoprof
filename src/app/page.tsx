@@ -742,9 +742,9 @@ export default function Home() {
             y = addSectionTitle("Core Competencies", y);
             doc.setFontSize(9);
             doc.setFont('Helvetica', 'normal');
-            doc.setTextColor(51, 65, 85); // slate-700
+            doc.setTextColor(51, 65, 85);
             
-            const skillsString = cvData.skills.map(skill => `• ${skill}`).join(' ');
+            const skillsString = cvData.skills.map(skill => `• ${skill}`).join('  ');
             const skillsLines = doc.splitTextToSize(skillsString, contentWidth);
             
             checkPageBreak(skillsLines.length * 9 * lineHeight);
@@ -999,11 +999,13 @@ export default function Home() {
           <h2 className="text-3xl font-bold text-center mb-12"><TranslatedText text="Technical Skills" /></h2>
           <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
             {skills.map(skill => (
-              <div key={skill.name} className="flex flex-col items-center justify-start text-center gap-2 h-24">
+              <div key={skill.name} className="flex flex-col items-center text-center gap-2">
                 <div className="w-16 h-16 bg-background rounded-full flex items-center justify-center shadow-md text-primary flex-shrink-0">
                   {skill.icon}
                 </div>
-                <p className="font-semibold text-foreground text-sm leading-tight px-1"><TranslatedText text={skill.name} /></p>
+                <p className="font-semibold text-foreground text-sm leading-tight px-1 h-14 flex items-center justify-center">
+                    <TranslatedText text={skill.name} />
+                </p>
               </div>
             ))}
           </div>
