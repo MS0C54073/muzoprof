@@ -211,9 +211,10 @@ const experiences = [
 
 const education = [
      {
-        degree: "Master's of Science, Computer Science",
-        university: "Novosibirsk State Technical University | Novosibirsk, Russia",
-        duration: "Sep 2021 - Jun 2023",
+        degree: "Master's of Science, Informatics and Computer Engineering",
+        university: "Novosibirsk State Technical University",
+        duration: "Sep 2022 - Jul 2024",
+        note: "Awaiting Official Translation and Certification in Zambia."
     },
     {
         degree: "Bachelor's of Science, Software and Administration of Information Systems",
@@ -581,9 +582,10 @@ export default function Home() {
                 ].sort((a, b) => new Date(b.duration.split(' – ')[1] === 'Present' ? Date.now() : b.duration.split(' – ')[1] || 0).getTime() - new Date(a.duration.split(' – ')[1] === 'Present' ? Date.now() : a.duration.split(' – ')[1] || 0).getTime()),
                 education: [
                     {
-                        degree: "Master's of Science, Computer Science",
-                        university: "Novosibirsk State Technical University, Russia",
-                        duration: "Sep 2021 - Jun 2023",
+                        degree: "Master's of Science, Informatics and Computer Engineering",
+                        university: "Novosibirsk State Technical University",
+                        duration: "Sep 2022 - Jul 2024",
+                        details: "Awaiting Official Translation and Certification in Zambia."
                     },
                     {
                         degree: "Bachelor's of Science, Software and Administration of Information Systems",
