@@ -5,7 +5,7 @@ import React, { createContext, useContext, useState, useEffect, useCallback, Rea
 import { translateBatch } from '@/ai/flows/translate-batch-flow';
 import type { TranslateBatchInput } from '@/ai/flows/translate-batch.types';
 
-type LanguageCode = 'en' | 'ru';
+export type LanguageCode = 'en' | 'ru';
 
 // A Set is used to efficiently track unique strings that need translation.
 type TranslationRequestContext = Set<string>;

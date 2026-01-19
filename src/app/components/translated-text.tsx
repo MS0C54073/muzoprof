@@ -1,6 +1,7 @@
 
 'use client';
 
+import { useTranslatedText } from '@/app/translator';
 import type { FC } from 'react';
 
 interface TranslatedTextProps {
@@ -8,7 +9,8 @@ interface TranslatedTextProps {
 }
 
 const TranslatedText: FC<TranslatedTextProps> = ({ text }) => {
-  return <>{text}</>;
+  const translatedText = useTranslatedText(text);
+  return <>{translatedText}</>;
 };
 
 export default TranslatedText;

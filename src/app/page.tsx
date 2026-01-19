@@ -471,15 +471,15 @@ export default function Home() {
                 },
                 summary: "A results-driven IT professional with a dynamic educational background in IT, Technological Entrepreneurship and Innovation Management, Management in the Digital Economy, Development of Digital Twins, and Management of High Tech Programs and Projects. This diverse expertise is applied to software development, system administration, and AI, with a special focus on securely connecting large language models to data and conceptualizing advanced AI assistants.",
                 skills: [
-                    "Languages: Python, JavaScript, TypeScript, C++, C#, PHP, SQL",
-                    "Frameworks: React, Next.js, Node.js/Express, Django, Laravel, .NET",
-                    "Mobile: Flutter",
-                    "Databases: PostgreSQL (Supabase), MongoDB, Firebase",
-                    "AI & Automation: AI Development (Genkit, Firebase Studio), Data Automation (n8n, Google AI Studio | Gemini API)",
-                    "Ops & Security: SysAdmin, Networking, Cybersecurity (SIEM, IDS), Cloud (GCP, Firebase)",
-                    "Tools: Docker, Git, Tableau (Foundational), Cursor 2.0",
-                    "Business: Project Management, Microsoft 365/Office",
-                    "Creative: Design & Media (Photoshop, Premiere Pro, Canva)",
+                    "• Languages: Python, JavaScript, TypeScript, C++, C#, PHP, SQL",
+                    "• Frameworks: React, Next.js, Node.js/Express, Django, Laravel, .NET",
+                    "• Mobile: Flutter",
+                    "• Databases: PostgreSQL (Supabase), MongoDB, Firebase",
+                    "• AI & Automation: AI Development (Genkit, Firebase Studio), Data Automation (n8n, Google AI Studio | Gemini API)",
+                    "• Ops & Security: SysAdmin, Networking, Cybersecurity (SIEM, IDS), Cloud (GCP, Firebase)",
+                    "• Tools: Docker, Git, Tableau (Foundational), Cursor 2.0",
+                    "• Business: Project Management, Microsoft 365/Office",
+                    "• Creative: Design & Media (Photoshop, Premiere Pro, Canva)",
                 ],
                 experience: [
                     {
@@ -744,8 +744,7 @@ export default function Home() {
             doc.setFont('Helvetica', 'normal');
             doc.setTextColor(51, 65, 85);
             
-            const skillsString = cvData.skills.map(skill => `• ${skill}`).join('  ');
-            const skillsLines = doc.splitTextToSize(skillsString, contentWidth);
+            const skillsLines = doc.splitTextToSize(cvData.skills.join('\n'), contentWidth);
             
             checkPageBreak(skillsLines.length * 9 * lineHeight);
             doc.text(skillsLines, margin, y);
@@ -1128,13 +1127,13 @@ export default function Home() {
                   <AccordionTrigger>
                     <div className="text-left">
                       <h3 className="text-xl font-bold text-accent"><TranslatedText text={exp.title}/></h3>
-                      <p className="font-semibold text-foreground">{exp.company}</p>
-                      <p className="text-sm text-muted-foreground">{exp.duration}</p>
+                      <p className="font-semibold text-foreground"><TranslatedText text={exp.company}/></p>
+                      <p className="text-sm text-muted-foreground"><TranslatedText text={exp.duration}/></p>
                     </div>
                   </AccordionTrigger>
                   <AccordionContent>
                     <ul className="list-disc list-inside text-muted-foreground space-y-1 pl-4">
-                      {exp.details.map((d, i) => <li key={i}>{d}</li>)}
+                      {exp.details.map((d, i) => <li key={i}><TranslatedText text={d}/></li>)}
                     </ul>
                   </AccordionContent>
                 </AccordionItem>
@@ -1165,11 +1164,11 @@ export default function Home() {
             {(showAllEducation ? education : education.slice(0, initialEducationToShow)).map((edu, index) => (
               <div key={index} className="mb-12 relative">
                 <div className="absolute left-[-34px] top-1.5 w-4 h-4 bg-primary rounded-full border-4 border-background"></div>
-                <p className="text-sm text-muted-foreground">{edu.duration}</p>
-                <h3 className="text-xl font-bold text-accent">{edu.degree}</h3>
-                <p className="font-semibold text-foreground">{edu.university}</p>
+                <p className="text-sm text-muted-foreground"><TranslatedText text={edu.duration}/></p>
+                <h3 className="text-xl font-bold text-accent"><TranslatedText text={edu.degree}/></h3>
+                <p className="font-semibold text-foreground"><TranslatedText text={edu.university}/></p>
                 {edu.note && (
-                  <p className="text-sm text-muted-foreground italic mt-1">{edu.note}</p>
+                  <p className="text-sm text-muted-foreground italic mt-1"><TranslatedText text={edu.note}/></p>
                 )}
               </div>
             ))}
@@ -1194,9 +1193,9 @@ export default function Home() {
                           <div className="flex items-start gap-4">
                               <Award className="h-8 w-8 text-accent flex-shrink-0 mt-1" />
                               <div>
-                                  <CardTitle className="text-lg text-accent">{award.title}</CardTitle>
+                                  <CardTitle className="text-lg text-accent"><TranslatedText text={award.title}/></CardTitle>
                                   <CardDescription className="mt-1">
-                                      <TranslatedText text="Awarded by "/> <strong>{award.issuer}</strong> - {award.date}
+                                      <TranslatedText text="Awarded by "/> <strong><TranslatedText text={award.issuer}/></strong> - <TranslatedText text={award.date}/>
                                   </CardDescription>
                               </div>
                           </div>
@@ -1220,11 +1219,11 @@ export default function Home() {
               {certifications.slice(0, showAllCerts ? certifications.length : initialCertsToShow).map((cert, index) => (
                   <Card key={index} className="bg-card/50">
                       <CardHeader>
-                          <CardTitle className="text-lg text-accent">{cert.title}</CardTitle>
+                          <CardTitle className="text-lg text-accent"><TranslatedText text={cert.title}/></CardTitle>
                       </CardHeader>
                       <CardContent>
                           <p className="text-sm text-muted-foreground">
-                              <TranslatedText text="Issued by "/> <strong>{cert.issuer}</strong> - {cert.date}
+                              <TranslatedText text="Issued by "/> <strong><TranslatedText text={cert.issuer}/></strong> - <TranslatedText text={cert.date}/>
                           </p>
                           {cert.credentialId && (
                               <p className="text-xs text-muted-foreground mt-1">
@@ -1235,7 +1234,7 @@ export default function Home() {
                               <div className="mt-2">
                                   <h4 className="text-xs font-semibold text-foreground mb-1"><TranslatedText text="Skills:"/></h4>
                                   <div className="flex flex-wrap gap-1">
-                                      {cert.skills.map(skill => <Badge key={skill} variant="secondary">{skill}</Badge>)}
+                                      {cert.skills.map(skill => <Badge key={skill} variant="secondary"><TranslatedText text={skill}/></Badge>)}
                                   </div>
                               </div>
                           )}
@@ -1260,9 +1259,9 @@ export default function Home() {
               {references.map((ref, index) => (
                   <Card key={index} className="flex flex-col bg-card/80">
                       <CardHeader>
-                          <CardTitle className="text-xl text-primary">{ref.name}</CardTitle>
+                          <CardTitle className="text-xl text-primary"><TranslatedText text={ref.name}/></CardTitle>
                           <CardDescription>
-                              {ref.title} at {ref.company}
+                              <TranslatedText text={ref.title}/> at <TranslatedText text={ref.company}/>
                           </CardDescription>
                       </CardHeader>
                       <CardContent className="flex-grow space-y-2">

@@ -30,6 +30,8 @@ import { Menu, Calculator, ChevronDown } from 'lucide-react';
 import TranslatedText from './components/translated-text';
 import { FloatingCalculatorButton } from './components/floating-calculator-button';
 import { useState } from 'react';
+import { TranslationProvider } from './translator';
+import { LanguageSelector } from './components/language-selector';
 
 
 const inter = Inter({
@@ -135,6 +137,7 @@ export default function RootLayout({
         >
           <BackgroundThemeProvider>
             <ViewModeProvider>
+              <TranslationProvider>
                 <DynamicBackground />
                 
                 <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm">
@@ -145,7 +148,8 @@ export default function RootLayout({
                       
                       {/* --- Desktop Nav & Controls --- */}
                       <div className="hidden lg:flex items-center gap-2">
-                          <nav className={isNavDropdownOpen ? 'hidden' : 'flex'}>
+                          <nav className={isNavDropdownOpen ? 'hidden' : 'flex items-center'}>
+                            <LanguageSelector />
                             <ModeToggle />
                             <ViewModeToggle />
                             <BackgroundThemeToggle />
@@ -170,7 +174,8 @@ export default function RootLayout({
                       </div>
 
                       {/* --- Mobile & Tablet Nav --- */}
-                      <div className="lg:hidden">
+                      <div className="lg:hidden flex items-center gap-2">
+                          <LanguageSelector />
                           <Sheet>
                               <SheetTrigger asChild>
                                   <Button variant="ghost" size="icon">
@@ -216,6 +221,7 @@ export default function RootLayout({
                   </main>
                 </ViewModeWrapper>
                 <Toaster />
+              </TranslationProvider>
             </ViewModeProvider>
           </BackgroundThemeProvider>
         </ThemeProvider>
