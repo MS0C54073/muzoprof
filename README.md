@@ -20,6 +20,13 @@ The portfolio covers sections on my work experience, education, technical skills
 - **Firebase**: Used for backend services like authentication and data storage.
 - **Genkit (Google AI)**: Powers the AI translation capabilities.
 
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your `.env` file:
+
+`GOOGLE_GENAI_API_KEY`: Your API key for Google's Generative AI. You can get one from [Google AI Studio](https://aistudio.google.com/app/apikey).
+`PROMPT_TRANSLATE_BATCH`: The prompt template used for batch translations. A default value is provided in the `.env` file.
+
 ## Live Version
 
 You can view the live version of this project at: [https://tinyurl.com/muzoslim](https://tinyurl.com/muzoslim)
