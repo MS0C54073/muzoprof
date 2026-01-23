@@ -46,6 +46,8 @@ const skills = [
     { name: 'Databases (PostgreSQL, Supabase, MongoDB, Firebase)', icon: <Database className="h-6 w-6" /> },
     { name: 'AI & Automation', icon: <BrainCircuit className="h-6 w-6" /> },
     { name: 'Firebase Studio', icon: <BrainCircuit className="h-6 w-6" /> },
+    { name: 'Google AI Studio', icon: <BrainCircuit className="h-6 w-6" /> },
+    { name: 'RAG', icon: <BrainCircuit className="h-6 w-6" /> },
     { name: 'Cybersecurity', icon: <Shield className="h-6 w-6" /> },
     { name: 'System Admin', icon: <Server className="h-6 w-6" /> },
     { name: 'Data Analysis(Python & SQL)', icon: <Code className="h-6 w-6" /> },
@@ -205,17 +207,6 @@ const experiences = [
             "Provided services such as encoding, printing, photocopying, typing, and downloading.",
             "Troubleshooted various computer applications, hardware, and software issues.",
             "Provided excellent customer care and maintained store records and inventories."
-        ]
-    },
-    {
-        title: "Freelance Tutor",
-        company: "Self-Employed / Various Institutions",
-        duration: "Dec 2019 – Present",
-        details: [
-            "Providing online and in-person instruction in programming and English for children, teenagers, and adults.",
-            "Teaching Python, Roblox Studio, Unity, Figma, and Business & IT English.",
-            "Delivering structured lessons, assessing learner progress, and developing tailored educational materials.",
-            "Worked with EF Education First, Center of Modern English, Oxford Linguistic Centre (Novosibirsk), and FillCamp."
         ]
     },
 ];
@@ -485,7 +476,7 @@ export default function Home() {
                     "• Languages: Python, JavaScript, TypeScript, C++, C#, PHP, SQL",
                     "• Frameworks: React, Next.js, Node.js/Express, Django, Laravel, .NET, Flutter",
                     "• Databases: PostgreSQL (Supabase), MongoDB, Firebase",
-                    "• AI & Automation: AI Development (Genkit, Firebase Studio, Google AI Studio | Gemini API), Data Automation (n8n)",
+                    "• AI & Automation: AI Development (Genkit, Firebase Studio, Google AI Studio | Gemini API, RAG), Data Automation (n8n)",
                     "• Ops & Security: SysAdmin, Networking, Cybersecurity (SIEM, IDS), Cloud (GCP, Firebase)",
                     "• Tools: Docker, Git, Tableau (Foundational), Cursor 2.0",
                     "• Business: Project Management, Microsoft 365/Office",
@@ -594,10 +585,7 @@ export default function Home() {
                         company: "Self-Employed / Various Institutions",
                         duration: "Dec 2019 – Present",
                         details: [
-                            "Providing online and in-person instruction in programming and English for children, teenagers, and adults.",
-                            "Teaching Python, Roblox Studio, Unity, Figma, and Business & IT English.",
-                            "Delivering structured lessons, assessing learner progress, and developing tailored educational materials.",
-                            "Worked with EF Education First, Center of Modern English, Oxford Linguistic Centre (Novosibirsk), and FillCamp."
+                            "Providing online and in-person instruction in programming and English for children, teenagers, and adults. Teaching Python, Roblox Studio, Unity, Figma, and Business & IT English. Delivering structured lessons, assessing learner progress, and developing tailored educational materials.", "Worked with EF Education First, Center of Modern English, Oxford Linguistic Centre (Novosibirsk), and FillCamp."
                         ]
                     },
                 ].sort((a, b) => new Date(b.duration.split(' – ')[1] === 'Present' ? Date.now() : b.duration.split(' – ')[1] || 0).getTime() - new Date(a.duration.split(' – ')[1] === 'Present' ? Date.now() : a.duration.split(' – ')[1] || 0).getTime()),
@@ -1303,8 +1291,7 @@ export default function Home() {
               ))}
           </div>
         </section>
-
-        {/* Contact Section */}
+        
         <section id="contact" className="py-20 border-t">
           <div className="text-center max-w-2xl mx-auto">
             <h2 className="text-3xl font-bold"><TranslatedText text="Let's Connect" /></h2>
