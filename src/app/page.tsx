@@ -33,8 +33,6 @@ import type { Order } from '@/lib/types';
 
 
 const skills = [
-    { name: 'Data Analysis(Python & SQL)', icon: <Code className="h-6 w-6" /> },
-    { name: 'Django', icon: <Server className="h-6 w-6" /> },
     { name: 'Laravel (PHP)', icon: <Server className="h-6 w-6" /> },
     { name: '.NET (C#)', icon: <Server className="h-6 w-6" /> },
     { name: 'Javascript', icon: <Code className="h-6 w-6" /> },
@@ -44,12 +42,14 @@ const skills = [
     { name: 'Node.js/Express', icon: <Server className="h-6 w-6" /> },
     { name: 'C++', icon: <Code className="h-6 w-6" /> },
     { name: 'Flutter', icon: <Smartphone className="h-6 w-6" /> },
+    { name: 'Databases (PostgreSQL, Supabase, MongoDB, Firebase)', icon: <Database className="h-6 w-6" /> },
     { name: 'Networking', icon: <Network className="h-6 w-6" /> },
     { name: 'AI & Automation', icon: <BrainCircuit className="h-6 w-6" /> },
     { name: 'Firebase Studio', icon: <BrainCircuit className="h-6 w-6" /> },
     { name: 'Cybersecurity', icon: <Shield className="h-6 w-6" /> },
     { name: 'System Admin', icon: <Server className="h-6 w-6" /> },
-    { name: 'Databases (PostgreSQL, Supabase, MongoDB, Firebase)', icon: <Database className="h-6 w-6" /> },
+    { name: 'Data Analysis(Python & SQL)', icon: <Code className="h-6 w-6" /> },
+    { name: 'Django', icon: <Server className="h-6 w-6" /> },
     { name: 'Tableau (Foundational)', icon: <Code className="h-6 w-6" /> },
     { name: 'Design & Photo Editing', icon: <Eye className="h-6 w-6" /> },
     { name: 'Microsoft 365/Office', icon: <UserCog className="h-6 w-6" /> },
@@ -110,6 +110,17 @@ const projects = [
 ];
 
 const experiences = [
+    {
+        title: "Freelance Tutor",
+        company: "Self-Employed / Various Institutions",
+        duration: "Dec 2019 – Present",
+        details: [
+            "Provided online and in-person instruction in programming and English for children, teenagers, and adults.",
+            "Taught Python, Roblox Studio, Unity, Figma, and Business & IT English.",
+            "Delivered structured lessons, assessed learner progress, and developed tailored educational materials.",
+            "Worked with EF Education First, Center of Modern English, Oxford Linguistic Centre (Novosibirsk), and FillCamp."
+        ]
+    },
     {
         title: "AI Content Evaluation Specialist (Project-Based)",
         company: "Invisible Technologies & Outlier",
@@ -472,16 +483,26 @@ export default function Home() {
                 summary: "A results-driven IT professional with a dynamic educational background in IT, Technological Entrepreneurship and Innovation Management, Management in the Digital Economy, Development of Digital Twins, and Management of High Tech Programs and Projects. This diverse expertise is applied to software development, system administration, and AI, with a special focus on securely connecting large language models to data and conceptualizing advanced AI assistants.",
                 skills: [
                     "• Languages: Python, JavaScript, TypeScript, C++, C#, PHP, SQL",
-                    "• Frameworks: React, Next.js, Node.js/Express, Django, Laravel, .NET",
-                    "• Mobile: Flutter",
+                    "• Frameworks: React, Next.js, Node.js/Express, Django, Laravel, .NET, Flutter",
                     "• Databases: PostgreSQL (Supabase), MongoDB, Firebase",
-                    "• AI & Automation: AI Development (Genkit, Firebase Studio), Data Automation (n8n, Google AI Studio | Gemini API)",
+                    "• AI & Automation: AI Development (Genkit, Firebase Studio, Google AI Studio | Gemini API), Data Automation (n8n)",
                     "• Ops & Security: SysAdmin, Networking, Cybersecurity (SIEM, IDS), Cloud (GCP, Firebase)",
                     "• Tools: Docker, Git, Tableau (Foundational), Cursor 2.0",
                     "• Business: Project Management, Microsoft 365/Office",
                     "• Creative: Design & Media (Photoshop, Premiere Pro, Canva)",
                 ],
                 experience: [
+                    {
+                        title: "Freelance Tutor",
+                        company: "Self-Employed / Various Institutions",
+                        duration: "Dec 2019 – Present",
+                        details: [
+                            "Provided online and in-person instruction in programming and English for children, teenagers, and adults.",
+                            "Taught Python, Roblox Studio, Unity, Figma, and Business & IT English.",
+                            "Delivered structured lessons, assessed learner progress, and developed tailored educational materials.",
+                            "Worked with EF Education First, Center of Modern English, Oxford Linguistic Centre (Novosibirsk), and FillCamp."
+                        ]
+                    },
                     {
                         title: "AI Content Evaluation Specialist (Project-Based)",
                         company: "Invisible Technologies & Outlier",
@@ -744,8 +765,8 @@ export default function Home() {
             doc.setFont('Helvetica', 'normal');
             doc.setTextColor(51, 65, 85);
             
-            const skillsLines = doc.splitTextToSize(cvData.skills.join('\n'), contentWidth);
-            
+            const skillsText = cvData.skills.join("\n");
+            const skillsLines = doc.splitTextToSize(skillsText, contentWidth);
             checkPageBreak(skillsLines.length * 9 * lineHeight);
             doc.text(skillsLines, margin, y);
             y += (skillsLines.length * 9 * lineHeight) + 4;
@@ -1002,7 +1023,7 @@ export default function Home() {
                 <div className="w-16 h-16 bg-background rounded-full flex items-center justify-center shadow-md text-primary flex-shrink-0">
                   {skill.icon}
                 </div>
-                <p className="font-semibold text-foreground text-sm leading-tight px-1 h-14 flex items-center justify-center">
+                <p className="font-semibold text-foreground text-sm leading-tight px-1 flex items-center justify-center h-10">
                     <TranslatedText text={skill.name} />
                 </p>
               </div>
