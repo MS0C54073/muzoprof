@@ -42,8 +42,8 @@ const skills = [
     { name: 'Node.js/Express', icon: <Server className="h-6 w-6" /> },
     { name: 'C++', icon: <Code className="h-6 w-6" /> },
     { name: 'Flutter', icon: <Smartphone className="h-6 w-6" /> },
-    { name: 'Databases (PostgreSQL, Supabase, MongoDB, Firebase)', icon: <Database className="h-6 w-6" /> },
     { name: 'Networking', icon: <Network className="h-6 w-6" /> },
+    { name: 'Databases (PostgreSQL, Supabase, MongoDB, Firebase)', icon: <Database className="h-6 w-6" /> },
     { name: 'AI & Automation', icon: <BrainCircuit className="h-6 w-6" /> },
     { name: 'Firebase Studio', icon: <BrainCircuit className="h-6 w-6" /> },
     { name: 'Cybersecurity', icon: <Shield className="h-6 w-6" /> },
@@ -115,10 +115,10 @@ const experiences = [
         company: "Self-Employed / Various Institutions",
         duration: "Dec 2019 – Present",
         details: [
-            "Provided online and in-person instruction in programming and English for children, teenagers, and adults.",
-            "Taught Python, Roblox Studio, Unity, Figma, and Business & IT English.",
-            "Delivered structured lessons, assessed learner progress, and developed tailored educational materials.",
-            "Worked with EF Education First, Center of Modern English, Oxford Linguistic Centre (Novosibirsk), and FillCamp."
+            "Providing online and in-person instruction in programming and English for children, teenagers, and adults.",
+            "Teaching Python, Roblox Studio, Unity, Figma, and Business & IT English.",
+            "Delivering structured lessons, assessing learner progress, and developing tailored educational materials.",
+            "Working with EF Education First, Center of Modern English, Oxford Linguistic Centre (Novosibirsk), and FillCamp."
         ]
     },
     {
@@ -497,10 +497,10 @@ export default function Home() {
                         company: "Self-Employed / Various Institutions",
                         duration: "Dec 2019 – Present",
                         details: [
-                            "Provided online and in-person instruction in programming and English for children, teenagers, and adults.",
-                            "Taught Python, Roblox Studio, Unity, Figma, and Business & IT English.",
-                            "Delivered structured lessons, assessed learner progress, and developed tailored educational materials.",
-                            "Worked with EF Education First, Center of Modern English, Oxford Linguistic Centre (Novosibirsk), and FillCamp."
+                            "Providing online and in-person instruction in programming and English for children, teenagers, and adults.",
+                            "Teaching Python, Roblox Studio, Unity, Figma, and Business & IT English.",
+                            "Delivering structured lessons, assessing learner progress, and developing tailored educational materials.",
+                            "Working with EF Education First, Center of Modern English, Oxford Linguistic Centre (Novosibirsk), and FillCamp."
                         ]
                     },
                     {
@@ -765,7 +765,7 @@ export default function Home() {
             doc.setFont('Helvetica', 'normal');
             doc.setTextColor(51, 65, 85);
             
-            const skillsText = cvData.skills.join("\n");
+            const skillsText = cvData.skills.join(" ");
             const skillsLines = doc.splitTextToSize(skillsText, contentWidth);
             checkPageBreak(skillsLines.length * 9 * lineHeight);
             doc.text(skillsLines, margin, y);
