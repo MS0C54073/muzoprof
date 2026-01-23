@@ -89,12 +89,13 @@ const serviceConfig = {
       ],
     },
     mobile_app_development: {
-      name: 'Mobile App Development',
+      name: 'Mobile App Development (Cross-Platform)',
       baseRate: 900,
       unit: 'project',
       features: [
-        { id: 'ios', name: 'iOS App', price: 500 },
-        { id: 'android', name: 'Android App', price: 500 },
+        { id: 'platform_ios', name: 'iOS App', price: 250 },
+        { id: 'platform_android', name: 'Android App', price: 250 },
+        { id: 'platform_web', name: 'Web App (PWA)', price: 400 },
         { id: 'push_notifications', name: 'Push Notifications', price: 150 },
         { id: 'in_app_purchases', name: 'In-App Purchases', price: 200 },
       ],
@@ -632,4 +633,6 @@ export default function ItServiceCalculatorPage() {
 }
 
     
+    
+
     
