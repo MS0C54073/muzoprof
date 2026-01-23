@@ -42,8 +42,8 @@ const skills = [
     { name: 'Node.js/Express', icon: <Server className="h-6 w-6" /> },
     { name: 'C++', icon: <Code className="h-6 w-6" /> },
     { name: 'Flutter', icon: <Smartphone className="h-6 w-6" /> },
-    { name: 'Databases (PostgreSQL, Supabase, MongoDB, Firebase)', icon: <Database className="h-6 w-6" /> },
     { name: 'Networking', icon: <Network className="h-6 w-6" /> },
+    { name: 'Databases (PostgreSQL, Supabase, MongoDB, Firebase)', icon: <Database className="h-6 w-6" /> },
     { name: 'AI & Automation', icon: <BrainCircuit className="h-6 w-6" /> },
     { name: 'Firebase Studio', icon: <BrainCircuit className="h-6 w-6" /> },
     { name: 'Cybersecurity', icon: <Shield className="h-6 w-6" /> },
@@ -110,17 +110,6 @@ const projects = [
 ];
 
 const experiences = [
-    {
-        title: "Freelance Tutor",
-        company: "Self-Employed / Various Institutions",
-        duration: "Dec 2019 – Present",
-        details: [
-            "Providing online and in-person instruction in programming and English for children, teenagers, and adults.",
-            "Teaching Python, Roblox Studio, Unity, Figma, and Business & IT English.",
-            "Delivering structured lessons, assessing learner progress, and developing tailored educational materials.",
-            "Worked with EF Education First, Center of Modern English, Oxford Linguistic Centre (Novosibirsk), and FillCamp."
-        ]
-    },
     {
         title: "AI Content Evaluation Specialist (Project-Based)",
         company: "Invisible Technologies & Outlier",
@@ -217,7 +206,18 @@ const experiences = [
             "Troubleshooted various computer applications, hardware, and software issues.",
             "Provided excellent customer care and maintained store records and inventories."
         ]
-    }
+    },
+    {
+        title: "Freelance Tutor",
+        company: "Self-Employed / Various Institutions",
+        duration: "Dec 2019 – Present",
+        details: [
+            "Providing online and in-person instruction in programming and English for children, teenagers, and adults.",
+            "Teaching Python, Roblox Studio, Unity, Figma, and Business & IT English.",
+            "Delivering structured lessons, assessing learner progress, and developing tailored educational materials.",
+            "Worked with EF Education First, Center of Modern English, Oxford Linguistic Centre (Novosibirsk), and FillCamp."
+        ]
+    },
 ];
 
 const education = [
@@ -493,17 +493,6 @@ export default function Home() {
                 ],
                 experience: [
                     {
-                        title: "Freelance Tutor",
-                        company: "Self-Employed / Various Institutions",
-                        duration: "Dec 2019 – Present",
-                        details: [
-                            "Providing online and in-person instruction in programming and English for children, teenagers, and adults.",
-                            "Teaching Python, Roblox Studio, Unity, Figma, and Business & IT English.",
-                            "Delivering structured lessons, assessing learner progress, and developing tailored educational materials.",
-                            "Worked with EF Education First, Center of Modern English, Oxford Linguistic Centre (Novosibirsk), and FillCamp."
-                        ]
-                    },
-                    {
                         title: "AI Content Evaluation Specialist (Project-Based)",
                         company: "Invisible Technologies & Outlier",
                         duration: "Aug 2024 – Sep 2025",
@@ -598,6 +587,17 @@ export default function Home() {
                             "Provided services such as encoding, printing, photocopying, typing, and downloading.",
                             "Troubleshooted various computer applications, hardware, and software issues.",
                             "Provided excellent customer care and maintained store records and inventories."
+                        ]
+                    },
+                    {
+                        title: "Freelance Tutor",
+                        company: "Self-Employed / Various Institutions",
+                        duration: "Dec 2019 – Present",
+                        details: [
+                            "Providing online and in-person instruction in programming and English for children, teenagers, and adults.",
+                            "Teaching Python, Roblox Studio, Unity, Figma, and Business & IT English.",
+                            "Delivering structured lessons, assessing learner progress, and developing tailored educational materials.",
+                            "Worked with EF Education First, Center of Modern English, Oxford Linguistic Centre (Novosibirsk), and FillCamp."
                         ]
                     },
                 ].sort((a, b) => new Date(b.duration.split(' – ')[1] === 'Present' ? Date.now() : b.duration.split(' – ')[1] || 0).getTime() - new Date(a.duration.split(' – ')[1] === 'Present' ? Date.now() : a.duration.split(' – ')[1] || 0).getTime()),
@@ -723,7 +723,7 @@ export default function Home() {
                 const lineY = yPos + titleHeight / 2 + 1;
                 doc.setDrawColor(226, 232, 240); // slate-200
                 doc.setLineWidth(0.5);
-                doc.line(margin + doc.getTextWidth(title) + 5, lineY, pageWidth - margin, lineY);
+                doc.line(margin + doc.getTextWidth(title) + 5, pageWidth - margin, lineY);
                 return yPos + titleHeight + 4; // Return new y position
             };
 
