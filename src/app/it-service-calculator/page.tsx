@@ -57,6 +57,16 @@ const serviceConfig = {
         { id: 'web_dev_intro_pack', name: 'Web Development (Intro)', price: 25 },
       ],
     },
+    landing_page: {
+      name: 'Landing Page',
+      baseRate: 200,
+      unit: 'project',
+      features: [
+        { id: 'copywriting', name: 'Professional Copywriting', price: 100 },
+        { id: 'lead_capture_form', name: 'Lead Capture Form Integration', price: 50 },
+        { id: 'analytics_setup', name: 'Analytics & Tracking Setup', price: 75 },
+      ],
+    },
     web_development: {
       name: 'Web Development',
       baseRate: 450,
@@ -621,4 +631,5 @@ export default function ItServiceCalculatorPage() {
   );
 }
 
+    
     
