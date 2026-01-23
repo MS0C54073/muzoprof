@@ -42,8 +42,8 @@ const skills = [
     { name: 'Node.js/Express', icon: <Server className="h-6 w-6" /> },
     { name: 'C++', icon: <Code className="h-6 w-6" /> },
     { name: 'Flutter', icon: <Smartphone className="h-6 w-6" /> },
-    { name: 'Networking', icon: <Network className="h-6 w-6" /> },
     { name: 'Databases (PostgreSQL, Supabase, MongoDB, Firebase)', icon: <Database className="h-6 w-6" /> },
+    { name: 'Networking', icon: <Network className="h-6 w-6" /> },
     { name: 'AI & Automation', icon: <BrainCircuit className="h-6 w-6" /> },
     { name: 'Firebase Studio', icon: <BrainCircuit className="h-6 w-6" /> },
     { name: 'Cybersecurity', icon: <Shield className="h-6 w-6" /> },
@@ -118,7 +118,7 @@ const experiences = [
             "Providing online and in-person instruction in programming and English for children, teenagers, and adults.",
             "Teaching Python, Roblox Studio, Unity, Figma, and Business & IT English.",
             "Delivering structured lessons, assessing learner progress, and developing tailored educational materials.",
-            "Working with EF Education First, Center of Modern English, Oxford Linguistic Centre (Novosibirsk), and FillCamp."
+            "Worked with EF Education First, Center of Modern English, Oxford Linguistic Centre (Novosibirsk), and FillCamp."
         ]
     },
     {
@@ -500,7 +500,7 @@ export default function Home() {
                             "Providing online and in-person instruction in programming and English for children, teenagers, and adults.",
                             "Teaching Python, Roblox Studio, Unity, Figma, and Business & IT English.",
                             "Delivering structured lessons, assessing learner progress, and developing tailored educational materials.",
-                            "Working with EF Education First, Center of Modern English, Oxford Linguistic Centre (Novosibirsk), and FillCamp."
+                            "Worked with EF Education First, Center of Modern English, Oxford Linguistic Centre (Novosibirsk), and FillCamp."
                         ]
                     },
                     {
