@@ -23,6 +23,9 @@ import {
 export async function generateCareerPortal(
   input: CareerPortalInput
 ): Promise<CareerPortalOutput> {
+  if (!process.env.GOOGLE_GENAI_API_KEY) {
+    throw new Error('The GOOGLE_GENAI_API_KEY environment variable is not set. Please add it to your .env file to use this feature.');
+  }
   return await careerPortalFlow(input);
 }
 

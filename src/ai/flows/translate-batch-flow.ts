@@ -22,6 +22,11 @@ import { TranslateBatchOutputSchema } from './translate-batch.types';
 export async function translateBatch(input: TranslateBatchInput): Promise<TranslateBatchOutput> {
   const { texts, targetLanguage } = input;
 
+  if (!process.env.GOOGLE_GENAI_API_KEY) {
+    console.error("GOOGLE_GENAI_API_KEY environment variable not set. Translation disabled.");
+    return { translations: texts }; // Fallback
+  }
+
   // If there are no texts or the target is English, return the original texts.
   if (!texts || texts.length === 0 || targetLanguage === 'en') {
     return { translations: texts };
