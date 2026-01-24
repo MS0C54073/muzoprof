@@ -65,6 +65,10 @@ const projects = [
     demo: 'https://tinyurl.com/muzoslim',
   },
   {
+    title: 'AI-chat',
+    link: 'https://github.com/MS0C54073/ai-chat',
+  },
+  {
     title: 'AquaView Water Quality Monitoring System',
     link: 'https://github.com/MS0C54073/AquaAnalys',
   },
@@ -1337,7 +1341,6 @@ export default function Home() {
           </div>
         </section>
         
-        {/* Services Section */}
         <section id="services" className="py-20 border-t">
           <div className="text-center max-w-2xl mx-auto">
             <h2 className="text-3xl font-bold"><TranslatedText text="Let's Build Your Vision" /></h2>
