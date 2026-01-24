@@ -1302,6 +1302,24 @@ export default function Home() {
           )}
         </section>
 
+        {/* AI Career Portal CTA Section */}
+        <section id="ai-career-portal" className="py-20 border-t">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl font-bold mb-4">
+              <TranslatedText text="Generate Your Own Career Portal" />
+            </h2>
+            <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
+              <TranslatedText text="Curious to see how AI can transform a standard resume into an interactive web portfolio? Upload a PDF resume and watch it generate a personal career page for you in seconds." />
+            </p>
+            <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
+              <Link href="/career-portal">
+                <BrainCircuit className="mr-2 h-5 w-5" />
+                <TranslatedText text="Try the AI Portal Generator" />
+              </Link>
+            </Button>
+          </div>
+        </section>
+
         {/* References Section */}
         <section id="references" className="py-20 border-t bg-muted/50 rounded-lg">
           <h2 className="text-3xl font-bold text-center mb-12"><TranslatedText text="References"/></h2>
