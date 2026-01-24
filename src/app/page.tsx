@@ -60,13 +60,13 @@ const skills = [
 
 const projects = [
   {
+    title: 'AI-chat',
+    link: 'https://github.com/MS0C54073/ai-chat',
+  },
+  {
     title: 'Personal/Portfolio Website',
     link: 'https://github.com/MS0C54073/muzoprof',
     demo: 'https://tinyurl.com/muzoslim',
-  },
-  {
-    title: 'AI-chat',
-    link: 'https://github.com/MS0C54073/ai-chat',
   },
   {
     title: 'AquaView Water Quality Monitoring System',
@@ -115,7 +115,7 @@ const projects = [
   },
 ];
 
-const experiences = [
+const professionalExperiences = [
     {
         title: "AI Content Evaluation Specialist (Project-Based)",
         company: "Invisible Technologies & Outlier",
@@ -214,6 +214,15 @@ const experiences = [
         ]
     },
 ];
+
+const tutoringExperience = {
+    title: "Freelance Tutor",
+    company: "Self-Employed / Various Institutions",
+    duration: "Dec 2019 – Present",
+    details: [
+        "Providing online and in-person instruction in programming and English for children, teenagers, and adults. Teaching Python, Roblox Studio, Unity, Figma, and Business & IT English. Delivering structured lessons, assessing learner progress, and developing tailored educational materials.", "Worked with EF Education First, Center of Modern English, Oxford Linguistic Centre (Novosibirsk), and FillCamp."
+    ]
+};
 
 const education = [
      {
@@ -486,7 +495,7 @@ export default function Home() {
                     "• Business: Project Management, Microsoft 365/Office",
                     "• Creative: Design & Media (Photoshop, Premiere Pro, Canva)",
                 ],
-                experience: [
+                professionalExperience: [
                     {
                         title: "AI Content Evaluation Specialist (Project-Based)",
                         company: "Invisible Technologies & Outlier",
@@ -583,7 +592,9 @@ export default function Home() {
                             "Troubleshooted various computer applications, hardware, and software issues.",
                             "Provided excellent customer care and maintained store records and inventories."
                         ]
-                    },
+                    }
+                ].sort((a, b) => new Date(b.duration.split(' – ')[1] === 'Present' ? Date.now() : b.duration.split(' – ')[1] || 0).getTime() - new Date(a.duration.split(' – ')[1] === 'Present' ? Date.now() : a.duration.split(' – ')[1] || 0).getTime()),
+                tutoringExperience: [
                     {
                         title: "Freelance Tutor",
                         company: "Self-Employed / Various Institutions",
@@ -592,7 +603,7 @@ export default function Home() {
                             "Providing online and in-person instruction in programming and English for children, teenagers, and adults. Teaching Python, Roblox Studio, Unity, Figma, and Business & IT English. Delivering structured lessons, assessing learner progress, and developing tailored educational materials.", "Worked with EF Education First, Center of Modern English, Oxford Linguistic Centre (Novosibirsk), and FillCamp."
                         ]
                     },
-                ].sort((a, b) => new Date(b.duration.split(' – ')[1] === 'Present' ? Date.now() : b.duration.split(' – ')[1] || 0).getTime() - new Date(a.duration.split(' – ')[1] === 'Present' ? Date.now() : a.duration.split(' – ')[1] || 0).getTime()),
+                ],
                 education: [
                     {
                         degree: "Master's of Science, Informatics and Computer Engineering",
@@ -764,9 +775,7 @@ export default function Home() {
             y += (skillsLines.length * 9 * lineHeight) + 4;
 
 
-            // --- Work Experience ---
-            y = addSectionTitle("Work Experience", y);
-            cvData.experience.forEach(exp => {
+            const renderExperience = (exp: any) => {
                 checkPageBreak(40);
                 doc.setFontSize(10);
                 doc.setFont('Helvetica', 'bold');
@@ -786,14 +795,23 @@ export default function Home() {
                 doc.setFontSize(9);
                 doc.setFont('Helvetica', 'normal');
                 doc.setTextColor(51, 65, 85);
-                exp.details.forEach(detail => {
+                exp.details.forEach((detail: string) => {
                     const detailLines = doc.splitTextToSize(`•  ${detail}`, contentWidth - 10);
                     checkPageBreak(detailLines.length * 9 * lineHeight + 2);
                     doc.text(detailLines, margin + 5, y);
                     y += detailLines.length * 9 * lineHeight;
                 });
                 y += 6;
-            });
+            };
+
+            // --- Work Experience ---
+            y = addSectionTitle("Work Experience", y);
+            cvData.professionalExperience.forEach(renderExperience);
+
+            // --- Tutoring Experience ---
+            y = addSectionTitle("Tutoring & Teaching", y);
+            cvData.tutoringExperience.forEach(renderExperience);
+
 
             // --- Education ---
             y = addSectionTitle("Education", y);
@@ -1135,7 +1153,7 @@ export default function Home() {
               value={openAccordionItems}
               onValueChange={setOpenAccordionItems}
             >
-              {(showAllExperience ? experiences : experiences.slice(0, initialExperienceToShow)).map((exp, index) => (
+              {(showAllExperience ? professionalExperiences : professionalExperiences.slice(0, initialExperienceToShow)).map((exp, index) => (
                 <AccordionItem value={`item-${index}`} key={index}>
                   <AccordionTrigger>
                     <div className="text-left">
@@ -1152,13 +1170,13 @@ export default function Home() {
                 </AccordionItem>
               ))}
             </Accordion>
-            {!showAllExperience && experiences.length > initialExperienceToShow && (
+            {!showAllExperience && professionalExperiences.length > initialExperienceToShow && (
                 <div className="text-center mt-8">
                     <Button 
                         variant="secondary" 
                         onClick={() => {
                             setShowAllExperience(true);
-                            setOpenAccordionItems(experiences.map((_, index) => `item-${index}`));
+                            setOpenAccordionItems(professionalExperiences.map((_, index) => `item-${index}`));
                         }}
                     >
                         <TranslatedText text="View All Experience" />
@@ -1166,6 +1184,24 @@ export default function Home() {
                     </Button>
                 </div>
             )}
+            
+            <h3 className="text-2xl font-semibold text-center mt-16 mb-8 border-t pt-12"><TranslatedText text="Tutoring & Teaching"/></h3>
+            <Accordion type="single" collapsible className="w-full" defaultValue="tutor-item">
+              <AccordionItem value="tutor-item">
+                <AccordionTrigger>
+                  <div className="text-left">
+                    <h3 className="text-xl font-bold text-accent"><TranslatedText text={tutoringExperience.title}/></h3>
+                    <p className="font-semibold text-foreground"><TranslatedText text={tutoringExperience.company}/></p>
+                    <p className="text-sm text-muted-foreground"><TranslatedText text={tutoringExperience.duration}/></p>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent>
+                  <ul className="list-disc list-inside text-muted-foreground space-y-1 pl-4">
+                    {tutoringExperience.details.map((d, i) => <li key={i}><TranslatedText text={d}/></li>)}
+                  </ul>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
           </div>
         </section>
         
