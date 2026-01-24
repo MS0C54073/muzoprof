@@ -112,6 +112,7 @@ const navLinks = [
     { href: '/#awards', text: 'Awards' },
     { href: '/#certifications', text: 'Certifications' },
     { href: '/it-service-calculator', text: 'IT Service Calculator' },
+    { href: '/career-portal', text: 'AI Career Portal' },
     { href: '/#references', text: 'References' },
     { href: '/#contact', text: 'Contact' },
     { href: '/blog', text: 'Blog' },
