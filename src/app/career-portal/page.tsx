@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState } from 'react';
@@ -18,6 +17,7 @@ import { cn } from '@/lib/utils';
 import { ArrowLeft, Loader2, UploadCloud, BrainCircuit, Linkedin, Github, Globe, Mail, Phone, Briefcase, GraduationCap, Code, Sparkles, AlertTriangle } from 'lucide-react';
 import { SocialIcons } from '@/components/social-icons';
 import { Badge } from '@/components/ui/badge';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
 const uploadSchema = z.object({
     resume: z.any()
@@ -182,6 +182,13 @@ export default function CareerPortalPage() {
             </header>
 
             <main className="flex-grow">
+                <Alert variant="accent" className="max-w-2xl mx-auto mb-8">
+                    <BrainCircuit className="h-4 w-4" />
+                    <AlertTitle><TranslatedText text="Feature Coming Soon!" /></AlertTitle>
+                    <AlertDescription>
+                        <TranslatedText text="This AI-powered feature is currently under development and will be implemented soon. Please check back later!" />
+                    </AlertDescription>
+                </Alert>
                 <Card className="shadow-lg max-w-2xl mx-auto">
                     <CardHeader>
                         <CardTitle><TranslatedText text="Upload Your Resume" /></CardTitle>
