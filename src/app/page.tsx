@@ -129,7 +129,7 @@ const professionalExperiences = [
         ]
     },
     {
-        title: "IT Support Volunteer / Technical Assistant",
+        title: "IT Specialist",
         company: "Embassy of the Republic of Zambia in Moscow, Russia",
         duration: "May 2025 – Jul 2025",
         details: [
@@ -221,7 +221,7 @@ const tutoringExperience = {
     company: "Self-Employed / Various Institutions",
     duration: "Dec 2019 – Present",
     details: [
-        "Providing online and in-person instruction in programming and English for children, teenagers, and adults. Teaching Python, Roblox Studio, Unity, Figma, and Business & IT English. Delivering structured lessons, assessing learner progress, and developing tailored educational materials.", "Worked with EF Education First, Center of Modern English, Oxford Linguistic Centre (Novosibirsk), and FillCamp."
+        "Providing online and in-person instruction in programming and English for children, teenagers, and adults. Teaching Python, Roblox Studio, Unity, Figma, and Business & IT English. Delivering structured lessons, assessing learner progress, and developing tailored educational materials. Worked with EF Education First, Center of Modern English, Oxford Linguistic Centre (Novosibirsk), and FillCamp."
     ]
 };
 
@@ -238,13 +238,13 @@ const education = [
         duration: "Sep 2017 - Jul 2021",
     },
     {
-        degree: "Diploma of Professional Retraining, Management in the Digital Economy",
+        degree: "Bachelor’s Degree (Postgraduate Degree), Management in the Digital Economy",
         university: "Novosibirsk State Technical University",
         duration: "Sep 2023 - Dec 2023",
         note: "Awaiting Official Translation and Certification in Zambia."
     },
     {
-        degree: "Diploma of Professional Retraining, Technological Entrepreneurship and Innovation Management",
+        degree: "Bachelor’s Degree (Postgraduate Degree), Technological Entrepreneurship and Innovation Management",
         university: "Novosibirsk State Technical University",
         duration: "Sep 2023 - Dec 2023",
         note: "Awaiting Official Translation and Certification in Zambia."
@@ -256,7 +256,7 @@ const education = [
         note: "Awaiting Official Translation and Certification in Zambia."
     },
     {
-        degree: "Diploma of Professional Retraining, Management of High Tech Programs and Projects",
+        degree: "Bachelor’s Degree (Postgraduate Degree), Management of High Tech Programs and Projects",
         university: "Pskov State University",
         duration: "Sep 2023 - Dec 2023",
         note: "Awaiting Official Translation and Certification in Zambia."
@@ -509,7 +509,7 @@ export default function Home() {
                         ]
                     },
                      {
-                        title: "IT Support Volunteer / Technical Assistant",
+                        title: "IT Specialist",
                         company: "Embassy of the Republic of Zambia in Moscow, Russia",
                         duration: "May 2025 – Jul 2025",
                         details: [
@@ -601,7 +601,7 @@ export default function Home() {
                         company: "Self-Employed / Various Institutions",
                         duration: "Dec 2019 – Present",
                         details: [
-                            "Providing online and in-person instruction in programming and English for children, teenagers, and adults. Teaching Python, Roblox Studio, Unity, Figma, and Business & IT English. Delivering structured lessons, assessing learner progress, and developing tailored educational materials.", "Worked with EF Education First, Center of Modern English, Oxford Linguistic Centre (Novosibirsk), and FillCamp."
+                            "Providing online and in-person instruction in programming and English for children, teenagers, and adults. Teaching Python, Roblox Studio, Unity, Figma, and Business & IT English. Delivering structured lessons, assessing learner progress, and developing tailored educational materials. Worked with EF Education First, Center of Modern English, Oxford Linguistic Centre (Novosibirsk), and FillCamp."
                         ]
                     },
                 ],
@@ -618,10 +618,10 @@ export default function Home() {
                         duration: "Sep 2017 - Jul 2021",
                     },
                      {
-                        degree: "Multiple Diplomas of Professional Retraining",
+                        degree: "Multiple Postgraduate Degrees & Diplomas",
                         university: "Novosibirsk & Pskov State Universities",
                         duration: "2023",
-                        details: "Awaiting Official Translation and Certification in Zambia. Specializations in Digital Economy Management, Technological Entrepreneurship, Digital Twins, and High-Tech Project Management."
+                        details: "Awaiting Official Translation and Certification in Zambia. Includes Bachelor's (Postgraduate) degrees in Digital Economy Management, Technological Entrepreneurship, and High-Tech Project Management, and a Diploma in Digital Twins."
                     },
                     {
                         degree: "Russian Language and Preparatory Program",
