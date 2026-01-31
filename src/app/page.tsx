@@ -230,7 +230,8 @@ const education = [
         degree: "Master's of Science, Informatics and Computer Engineering",
         university: "Novosibirsk State Technical University",
         duration: "Sep 2022 - Jul 2024",
-        note: "Awaiting Official Translation and Certification in Zambia."
+        note: "Awaiting Official Translation and Certification in Zambia.",
+        blurred: true,
     },
     {
         degree: "Bachelor's of Science, Software and Administration of Information Systems",
@@ -241,13 +242,15 @@ const education = [
         degree: "Bachelor’s Degree (Postgraduate Degree), Management in the Digital Economy",
         university: "Novosibirsk State Technical University",
         duration: "Sep 2023 - Dec 2023",
-        note: "Awaiting Official Translation and Certification in Zambia."
+        note: "Awaiting Official Translation and Certification in Zambia.",
+        blurred: true,
     },
     {
         degree: "Bachelor’s Degree (Postgraduate Degree), Technological Entrepreneurship and Innovation Management",
         university: "Novosibirsk State Technical University",
         duration: "Sep 2023 - Dec 2023",
-        note: "Awaiting Official Translation and Certification in Zambia."
+        note: "Awaiting Official Translation and Certification in Zambia.",
+        blurred: true,
     },
     {
         degree: "Diploma of Professional Retraining, Development of Digital Twins",
@@ -259,7 +262,8 @@ const education = [
         degree: "Bachelor’s Degree (Postgraduate Degree), Management of High Tech Programs and Projects",
         university: "Pskov State University",
         duration: "Sep 2023 - Dec 2023",
-        note: "Awaiting Official Translation and Certification in Zambia."
+        note: "Awaiting Official Translation and Certification in Zambia.",
+        blurred: true,
     },
     {
         degree: "Russian language and preparatory program, Russian language and Culture",
@@ -617,11 +621,29 @@ export default function Home() {
                         university: "Kursk State University, Russia",
                         duration: "Sep 2017 - Jul 2021",
                     },
+                    {
+                        degree: "Bachelor’s Degree (Postgraduate Degree), Management in the Digital Economy",
+                        university: "Novosibirsk State Technical University",
+                        duration: "Sep 2023 - Dec 2023",
+                        details: "Awaiting Official Translation and Certification in Zambia."
+                    },
+                    {
+                        degree: "Bachelor’s Degree (Postgraduate Degree), Technological Entrepreneurship and Innovation Management",
+                        university: "Novosibirsk State Technical University",
+                        duration: "Sep 2023 - Dec 2023",
+                        details: "Awaiting Official Translation and Certification in Zambia."
+                    },
                      {
-                        degree: "Multiple Postgraduate Degrees & Diplomas",
-                        university: "Novosibirsk & Pskov State Universities",
-                        duration: "2023",
-                        details: "Awaiting Official Translation and Certification in Zambia. Includes Bachelor's (Postgraduate) degrees in Digital Economy Management, Technological Entrepreneurship, and High-Tech Project Management, and a Diploma in Digital Twins."
+                        degree: "Diploma of Professional Retraining, Development of Digital Twins",
+                        university: "Novosibirsk State Technical University",
+                        duration: "Sep 2023 - Dec 2023",
+                        details: "Awaiting Official Translation and Certification in Zambia."
+                    },
+                     {
+                        degree: "Bachelor’s Degree (Postgraduate Degree), Management of High Tech Programs and Projects",
+                        university: "Pskov State University",
+                        duration: "Sep 2023 - Dec 2023",
+                        details: "Awaiting Official Translation and Certification in Zambia."
                     },
                     {
                         degree: "Russian Language and Preparatory Program",
@@ -1212,7 +1234,7 @@ export default function Home() {
           <div className="max-w-3xl mx-auto relative pl-8">
             <div className="absolute left-0 top-0 h-full w-0.5 bg-border"></div>
             {(showAllEducation ? education : education.slice(0, initialEducationToShow)).map((edu, index) => (
-              <div key={index} className="mb-12 relative">
+              <div key={index} className={cn("mb-12 relative", (edu as any).blurred && "blur-sm pointer-events-none")}>
                 <div className="absolute left-[-34px] top-1.5 w-4 h-4 bg-primary rounded-full border-4 border-background"></div>
                 <p className="text-sm text-muted-foreground"><TranslatedText text={edu.duration}/></p>
                 <h3 className="text-xl font-bold text-accent"><TranslatedText text={edu.degree}/></h3>
