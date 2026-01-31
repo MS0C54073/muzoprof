@@ -1223,7 +1223,7 @@ export default function Home() {
           <div className="max-w-3xl mx-auto relative pl-8">
             <div className="absolute left-0 top-0 h-full w-0.5 bg-border"></div>
             {(showAllEducation ? education : education.slice(0, initialEducationToShow)).map((edu, index) => (
-              <div key={index} className={cn("mb-12 relative", (edu as any).blurred && "blur-md pointer-events-none")}>
+              <div key={index} className={cn("mb-12 relative", (edu as any).blurred && "blur-3xl pointer-events-none")}>
                 <div className="absolute left-[-34px] top-1.5 w-4 h-4 bg-primary rounded-full border-4 border-background"></div>
                 <p className="text-sm text-muted-foreground"><TranslatedText text={edu.duration}/></p>
                 <h3 className="text-xl font-bold text-accent"><TranslatedText text={edu.degree}/></h3>
