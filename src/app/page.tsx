@@ -226,13 +226,6 @@ const tutoringExperience = {
 };
 
 const education = [
-     {
-        degree: "Master's of Science, Informatics and Computer Engineering",
-        university: "Novosibirsk State Technical University",
-        duration: "Sep 2022 - Jul 2024",
-        note: "Awaiting Official Translation and Certification in Zambia.",
-        blurred: true,
-    },
     {
         degree: "Bachelor's of Science, Software and Administration of Information Systems",
         university: "Kursk State University | Kursk, Russia",
@@ -267,6 +260,13 @@ const education = [
         degree: "General Certificate in Education (ECZ), O-Levels",
         university: "Arakan Boys Secondary School",
         duration: "2011 - 2013",
+    },
+    {
+        degree: "Master's of Science, Informatics and Computer Engineering",
+        university: "Novosibirsk State Technical University",
+        duration: "Sep 2022 - Jul 2024",
+        note: "Awaiting Official Translation and Certification in Zambia.",
+        blurred: true,
     },
 ];
 
@@ -604,12 +604,6 @@ export default function Home() {
                 ],
                 education: [
                     {
-                        degree: "Master's of Science, Informatics and Computer Engineering",
-                        university: "Novosibirsk State Technical University",
-                        duration: "Sep 2022 - Jul 2024",
-                        details: "Awaiting Official Translation and Certification in Zambia."
-                    },
-                    {
                         degree: "Bachelor's of Science, Software and Administration of Information Systems",
                         university: "Kursk State University, Russia",
                         duration: "Sep 2017 - Jul 2021",
@@ -643,6 +637,12 @@ export default function Home() {
                         degree: "General Certificate in Education (O-Levels)",
                         university: "Arakan Boys Secondary School",
                         duration: "2011 - 2013",
+                    },
+                    {
+                        degree: "Master's of Science, Informatics and Computer Engineering",
+                        university: "Novosibirsk State Technical University",
+                        duration: "Sep 2022 - Jul 2024",
+                        details: "Awaiting Official Translation and Certification in Zambia."
                     },
                 ],
                 certifications: [
