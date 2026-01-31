@@ -164,7 +164,7 @@ const professionalExperiences = [
       company: "VITALITE Group",
       duration: "2021 (Temporal Contract)",
       details: [
-        "Delivered professional customer support by responding promptly to inquiries and resolving complaints.",
+        "Delivered professional customer support by responding to inquiries and resolving complaints.",
         "Communicated with customers across multiple channels, ensuring a positive and empathetic experience.",
         "Processed orders, forms, and applications while maintaining accurate records of transactions and feedback.",
         "Collaborated with colleagues to coordinate effective customer service solutions."
@@ -181,16 +181,6 @@ const professionalExperiences = [
             "Utilized automated debugging tools and performance optimization techniques to enhance application efficiency.",
             "Collaborated with industry professionals and mentors, gaining hands-on experience in real-world software development and IT support environments."
         ]
-    },
-    {
-      title: "IT Support Freelancer",
-      company: "Hybrid",
-      duration: "2017 – Present",
-      details: [
-        "Providing remote or on-site technical assistance to individuals or businesses.",
-        "Resolving hardware, software, and network issues via phone, email, or chat.",
-        "Documenting solutions for clients."
-      ]
     },
     {
         title: "Customer Care Associate",
@@ -213,6 +203,16 @@ const professionalExperiences = [
             "Troubleshooted various computer applications, hardware, and software issues.",
             "Provided excellent customer care and maintained store records and inventories."
         ]
+    },
+    {
+      title: "IT Support Freelancer",
+      company: "Hybrid",
+      duration: "2017 – Present",
+      details: [
+        "Providing remote or on-site technical assistance to individuals or businesses.",
+        "Resolving hardware, software, and network issues via phone, email, or chat.",
+        "Documenting solutions for clients."
+      ]
     },
 ];
 
@@ -242,28 +242,21 @@ const education = [
         degree: "Bachelor’s Degree (Postgraduate Degree), Management in the Digital Economy",
         university: "Novosibirsk State Technical University",
         duration: "Sep 2023 - Dec 2023",
-        note: "Awaiting Official Translation and Certification in Zambia.",
-        blurred: true,
     },
     {
         degree: "Bachelor’s Degree (Postgraduate Degree), Technological Entrepreneurship and Innovation Management",
         university: "Novosibirsk State Technical University",
         duration: "Sep 2023 - Dec 2023",
-        note: "Awaiting Official Translation and Certification in Zambia.",
-        blurred: true,
     },
     {
         degree: "Diploma of Professional Retraining, Development of Digital Twins",
         university: "Novosibirsk State Technical University",
         duration: "Sep 2023 - Dec 2023",
-        note: "Awaiting Official Translation and Certification in Zambia."
     },
     {
         degree: "Bachelor’s Degree (Postgraduate Degree), Management of High Tech Programs and Projects",
         university: "Pskov State University",
         duration: "Sep 2023 - Dec 2023",
-        note: "Awaiting Official Translation and Certification in Zambia.",
-        blurred: true,
     },
     {
         degree: "Russian language and preparatory program, Russian language and Culture",
@@ -548,7 +541,7 @@ export default function Home() {
                       company: "VITALITE Group",
                       duration: "2021 (Temporal Contract)",
                       details: [
-                        "Delivered professional customer support by responding promptly to inquiries and resolving complaints.",
+                        "Delivered professional customer support by responding to inquiries and resolving complaints.",
                         "Communicated with customers across multiple channels, ensuring a positive and empathetic experience.",
                         "Processed orders, forms, and applications while maintaining accurate records of transactions and feedback.",
                         "Collaborated with colleagues to coordinate effective customer service solutions."
@@ -565,16 +558,6 @@ export default function Home() {
                            "Utilized automated debugging tools and performance optimization techniques to enhance application efficiency.",
                            "Collaborated with industry professionals and mentors, gaining hands-on experience in real-world software development and IT support environments."
                         ]
-                    },
-                    {
-                      title: "IT Support Freelancer",
-                      company: "Hybrid",
-                      duration: "2017 – Present",
-                      details: [
-                        "Providing remote or on-site technical assistance to individuals or businesses.",
-                        "Resolving hardware, software, and network issues via phone, email, or chat.",
-                        "Documenting solutions for clients."
-                      ]
                     },
                     {
                         title: "Customer Care Associate",
@@ -597,7 +580,17 @@ export default function Home() {
                             "Troubleshooted various computer applications, hardware, and software issues.",
                             "Provided excellent customer care and maintained store records and inventories."
                         ]
-                    }
+                    },
+                     {
+                      title: "IT Support Freelancer",
+                      company: "Hybrid",
+                      duration: "2017 – Present",
+                      details: [
+                        "Providing remote or on-site technical assistance to individuals or businesses.",
+                        "Resolving hardware, software, and network issues via phone, email, or chat.",
+                        "Documenting solutions for clients."
+                      ]
+                    },
                 ].sort((a, b) => new Date(b.duration.split(' – ')[1] === 'Present' ? Date.now() : b.duration.split(' – ')[1] || 0).getTime() - new Date(a.duration.split(' – ')[1] === 'Present' ? Date.now() : a.duration.split(' – ')[1] || 0).getTime()),
                 tutoringExperience: [
                     {
@@ -625,25 +618,21 @@ export default function Home() {
                         degree: "Bachelor’s Degree (Postgraduate Degree), Management in the Digital Economy",
                         university: "Novosibirsk State Technical University",
                         duration: "Sep 2023 - Dec 2023",
-                        details: "Awaiting Official Translation and Certification in Zambia."
                     },
                     {
                         degree: "Bachelor’s Degree (Postgraduate Degree), Technological Entrepreneurship and Innovation Management",
                         university: "Novosibirsk State Technical University",
                         duration: "Sep 2023 - Dec 2023",
-                        details: "Awaiting Official Translation and Certification in Zambia."
                     },
                      {
                         degree: "Diploma of Professional Retraining, Development of Digital Twins",
                         university: "Novosibirsk State Technical University",
                         duration: "Sep 2023 - Dec 2023",
-                        details: "Awaiting Official Translation and Certification in Zambia."
                     },
                      {
                         degree: "Bachelor’s Degree (Postgraduate Degree), Management of High Tech Programs and Projects",
                         university: "Pskov State University",
                         duration: "Sep 2023 - Dec 2023",
-                        details: "Awaiting Official Translation and Certification in Zambia."
                     },
                     {
                         degree: "Russian Language and Preparatory Program",
