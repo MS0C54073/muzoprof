@@ -1,4 +1,3 @@
-
 'use client';
 
 import Image from 'next/image';
@@ -1242,6 +1241,14 @@ export default function Home() {
                   </Button>
               </div>
           )}
+          <div className="max-w-3xl mx-auto mt-8 text-center">
+              <Button asChild variant="outline">
+                  <a href="https://drive.google.com/drive/folders/1YuzeLBdj9-vTvZcJsEfyTUdH9j_ZqlIV?usp=sharing" target="_blank" rel="noopener noreferrer">
+                      <ExternalLink className="mr-2 h-4 w-4" />
+                      <TranslatedText text="Education File and CV" />
+                  </a>
+              </Button>
+          </div>
         </section>
 
         {/* Awards Section */}
