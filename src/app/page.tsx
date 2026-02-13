@@ -19,6 +19,7 @@ import { jsPDF } from 'jspdf';
 import { useState, type ComponentType } from 'react';
 import { getAnalytics, logEvent } from "firebase/analytics";
 import { app, storage, db }from '@/lib/firebase';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -60,8 +61,8 @@ const skills = [
 
 const projects = [
   {
-    title: 'AI-chat',
-    link: 'https://github.com/MS0C54073/ai-chat',
+    title: 'ai-chatBot using AI SDK by Vercel',
+    link: 'https://github.com/MS0C54073/ai-chatBot_muzoGPT',
   },
   {
     title: 'Personal/Portfolio Website',
