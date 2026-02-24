@@ -29,7 +29,6 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { jsPDF } from 'jspdf';
 import { useState, useEffect } from 'react';
-import { getAnalytics, logEvent } from "firebase/analytics";
 import { app, storage, db }from '@/lib/firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
@@ -539,7 +538,6 @@ export default function Home() {
             const PAGE_W = doc.internal.pageSize.getWidth();
             const PAGE_H = doc.internal.pageSize.getHeight();
             const MARGIN = 40;
-            const PRINT_W = PAGE_W - (MARGIN * 2);
             const SIDEBAR_W = PAGE_W * 0.33;
             const MAIN_W = PAGE_W - SIDEBAR_W - (MARGIN * 1.5);
             
@@ -580,7 +578,7 @@ export default function Home() {
                 doc.line(SIDEBAR_W, 0, SIDEBAR_W, PAGE_H);
             };
 
-            const renderSafeText = (text: string, x: number, width: number, size: number, options: { font?: string, style?: string, color?: [number, number, number], align?: 'left'|'center'|'right' } = {}) => {
+            const renderSafeText = (text: string, x: number, width: number, size: number, options: { font?: string, style?: string, color?: [number, number, number], align?: 'left'|'center'|'right', isJustified?: boolean } = {}) => {
                 doc.setFont(options.font || 'helvetica', options.style || 'normal');
                 doc.setFontSize(size);
                 doc.setTextColor(options.color?.[0] || 0, options.color?.[1] || 0, options.color?.[2] || 0);
@@ -610,23 +608,23 @@ export default function Home() {
                 // Vertical Centering Algorithm for Header
                 const nameStr = cvData.name.toUpperCase();
                 const titleStr = cvData.jobTitle;
-                const nameH = calculateTextHeight(nameStr, textMaxW, 24);
-                const titleH = calculateTextHeight(titleStr, textMaxW, 11);
+                const nameH = calculateTextHeight(nameStr, textMaxW, 22);
+                const titleH = calculateTextHeight(titleStr, textMaxW, 10);
                 const textBlockTotalH = nameH + titleH + 5;
                 
                 const headerContentTop = (headerH - Math.max(imgSize, textBlockTotalH)) / 2;
                 
-                // Draw Text Block
-                let headerY = headerContentTop + 25; // Adjusted for font baseline
+                // Draw Name & Title with refined spacing
+                let headerY = headerContentTop + 22; 
                 doc.setFont('times', 'bold');
-                doc.setFontSize(24);
+                doc.setFontSize(22);
                 doc.setTextColor(COLORS.GOLD[0], COLORS.GOLD[1], COLORS.GOLD[2]);
                 const nameLines = doc.splitTextToSize(nameStr, textMaxW);
                 doc.text(nameLines, textX, headerY);
                 
-                headerY += (nameLines.length * (24 * V_RHYTHM.LINE)) + 5;
+                headerY += (nameLines.length * (22 * 1.1)) + 4;
                 doc.setFont('helvetica', 'normal');
-                doc.setFontSize(11);
+                doc.setFontSize(10);
                 doc.setTextColor(255, 255, 255);
                 const titleLines = doc.splitTextToSize(titleStr, textMaxW);
                 doc.text(titleLines, textX, headerY);
@@ -641,7 +639,7 @@ export default function Home() {
                 let sideY = currentY;
 
                 const drawSideSection = (title: string, items: {label: string, val: string}[]) => {
-                    doc.setFont('helvetica', 'bold');
+                    doc.setFont('times', 'bold');
                     doc.setFontSize(10);
                     doc.setTextColor(COLORS.NAVY[0], COLORS.NAVY[1], COLORS.NAVY[2]);
                     doc.text(title.toUpperCase(), sideX, sideY);
@@ -669,7 +667,7 @@ export default function Home() {
                 ]);
 
                 // Sidebar Education
-                doc.setFont('helvetica', 'bold');
+                doc.setFont('times', 'bold');
                 doc.setFontSize(10);
                 doc.setTextColor(COLORS.NAVY[0], COLORS.NAVY[1], COLORS.NAVY[2]);
                 doc.text("EDUCATION", sideX, sideY);
@@ -689,25 +687,35 @@ export default function Home() {
                     sideY += 18;
                 });
 
-                // Sidebar Skills
+                // Sidebar Skills - Refactored to Grid for better alignment
                 sideY += 5;
-                doc.setFont('helvetica', 'bold');
+                doc.setFont('times', 'bold');
                 doc.setFontSize(10);
                 doc.setTextColor(COLORS.NAVY[0], COLORS.NAVY[1], COLORS.NAVY[2]);
                 doc.text("SKILLS", sideX, sideY);
                 sideY += 15;
-                doc.setFontSize(8.5);
+                doc.setFontSize(8);
                 doc.setFont('helvetica', 'normal');
                 doc.setTextColor(COLORS.TEXT[0], COLORS.TEXT[1], COLORS.TEXT[2]);
-                const skillLines = doc.splitTextToSize(cvData.skills.join(", "), sideW);
-                doc.text(skillLines, sideX, sideY);
+                
+                const skillCol1 = cvData.skills.slice(0, Math.ceil(cvData.skills.length / 2));
+                const skillCol2 = cvData.skills.slice(Math.ceil(cvData.skills.length / 2));
+                const colW = sideW / 2;
+                
+                let skillsY = sideY;
+                skillCol1.forEach((skill, i) => {
+                    doc.text(`• ${skill}`, sideX, skillsY + (i * 11));
+                });
+                skillCol2.forEach((skill, i) => {
+                    doc.text(`• ${skill}`, sideX + colW, skillsY + (i * 11));
+                });
 
                 // --- 3. MAIN CONTENT (Ref-safe Flow) ---
                 const mainX = SIDEBAR_W + 30;
                 
                 const renderMainHeading = (title: string) => {
                     checkSpace(40);
-                    doc.setFont('helvetica', 'bold');
+                    doc.setFont('times', 'bold');
                     doc.setFontSize(12);
                     doc.setTextColor(COLORS.NAVY[0], COLORS.NAVY[1], COLORS.NAVY[2]);
                     doc.text(title.toUpperCase(), mainX, currentY);
@@ -719,39 +727,39 @@ export default function Home() {
                 };
 
                 renderMainHeading("Profile Summary");
-                currentY += renderSafeText(cvData.summary, mainX, MAIN_W, 10, { color: COLORS.TEXT }) + V_RHYTHM.SECTION;
+                currentY += renderSafeText(cvData.summary, mainX, MAIN_W, 9.5, { color: COLORS.TEXT, isJustified: true }) + V_RHYTHM.SECTION;
 
                 renderMainHeading("Professional Experience");
                 cvData.experience.forEach(exp => {
-                    // Block Height calculation for pre-page-break logic
-                    const entryTitleH = calculateTextHeight(exp.title.toUpperCase(), MAIN_W, 11);
+                    const entryTitleH = calculateTextHeight(exp.title.toUpperCase(), MAIN_W, 10.5);
                     const subH = 15;
-                    const detailsH = exp.details.reduce((acc, d) => acc + calculateTextHeight(`• ${d}`, MAIN_W - 10, 9.5), 0);
+                    const detailsH = exp.details.reduce((acc, d) => acc + calculateTextHeight(`• ${d}`, MAIN_W - 15, 9), 0);
                     const totalEntryH = entryTitleH + subH + detailsH + 20;
 
                     checkSpace(totalEntryH);
 
                     doc.setFont('helvetica', 'bold');
-                    doc.setFontSize(11);
+                    doc.setFontSize(10.5);
                     doc.setTextColor(0, 0, 0);
-                    currentY += renderSafeText(exp.title.toUpperCase(), mainX, MAIN_W, 11);
+                    currentY += renderSafeText(exp.title.toUpperCase(), mainX, MAIN_W, 10.5);
                     
                     doc.setFont('helvetica', 'normal');
-                    doc.setFontSize(10);
+                    doc.setFontSize(9.5);
                     doc.setTextColor(COLORS.SUB[0], COLORS.SUB[1], COLORS.SUB[2]);
-                    currentY += renderSafeText(`${exp.company} | ${exp.duration}`, mainX, MAIN_W, 10) + 5;
+                    currentY += renderSafeText(`${exp.company} | ${exp.duration}`, mainX, MAIN_W, 9.5) + 5;
                     
                     doc.setTextColor(COLORS.TEXT[0], COLORS.TEXT[1], COLORS.TEXT[2]);
                     exp.details.forEach(detail => {
-                        currentY += renderSafeText(`• ${detail}`, mainX + 5, MAIN_W - 10, 9.5);
+                        const h = renderSafeText(`• ${detail}`, mainX + 10, MAIN_W - 15, 9);
+                        currentY += h;
                     });
                     currentY += V_RHYTHM.ENTRY;
                 });
 
             } else {
-                // --- CLASSIC LAYOUT REFACTORED ---
+                // --- CLASSIC LAYOUT ---
                 currentY = MARGIN;
-                currentY += renderSafeText(cvData.name.toUpperCase(), PAGE_W/2, PRINT_W, 22, { style: 'bold', align: 'center' }) + 10;
+                currentY += renderSafeText(cvData.name.toUpperCase(), PAGE_W/2, PRINT_W, 22, { font: 'times', style: 'bold', align: 'center' }) + 10;
                 
                 const contactStr = `${cvData.email}  |  ${cvData.phone}  |  ${cvData.location}`;
                 currentY += renderSafeText(contactStr, PAGE_W/2, PRINT_W, 10, { align: 'center' }) + 5;
@@ -761,7 +769,7 @@ export default function Home() {
 
                 const addClassicSection = (title: string) => {
                     checkSpace(40);
-                    doc.setFont('helvetica', 'bold');
+                    doc.setFont('times', 'bold');
                     doc.setFontSize(12);
                     doc.text(title.toUpperCase(), MARGIN, currentY);
                     currentY += 5;
