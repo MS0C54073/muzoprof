@@ -57,6 +57,14 @@ interface CvEducation {
     blurred?: boolean;
 }
 
+interface CvReference {
+    name: string;
+    title: string;
+    company: string;
+    email: string | null;
+    phone: string;
+}
+
 interface CvData {
     name: string;
     jobTitle: string;
@@ -70,6 +78,7 @@ interface CvData {
     skills: string[];
     experience: CvExperience[];
     education: CvEducation[];
+    references: CvReference[];
 }
 
 const skills = [
@@ -246,14 +255,14 @@ const professionalExperiences = [
         ]
     },
     {
-      title: "IT Support Freelancer",
-      company: "Hybrid",
-      duration: "2017 – Present",
-      details: [
-        "Providing remote or on-site technical assistance to individuals or businesses.",
-        "Resolving hardware, software, and network issues via phone, email, or chat.",
-        "Documenting solutions for clients."
-      ]
+        title: "IT Support Freelancer",
+        company: "Hybrid",
+        duration: "2017 – Present",
+        details: [
+            "Providing remote or on-site technical assistance to individuals or businesses.",
+            "Resolving hardware, software, and network issues via phone, email, or chat.",
+            "Documenting solutions for clients."
+        ]
     },
 ];
 
@@ -436,6 +445,10 @@ export default function Home() {
         education: educationData.map(edu => ({
             ...edu,
             university: edu.university.split('|')[0].trim()
+        })),
+        references: references.map(ref => ({
+            ...ref,
+            email: ref.email
         }))
     });
 
@@ -608,6 +621,22 @@ export default function Home() {
                 const textX = MARGIN;
                 const textMaxW = imgX - textX - 20;
                 
+                // Try to add profile image
+                const profileImgElement = document.getElementById('profile-pic') as HTMLImageElement;
+                if (profileImgElement) {
+                    try {
+                        const canvas = document.createElement('canvas');
+                        canvas.width = profileImgElement.naturalWidth;
+                        canvas.height = profileImgElement.naturalHeight;
+                        const ctx = canvas.getContext('2d');
+                        ctx?.drawImage(profileImgElement, 0, 0);
+                        const base64 = canvas.toDataURL('image/jpeg');
+                        doc.addImage(base64, 'JPEG', imgX, (headerH - imgSize) / 2, imgSize, imgSize);
+                    } catch (e) {
+                        console.warn("Could not embed profile image in CV.", e);
+                    }
+                }
+
                 const nameStr = cvData.name.toUpperCase();
                 const titleStr = cvData.jobTitle;
                 const nameH = calculateTextHeight(nameStr, textMaxW, 22);
@@ -727,7 +756,28 @@ export default function Home() {
                     currentY += V_RHYTHM.ENTRY;
                 });
 
-                // --- 4. SKILLS SECTION (START ON PAGE 2 AS REQUESTED) ---
+                // --- 4. REFERENCES SECTION ---
+                renderMainHeading("References");
+                cvData.references.forEach(ref => {
+                    const refTotalH = calculateTextHeight(ref.name, MAIN_W, 10) + calculateTextHeight(ref.title, MAIN_W, 9) + 20;
+                    checkSpace(refTotalH);
+                    
+                    doc.setFont('helvetica', 'bold');
+                    doc.setFontSize(10);
+                    doc.setTextColor(0, 0, 0);
+                    currentY += renderSafeText(ref.name, mainX, MAIN_W, 10);
+                    
+                    doc.setFont('helvetica', 'normal');
+                    doc.setFontSize(9);
+                    doc.setTextColor(COLORS.SUB[0], COLORS.SUB[1], COLORS.SUB[2]);
+                    currentY += renderSafeText(`${ref.title} at ${ref.company}`, mainX, MAIN_W, 9);
+                    
+                    doc.setTextColor(COLORS.TEXT[0], COLORS.TEXT[1], COLORS.TEXT[2]);
+                    const contactLine = [ref.email, ref.phone].filter(Boolean).join(" | ");
+                    currentY += renderSafeText(contactLine, mainX, MAIN_W, 8.5) + 10;
+                });
+
+                // --- 5. SKILLS SECTION (START ON PAGE 2 AS REQUESTED) ---
                 if (doc.internal.getNumberOfPages() < 2) {
                     doc.addPage();
                     drawModernBackdrop();
@@ -814,6 +864,20 @@ export default function Home() {
                     currentY += 12;
                     doc.text(edu.university, MARGIN, currentY);
                     currentY += 15;
+                });
+
+                addClassicSection("References");
+                cvData.references.forEach(ref => {
+                    checkSpace(40);
+                    doc.setFont('helvetica', 'bold');
+                    doc.text(ref.name, MARGIN, currentY);
+                    currentY += 12;
+                    doc.setFont('helvetica', 'normal');
+                    doc.text(`${ref.title} at ${ref.company}`, MARGIN, currentY);
+                    currentY += 12;
+                    const contactLine = [ref.email, ref.phone].filter(Boolean).join(" | ");
+                    doc.text(contactLine, MARGIN, currentY);
+                    currentY += 20;
                 });
             }
 
