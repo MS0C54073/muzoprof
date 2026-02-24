@@ -1,3 +1,4 @@
+
 'use client';
 
 import Image from 'next/image';
@@ -5,7 +6,7 @@ import Link from 'next/link';
 import TranslatedText from '@/app/components/translated-text';
 import { Button } from '@/components/ui/button';
 import { SocialIcons } from '@/components/social-icons';
-import { ArrowRight, Award, BrainCircuit, Calendar, Code, Database, Download, Eye, ExternalLink, Github, Globe, GraduationCap, Loader2, Mail, Network, Phone, Server, Shield, Smartphone, Star, Users, Check, UserCog, ChevronDown, Calculator, Terminal, Gamepad, Film } from 'lucide-react';
+import { ArrowRight, Award, BrainCircuit, Calendar, Code, Database, Download, Eye, ExternalLink, Github, Globe, GraduationCap, Loader2, Mail, Network, Phone, Server, Shield, Smartphone, Star, Users, Check, UserCog, ChevronDown, Calculator, Terminal, Gamepad, Film, Edit, Layout } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
@@ -14,9 +15,21 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion"
+} from "@/components/ui/accordion";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogFooter,
+} from "@/components/ui/dialog";
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Label } from '@/components/ui/label';
 import { jsPDF } from 'jspdf';
-import { useState, type ComponentType } from 'react';
+import { useState, useEffect } from 'react';
 import { getAnalytics, logEvent } from "firebase/analytics";
 import { app, storage, db }from '@/lib/firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
@@ -26,11 +39,38 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Label } from '@/components/ui/label';
 import type { Order } from '@/lib/types';
 
+// --- CV Data Types ---
+interface CvExperience {
+    title: string;
+    company: string;
+    location: string;
+    duration: string;
+    details: string[];
+}
+
+interface CvEducation {
+    degree: string;
+    university: string;
+    duration: string;
+    note?: string;
+}
+
+interface CvData {
+    name: string;
+    jobTitle: string;
+    email: string;
+    phone: string;
+    location: string;
+    linkedin: string;
+    github: string;
+    portfolio: string;
+    summary: string;
+    skills: string[];
+    experience: CvExperience[];
+    education: CvEducation[];
+}
 
 const skills = [
     { name: 'Laravel (PHP)', icon: <Server className="h-6 w-6" /> },
@@ -45,6 +85,7 @@ const skills = [
     { name: 'Networking', icon: <Network className="h-6 w-6" /> },
     { name: 'Databases (PostgreSQL, Supabase, MongoDB, Firebase)', icon: <Database className="h-6 w-6" /> },
     { name: 'AI & Automation', icon: <BrainCircuit className="h-6 w-6" /> },
+    { name: 'AI SDK by Vercel', icon: <BrainCircuit className="h-6 w-6" /> },
     { name: 'Firebase Studio', icon: <BrainCircuit className="h-6 w-6" /> },
     { name: 'Google AI Studio', icon: <BrainCircuit className="h-6 w-6" /> },
     { name: 'AI SDK (Vercel)', icon: <BrainCircuit className="h-6 w-6" /> },
@@ -225,7 +266,7 @@ const tutoringExperience = {
     ]
 };
 
-const education = [
+const educationData = [
     {
         degree: "Bachelor's of Science, Software and Administration of Information Systems",
         university: "Kursk State University | Kursk, Russia",
@@ -368,6 +409,36 @@ export default function Home() {
     const [showAllExperience, setShowAllExperience] = useState(false);
     const [openAccordionItems, setOpenAccordionItems] = useState<string[]>([]);
     const [showAllEducation, setShowAllEducation] = useState(false);
+    const [cvLayout, setCvLayout] = useState<'modern' | 'classic'>('modern');
+    
+    // --- State for CV Data (Editable) ---
+    const [cvData, setCvData] = useState<CvData>({
+        name: "Musonda Salimu",
+        jobTitle: "IT Professional | Software Developer | AI | Tutor",
+        email: "musondasalim@gmail.com",
+        phone: "+260966882901",
+        location: "Lusaka, Zambia",
+        linkedin: "linkedin.com/in/musonda-salimu",
+        github: "github.com/MS0C54073",
+        portfolio: "https://tinyurl.com/muzoslim",
+        summary: "A results-driven IT professional with a dynamic educational background in IT, Technological Entrepreneurship and Innovation Management, Management in the Digital Economy, Development of Digital Twins, and Management of High Tech Programs and Projects. This diverse expertise is applied to software development, system administration, and AI, with a special focus on securely connecting large language models to data and conceptualizing advanced AI assistants.",
+        skills: [
+            "Python", "JavaScript", "TypeScript", "C++", "C#", "PHP", "SQL",
+            "React", "Next.js", "Node.js", "Express", "Django", "Laravel", ".NET",
+            "PostgreSQL", "MongoDB", "Firebase", "Genkit", "Vercel AI SDK", "RAG",
+            "SysAdmin", "Networking", "Cybersecurity", "Project Management", "UI/UX"
+        ],
+        experience: professionalExperiences.map(exp => ({
+            ...exp,
+            location: "Remote / On-site",
+            details: exp.details.slice(0, 6) // Limit bullet points to 6 as requested
+        })),
+        education: educationData.map(edu => ({
+            ...edu,
+            university: edu.university.split('|')[0].trim()
+        }))
+    });
+
     const initialProjectsToShow = 4;
     const initialCertsToShow = 4;
     const initialExperienceToShow = 4;
@@ -466,467 +537,256 @@ export default function Home() {
             if (typeof window !== "undefined") {
                 if (process.env.NEXT_PUBLIC_FIREBASE_API_KEY) {
                     const analytics = getAnalytics(app);
-                    logEvent(analytics, 'cv_generated', { type: outputType });
-                } else {
-                    console.warn('Firebase Analytics is disabled. CV generation event will not be logged.');
+                    logEvent(analytics, 'cv_generated', { type: outputType, layout: cvLayout });
                 }
             }
             
-            const cvData = {
-                name: "Musonda Salimu",
-                jobTitle: "IT Professional | Software Developer | AI | Tutor",
-                contact: {
-                    email: "musondasalim@gmail.com",
-                    phone1: "+260966882901",
-                    phone2: "+260979287496",
-                    github: "github.com/MS0C54073",
-                    portfolio: "https://tinyurl.com/muzoslim",
-                },
-                summary: "A results-driven IT professional with a dynamic educational background in IT, Technological Entrepreneurship and Innovation Management, Management in the Digital Economy, Development of Digital Twins, and Management of High Tech Programs and Projects. This diverse expertise is applied to software development, system administration, and AI, with a special focus on securely connecting large language models to data and conceptualizing advanced AI assistants.",
-                skills: [
-                    "• Languages: Python, JavaScript, TypeScript, C++, C#, PHP, SQL",
-                    "• Frameworks: React, Next.js, Node.js/Express, Django, Laravel, .NET, Flutter",
-                    "• Databases: PostgreSQL (Supabase), MongoDB, Firebase",
-                    "• AI & Automation: AI Development (Genkit, Vercel AI SDK, Firebase Studio, Google AI Studio | Gemini API, RAG), Data Automation (n8n)",
-                    "• Ops & Security: SysAdmin, Networking, Cybersecurity (SIEM, IDS), Cloud (GCP, Firebase)",
-                    "• Tools: Docker, Git, Tableau (Foundational), Cursor 2.0",
-                    "• Business: Project Management, Microsoft 365/Office",
-                    "• Creative: Design & Media (Photoshop, Premiere Pro, Canva)",
-                ],
-                professionalExperience: [
-                    {
-                        title: "AI Content Evaluation Specialist (Project-Based)",
-                        company: "Invisible Technologies & Outlier",
-                        duration: "Aug 2024 – Sep 2025",
-                        details: [
-                            "Evaluated AI-generated content, including code, text, images, and videos, providing clear, human-readable summaries.",
-                            "Solved coding problems and ensured all technical outputs were functional, efficient, and reliable.",
-                            "Developed test cases and verification methods to confirm content quality and accuracy.",
-                            "Provided actionable feedback to improve AI content generation processes."
-                        ]
-                    },
-                     {
-                        title: "IT Specialist",
-                        company: "Embassy of the Republic of Zambia in Moscow, Russia",
-                        duration: "May 2025 – Jul 2025",
-                        details: [
-                           "Maintained and managed embassy IT systems.",
-                           "Provided Technical Support to ensure seamless digital operations."
-                        ]
-                    },
-                    {
-                        title: "AI Training Methods Researcher (Internship)",
-                        company: "Novosibirsk State Technical University",
-                        duration: "2022 – 2024",
-                        details: [
-                          "Tested new training algorithms specifically for Spiking Neural Networks (SNNs).",
-                          "Conducted experiments to evaluate the performance of various SNN training approaches.",
-                          "Managed and preprocessed datasets for training and evaluating SNN models."
-                        ]
-                    },
-                    {
-                        title: "System Administrator Intern",
-                        company: "Pensions and Insurance Authority",
-                        duration: "May 2022 – Oct 2022",
-                        details: [
-                            "Assisted in maintaining, securing, and optimizing the Authority’s IT infrastructure and websites.",
-                            "Contributed to the maintenance and development of the Authority’s official website to improve functionality and accessibility.",
-                            "Monitored system performance and resolved software, hardware, and network issues to ensure reliable operations.",
-                            "Provided ICT support and user training to staff, enhancing technical efficiency and digital literacy.",
-                            "Supported data backup, system updates."
-                        ]
-                    },
-                     {
-                      title: "Customer Care Assistant",
-                      company: "VITALITE Group",
-                      duration: "2021 (Temporal Contract)",
-                      details: [
-                        "Delivered professional customer support by responding to inquiries and resolving complaints.",
-                        "Communicated with customers across multiple channels, ensuring a positive and empathetic experience.",
-                        "Processed orders, forms, and applications while maintaining accurate records of transactions and feedback.",
-                        "Collaborated with colleagues to coordinate effective customer service solutions."
-                      ]
-                    },
-                    {
-                        title: "IT Intern / Trainee (Software Development & Networking Support)",
-                        company: "Kursk State University",
-                        duration: "May 2019 – Jul 2021",
-                        details: [
-                           "Participated in university-organized summer and winter trainee programs in partnership with various IT companies.",
-                           "Assisted in networking support, system setup, and maintenance of lab environments.",
-                           "Built, tested, and optimized software applications using C++, Python, and C#.",
-                           "Utilized automated debugging tools and performance optimization techniques to enhance application efficiency.",
-                           "Collaborated with industry professionals and mentors, gaining hands-on experience in real-world software development and IT support environments."
-                        ]
-                    },
-                    {
-                        title: "Customer Care Associate",
-                        company: "Tech Mahindra - outsourcing (Airtel Zambia PLC) services",
-                        duration: "Aug 2015 - Oct 2016",
-                        details: [
-                            "Ensured Customer Satisfaction through consistent standards of service excellence through implementation of continuous improvement initiatives.",
-                            "Provided excellent customer relationship management by resolving customer queries, selling, retention and relationship building.",
-                            "Promoted Airtel brand image by managing service delivery aligned to customer needs and business objectives.",
-                            "Adhered to good work ethics."
-                        ]
-                    },
-                    {
-                        title: "Internet Cafe Operator",
-                        company: "AbduTech InterNet Cafe",
-                        duration: "Dec 2013 - Aug 2015",
-                        details: [
-                            "Assisted customers with PC software including Microsoft Office, Adobe suites, Windows operating system installation, and other essential programs.",
-                            "Provided services such as encoding, printing, photocopying, typing, and downloading.",
-                            "Troubleshooted various computer applications, hardware, and software issues.",
-                            "Provided excellent customer care and maintained store records and inventories."
-                        ]
-                    },
-                     {
-                      title: "IT Support Freelancer",
-                      company: "Hybrid",
-                      duration: "2017 – Present",
-                      details: [
-                        "Providing remote or on-site technical assistance to individuals or businesses.",
-                        "Resolving hardware, software, and network issues via phone, email, or chat.",
-                        "Documenting solutions for clients."
-                      ]
-                    },
-                ].sort((a, b) => new Date(b.duration.split(' – ')[1] === 'Present' ? Date.now() : b.duration.split(' – ')[1] || 0).getTime() - new Date(a.duration.split(' – ')[1] === 'Present' ? Date.now() : a.duration.split(' – ')[1] || 0).getTime()),
-                tutoringExperience: [
-                    {
-                        title: "Freelance Tutor",
-                        company: "Self-Employed / Various Institutions",
-                        duration: "Dec 2019 – Present",
-                        details: [
-                            "Providing online and in-person instruction in programming and English for children, teenagers, and adults. Teaching Python, Roblox Studio, Unity, Figma, and Business & IT English. Delivering structured lessons, assessing learner progress, and developing tailored educational materials. Worked with EF Education First, Center of Modern English, Oxford Linguistic Centre (Novosibirsk), and FillCamp."
-                        ]
-                    },
-                ],
-                education: [
-                    {
-                        degree: "Bachelor's of Science, Software and Administration of Information Systems",
-                        university: "Kursk State University, Russia",
-                        duration: "Sep 2017 - Jul 2021",
-                    },
-                    {
-                        degree: "Bachelor’s Degree (Postgraduate Degree), Management in the Digital Economy",
-                        university: "Novosibirsk State Technical University",
-                        duration: "Sep 2023 - Dec 2023",
-                    },
-                    {
-                        degree: "Bachelor’s Degree (Postgraduate Degree), Technological Entrepreneurship and Innovation Management",
-                        university: "Novosibirsk State Technical University",
-                        duration: "Sep 2023 - Dec 2023",
-                    },
-                     {
-                        degree: "Diploma of Professional Retraining, Development of Digital Twins",
-                        university: "Novosibirsk State Technical University",
-                        duration: "Sep 2023 - Dec 2023",
-                    },
-                     {
-                        degree: "Bachelor’s Degree (Postgraduate Degree), Management of High Tech Programs and Projects",
-                        university: "Pskov State University",
-                        duration: "Sep 2023 - Dec 2023",
-                    },
-                    {
-                        degree: "Russian Language and Preparatory Program",
-                        university: "Belgorod State University",
-                        duration: "Oct 2016 - Jul 2017",
-                    },
-                    {
-                        degree: "General Certificate in Education (O-Levels)",
-                        university: "Arakan Boys Secondary School",
-                        duration: "2011 - 2013",
-                    },
-                    {
-                        degree: "Master's of Science, Informatics and Computer Engineering",
-                        university: "Novosibirsk State Technical University",
-                        duration: "Sep 2022 - Jul 2024",
-                        details: "Awaiting Official Translation and Certification in Zambia."
-                    },
-                ],
-                certifications: [
-                    {
-                        title: "AI Agents and Agentic AI in Python: Powered by Generative AI",
-                        issuer: "Vanderbilt University", type: "Specialization",
-                        date: "Completed Aug 2025",
-                        courses: ["AI Agents and Agentic AI Architecture in Python", "AI Agents and Agentic AI with Python & Generative AI"]
-                    },
-                    { title: "Prompt Engineering for ChatGPT", issuer: "Vanderbilt University", type: "Course", date: "Completed Aug 2025" },
-                    { title: "Introduction to Cybersecurity", issuer: "SMART ZAMBIA INSTITUTE (Cisco Networking Academy)", type: "Course", date: "Issued Jul 2025" },
-                    {
-                        title: "Google Cybersecurity Professional Certificate",
-                        issuer: "Google", type: "Specialization",
-                        date: "Completed Aug 2023",
-                        courses: ["Automate Cybersecurity Tasks with Python", "Sound the Alarm: Detection and Response", "Put It to Work: Prepare for Cybersecurity Jobs"]
-                    },
-                    { title: 'Teach English Now! Foundational Principles', issuer: 'Arizona State University (via Coursera)', type: 'Course', date: 'Completed Sep 2024' },
-                    { title: "Key Technologies for Business Specialization", issuer: "IBM", type: "Specialization", date: "Completed Aug 2023" },
-                    {
-                        title: "IT Fundamentals for Cybersecurity Specialization",
-                        issuer: "IBM", type: "Specialization",
-                        date: "Completed Jun 2022",
-                        courses: ["Operating Systems: Overview, Administration, and Security", "Cybersecurity Compliance Framework, Standards & Regulations", "Computer Networks and Network Security"]
-                    },
-                    { title: "C++ (Basic) Certificate", issuer: "HackerRank", type: "Certificate", date: "Issued Sep 2020", credentialId: "DEA4F08FE541" },
-                    { title: "Python (Basic) Certificate", issuer: "HackerRank", type: "Certificate", date: "Issued Aug 2020", credentialId: "6E56080D33F3" },
-                    { title: 'EF SET English Certificate', issuer: 'EF SET', type: "Certificate", date: 'Issued Sep 2024' },
-                    { title: 'Teacher Of English To Speakers Of Other Languages (TEFL)', issuer: 'Teacher Record', type: "Certificate", date: 'Issued Sep 2023', credentialId: 'TR2672252278' },
-                ],
-                references: [
-                    {
-                        name: "Innocent Mukupa",
-                        title: "ICT Manager",
-                        company: "Pensions & Insurance Authority",
-                        email: "Innocent.mukupa@pia.org.zm",
-                        phone: "+260-211-251401 | +260-211-251405 | Fax: +260-211-251492"
-                    },
-                    {
-                        name: "Prof. Aaron B. Zyambo",
-                        title: "CEO & Lead Consultant",
-                        company: "Mega Vision Logistics Int'l Ltd",
-                        email: "abzyambo@yahoo.com",
-                        phone: "+260 97 9793999"
-                    },
-                     {
-                        name: "Mwansa Kapoka",
-                        title: "Team Leader",
-                        company: "TechMahindra Limited Zambia",
-                        email: "mwansa.kapoka@sc.com",
-                        phone: "+260 978980443"
-                    },
-                    {
-                        name: "Allan Mwimbu",
-                        title: "Supervior | First Secretary Political",
-                        company: "Embassy of the Republic of Zambia in Moscow, Russia",
-                        email: null,
-                        phone: "+79855159011"
-                    },
-                    {
-                        name: "Ann Chibinga",
-                        title: "Team Leader",
-                        company: "VITALITE Zambia",
-                        email: "ann.chibinga@vitalitegroup.com",
-                        phone: "(+260) 777407124"
-                    },
-                ]
-            };
-            
-            const doc = new jsPDF({ unit: 'px', format: 'a4' });
-            doc.setFont('Helvetica', 'normal');
-
-            const pageHeight = doc.internal.pageSize.getHeight();
+            const doc = new jsPDF({ unit: 'pt', format: 'a4' });
             const pageWidth = doc.internal.pageSize.getWidth();
-            const margin = 30;
-            const contentWidth = pageWidth - margin * 2;
-            const lineHeight = 1.15;
+            const pageHeight = doc.internal.pageSize.getHeight();
+            const margin = 40;
+            const sidebarWidth = pageWidth * 0.35;
+            const mainWidth = pageWidth - sidebarWidth - (margin * 2);
             let y = 0;
 
-            const checkPageBreak = (heightNeeded: number) => {
-                if (y + heightNeeded > pageHeight - margin) {
+            // --- Colors ---
+            const colorNavy = [31, 42, 68];
+            const colorGold = [201, 162, 39];
+            const colorGrey = [243, 244, 246];
+            const colorText = [51, 51, 51];
+            const colorSubtext = [102, 102, 102];
+
+            const checkPageBreak = (needed: number) => {
+                if (y + needed > pageHeight - margin) {
                     doc.addPage();
-                    y = margin;
+                    if (cvLayout === 'modern') {
+                        drawModernLayoutBase();
+                    }
+                    y = margin + 20;
                 }
             };
-            
-            const addSectionTitle = (title: string, yPos: number) => {
-                doc.setFontSize(11);
-                doc.setFont('Helvetica', 'bold');
-                doc.setTextColor(37, 99, 235); // #2563EB
-                doc.text(title.toUpperCase(), margin, yPos);
-                const titleHeight = 11;
-                const lineY = yPos + titleHeight / 2 + 1;
-                doc.setDrawColor(226, 232, 240); // slate-200
-                doc.setLineWidth(0.5);
-                doc.line(margin + doc.getTextWidth(title) + 5, pageWidth - margin, lineY);
-                return yPos + titleHeight + 4; // Return new y position
+
+            const drawModernLayoutBase = () => {
+                // Sidebar Background
+                doc.setFillColor(colorGrey[0], colorGrey[1], colorGrey[2]);
+                doc.rect(0, 0, sidebarWidth, pageHeight, 'F');
+                // Sidebar Divider
+                doc.setDrawColor(220, 220, 220);
+                doc.line(sidebarWidth, 0, sidebarWidth, pageHeight);
             };
 
-            // --- Header ---
-            y = margin;
-            
-            doc.setFontSize(24);
-            doc.setFont('Helvetica', 'bold');
-            doc.setTextColor(0, 0, 0);
-            doc.text(cvData.name, margin, y + 5);
-            y += 20;
-            
-            doc.setFontSize(11);
-            doc.setFont('Helvetica', 'normal');
-            doc.setTextColor(82, 82, 91); // zinc-600
-            doc.text(cvData.jobTitle, margin, y + 5);
-            y += 15;
-
-            doc.setFontSize(9);
-            const contactLine = `${cvData.contact.email}  •  ${cvData.contact.phone1}  •  ${cvData.contact.phone2}`;
-            doc.text(contactLine, margin, y + 5);
-            y += 12;
-            const socialLine = `GitHub: ${cvData.contact.github}  •  Portfolio: ${cvData.contact.portfolio}`;
-            doc.text(socialLine, margin, y + 5);
-            y += 5;
-            
-            // --- Summary ---
-            y = addSectionTitle("Summary", y + 15);
-            doc.setFontSize(9);
-            doc.setFont('Helvetica', 'normal');
-            doc.setTextColor(51, 65, 85); // slate-700
-            const summaryLines = doc.splitTextToSize(cvData.summary, contentWidth);
-            doc.text(summaryLines, margin, y);
-            y += summaryLines.length * 9 * lineHeight;
-
-            // --- Core Competencies ---
-            y = addSectionTitle("Core Competencies", y);
-            doc.setFontSize(9);
-            doc.setFont('Helvetica', 'normal');
-            doc.setTextColor(51, 65, 85);
-            
-            const skillsText = cvData.skills.join(" ");
-            const skillsLines = doc.splitTextToSize(skillsText, contentWidth);
-            checkPageBreak(skillsLines.length * 9 * lineHeight);
-            doc.text(skillsLines, margin, y);
-            y += (skillsLines.length * 9 * lineHeight) + 4;
-
-
-            const renderExperience = (exp: any) => {
-                checkPageBreak(40);
-                doc.setFontSize(10);
-                doc.setFont('Helvetica', 'bold');
-                doc.setTextColor(0, 0, 0);
-                doc.text(exp.title, margin, y);
-
-                doc.setFont('Helvetica', 'normal');
-                doc.setTextColor(82, 82, 91);
-                doc.text(exp.duration, pageWidth - margin, y, { align: 'right' });
-                y += 10 * lineHeight;
-
-                doc.setFontSize(9);
-                doc.setFont('Helvetica', 'italic');
-                doc.text(exp.company, margin, y);
-                y += 10;
+            if (cvLayout === 'modern') {
+                // 1. Full-width Top Header
+                doc.setFillColor(colorNavy[0], colorNavy[1], colorNavy[2]);
+                doc.rect(0, 0, pageWidth, 120, 'F');
                 
+                doc.setTextColor(colorGold[0], colorGold[1], colorGold[2]);
+                doc.setFont('times', 'bold');
+                doc.setFontSize(28);
+                const nameUpper = cvData.name.toUpperCase();
+                doc.text(nameUpper, pageWidth / 2, 65, { align: 'center' });
+                
+                doc.setTextColor(255, 255, 255);
+                doc.setFont('helvetica', 'normal');
+                doc.setFontSize(12);
+                doc.text(cvData.jobTitle, pageWidth / 2, 85, { align: 'center' });
+
+                drawModernLayoutBase();
+                
+                // --- SIDEBAR CONTENT (Left) ---
+                y = 150;
+                const sidebarX = 30;
+                const sidebarContentWidth = sidebarWidth - 60;
+
+                const addSidebarTitle = (title: string) => {
+                    doc.setTextColor(colorNavy[0], colorNavy[1], colorNavy[2]);
+                    doc.setFont('helvetica', 'bold');
+                    doc.setFontSize(11);
+                    doc.text(title.toUpperCase(), sidebarX, y);
+                    y += 15;
+                };
+
+                // Contact
+                addSidebarTitle("Contact");
                 doc.setFontSize(9);
-                doc.setFont('Helvetica', 'normal');
-                doc.setTextColor(51, 65, 85);
-                exp.details.forEach((detail: string) => {
-                    const detailLines = doc.splitTextToSize(`•  ${detail}`, contentWidth - 10);
-                    checkPageBreak(detailLines.length * 9 * lineHeight + 2);
-                    doc.text(detailLines, margin + 5, y);
-                    y += detailLines.length * 9 * lineHeight;
+                doc.setTextColor(colorText[0], colorText[1], colorText[2]);
+                doc.setFont('helvetica', 'normal');
+                
+                const contactItems = [
+                    { label: "Phone", val: cvData.phone },
+                    { label: "Email", val: cvData.email },
+                    { label: "Location", val: cvData.location },
+                    { label: "LinkedIn", val: cvData.linkedin }
+                ];
+                
+                contactItems.forEach(item => {
+                    doc.setFont('helvetica', 'bold');
+                    doc.text(`${item.label}:`, sidebarX, y);
+                    doc.setFont('helvetica', 'normal');
+                    const lines = doc.splitTextToSize(item.val, sidebarContentWidth);
+                    doc.text(lines, sidebarX, y + 10);
+                    y += (lines.length * 10) + 8;
                 });
-                y += 6;
-            };
 
-            // --- Work Experience ---
-            y = addSectionTitle("Work Experience", y);
-            cvData.professionalExperience.forEach(renderExperience);
-
-            // --- Tutoring Experience ---
-            y = addSectionTitle("Tutoring & Teaching", y);
-            cvData.tutoringExperience.forEach(renderExperience);
-
-
-            // --- Education ---
-            y = addSectionTitle("Education", y);
-            cvData.education.forEach(edu => {
-                checkPageBreak(edu.details ? 30 : 20);
-                doc.setFontSize(10);
-                doc.setFont('Helvetica', 'bold');
-                doc.setTextColor(0, 0, 0);
-                doc.text(edu.degree, margin, y);
-
-                doc.setFont('Helvetica', 'normal');
-                doc.setTextColor(82, 82, 91);
-                doc.text(edu.duration, pageWidth - margin, y, { align: 'right' });
-                y += 10 * lineHeight;
-
-                doc.setFontSize(9);
-                doc.setFont('Helvetica', 'italic');
-                doc.text(edu.university, margin, y);
                 y += 10;
 
-                if (edu.details) {
-                    doc.setFontSize(8);
-                    doc.setFont('Helvetica', 'normal');
-                    const detailLines = doc.splitTextToSize(edu.details, contentWidth - 5);
-                    checkPageBreak(detailLines.length * 8 * lineHeight);
-                    doc.text(detailLines, margin + 5, y);
-                    y += detailLines.length * 8 * lineHeight;
-                }
-                y += 4;
-            });
+                // Education
+                addSidebarTitle("Education");
+                cvData.education.forEach(edu => {
+                    doc.setFontSize(9);
+                    doc.setFont('helvetica', 'bold');
+                    const eduLines = doc.splitTextToSize(edu.degree.toUpperCase(), sidebarContentWidth);
+                    doc.text(eduLines, sidebarX, y);
+                    y += (eduLines.length * 10);
+                    
+                    doc.setFont('helvetica', 'normal');
+                    doc.setTextColor(colorSubtext[0], colorSubtext[1], colorSubtext[2]);
+                    doc.text(edu.university, sidebarX, y);
+                    y += 10;
+                    doc.text(edu.duration, sidebarX, y);
+                    y += 18;
+                    doc.setTextColor(colorText[0], colorText[1], colorText[2]);
+                });
 
-            // --- Licenses & Certifications ---
-            checkPageBreak(50); // check for space before starting the section
-            y = addSectionTitle("Licenses & Certifications", y);
-            cvData.certifications.forEach(cert => {
-                const requiredHeight = (cert.courses ? 28 : 18) + (cert.credentialId ? 8 : 0);
-                checkPageBreak(requiredHeight);
-
-                doc.setFontSize(10);
-                doc.setFont('Helvetica', 'bold');
-                doc.setTextColor(0, 0, 0);
-                doc.text(cert.title, margin, y);
-                y += 10 * lineHeight;
-
-                doc.setFontSize(9);
-                doc.setFont('Helvetica', 'normal');
-                doc.setTextColor(82, 82, 91);
-                const issuerLine = `${cert.issuer} · ${cert.type}`;
-                doc.text(issuerLine, margin, y);
-                doc.text(cert.date, pageWidth - margin, y, { align: 'right' });
                 y += 10;
 
-                if (cert.courses) {
-                    doc.setFontSize(8);
-                    doc.setFont('Helvetica', 'italic');
-                    const coursesText = `Relevant Coursework: ${cert.courses.join(', ')}`;
-                    const courseLines = doc.splitTextToSize(coursesText, contentWidth);
-                    checkPageBreak(courseLines.length * 8 * lineHeight);
-                    doc.text(courseLines, margin, y);
-                    y += courseLines.length * 8 * lineHeight;
-                }
+                // Skills
+                addSidebarTitle("Skills");
+                doc.setFontSize(9);
+                doc.setFont('helvetica', 'normal');
+                const skillLines = doc.splitTextToSize(cvData.skills.join(", "), sidebarContentWidth);
+                doc.text(skillLines, sidebarX, y);
+                y += (skillLines.length * 10) + 20;
+
+                // --- MAIN CONTENT (Right) ---
+                y = 150;
+                const mainX = sidebarWidth + 30;
                 
-                if (cert.credentialId) {
-                    doc.setFontSize(8);
-                    doc.setFont('Helvetica', 'italic');
-                    doc.text(`Credential ID: ${cert.credentialId}`, margin, y);
-                    y += 8;
-                }
-                y += 4;
-            });
-            
-             // --- References ---
-            doc.addPage();
-            y = margin;
-            y = addSectionTitle("References", y);
-            cvData.references.forEach(ref => {
-                checkPageBreak(30);
+                const addMainTitle = (title: string) => {
+                    doc.setTextColor(colorNavy[0], colorNavy[1], colorNavy[2]);
+                    doc.setFont('helvetica', 'bold');
+                    doc.setFontSize(13);
+                    doc.text(title.toUpperCase(), mainX, y);
+                    y += 5;
+                    doc.setDrawColor(colorNavy[0], colorNavy[1], colorNavy[2]);
+                    doc.setLineWidth(0.5);
+                    doc.line(mainX, y, pageWidth - margin, y);
+                    y += 20;
+                };
+
+                // Profile
+                addMainTitle("Profile");
+                doc.setTextColor(colorText[0], colorText[1], colorText[2]);
+                doc.setFont('helvetica', 'normal');
                 doc.setFontSize(10);
-                doc.setFont('Helvetica', 'bold');
-                doc.text(ref.name, margin, y);
-                y += 10;
+                const summaryLines = doc.splitTextToSize(cvData.summary, mainWidth);
+                doc.text(summaryLines, mainX, y);
+                y += (summaryLines.length * 12) + 25;
+
+                // Experience
+                addMainTitle("Professional Experience");
+                cvData.experience.forEach(exp => {
+                    checkPageBreak(100);
+                    doc.setFont('helvetica', 'bold');
+                    doc.setFontSize(11);
+                    doc.setTextColor(0, 0, 0);
+                    doc.text(exp.title.toUpperCase(), mainX, y);
+                    y += 14;
+                    
+                    doc.setFont('helvetica', 'normal');
+                    doc.setFontSize(10);
+                    doc.setTextColor(colorSubtext[0], colorSubtext[1], colorSubtext[2]);
+                    doc.text(`${exp.company} | ${exp.duration}`, mainX, y);
+                    y += 15;
+                    
+                    doc.setTextColor(colorText[0], colorText[1], colorText[2]);
+                    exp.details.forEach(detail => {
+                        const detailLines = doc.splitTextToSize(`• ${detail}`, mainWidth - 10);
+                        checkPageBreak(detailLines.length * 12);
+                        doc.text(detailLines, mainX + 5, y);
+                        y += (detailLines.length * 12);
+                    });
+                    y += 15;
+                });
+
+            } else {
+                // --- CLASSIC ATS LAYOUT ---
+                y = margin;
+                doc.setFont('helvetica', 'bold');
+                doc.setFontSize(24);
+                doc.text(cvData.name.toUpperCase(), pageWidth / 2, y, { align: 'center' });
+                y += 20;
                 
-                doc.setFontSize(9);
-                doc.setFont('Helvetica', 'normal');
-                doc.text(`${ref.title}, ${ref.company}`, margin, y);
-                y += 9;
+                doc.setFontSize(10);
+                doc.setFont('helvetica', 'normal');
+                const contactStr = `${cvData.email}  |  ${cvData.phone}  |  ${cvData.location}`;
+                doc.text(contactStr, pageWidth / 2, y, { align: 'center' });
+                y += 15;
+                const linksStr = `GitHub: ${cvData.github}  |  Portfolio: ${cvData.portfolio}`;
+                doc.text(linksStr, pageWidth / 2, y, { align: 'center' });
+                y += 30;
 
-                if (ref.email) {
-                    doc.text(`Email: ${ref.email}`, margin, y);
-                    y += 9;
-                }
-                 if (ref.phone) {
-                    doc.text(`Phone: ${ref.phone}`, margin, y);
-                    y += 9;
-                }
-                y += 8;
-            });
+                const addSection = (title: string) => {
+                    doc.setFont('helvetica', 'bold');
+                    doc.setFontSize(12);
+                    doc.text(title.toUpperCase(), margin, y);
+                    y += 5;
+                    doc.setLineWidth(1);
+                    doc.line(margin, y, pageWidth - margin, y);
+                    y += 15;
+                };
 
+                addSection("Professional Summary");
+                doc.setFont('helvetica', 'normal');
+                doc.setFontSize(10);
+                const summaryLines = doc.splitTextToSize(cvData.summary, pageWidth - margin * 2);
+                doc.text(summaryLines, margin, y);
+                y += (summaryLines.length * 12) + 20;
+
+                addSection("Technical Skills");
+                const skillLines = doc.splitTextToSize(cvData.skills.join(", "), pageWidth - margin * 2);
+                doc.text(skillLines, margin, y);
+                y += (skillLines.length * 12) + 20;
+
+                addSection("Professional Experience");
+                cvData.experience.forEach(exp => {
+                    checkPageBreak(80);
+                    doc.setFont('helvetica', 'bold');
+                    doc.text(exp.title, margin, y);
+                    doc.setFont('helvetica', 'normal');
+                    doc.text(exp.duration, pageWidth - margin, y, { align: 'right' });
+                    y += 12;
+                    doc.setFont('helvetica', 'italic');
+                    doc.text(exp.company, margin, y);
+                    y += 15;
+                    
+                    doc.setFont('helvetica', 'normal');
+                    exp.details.forEach(detail => {
+                        const detailLines = doc.splitTextToSize(`- ${detail}`, pageWidth - margin * 2 - 10);
+                        checkPageBreak(detailLines.length * 12);
+                        doc.text(detailLines, margin + 10, y);
+                        y += (detailLines.length * 12);
+                    });
+                    y += 10;
+                });
+
+                addSection("Education");
+                cvData.education.forEach(edu => {
+                    checkPageBreak(40);
+                    doc.setFont('helvetica', 'bold');
+                    doc.text(edu.degree, margin, y);
+                    doc.setFont('helvetica', 'normal');
+                    doc.text(edu.duration, pageWidth - margin, y, { align: 'right' });
+                    y += 12;
+                    doc.text(edu.university, margin, y);
+                    y += 15;
+                });
+            }
 
             if (outputType === 'preview') {
                 doc.output('dataurlnewwindow');
             } else {
-                doc.save('MuzoSaliCV.pdf');
+                doc.save(`${cvData.name.replace(/\s+/g, '_')}_CV.pdf`);
             }
         } catch (error) {
             console.error("Error generating PDF:", error);
@@ -983,10 +843,57 @@ export default function Home() {
                   <TranslatedText text="Service Cost" />
               </Link>
             </Button>
-            <Button onClick={() => generateCv('download')} size="lg" variant="outline" className="hover:bg-accent hover:text-accent-foreground" disabled={isGenerating}>
-                  {isGenerating ? <Loader2 className="mr-2 h-5 w-5 animate-spin" /> : <Download className="mr-2 h-5 w-5" />}
-                  <TranslatedText text="Download CV" />
-            </Button>
+            
+            {/* --- CV Generator Controls --- */}
+            <div className="flex gap-2">
+                <Dialog>
+                    <DialogTrigger asChild>
+                        <Button variant="outline" size="lg">
+                            <Layout className="mr-2 h-5 w-5" />
+                            <TranslatedText text="CV Options" />
+                        </Button>
+                    </DialogTrigger>
+                    <DialogContent className="max-w-md">
+                        <DialogHeader>
+                            <DialogTitle><TranslatedText text="CV Export Settings" /></DialogTitle>
+                            <DialogDescription>
+                                <TranslatedText text="Choose your preferred layout style for the generated PDF." />
+                            </DialogDescription>
+                        </DialogHeader>
+                        <div className="grid gap-4 py-4">
+                            <div className="flex items-center justify-between p-3 border rounded-lg hover:bg-accent cursor-pointer transition-colors" onClick={() => setCvLayout('modern')}>
+                                <div className="flex items-center gap-3">
+                                    <div className={cn("w-4 h-4 rounded-full border-2", cvLayout === 'modern' ? "bg-primary border-primary" : "border-muted-foreground")} />
+                                    <div>
+                                        <p className="font-semibold"><TranslatedText text="Modern Premium" /></p>
+                                        <p className="text-xs text-muted-foreground"><TranslatedText text="Elegant two-column design with navy header." /></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="flex items-center justify-between p-3 border rounded-lg hover:bg-accent cursor-pointer transition-colors" onClick={() => setCvLayout('classic')}>
+                                <div className="flex items-center gap-3">
+                                    <div className={cn("w-4 h-4 rounded-full border-2", cvLayout === 'classic' ? "bg-primary border-primary" : "border-muted-foreground")} />
+                                    <div>
+                                        <p className="font-semibold"><TranslatedText text="Classic ATS" /></p>
+                                        <p className="text-xs text-muted-foreground"><TranslatedText text="Standard professional layout, 100% ATS optimized." /></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <DialogFooter>
+                            <Button onClick={() => generateCv('download')} className="w-full" disabled={isGenerating}>
+                                {isGenerating ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Download className="mr-2 h-4 w-4" />}
+                                <TranslatedText text="Download CV" />
+                            </Button>
+                        </DialogFooter>
+                    </DialogContent>
+                </Dialog>
+                
+                <Button onClick={() => generateCv('preview')} size="lg" variant="outline" disabled={isGenerating}>
+                    <Eye className="mr-2 h-5 w-5" />
+                    <TranslatedText text="Preview" />
+                </Button>
+            </div>
           </div>
         </section>
 
@@ -1222,7 +1129,7 @@ export default function Home() {
           <h2 className="text-3xl font-bold text-center mb-12"><TranslatedText text="Education" /></h2>
           <div className="max-w-3xl mx-auto relative pl-8">
             <div className="absolute left-0 top-0 h-full w-0.5 bg-border"></div>
-            {(showAllEducation ? education : education.slice(0, initialEducationToShow)).map((edu, index) => (
+            {(showAllEducation ? educationData : educationData.slice(0, initialEducationToShow)).map((edu, index) => (
               <div key={index} className={cn("mb-12 relative", (edu as any).blurred && "blur-3xl pointer-events-none")}>
                 <div className="absolute left-[-34px] top-1.5 w-4 h-4 bg-primary rounded-full border-4 border-background"></div>
                 <p className="text-sm text-muted-foreground"><TranslatedText text={edu.duration}/></p>
@@ -1234,7 +1141,7 @@ export default function Home() {
               </div>
             ))}
           </div>
-          {!showAllEducation && education.length > initialEducationToShow && (
+          {!showAllEducation && educationData.length > initialEducationToShow && (
               <div className="text-center mt-8">
                   <Button variant="secondary" onClick={() => setShowAllEducation(true)}>
                       <TranslatedText text="View All Education" />
