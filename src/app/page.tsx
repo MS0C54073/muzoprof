@@ -331,6 +331,7 @@ const awards = [
 const certifications = [
     { title: 'Introduction to Cybersecurity', issuer: 'SMART ZAMBIA INSTITUTE (Cisco Networking Academy)', date: 'Jul 2025', skills: ['Cybersecurity'] },
     { title: 'AI Agents and Agentic AI in Python: Powered by Generative AI', issuer: 'Vanderbilt University', date: 'Aug 2025', credentialId: 'K42YL24QMRT3' },
+    { title: 'Introduction to Software Engineering', issuer: 'IBM', date: '2024', credentialId: 'FA7LTGBWF47V', url: 'https://www.coursera.org/account/accomplishments/certificate/FA7LTGBWF47V' },
     { title: 'Automate Cybersecurity Tasks with Python', issuer: 'Google', date: 'Aug 2023', credentialId: 'C7XRV7CQNCQM', skills: ['PEP 8 style guide'] },
     { title: 'Assets, Threats, and Vulnerabilities', issuer: 'Google', date: 'Aug 2023', credentialId: 'VX5TA2Q2S67K' },
     { title: 'Connect and Protect: Networks and Network Security', issuer: 'Google', date: 'Aug 2023', credentialId: 'QTMMW72GVFNR' },
@@ -1303,6 +1304,14 @@ export default function Home() {
                               <p className="text-xs text-muted-foreground mt-1">
                                   <TranslatedText text="Credential ID: "/> {cert.credentialId}
                               </p>
+                          )}
+                          {(cert as any).url && (
+                              <Button variant="link" asChild className="p-0 h-auto text-xs mt-2">
+                                  <a href={(cert as any).url} target="_blank" rel="noopener noreferrer">
+                                      <ExternalLink className="mr-1 h-3 w-3" />
+                                      <TranslatedText text="Verify Certificate" />
+                                  </a>
+                              </Button>
                           )}
                           {cert.skills && (
                               <div className="mt-2">
