@@ -110,10 +110,38 @@ const skills = [
 ];
 
 const projects = [
+  // --- AI & Machine Learning ---
   {
     title: 'ai-chatBot using AI SDK by Vercel',
     link: 'https://github.com/MS0C54073/ai-chatBot_muzoGPT',
+    category: 'AI/ML'
   },
+  {
+    title: 'Machine Learning Disease Predictor',
+    link: 'https://github.com/MS0C54073/MLDiseasepredictor',
+    category: 'AI/ML'
+  },
+  {
+    title: 'Spiking Neural Network (SNN) with PyTorch',
+    link: 'https://github.com/MS0C54073/Spiking-Neural-Network-SNN-with-PyTorch',
+    category: 'AI/ML'
+  },
+  {
+    title: 'AI CV Generator & Resume Parser',
+    link: 'https://github.com/MS0C54073/Cv_Generator/tree/master/resume',
+    category: 'AI/ML'
+  },
+  {
+    title: 'Detecting Fake News with Python',
+    link: 'https://github.com/MS0C54073/Detecting-Fake-News',
+    category: 'AI/ML'
+  },
+  {
+    title: 'Spotify Recommendation Model (ML)',
+    link: 'https://github.com/MS0C54073/Spotify-Recommendation-model',
+    category: 'AI/ML'
+  },
+  // --- Web & Software Development ---
   {
     title: 'Personal/Portfolio Website',
     link: 'https://github.com/MS0C54073/muzoprof',
@@ -155,10 +183,6 @@ const projects = [
   {
     title: 'STOCK PRICE PREDICTION',
     link: 'https://github.com/MS0C54073/Stocks-Price-Prediction-Python',
-  },
-  {
-    title: 'DETECTING FAKE NEWS WITH PYTHON',
-    link: 'https://github.com/MS0C54073/store-locator.git',
   },
   {
     title: 'STORE-LOCATOR',
@@ -239,7 +263,7 @@ const professionalExperiences = [
         details: [
             "Ensured Customer Satisfaction through consistent standards of service excellence through implementation of continuous improvement initiatives.",
             "Provided excellent customer relationship management by resolving customer queries, selling, retention and relationship building.",
-            "Promoted Airtel brand image by managing service delivery aligned to customer needs and business objectives.",
+            "Promoted Airtel brand image by managing service delivery aligned to customer needs and objectives.",
             "Adhered to good work ethics."
         ]
     },
@@ -1083,71 +1107,115 @@ export default function Home() {
                   </a>
               </Button>
           </div>
-          <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
-            {(showAllProjects ? projects : projects.slice(0, initialProjectsToShow)).map((project, index) => {
-              if (project.demo) {
-                return (
-                  <Card key={index} className="bg-card/50 hover:bg-accent/20 hover:border-primary transition-all duration-300 h-full flex flex-col">
-                    <CardHeader>
-                      <CardTitle className="text-accent group-hover:text-primary transition-colors">
-                        <TranslatedText text={project.title} />
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="flex-grow flex items-end">
-                      <div className="mt-4 flex w-full">
-                          <Button asChild variant="outline" className="flex-grow rounded-r-none focus:z-10">
-                            <a href={project.link} target="_blank" rel="noopener noreferrer">
-                                <Github className="mr-2 h-4 w-4" />
-                                <TranslatedText text="GitHub" />
-                              </a>
-                          </Button>
-                          <Button asChild variant="default" className="-ml-px rounded-l-none focus:z-10">
-                              <a href={project.demo} target="_blank" rel="noopener noreferrer">
-                                  <ExternalLink className="mr-2 h-4 w-4" />
-                                  <TranslatedText text="Demo" />
-                              </a>
-                          </Button>
-                      </div>
-                    </CardContent>
-                  </Card>
-                );
-              }
-              return (
-                <a 
-                  key={index}
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group block"
-                >
-                  <Card className="bg-card/50 hover:bg-accent/20 hover:border-primary transition-all duration-300 h-full">
-                    <CardHeader>
-                      <CardTitle className="text-accent group-hover:text-primary transition-colors">
-                          <TranslatedText text={project.title} />
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <Button asChild variant="outline" className="w-full">
-                            <span className="flex items-center">
-                                <Github className="mr-2 h-4 w-4" />
-                                <TranslatedText text="View on GitHub" />
-                              </span>
-                          </Button>
-                    </CardContent>
-                  </Card>
-                </a>
-              )
-            })}
+
+          {/* AI/ML Sub-Section */}
+          <div className="max-w-4xl mx-auto mb-16">
+            <h3 className="text-2xl font-bold text-primary mb-8 flex items-center justify-center gap-2">
+                <BrainCircuit className="h-7 w-7" />
+                <TranslatedText text="AI & Machine Learning" />
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {projects.filter(p => p.category === 'AI/ML').map((project, index) => (
+                    <a 
+                      key={index}
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group block"
+                    >
+                      <Card className="bg-card/50 hover:bg-accent/20 hover:border-primary transition-all duration-300 h-full">
+                        <CardHeader>
+                          <CardTitle className="text-accent group-hover:text-primary transition-colors text-lg">
+                              <TranslatedText text={project.title} />
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                            <Button asChild variant="outline" className="w-full">
+                                <span className="flex items-center">
+                                    <Github className="mr-2 h-4 w-4" />
+                                    <TranslatedText text="View on GitHub" />
+                                  </span>
+                              </Button>
+                        </CardContent>
+                      </Card>
+                    </a>
+                ))}
+            </div>
           </div>
-          {!showAllProjects && projects.length > initialProjectsToShow && (
-              <div className="text-center mt-8">
-                  <Button variant="secondary" onClick={() => setShowAllProjects(true)}>
-                      <TranslatedText text="View All Projects" />
-                      <ChevronDown className="ml-2 h-4 w-4" />
-                  </Button>
-              </div>
-          )}
-          <div className="max-w-4xl mx-auto mt-8">
+
+          {/* Web & General Section */}
+          <div className="max-w-4xl mx-auto">
+            <h3 className="text-2xl font-bold text-primary mb-8 flex items-center justify-center gap-2">
+                <Code className="h-7 w-7" />
+                <TranslatedText text="Web & Software Development" />
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {(showAllProjects ? projects.filter(p => !p.category) : projects.filter(p => !p.category).slice(0, initialProjectsToShow)).map((project, index) => {
+                if ((project as any).demo) {
+                  return (
+                    <Card key={index} className="bg-card/50 hover:bg-accent/20 hover:border-primary transition-all duration-300 h-full flex flex-col">
+                      <CardHeader>
+                        <CardTitle className="text-accent group-hover:text-primary transition-colors text-lg">
+                          <TranslatedText text={project.title} />
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent className="flex-grow flex items-end">
+                        <div className="mt-4 flex w-full">
+                            <Button asChild variant="outline" className="flex-grow rounded-r-none focus:z-10">
+                              <a href={project.link} target="_blank" rel="noopener noreferrer">
+                                  <Github className="mr-2 h-4 w-4" />
+                                  <TranslatedText text="GitHub" />
+                                </a>
+                            </Button>
+                            <Button asChild variant="default" className="-ml-px rounded-l-none focus:z-10">
+                                <a href={(project as any).demo} target="_blank" rel="noopener noreferrer">
+                                    <ExternalLink className="mr-2 h-4 w-4" />
+                                    <TranslatedText text="Demo" />
+                                </a>
+                            </Button>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  );
+                }
+                return (
+                  <a 
+                    key={index}
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group block"
+                  >
+                    <Card className="bg-card/50 hover:bg-accent/20 hover:border-primary transition-all duration-300 h-full">
+                      <CardHeader>
+                        <CardTitle className="text-accent group-hover:text-primary transition-colors text-lg">
+                            <TranslatedText text={project.title} />
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                          <Button asChild variant="outline" className="w-full">
+                              <span className="flex items-center">
+                                  <Github className="mr-2 h-4 w-4" />
+                                  <TranslatedText text="View on GitHub" />
+                                </span>
+                            </Button>
+                      </CardContent>
+                    </Card>
+                  </a>
+                )
+              })}
+            </div>
+            {!showAllProjects && projects.filter(p => !p.category).length > initialProjectsToShow && (
+                <div className="text-center mt-8">
+                    <Button variant="secondary" onClick={() => setShowAllProjects(true)}>
+                        <TranslatedText text="View All Projects" />
+                        <ChevronDown className="ml-2 h-4 w-4" />
+                    </Button>
+                </div>
+            )}
+          </div>
+
+          <div className="max-w-4xl mx-auto mt-12">
             <Alert variant="accent">
               <Terminal className="h-4 w-4" />
               <AlertTitle><TranslatedText text="Explore My Full Portfolio" /></AlertTitle>
