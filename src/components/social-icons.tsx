@@ -1,5 +1,4 @@
 
-
 'use client';
 
 import { Github, Youtube } from 'lucide-react';
@@ -51,5 +50,3 @@ export function SocialIcons({ className }: { className?: string }) {
     </TooltipProvider>
   );
 }
-
-    
