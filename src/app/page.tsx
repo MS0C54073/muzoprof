@@ -1,4 +1,3 @@
-
 'use client';
 
 import Image from 'next/image';
@@ -340,7 +339,6 @@ const educationData = [
         university: "Novosibirsk State Technical University",
         duration: "Sep 2022 - Jul 2024",
         note: "Awaiting Official Translation and Certification in Zambia.",
-        blurred: true,
     },
 ];
 
@@ -1186,7 +1184,7 @@ export default function Home() {
                     rel="noopener noreferrer"
                     className="group block"
                   >
-                    <Card className="bg-card/50 hover:bg-accent/20 hover:border-primary transition-all duration-300 h-full">
+                    <Card key={index} className="bg-card/50 hover:bg-accent/20 hover:border-primary transition-all duration-300 h-full">
                       <CardHeader>
                         <CardTitle className="text-accent group-hover:text-primary transition-colors text-lg">
                             <TranslatedText text={project.title} />
@@ -1297,7 +1295,7 @@ export default function Home() {
           <div className="max-w-3xl mx-auto relative pl-8">
             <div className="absolute left-0 top-0 h-full w-0.5 bg-border"></div>
             {(showAllEducation ? educationData : educationData.slice(0, initialEducationToShow)).map((edu, index) => (
-              <div key={index} className={cn("mb-12 relative", (edu as any).blurred && "blur-3xl pointer-events-none")}>
+              <div key={index} className={cn("mb-12 relative")}>
                 <div className="absolute left-[-34px] top-1.5 w-4 h-4 bg-primary rounded-full border-4 border-background"></div>
                 <p className="text-sm text-muted-foreground"><TranslatedText text={edu.duration}/></p>
                 <h3 className="text-xl font-bold text-accent"><TranslatedText text={edu.degree}/></h3>
@@ -1466,6 +1464,10 @@ export default function Home() {
                 <a href="tel:+260966882901" className="flex items-center gap-2 hover:text-primary">
                   <Phone className="h-4 w-4" />
                   <span>+260966882901</span>
+                </a>
+                <a href="tel:+260977288260" className="flex items-center gap-2 hover:text-primary">
+                  <Phone className="h-4 w-4" />
+                  <span>+260977288260</span>
                 </a>
                 <a href="tel:+260979287496" className="flex items-center gap-2 hover:text-primary">
                   <Phone className="h-4 w-4" />
