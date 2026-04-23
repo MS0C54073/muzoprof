@@ -300,6 +300,12 @@ const tutoringExperience = {
 
 const educationData = [
     {
+        degree: "Master's of Science, Information Science and Computer Engineering",
+        university: "Novosibirsk State Technical University",
+        duration: "Sep 2022 - Jul 2024",
+        note: "Awaiting Official Translation and Validation (Legalization) in Zambia.",
+    },
+    {
         degree: "Bachelor's of Science, Software and Administration of Information Systems",
         university: "Kursk State University | Kursk, Russia",
         duration: "Sep 2017 - Jul 2021",
@@ -333,12 +339,6 @@ const educationData = [
         degree: "General Certificate in Education (ECZ), O-Levels",
         university: "Arakan Boys Secondary School",
         duration: "2011 - 2013",
-    },
-    {
-        degree: "Master's of Science, Information Science and Computer Engineering",
-        university: "Novosibirsk State Technical University",
-        duration: "Sep 2022 - Jul 2024",
-        note: "Awaiting Official Translation and Validation (Legalization) in Zambia.",
     },
 ];
 
