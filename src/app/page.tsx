@@ -335,7 +335,7 @@ const educationData = [
         duration: "2011 - 2013",
     },
     {
-        degree: "Master's of Science, Informatics and Computer Engineering",
+        degree: "Master's of Science, Information Science and Computer Engineering",
         university: "Novosibirsk State Technical University",
         duration: "Sep 2022 - Jul 2024",
         note: "Awaiting Official Translation and Validation (Legalization) in Zambia.",
