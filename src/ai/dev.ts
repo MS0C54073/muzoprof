@@ -1,5 +1,7 @@
 
 'use server';
-// Flows will be imported for their side effects in this file.
+/**
+ * @fileOverview Side-effect imports for Genkit development.
+ */
 import './flows/translate-batch-flow';
 import './flows/generate-career-portal-flow';

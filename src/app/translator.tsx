@@ -1,14 +1,11 @@
 
 'use client';
 
-import React, { createContext, useContext, useState, useEffect, useCallback, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback, ReactNode, useRef } from 'react';
 import { translateBatch } from '@/ai/flows/translate-batch-flow';
 import type { TranslateBatchInput } from '@/ai/flows/translate-batch.types';
 
 export type LanguageCode = 'en' | 'ru';
-
-// A Set is used to efficiently track unique strings that need translation.
-type TranslationRequestContext = Set<string>;
 
 interface TranslationContextProps {
   language: LanguageCode;
@@ -27,92 +24,89 @@ export const useTranslation = () => {
   return context;
 };
 
-// Helper to safely get language from local storage
-const getInitialLanguage = (): LanguageCode => {
-    if (typeof window === 'undefined') {
-        return 'en';
-    }
-    try {
-        const storedLang = localStorage.getItem('user-language');
-        if (storedLang && ['en', 'ru'].includes(storedLang)) {
-            return storedLang as LanguageCode;
-        }
-    } catch (error) {
-        console.warn('Could not access local storage for language preference.', error);
-    }
-    return 'en';
-}
-
 export const TranslationProvider = ({ children }: { children: ReactNode }) => {
-  const [language, setLanguageState] = useState<LanguageCode>(getInitialLanguage);
+  // Default to English to avoid hydration mismatches. 
+  // We'll sync with localStorage in a useEffect.
+  const [language, setLanguageState] = useState<LanguageCode>('en');
   const [translations, setTranslations] = useState<Map<string, string>>(new Map());
-  const [translationRequestQueue, setTranslationRequestQueue] = useState<TranslationRequestContext>(new Set());
+  const [isMounted, setIsMounted] = useState(false);
+  
+  // Use refs for the queue to avoid triggering re-renders on every registration.
+  const queueRef = useRef<Set<string>>(new Set());
+  const inFlightRef = useRef<Set<string>>(new Set());
+  const processingRef = useRef(false);
+
+  // Sync language with localStorage after mount.
+  useEffect(() => {
+    setIsMounted(true);
+    const storedLang = localStorage.getItem('user-language');
+    if (storedLang === 'ru' || storedLang === 'en') {
+      setLanguageState(storedLang as LanguageCode);
+    }
+  }, []);
 
   // Function for components to register their text
   const requestTranslation = useCallback((text: string) => {
-    if (text && language !== 'en' && !translations.has(text)) {
-      setTranslationRequestQueue(prev => new Set(prev).add(text));
+    if (!text || language === 'en') return;
+    
+    // Only queue if it's not already translated and not already requested.
+    if (!translations.has(text) && !inFlightRef.current.has(text) && !queueRef.current.has(text)) {
+      queueRef.current.add(text);
     }
   }, [language, translations]);
 
   const setLanguage = (newLanguage: LanguageCode) => {
-    try {
+    if (typeof window !== 'undefined') {
       localStorage.setItem('user-language', newLanguage);
-    } catch (error) {
-       console.warn('Could not save language preference to local storage.', error);
     }
     setLanguageState(newLanguage);
-    // Clear cache and request queue on language change
+    // Clear cache and queues on language change
     setTranslations(new Map());
-    setTranslationRequestQueue(new Set());
+    queueRef.current.clear();
+    inFlightRef.current.clear();
+    processingRef.current = false;
   };
 
+  // Process the queue in batches every second.
   useEffect(() => {
-    if (language === 'en') {
-      setTranslations(new Map()); // Clear translations if language is English
-      return;
-    }
+    if (language === 'en' || !isMounted) return;
 
-    if (translationRequestQueue.size === 0) {
-      return;
-    }
-    
-    // Create a snapshot of the current queue for processing.
-    const textsToTranslate = Array.from(translationRequestQueue);
-    
-    // Clear the queue immediately after capturing the texts.
-    setTranslationRequestQueue(new Set());
-    
     const performBatchTranslation = async () => {
+      if (queueRef.current.size === 0 || processingRef.current) return;
+      
+      processingRef.current = true;
+      const textsToTranslate = Array.from(queueRef.current);
+      queueRef.current.clear();
+      
+      // Mark as in-flight
+      textsToTranslate.forEach(t => inFlightRef.current.add(t));
+
       try {
-        const input: TranslateBatchInput = {
+        const result = await translateBatch({
           texts: textsToTranslate,
           targetLanguage: language,
-        };
-        const result = await translateBatch(input);
-        
-        // Update the central cache with all the new translations
-        setTranslations(prev => {
-          const newTranslations = new Map(prev);
-          result.translations.forEach((translatedText, i) => {
-            newTranslations.set(textsToTranslate[i], translatedText);
-          });
-          return newTranslations;
         });
 
+        if (result && result.translations) {
+          setTranslations(prev => {
+            const newTranslations = new Map(prev);
+            result.translations.forEach((translatedText, i) => {
+              newTranslations.set(textsToTranslate[i], translatedText);
+            });
+            return newTranslations;
+          });
+        }
       } catch (error) {
         console.error("Batch translation failed:", error);
-        // In case of a batch failure, we don't update the cache.
-        // The original text will be shown as a fallback.
+      } finally {
+        textsToTranslate.forEach(t => inFlightRef.current.delete(t));
+        processingRef.current = false;
       }
     };
 
-    // Debounce the call to avoid rapid-fire requests
-    const timer = setTimeout(performBatchTranslation, 50);
-
-    return () => clearTimeout(timer);
-
-  }, [language, translationRequestQueue]);
+    const intervalId = setInterval(performBatchTranslation, 1000);
+    return () => clearInterval(intervalId);
+  }, [language, isMounted]);
 
   const contextValue = {
     language,
@@ -132,11 +126,11 @@ export const useTranslatedText = (text: string): string => {
   const { translations, requestTranslation, language } = useTranslation();
 
   useEffect(() => {
-    // Register the text for translation when the component mounts or text changes
-    if (text) {
+    // Register the text for translation when the component mounts or text/language changes
+    if (text && language !== 'en') {
       requestTranslation(text);
     }
-  }, [text, requestTranslation]);
+  }, [text, requestTranslation, language]);
 
   if (language === 'en') {
     return text;

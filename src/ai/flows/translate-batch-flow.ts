@@ -22,27 +22,34 @@ import { TranslateBatchOutputSchema } from './translate-batch.types';
 export async function translateBatch(input: TranslateBatchInput): Promise<TranslateBatchOutput> {
   const { texts, targetLanguage } = input;
 
-  if (!process.env.GOOGLE_GENAI_API_KEY) {
-    console.error("GOOGLE_GENAI_API_KEY environment variable not set. Translation disabled.");
-    return { translations: texts }; // Fallback
-  }
-
-  // If there are no texts or the target is English, return the original texts.
+  // Fallback: If no texts or English is requested, return original texts.
   if (!texts || texts.length === 0 || targetLanguage === 'en') {
     return { translations: texts };
   }
 
-  // Create a numbered list of texts for the prompt.
-  const numberedTexts = texts.map((text, index) => `${index + 1}. "${text}"`).join('\n');
-
-  if (!process.env.PROMPT_TRANSLATE_BATCH) {
-    console.error("PROMPT_TRANSLATE_BATCH environment variable not set.");
-    return { translations: texts }; // Fallback
+  if (!process.env.GOOGLE_GENAI_API_KEY) {
+    console.warn("GOOGLE_GENAI_API_KEY environment variable not set. Translation falling back to original text.");
+    return { translations: texts };
   }
 
-  // Replace placeholders in the prompt template.
-  const promptText = process.env.PROMPT_TRANSLATE_BATCH
-      .replace('{{targetLanguage}}', targetLanguage)
+  // Create a numbered list of texts for the prompt to ensure the model maintains order.
+  const numberedTexts = texts.map((text, index) => `${index + 1}. "${text}"`).join('\n');
+
+  // Provide a robust default prompt template if the env var is missing.
+  const defaultTemplate = `You are a professional translator. Translate the following list of texts from English into {{targetLanguage}}. 
+Maintain the original tone, context, and formatting. Do not translate technical terms or proper names unless they have standard equivalents.
+Return the translations as a JSON object with a 'translations' field containing an array of strings in the exact same order as provided.
+
+Texts to translate:
+{{numberedTexts}}`;
+
+  const promptTemplate = process.env.PROMPT_TRANSLATE_BATCH || defaultTemplate;
+  
+  // Resolve language code to human-readable name
+  const languageName = targetLanguage === 'ru' ? 'Russian' : targetLanguage;
+
+  const promptText = promptTemplate
+      .replace('{{targetLanguage}}', languageName)
       .replace('{{numberedTexts}}', numberedTexts);
 
   try {
@@ -62,23 +69,19 @@ export async function translateBatch(input: TranslateBatchInput): Promise<Transl
     
     const output = response.output;
 
-    // Validate the output structure and length.
+    // Validate the output structure and length to ensure consistency.
     if (output && Array.isArray(output.translations) && output.translations.length === texts.length) {
         return output;
     }
 
-    console.warn('Batch translation returned invalid structure or mismatched length, falling back to original texts.', {
-        input,
-        response,
-    });
-    return { translations: texts }; // Fallback for invalid structure
+    console.warn('Batch translation returned mismatched length, falling back to original.');
+    return { translations: texts };
 
   } catch (error) {
     console.error(
-        `Batch translation failed for ${texts.length} texts to "${targetLanguage}". Falling back to original texts.`,
+        `Batch translation failed for ${texts.length} texts to "${targetLanguage}". Returning original.`,
         error
     );
-    // On any error, gracefully fall back to the original texts.
     return { translations: texts };
   }
 }
