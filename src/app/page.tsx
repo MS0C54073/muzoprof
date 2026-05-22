@@ -429,8 +429,8 @@ export default function Home() {
             "Key Technologies for Business — IBM (Specialisation)",
             "IT Fundamentals for Cybersecurity — IBM (Specialisation)",
             "Introduction to Cybersecurity — Smart Zambia Institute / Cisco",
-            "C++ (Basic) Certificate — HackerRank",
-            "Python (Basic) Certificate — HackerRank"
+            "C++ (Basic) Certificate — https://www.hackerrank.com/certificates/dea4f08fe541",
+            "Python (Basic) Certificate — https://www.hackerrank.com/certificates/6e56080d33f3"
         ],
         diplomas: [
             "Management in the Digital Economy — Novosibirsk State Technical University",
@@ -1153,9 +1153,9 @@ export default function Home() {
           </div>
           <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
               {cvData.certifications.slice(0, showAllCerts ? cvData.certifications.length : initialCertsToShow).map((cert, index) => {
-                  const urlMatch = cert.match(/\((https?:\/\/[^\)]+)\)/);
-                  const cleanText = cert.replace(/\s?\(https?:\/\/[^\)]+\)/, '');
+                  const urlMatch = cert.match(/(?:—\s*|\()(https?:\/\/[^\s\)]+)\)?/);
                   const certUrl = urlMatch ? urlMatch[1] : null;
+                  const cleanText = cert.split(urlMatch ? urlMatch[0] : '___nonexistent___')[0].replace(/\s*—\s*$/, '').trim();
 
                   return (
                       <Card key={index} className="bg-card/50 flex flex-col">
@@ -1240,72 +1240,6 @@ export default function Home() {
               <SocialIcons className="flex space-x-4 justify-center" />
             </div>
           </div>
-        </section>
-        
-        <section id="services" className="py-20 border-t">
-          <div className="text-center max-w-2xl mx-auto">
-            <h2 className="text-3xl font-bold"><TranslatedText text="Let's Build Your Vision" /></h2>
-            <p className="text-muted-foreground mt-4 mb-8">
-              <TranslatedText text="Have an idea for a website or mobile app? I can help you build a functional prototype to bring your vision to life. Fill out the form below with your project details to get started." />
-            </p>
-          </div>
-          <Card className="max-w-xl mx-auto p-6 bg-card/80 backdrop-blur-sm shadow-xl">
-            <form onSubmit={handleSubmit(onOrderSubmit)}>
-                <div className="mb-4">
-                  <Label htmlFor="order-name" className="block text-foreground text-sm font-bold mb-2"><TranslatedText text="Name:" /></Label>
-                  <Input type="text" id="order-name" {...register("name")} className="shadow appearance-none border rounded w-full py-2 px-3 bg-background/70 text-foreground leading-tight focus:outline-none focus:shadow-outline focus:ring-2 focus:ring-primary" />
-                  {errors.name && <p className="text-destructive text-xs italic mt-1"><TranslatedText text={errors.name.message || ""} /></p>}
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                    <div>
-                      <Label htmlFor="order-email" className="block text-foreground text-sm font-bold mb-2"><TranslatedText text="Email:" /></Label>
-                      <Input type="email" id="order-email" {...register("email")} className="shadow appearance-none border rounded w-full py-2 px-3 bg-background/70 text-foreground leading-tight focus:outline-none focus:shadow-outline focus:ring-2 focus:ring-primary" />
-                      {errors.email && <p className="text-destructive text-xs italic mt-1"><TranslatedText text={errors.email.message || ""} /></p>}
-                    </div>
-                    <div>
-                      <Label htmlFor="order-phone" className="block text-foreground text-sm font-bold mb-2"><TranslatedText text="Phone:" /></Label>
-                      <Input type="tel" id="order-phone" {...register("phone")} className="shadow appearance-none border rounded w-full py-2 px-3 bg-background/70 text-foreground leading-tight focus:outline-none focus:shadow-outline focus:ring-2 focus:ring-primary" />
-                      {errors.phone && <p className="text-destructive text-xs italic mt-1"><TranslatedText text={errors.phone.message || ""} /></p>}
-                    </div>
-                </div>
-                <div className="mb-4">
-                  <Label htmlFor="order-details" className="block text-foreground text-sm font-bold mb-2"><TranslatedText text="Project Details:" /></Label>
-                  <Textarea id="order-details" rows={4} {...register("details")} className="shadow appearance-none border rounded w-full py-2 px-3 bg-background/70 text-foreground leading-tight focus:outline-none focus:shadow-outline focus:ring-2 focus:ring-primary"></Textarea>
-                  {errors.details && <p className="text-destructive text-xs italic mt-1"><TranslatedText text={errors.details.message || ""} /></p>}
-                </div>
-                <div className="mb-6">
-                  <Label htmlFor="order-attachment" className="block text-foreground text-sm font-bold mb-2"><TranslatedText text="Attach File (Optional):" /></Label>
-                  <Input type="file" id="order-attachment" {...register("attachment")} className="shadow appearance-none border rounded w-full py-2 px-3 bg-background/70 text-foreground leading-tight focus:outline-none focus:shadow-outline file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-primary-foreground hover:file:bg-primary/90 focus:ring-2 focus:ring-primary" />
-                </div>
-                <div className="flex items-center justify-end">
-                  <Button
-                    type="submit"
-                    disabled={orderStatus === 'submitting' || orderStatus === 'success'}
-                    className={cn(
-                      'font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition-colors min-w-[160px] justify-center',
-                      orderStatus === 'submitting' && 'opacity-50 cursor-not-allowed',
-                      orderStatus === 'success'
-                        ? 'bg-button-success text-button-success-foreground hover:bg-button-success/90'
-                        : 'bg-accent hover:bg-accent/90 text-accent-foreground'
-                    )}
-                  >
-                    {orderStatus === 'submitting' ? (
-                      <>
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        <TranslatedText text="Submitting..." />
-                      </>
-                    ) : orderStatus === 'success' ? (
-                      <>
-                        <Check className="mr-2 h-4 w-4" />
-                        <TranslatedText text="Submitted!" />
-                      </>
-                    ) : (
-                      <TranslatedText text="Submit" />
-                    )}
-                  </Button>
-                </div>
-              </form>
-          </Card>
         </section>
         
         <footer className="text-center py-6 mt-8 border-t border-border">
