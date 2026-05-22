@@ -1,18 +1,41 @@
-# Bilingual AI Personal Website (MuzoInTech)
+# MuzoInTech - Professional Portfolio
 
-## About Me (Project AIM)
+A modern, high-performance personal portfolio website built with Next.js, React, and Firebase. This platform showcases technical expertise, professional projects, and educational milestones.
 
-This project is a dynamic and interactive personal portfolio website. I am Musonda Salimu, an IT Professional, Software Developer, and AI Enthusiast. This platform is designed to showcase a comprehensive overview of my technical skills, professional projects, and educational journey.
+## Core Features
 
-Key features of this website include:
--   **AI-Powered Translations**: The entire site supports real-time translation (English/Russian) powered by Google's Gemini Pro via Genkit.
--   **Dynamic CV Generation**: A high-precision PDF engine allows visitors to download or preview a professionally formatted 3-page CV instantly.
--   **Service Calculator**: An interactive tool for clients to estimate project costs for web, software, and AI development.
--   **AI Career Portal**: A feature that parses uploaded PDF resumes to create personalized landing pages.
+- **Dynamic CV Generation**: High-precision PDF generation engine for professional resumes.
+- **IT Service Calculator**: Interactive tool for project cost estimation across web, software, and AI services.
+- **Bilingual Support**: Real-time language translation capabilities (English/Russian) via Gemini Pro.
+- **AI Career Portal**: Resume analysis flow that transforms PDF uploads into personalized landing pages.
+- **Modern UI/UX**: Responsive design built with Tailwind CSS, Shadcn UI, and dynamic background themes.
 
-## Project Structure
+## Tech Stack
 
-The following diagram illustrates the high-level architecture and routing of the application:
+- **Framework**: Next.js 15 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS, Shadcn UI
+- **Backend**: Firebase (Firestore, Storage, Authentication)
+- **AI Integration**: Genkit (Google AI)
+- **PDF Engine**: jsPDF
+
+## Getting Started
+
+1. Clone the repository.
+2. Set up environment variables in a `.env` file:
+   - `GOOGLE_GENAI_API_KEY`
+   - `NEXT_PUBLIC_FIREBASE_API_KEY`
+   - `RESEND_API_KEY`
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
+4. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+## Project Architecture
 
 ```mermaid
 graph TD
@@ -28,45 +51,23 @@ graph TD
     end
 
     subgraph "Logic Engines"
-        Home --> CVGen[CV Generation Engine - jsPDF]
+        Home --> CVGen[CV Generation Engine]
         Calculator --> PriceLogic[Quotation Logic]
     end
 
-    subgraph "AI & Backend (Server Side)"
-        Genkit[Genkit AI Flows]
-        Firebase[Firebase Backend]
+    subgraph "AI & Backend"
+        Router -.-> Genkit[Genkit AI Flows]
+        Router -.-> Firebase[Firebase Services]
         
-        Router -.-> Genkit
-        Genkit --> Translate[Batch Translation Flow]
-        Genkit --> CareerGen[Resume Analysis Flow]
+        Genkit --> Translate[Batch Translation]
+        Genkit --> CareerGen[Resume Analysis]
         
-        Router -.-> Firebase
-        Firebase --> Firestore[Firestore: Blog, Orders, Comments]
-        Firebase --> Storage[Storage: Resume Uploads, Attachments]
-        Firebase --> Auth[Auth: Admin Access]
+        Firebase --> Firestore[Database]
+        Firebase --> Storage[File Storage]
+        Firebase --> Auth[Authentication]
     end
-
-    style Genkit fill:#f96,stroke:#333,stroke-width:2px
-    style Firebase fill:#4285F4,stroke:#fff,color:#fff
 ```
 
-## Technologies Used
+## License
 
-- **Next.js 15 (App Router)**: The core framework for server-side rendering and client-side interactivity.
-- **TypeScript**: Ensuring type safety across complex data structures like CV models and translation queues.
-- **Genkit (Google AI)**: Orchestrating LLM flows for batch translation and resume parsing.
-- **Tailwind CSS & Shadcn UI**: Providing a modern, responsive, and accessible user interface.
-- **Firebase**: Managing the database (Firestore), file storage (Storage), and serverless functions.
-- **jsPDF**: A client-side library for high-precision PDF document generation.
-
-## Environment Variables
-
-To run this project, you will need to add the following environment variables to your `.env` file:
-
-`GOOGLE_GENAI_API_KEY`: Your API key for Google's Generative AI.
-`NEXT_PUBLIC_FIREBASE_API_KEY`: Your Firebase client configuration.
-`RESEND_API_KEY`: For handling email notifications on project requests.
-
-## Live Version
-
-You can view the live version of this project at: [https://tinyurl.com/muzoslim](https://tinyurl.com/muzoslim)
+© 2026 Musonda Salimu. All Rights Reserved.
