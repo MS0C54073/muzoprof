@@ -39,7 +39,7 @@ import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
 import type { Order } from '@/lib/types';
 
-// --- CV Data Types ---
+// --- Types ---
 interface CvExperience {
     title: string;
     company: string;
@@ -87,6 +87,7 @@ interface CvData {
     references: CvReference[];
 }
 
+// --- Data Constants ---
 const skills = [
     { name: 'Laravel (PHP)', icon: <Server className="h-6 w-6" /> },
     { name: '.NET (C#)', icon: <Server className="h-6 w-6" /> },
@@ -536,14 +537,15 @@ export default function Home() {
             
             // --- CONSTANTS & METRICS ---
             const PAGE_W = doc.internal.pageSize.getWidth();
+            const PAGE_H = doc.internal.pageSize.getHeight();
             const MARGIN = 46; 
             const CONTENT_W = PAGE_W - (MARGIN * 2);
             
             const COLORS = {
-                ACCENT: [31, 78, 121] as [number, number, number], 
-                LIGHT: [46, 117, 182] as [number, number, number],  
-                GRAY: [85, 85, 85] as [number, number, number],    
-                BLACK: [17, 17, 17] as [number, number, number]    
+                ACCENT: [31, 78, 121] as [number, number, number], // #1F4E79
+                LIGHT: [46, 117, 182] as [number, number, number],  // #2E75B6
+                GRAY: [85, 85, 85] as [number, number, number],    // #555555
+                BLACK: [17, 17, 17] as [number, number, number]    // #111111
             };
 
             let currentY = MARGIN;
