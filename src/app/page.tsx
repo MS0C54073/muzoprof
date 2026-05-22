@@ -43,7 +43,7 @@ import type { Order } from '@/lib/types';
 interface CvExperience {
     title: string;
     company: string;
-    location: string;
+    location?: string;
     duration: string;
     details: string[];
 }
@@ -53,7 +53,6 @@ interface CvEducation {
     university: string;
     duration: string;
     note?: string;
-    blurred?: boolean;
 }
 
 interface CvReference {
@@ -64,19 +63,27 @@ interface CvReference {
     phone: string;
 }
 
+interface CvSkillCategory {
+    label: string;
+    value: string;
+}
+
 interface CvData {
     name: string;
     jobTitle: string;
     email: string;
-    phone: string;
+    phones: string[];
     location: string;
     linkedin: string;
     github: string;
     portfolio: string;
     summary: string;
-    skills: string[];
+    skillCategories: CvSkillCategory[];
     experience: CvExperience[];
+    community: CvExperience[];
     education: CvEducation[];
+    certifications: string[];
+    diplomas: string[];
     references: CvReference[];
 }
 
@@ -109,7 +116,6 @@ const skills = [
 ];
 
 const projects = [
-  // --- AI & Machine Learning ---
   {
     title: 'ai-chatBot using AI SDK by Vercel',
     link: 'https://github.com/MS0C54073/ai-chatBot_muzoGPT',
@@ -140,7 +146,6 @@ const projects = [
     link: 'https://github.com/MS0C54073/Spotify-Recommendation-model',
     category: 'AI/ML'
   },
-  // --- Web & Software Development ---
   {
     title: 'Personal/Portfolio Website',
     link: 'https://github.com/MS0C54073/muzoprof',
@@ -168,7 +173,7 @@ const projects = [
     link: 'https://github.com/MS0C54073/Final-Year-Project',
   },
   {
-    title: 'TEXT FILES ARCHIVING PROGRAM (High-level language programming)',
+    title: 'TEXT FILES ARCHIVING PROGRAM (C++ Builder)',
     link: 'https://github.com/MS0C54073/TEXT-FILES-ARCHIVING-PROGRAM-Cplusplus-Builder',
   },
   {
@@ -191,112 +196,109 @@ const projects = [
 
 const professionalExperiences = [
     {
-        title: "AI Content Evaluation Specialist (Project-Based)",
+        title: "AI Content Evaluation Specialist",
         company: "Invisible Technologies & Outlier",
         duration: "Aug 2024 – Sep 2025",
         details: [
-            "Evaluated AI-generated content, including code, text, images, and videos, providing clear, human-readable summaries.",
-            "Solved coding problems and ensured all technical outputs were functional, efficient, and reliable.",
-            "Developed test cases and verification methods to confirm content quality and accuracy.",
-            "Provided actionable feedback to improve AI content generation processes."
+            "Evaluated AI-generated content across code, text, images, and video",
+            "Solved complex coding problems ensuring efficiency and reliability",
+            "Developed test cases and verification methodologies to validate output quality",
+            "Provided actionable feedback to optimise AI content generation processes"
         ]
     },
     {
-        title: "IT Specialist",
-        company: "Embassy of the Republic of Zambia in Moscow, Russia",
+        title: "IT Support Volunteer & Technical Assistant",
+        company: "Embassy of the Republic of Zambia, Moscow",
         duration: "May 2025 – Jul 2025",
         details: [
-            "Maintained and managed embassy IT systems.",
-            "Provided Technical Support to ensure seamless digital operations."
-        ]
-    },
-    {
-        title: "AI Training Methods Researcher (Internship)",
-        company: "Novosibirsk State Technical University",
-        duration: "2022 – 2024",
-        details: [
-          "Tested new training algorithms specifically for Spiking Neural Networks (SNNs).",
-          "Conducted experiments to evaluate the performance of various SNN training approaches.",
-          "Managed and preprocessed datasets for training and evaluating SNN models."
-        ]
-    },
-    {
-        title: "System Administrator Intern",
-        company: "Pensions and Insurance Authority",
-        duration: "May 2022 – Oct 2022",
-        details: [
-            "Assisted in maintaining, securing, and optimizing the Authority’s IT infrastructure and websites.",
-            "Contributed to the maintenance and development of the Authority’s official website to improve functionality and accessibility.",
-            "Monitored system performance and resolved software, hardware, and network issues to ensure reliable operations.",
-            "Provided ICT support and user training to staff, enhancing technical efficiency and digital literacy.",
-            "Supported data backup, system updates."
-        ]
-    },
-     {
-      title: "Customer Care Assistant",
-      company: "VITALITE Group",
-      duration: "2021 (Temporal Contract)",
-      details: [
-        "Delivered professional customer support by responding to inquiries and resolving complaints.",
-        "Communicated with customers across multiple channels, ensuring a positive and empathetic experience.",
-        "Processed orders, forms, and applications while maintaining accurate records of transactions and feedback.",
-        "Collaborated with colleagues to coordinate effective customer service solutions."
-      ]
-    },
-    {
-        title: "IT Intern / Trainee (Software Development & Networking Support)",
-        company: "Kursk State University",
-        duration: "May 2019 – Jul 2021",
-        details: [
-            "Participated in university-organized summer and winter trainee programs in partnership with various IT companies.",
-            "Assisted in networking support, system setup, and maintenance of lab environments.",
-            "Built, tested, and optimized software applications using C++, Python, and C#.",
-            "Utilized automated debugging tools and performance optimization techniques to enhance application efficiency.",
-            "Collaborated with industry professionals and mentors, gaining hands-on experience in real-world software development and IT support environments."
-        ]
-    },
-    {
-        title: "Customer Care Associate",
-        company: "Tech Mahindra - outsourcing (Airtel Zambia PLC) services",
-        duration: "Aug 2015 - Oct 2016",
-        details: [
-            "Ensured Customer Satisfaction through consistent standards of service excellence through implementation of continuous improvement initiatives.",
-            "Provided excellent customer relationship management by resolving customer queries, selling, retention and relationship building.",
-            "Promoted Airtel brand image by managing service delivery aligned to customer needs and objectives.",
-            "Adhered to good work ethics."
-        ]
-    },
-    {
-        title: "Internet Cafe Operator",
-        company: "AbduTech InterNet Cafe",
-        duration: "Dec 2013 - Aug 2015",
-        details: [
-            "Assisted customers with PC software including Microsoft Office, Adobe suites, Windows operating system installation, and other essential programs.",
-            "Provided services such as encoding, printing, photocopying, typing, and downloading.",
-            "Troubleshooted various computer applications, hardware, and software issues.",
-            "Provided excellent customer care and maintained store records and inventories."
+            "Maintained and managed critical embassy IT infrastructure systems",
+            "Provided proactive technical support ensuring seamless digital operations"
         ]
     },
     {
         title: "IT Support Freelancer",
-        company: "Hybrid",
+        company: "Self-Employed",
         duration: "2017 – Present",
         details: [
-            "Providing remote or on-site technical assistance to individuals or businesses.",
-            "Resolving hardware, software, and network issues via phone, email, or chat.",
-            "Documenting solutions for clients."
+            "Deliver remote and on-site technical assistance to individuals and businesses",
+            "Resolve hardware, software, and network issues across multiple channels",
+            "Document comprehensive solutions and maintain detailed client records"
+        ]
+    },
+    {
+        title: "AI Training Methods Researcher",
+        company: "Novosibirsk State Technical University",
+        duration: "2022 – 2024",
+        details: [
+          "Tested and evaluated novel training algorithms for Spiking Neural Networks (SNNs)",
+          "Conducted experiments analysing performance of various SNN training methodologies",
+          "Managed and preprocessed large-scale datasets for neural network models"
+        ]
+    },
+    {
+        title: "System Administrator Intern",
+        company: "Pensions and Insurance Authority, Zambia",
+        duration: "May 2022 – Oct 2022",
+        details: [
+            "Maintained, secured, and optimised IT infrastructure and organisational websites",
+            "Monitored system performance and resolved technical issues promptly",
+            "Provided ICT support and user training, enhancing overall technical efficiency"
+        ]
+    },
+    {
+        title: "Software Development Trainee",
+        company: "Kursk State University",
+        duration: "May 2019 – Jul 2021",
+        details: [
+            "Built, tested, and optimised applications using C++, Python, and C#",
+            "Applied automated debugging and performance optimisation techniques",
+            "Collaborated with senior developers in real-world software environments"
+        ]
+    },
+    {
+        title: "Customer Care Associate",
+        company: "Tech Mahindra (Airtel Zambia PLC)",
+        duration: "Aug 2015 – Oct 2016",
+        details: [
+            "Ensured customer satisfaction through consistent service excellence",
+            "Managed customer relationship building and service retention initiatives",
+            "Promoted brand value through service delivery aligned to customer needs"
         ]
     },
 ];
 
-const tutoringExperience = {
-    title: "Freelance Tutor",
-    company: "Self-Employed / Various Institutions",
-    duration: "Dec 2019 – Present",
-    details: [
-        "Providing online and in-person instruction in programming and English for children, teenagers, and adults. Teaching Python, Roblox Studio, Unity, Figma, and Business & IT English. Delivering structured lessons, assessing learner progress, and developing tailored educational materials. Worked with EF Education First, Center of Modern English, Oxford Linguistic Centre (Novosibirsk), and FillCamp."
-    ]
-};
+const communityInvolvement = [
+    {
+        title: "Technical & Community Development Volunteer",
+        company: "AKZAM Community, Zambia",
+        duration: "Ongoing",
+        details: [
+            "Assist with technical development programmes supporting local community growth",
+            "Contribute to capacity-building activities and community development projects in Zambia"
+        ]
+    },
+    {
+        title: "City Representative & Student Welfare Volunteer",
+        company: "Zambian Student Community, Russia",
+        duration: "2017 – 2025",
+        details: [
+            "Served as city representative for Zambian scholarship students studying across Russia",
+            "Assisted newly arrived scholarship students with orientation, settlement, and integration",
+            "Coordinated and maintained records of outgoing students, ensuring smooth transitions",
+            "Provided ongoing pastoral support and guidance to the wider student community"
+        ]
+    },
+    {
+        title: "Volunteer Teacher — Special Needs & TEFL Summer Camps",
+        company: "University Volunteer Programme, Russia",
+        duration: "2019 – 2023",
+        details: [
+            "Taught at university-organised summer camps for children with special needs and able-bodied children",
+            "Delivered TEFL (Teaching English as a Foreign Language) lessons and extracurricular activities",
+            "Designed inclusive, engaging learning experiences catering to diverse abilities and learner needs"
+        ]
+    },
+];
 
 const educationData = [
     {
@@ -306,82 +308,20 @@ const educationData = [
         note: "Awaiting Official Translation and Validation (Legalization).",
     },
     {
-        degree: "Bachelor of Science, Software and Administration of Information Systems",
-        university: "Kursk State University | Kursk, Russia",
-        duration: "Sep 2017 - Jul 2021",
+        degree: "BSc Software and Information Systems Administration",
+        university: "Kursk State University, Russia",
+        duration: "2017 – 2021",
     },
     {
-        degree: "Bachelor’s Degree (Postgraduate Degree), Management in the Digital Economy",
-        university: "Novosibirsk State Technical University",
-        duration: "Sep 2023 - Dec 2023",
-    },
-    {
-        degree: "Bachelor’s Degree (Postgraduate Degree), Technological Entrepreneurship and Innovation Management",
-        university: "Novosibirsk State Technical University",
-        duration: "Sep 2023 - Dec 2023",
-    },
-    {
-        degree: "Diploma of Professional Retraining, Development of Digital Twins",
-        university: "Novosibirsk State Technical University",
-        duration: "Sep 2023 - Dec 2023",
-    },
-    {
-        degree: "Bachelor’s Degree (Postgraduate Degree), Management of High Tech Programs and Projects",
-        university: "Pskov State University",
-        duration: "Sep 2023 - Dec 2023",
-    },
-    {
-        degree: "Russian language and preparatory program, Russian language and Culture",
+        degree: "Russian Language & Preparatory Programme",
         university: "Belgorod State University",
-        duration: "Oct 2016 - Jul 2017",
+        duration: "2016 – 2017",
     },
     {
-        degree: "General Certificate in Education (ECZ), O-Levels",
+        degree: "General Certificate in Education (O-Levels)",
         university: "Arakan Boys Secondary School",
-        duration: "2011 - 2013",
+        duration: "2011 – 2013",
     },
-];
-
-const awards = [
-    {
-        title: "WINNER of 'International Olympiad of the Financial University for Youth (Master's Degree - 2023-2024)'",
-        issuer: "Financial University",
-        date: "2024",
-    },
-];
-
-const certifications = [
-    { title: 'Introduction to Cybersecurity', issuer: 'SMART ZAMBIA INSTITUTE (Cisco Networking Academy)', date: 'Jul 2025', skills: ['Cybersecurity'] },
-    { title: 'AI Agents and Agentic AI in Python: Powered by Generative AI', issuer: 'Vanderbilt University', date: 'Aug 2025', credentialId: 'K42YL24QMRT3' },
-    { title: 'Introduction to Software Engineering', issuer: 'IBM', date: '2024', credentialId: 'FA7LTGBWF47V', url: 'https://www.coursera.org/account/accomplishments/certificate/FA7LTGBWF47V' },
-    { title: 'Automate Cybersecurity Tasks with Python', issuer: 'Google', date: 'Aug 2023', credentialId: 'C7XRV7CQNCQM', skills: ['PEP 8 style guide'] },
-    { title: 'Assets, Threats, and Vulnerabilities', issuer: 'Google', date: 'Aug 2023', credentialId: 'VX5TA2Q2S67K' },
-    { title: 'Connect and Protect: Networks and Network Security', issuer: 'Google', date: 'Aug 2023', credentialId: 'QTMMW72GVFNR' },
-    { title: 'Google Cybersecurity', issuer: 'Google', date: 'Aug 2023', credentialId: 'ZQRFL5JFN79Z', skills: ['SQL', 'SIEM', 'IDS', 'Linux', 'Python'] },
-    { title: 'Introduction to Artificial Intelligence (AI)', issuer: 'IBM', date: 'Aug 2023', credentialId: 'ZQRFL5JFN79Z' },
-    { title: 'Introduction to Cloud Computing', issuer: 'IBM', date: 'Aug 2023', credentialId: '6V7R3J56LE33' },
-    { title: 'Key Technologies for Business', issuer: 'IBM', date: 'Aug 2023', credentialId: 'ED6HPWDG6QVB' },
-    { title: 'Play It Safe: Manage Security Risks', issuer: 'Google', date: 'Aug 2023', credentialId: 'SM23C5AREJRM' },
-    { title: 'Put It to Work: Prepare for Cybersecurity Jobs', issuer: 'Google', date: 'Aug 2023', credentialId: 'LSZUYQUMHPP8' },
-    { title: 'Sound the Alarm: Detection and Response', issuer: 'Google', date: 'Aug 2023', credentialId: 'DBENMJKEDA46' },
-    { title: 'Tools of the Trade: Linux and SQL', issuer: 'Google', date: 'Aug 2023', credentialId: 'PMN4CB7GLMC7' },
-    { title: 'Cybersecurity Compliance Framework & System Administration', issuer: 'IBM', date: 'Jun 2022', credentialId: 'SARK6MHGJE2W' },
-    { title: 'Cybersecurity Roles, Processes & Operating System Security', issuer: 'IBM', date: 'Jun 2022', credentialId: '9SSFKD6DLP7N' },
-    { title: 'IT Fundamentals for Cybersecurity', issuer: 'IBM', date: 'Jun 2022', credentialId: 'BDSXYEGVZUWK', skills: ['Networking', 'Databases', 'Cybersecurity', 'OS Security', 'Cyber Attacks'] },
-    { title: 'Introduction to Cybersecurity Tools & Cyber Attacks', issuer: 'Coursera', date: 'Jun 2022' },
-    { title: 'Network Security & Database Vulnerabilities', issuer: 'IBM', date: 'Jun 2022', credentialId: 'NTDBPW657286' },
-    { title: 'Foundations of Digital Marketing and E-commerce', issuer: 'Google', date: 'May 2022', credentialId: 'F7MG9YAXM94Y' },
-    { title: 'Foundations of Project Management', issuer: 'Google', date: 'May 2022', credentialId: 'KBKA6QSQRLGV' },
-    { title: 'Crash Course on Python', issuer: 'Google', date: 'Feb 2022', credentialId: '739MZ344RHQ2' },
-    { title: 'Exploratory Data Analysis for Machine Learning', issuer: 'IBM', date: 'Feb 2022', credentialId: '65JUNKQNLLNE' },
-    { title: 'Foundations of User Experience (UX) Design', issuer: 'Google', date: 'Feb 2022', credentialId: 'LQUUB69CBRJU' },
-    { title: 'Foundations: Data, Data, Everywhere', issuer: 'Google', date: 'Feb 2022', credentialId: 'J5KRN8LFPNPK' },
-    { title: 'Introduction to Cybersecurity Tools & Cyber Attacks', issuer: 'IBM', date: 'Feb 2022', credentialId: 'RJR6MQHGE65M' },
-    { title: 'C++ (Basic) Certificate', issuer: 'HackerRank', date: 'Sep 2020', credentialId: 'DEA4F08FE541' },
-    { title: 'Python (Basic) Certificate', issuer: 'HackerRank', date: 'Aug 2020', credentialId: '6E56080D33F3' },
-    { title: 'EF SET English Certificate', issuer: 'EF SET', date: 'Sep 2024' },
-    { title: 'Teacher Of English To Speakers Of Other Languages (TEFL)', issuer: 'Teacher Record', date: 'Sep 2023', credentialId: 'TR2672252278' },
-    { title: 'Teach English Now! Foundational Principles', issuer: 'Arizona State University (via Coursera)', date: 'Sep 2024' },
 ];
 
 const references = [
@@ -389,29 +329,15 @@ const references = [
         name: "Innocent Mukupa",
         title: "ICT Manager",
         company: "Pensions & Insurance Authority",
-        email: "Innocent.mukupa@pia.org.zm",
-        phone: "+260-211-251401 | +260-211-251405 | Fax: +260-211-251492"
-    },
-    {
-        name: "Prof. Aaron B. Zyambo",
-        title: "CEO & Lead Consultant",
-        company: "Mega Vision Logistics Int'l Ltd",
-        email: "abzyambo@yahoo.com",
-        phone: "+260 97 9793999"
+        email: "mungolemukupa@gmail.com",
+        phone: "+260 964 748 111"
     },
     {
         name: "Mwansa Kapoka",
         title: "Team Leader",
         company: "TechMahindra Limited Zambia",
         email: "mwansa.kapoka@sc.com",
-        phone: "+260 978980443"
-    },
-    {
-        name: "Allan Mwimbu",
-        title: "Supervior | First Secretary Political",
-        company: "Embassy of the Republic of Zambia in Moscow, Russia",
-        email: null,
-        phone: "+79855159011"
+        phone: "+260 978 980 443"
     },
     {
         name: "Ann Chibinga",
@@ -419,6 +345,20 @@ const references = [
         company: "VITALITE Zambia",
         email: "ann.chibinga@vitalitegroup.com",
         phone: "(+260) 777407124"
+    },
+    {
+        name: "Prof. Aaron B. Zyambo",
+        title: "CEO & Lead Consultant",
+        company: "Mega Vision Logistics Int'l Ltd",
+        email: "abzyambo@yahoo.com",
+        phone: "+260 979 793 999"
+    },
+    {
+        name: "Allan Mwimbu",
+        title: "First Secretary Political (Admin Supervisor)",
+        company: "Embassy of Zambia, Moscow",
+        email: null,
+        phone: "+7 985 515 9011"
     },
 ];
 
@@ -445,34 +385,47 @@ export default function Home() {
     
     // --- State for CV Data (Editable) ---
     const [cvData, setCvData] = useState<CvData>({
-        name: "Musonda Salimu",
-        jobTitle: "IT Professional | Software Developer | AI | Tutor",
+        name: "MUSONDA SALIMU",
+        jobTitle: "IT Support  |  Software Developer  |  AI Specialist",
         email: "musondasalim@gmail.com",
-        phone: "+260966882901",
+        phones: ["+260 966 882 901", "+260 979 287 496", "+260 977 288 260"],
         location: "Lusaka, Zambia",
         linkedin: "linkedin.com/in/musonda-salimu",
         github: "github.com/MS0C54073",
-        portfolio: "https://tinyurl.com/muzoslim",
-        summary: "A results-driven IT professional with a dynamic educational background in IT, Technological Entrepreneurship and Innovation Management, Management in the Digital Economy, Development of Digital Twins, and Management of High Tech Programs and Projects. This diverse expertise is applied to software development, system administration, and AI, with a special focus on securely connecting large language models to data and conceptualizing advanced AI assistants.",
-        skills: [
-            "Python", "JavaScript", "TypeScript", "C++", "C#", "PHP", "SQL",
-            "React", "Next.js", "Node.js", "Express", "Django", "Laravel", ".NET",
-            "PostgreSQL", "MongoDB", "Firebase", "Genkit", "Vercel AI SDK", "RAG",
-            "SysAdmin", "Networking", "Cybersecurity", "Project Management", "UI/UX"
+        portfolio: "tinyurl.com/muzoslim",
+        summary: "Results-driven IT professional with expertise in software development, system administration, and artificial intelligence. Background in technological entrepreneurship with hands-on experience in modern frameworks and cloud technologies. Active community contributor through technical mentorship, student welfare, and volunteer programmes across Zambia and Russia.",
+        skillCategories: [
+            { label: "Languages", value: "Python, JavaScript, TypeScript, C++, C#" },
+            { label: "Frameworks", value: "React, Next.js, Node.js/Express, Django, .NET" },
+            { label: "Mobile & Web", value: "Flutter, React Native" },
+            { label: "Databases", value: "PostgreSQL (Supabase), MongoDB, Firebase" },
+            { label: "AI & Automation", value: "Genkit, Firebase Studio, Claude Code, n8n, Gemini API, Orange Data Mining, Power BI, SQL" },
+            { label: "Cloud & DevOps", value: "Docker, Git" },
+            { label: "Cybersecurity", value: "SIEM, IDS, Network Security, Cybersecurity Compliance (Basic)" },
+            { label: "Tools & Platforms", value: "Cursor 2.0, Tableau, Microsoft 365/Office, Adobe Creative Suite" },
         ],
-        experience: professionalExperiences.map(exp => ({
-            ...exp,
-            location: "Remote / On-site",
-            details: exp.details.slice(0, 6) // Limit bullet points to 6
-        })),
-        education: educationData.map(edu => ({
-            ...edu,
-            university: edu.university.split('|')[0].trim()
-        })),
-        references: references.map(ref => ({
-            ...ref,
-            email: ref.email
-        }))
+        experience: professionalExperiences,
+        community: communityInvolvement,
+        education: educationData,
+        certifications: [
+            "AI Agents and Agentic AI in Python: Powered by Generative AI — Vanderbilt University (Specialisation)",
+            "Prompt Engineering for ChatGPT — Vanderbilt University",
+            "Developing Front-End Apps with React — IBM / Coursera",
+            "Business School's Globalization – Economic Growth and Stability — IE University / Coursera",
+            "Google Cybersecurity Professional Certificate — Google",
+            "Key Technologies for Business — IBM (Specialisation)",
+            "IT Fundamentals for Cybersecurity — IBM (Specialisation)",
+            "Introduction to Cybersecurity — Smart Zambia Institute / Cisco",
+            "C++ (Basic) Certificate — HackerRank",
+            "Python (Basic) Certificate — HackerRank"
+        ],
+        diplomas: [
+            "Management in the Digital Economy — Novosibirsk State Technical University",
+            "Technological Entrepreneurship and Innovation Management — Novosibirsk State Technical University",
+            "Management of High Tech Programmes and Projects — Pskov State University",
+            "Development of Digital Twins: Machine Learning with Orange Data Mining — Novosibirsk State Technical University"
+        ],
+        references: references
     });
 
     const initialProjectsToShow = 4;
@@ -506,7 +459,6 @@ export default function Home() {
                 attachmentUrl = await getDownloadURL(storageRef);
             }
             
-            // 1. Save to Firestore
             const orderPayload: Omit<Order, 'id'> = {
                 name: data.name,
                 email: data.email,
@@ -519,7 +471,6 @@ export default function Home() {
             };
             await addDoc(collection(db, 'orders'), orderPayload);
 
-            // 2. Call API route to send email
             const emailPayload = {
                 ...data,
                 details: data.details,
@@ -534,7 +485,6 @@ export default function Home() {
             const result = await response.json();
 
             if (!result.success) {
-                console.warn("Firestore save succeeded, but email notification failed.", result.message);
                 toast({
                     variant: 'default',
                     title: 'Request Submitted (Email Failed)',
@@ -575,289 +525,180 @@ export default function Home() {
             // --- CONSTANTS & METRICS ---
             const PAGE_W = doc.internal.pageSize.getWidth();
             const PAGE_H = doc.internal.pageSize.getHeight();
-            const MARGIN = 40;
-            const SIDEBAR_W = PAGE_W * 0.33;
-            const MAIN_W = PAGE_W - SIDEBAR_W - (MARGIN * 2);
+            const MARGIN = 45;
+            const CONTENT_W = PAGE_W - (MARGIN * 2);
             
             const COLORS = {
-                NAVY: [31, 42, 68] as [number, number, number],
-                GOLD: [201, 162, 39] as [number, number, number],
-                TEXT: [51, 51, 51] as [number, number, number],
-                SUB: [102, 102, 102] as [number, number, number],
-                WHITE: [255, 255, 255] as [number, number, number]
-            };
-
-            const V_RHYTHM = {
-                SECTION: 35,
-                ENTRY: 15,
-                LINE: 1.25,
-                PARA: 8
+                ACCENT: [31, 78, 121] as [number, number, number], // #1F4E79
+                LIGHT: [46, 117, 182] as [number, number, number],  // #2E75B6
+                GRAY: [85, 85, 85] as [number, number, number],    // #555555
+                BLACK: [17, 17, 17] as [number, number, number]    // #111111
             };
 
             let currentY = MARGIN;
 
-            // --- REUSABLE FLOW HELPERS ---
-            
-            const drawModernBackdrop = () => {
-                doc.setFillColor(COLORS.NAVY[0], COLORS.NAVY[1], COLORS.NAVY[2]);
-                doc.rect(PAGE_W - SIDEBAR_W, 0, SIDEBAR_W, PAGE_H, 'F');
-            };
-
             const checkSpace = (needed: number) => {
                 if (currentY + needed > PAGE_H - MARGIN) {
                     doc.addPage();
-                    if (cvLayout === 'modern') drawModernBackdrop();
-                    currentY = MARGIN + 20;
+                    currentY = MARGIN;
                     return true;
                 }
                 return false;
             };
 
-            const renderSafeText = (text: string, x: number, width: number, size: number, options: { font?: string, style?: string, color?: [number, number, number], align?: 'left'|'center'|'right' } = {}) => {
+            const renderText = (text: string, x: number, width: number, size: number, options: { font?: string, style?: string, color?: [number, number, number], align?: 'left'|'center'|'right' } = {}) => {
                 doc.setFont(options.font || 'helvetica', options.style || 'normal');
                 doc.setFontSize(size);
-                doc.setTextColor(options.color?.[0] || 0, options.color?.[1] || 0, options.color?.[2] || 0);
+                doc.setTextColor(options.color?.[0] ?? 0, options.color?.[1] ?? 0, options.color?.[2] ?? 0);
                 
                 const lines = doc.splitTextToSize(text, width);
                 doc.text(lines, x, currentY, { align: options.align || 'left' });
-                const heightUsed = lines.length * (size * V_RHYTHM.LINE);
-                return heightUsed;
+                const h = lines.length * (size * 1.2);
+                return h;
             };
 
-            const calculateTextHeight = (text: string, width: number, size: number) => {
-                const lines = doc.splitTextToSize(text, width);
-                return lines.length * (size * V_RHYTHM.LINE);
-            };
-
-            if (cvLayout === 'modern') {
-                // --- 1. HEADER AREA (WHITE) ---
-                const headerH = 120;
-                doc.setFillColor(255, 255, 255);
-                doc.rect(0, 0, PAGE_W, headerH, 'F');
-                
-                // Draw decorative logo/circle
-                doc.setDrawColor(COLORS.NAVY[0], COLORS.NAVY[1], COLORS.NAVY[2]);
-                doc.setLineWidth(2);
-                doc.circle(MARGIN + 25, headerH / 2, 25, 'D');
-                doc.setFont('times', 'bold');
-                doc.setFontSize(16);
-                doc.setTextColor(COLORS.NAVY[0], COLORS.NAVY[1], COLORS.NAVY[2]);
-                doc.text("MS", MARGIN + 25, headerH / 2 + 6, { align: 'center' });
-
-                const nameStr = cvData.name.toUpperCase();
-                const titleStr = cvData.jobTitle;
-                
-                let headerY = MARGIN + 15;
-                doc.setFont('times', 'bold');
-                doc.setFontSize(28);
-                doc.setTextColor(0, 0, 0);
-                doc.text(nameStr, MARGIN + 70, headerY + 20);
-                
-                headerY += 45;
+            const addSectionHeader = (title: string) => {
+                checkSpace(45);
+                currentY += 15;
                 doc.setFont('helvetica', 'bold');
                 doc.setFontSize(11);
-                doc.setTextColor(COLORS.GOLD[0], COLORS.GOLD[1], COLORS.GOLD[2]);
-                doc.text(titleStr.toUpperCase(), MARGIN + 70, headerY);
-
-                drawModernBackdrop();
+                doc.setTextColor(COLORS.ACCENT[0], COLORS.ACCENT[1], COLORS.ACCENT[2]);
+                doc.text(title.toUpperCase(), MARGIN, currentY);
                 
-                // Profile image inside sidebar
-                const imgSize = 75;
-                const sidebarX = PAGE_W - SIDEBAR_W + 30;
-                const sidebarW = SIDEBAR_W - 60;
+                currentY += 4;
+                doc.setDrawColor(COLORS.LIGHT[0], COLORS.LIGHT[1], COLORS.LIGHT[2]);
+                doc.setLineWidth(1);
+                doc.line(MARGIN, currentY, PAGE_W - MARGIN, currentY);
+                currentY += 18;
+            };
+
+            const addJobTitle = (title: string, org: string, dates: string) => {
+                checkSpace(35);
+                doc.setFont('helvetica', 'bold');
+                doc.setFontSize(10);
+                doc.setTextColor(COLORS.BLACK[0], COLORS.BLACK[1], COLORS.BLACK[2]);
+                doc.text(title, MARGIN, currentY);
                 
-                const profileImgElement = document.getElementById('profile-pic') as HTMLImageElement;
-                if (profileImgElement) {
-                    try {
-                        const canvas = document.createElement('canvas');
-                        canvas.width = profileImgElement.naturalWidth;
-                        canvas.height = profileImgElement.naturalHeight;
-                        const ctx = canvas.getContext('2d');
-                        ctx?.drawImage(profileImgElement, 0, 0);
-                        const base64 = canvas.toDataURL('image/jpeg');
-                        doc.addImage(base64, 'JPEG', PAGE_W - (SIDEBAR_W / 2) - (imgSize / 2), 25, imgSize, imgSize);
-                    } catch (e) {
-                        console.warn("Profile image embed skipped.", e);
-                    }
-                }
-
-                currentY = headerH + 30;
-
-                // --- 2. SIDEBAR CONTENT (RIGHT) ---
-                let sideY = 120;
-                const drawSideSectionTitle = (title: string, y: number) => {
-                    doc.setFont('times', 'bold');
-                    doc.setFontSize(11);
-                    doc.setTextColor(255, 255, 255);
-                    doc.text(title.toUpperCase(), sidebarX, y);
-                    doc.setDrawColor(255, 255, 255);
-                    doc.setLineWidth(0.5);
-                    doc.line(sidebarX, y + 4, sidebarX + sidebarW, y + 4);
-                    return y + 22;
-                };
-
-                sideY = drawSideSectionTitle("Contact", sideY);
-                doc.setFontSize(8.5);
+                const titleWidth = doc.getTextWidth(title);
                 doc.setFont('helvetica', 'normal');
-                const contactItems = [
-                    { label: "P:", val: cvData.phone },
-                    { label: "E:", val: cvData.email },
-                    { label: "L:", val: cvData.location },
-                    { label: "W:", val: cvData.portfolio }
-                ];
-                contactItems.forEach(item => {
-                    doc.setTextColor(COLORS.WHITE[0], COLORS.WHITE[1], COLORS.WHITE[2]);
-                    doc.text(`${item.label} ${item.val}`, sidebarX, sideY);
-                    sideY += 14;
-                });
+                doc.setFontSize(9.5);
+                doc.setTextColor(COLORS.GRAY[0], COLORS.GRAY[1], COLORS.GRAY[2]);
+                doc.text(`  |  ${org}`, MARGIN + titleWidth, currentY);
+                
+                doc.setFont('helvetica', 'italic');
+                doc.setFontSize(9);
+                doc.text(dates, PAGE_W - MARGIN, currentY, { align: 'right' });
+                currentY += 14;
+            };
 
-                sideY += 15;
-                sideY = drawSideSectionTitle("Education", sideY);
-                cvData.education.slice(0, 3).forEach(edu => {
+            const addBullet = (text: string) => {
+                const bulletChar = "•";
+                const bulletSize = 9.5;
+                checkSpace(bulletSize * 1.5);
+                doc.setFont('helvetica', 'normal');
+                doc.setFontSize(bulletSize);
+                doc.setTextColor(COLORS.BLACK[0], COLORS.BLACK[1], COLORS.BLACK[2]);
+                
+                const lines = doc.splitTextToSize(text, CONTENT_W - 20);
+                doc.text(bulletChar, MARGIN + 5, currentY);
+                doc.text(lines, MARGIN + 18, currentY);
+                currentY += (lines.length * bulletSize * 1.2) + 2;
+            };
+
+            // --- HEADER ---
+            currentY = MARGIN + 10;
+            currentY += renderText(cvData.name.toUpperCase(), PAGE_W/2, CONTENT_W, 23, { align: 'center', style: 'bold', color: COLORS.ACCENT }) + 8;
+            currentY += renderText(cvData.jobTitle, PAGE_W/2, CONTENT_W, 10.5, { align: 'center', color: COLORS.LIGHT }) + 10;
+            
+            const contactRow1 = `${cvData.email}   |   ${cvData.phones.join("  /  ")}`;
+            currentY += renderText(contactRow1, PAGE_W/2, CONTENT_W, 9, { align: 'center', color: COLORS.GRAY }) + 5;
+            
+            const contactRow2 = `${cvData.github}   |   ${cvData.portfolio}   |   ${cvData.linkedin}`;
+            currentY += renderText(contactRow2, PAGE_W/2, CONTENT_W, 9, { align: 'center', color: COLORS.GRAY }) + 15;
+
+            // --- SUMMARY ---
+            addSectionHeader("Professional Summary");
+            currentY += renderText(cvData.summary, MARGIN, CONTENT_W, 9.5, { color: COLORS.BLACK }) + 15;
+
+            // --- CORE COMPETENCIES ---
+            addSectionHeader("Core Competencies");
+            cvData.skillCategories.forEach(cat => {
+                checkSpace(18);
+                doc.setFont('helvetica', 'bold');
+                doc.setFontSize(9.5);
+                doc.setTextColor(COLORS.ACCENT[0], COLORS.ACCENT[1], COLORS.ACCENT[2]);
+                doc.text(`${cat.label}:`, MARGIN, currentY);
+                
+                doc.setFont('helvetica', 'normal');
+                doc.setTextColor(COLORS.BLACK[0], COLORS.BLACK[1], COLORS.BLACK[2]);
+                const lines = doc.splitTextToSize(cat.value, CONTENT_W - 100);
+                doc.text(lines, MARGIN + 100, currentY);
+                currentY += (lines.length * 9.5 * 1.2) + 2;
+            });
+
+            // --- EXPERIENCE ---
+            addSectionHeader("Professional Experience");
+            cvData.experience.forEach(exp => {
+                addJobTitle(exp.title, exp.company, exp.duration);
+                exp.details.forEach(d => addBullet(d));
+                currentY += 8;
+            });
+
+            // --- COMMUNITY ---
+            addSectionHeader("Community Involvement & Volunteering");
+            cvData.community.forEach(vol => {
+                addJobTitle(vol.title, vol.company, vol.duration);
+                vol.details.forEach(d => addBullet(d));
+                currentY += 8;
+            });
+
+            // --- EDUCATION ---
+            addSectionHeader("Education");
+            cvData.education.forEach(edu => {
+                addJobTitle(edu.degree, edu.university, edu.duration);
+                if (edu.note) {
+                    doc.setFont('helvetica', 'italic');
                     doc.setFontSize(8.5);
-                    doc.setFont('helvetica', 'bold');
-                    doc.setTextColor(255, 255, 255);
-                    const eduLines = doc.splitTextToSize(edu.degree.toUpperCase(), sidebarW);
-                    doc.text(eduLines, sidebarX, sideY);
-                    sideY += (eduLines.length * 10);
-                    doc.setFont('helvetica', 'normal');
-                    doc.setTextColor(220, 220, 220);
-                    doc.text(edu.university, sidebarX, sideY);
-                    sideY += 12;
-                    doc.text(edu.duration, sidebarX, sideY);
-                    sideY += 20;
-                });
-
-                // --- 3. MAIN COLUMN (LEFT) ---
-                const mainX = MARGIN;
-                const renderMainHeading = (title: string, iconType: 'summary' | 'exp' | 'edu' | 'ref') => {
-                    checkSpace(50);
-                    doc.setDrawColor(COLORS.NAVY[0], COLORS.NAVY[1], COLORS.NAVY[2]);
-                    doc.setFillColor(COLORS.NAVY[0], COLORS.NAVY[1], COLORS.NAVY[2]);
-                    doc.circle(mainX + 10, currentY - 5, 12, 'F');
-                    
-                    doc.setFont('times', 'bold');
-                    doc.setFontSize(13);
-                    doc.setTextColor(COLORS.NAVY[0], COLORS.NAVY[1], COLORS.NAVY[2]);
-                    doc.text(title.toUpperCase(), mainX + 30, currentY);
-                    
-                    currentY += 4;
-                    doc.setLineWidth(1);
-                    doc.line(mainX + 30, currentY, PAGE_W - SIDEBAR_W - 20, currentY);
-                    currentY += 25;
-                };
-
-                renderMainHeading("Profile Summary", 'summary');
-                currentY += renderSafeText(cvData.summary, mainX, MAIN_W, 9.5, { color: COLORS.TEXT }) + V_RHYTHM.SECTION;
-
-                renderMainHeading("Work Experience", 'exp');
-                cvData.experience.forEach(exp => {
-                    const titleH = calculateTextHeight(exp.title.toUpperCase(), MAIN_W, 10.5);
-                    const detailsH = exp.details.reduce((acc, d) => acc + calculateTextHeight(`• ${d}`, MAIN_W - 15, 9), 0);
-                    checkSpace(titleH + detailsH + 30);
-
-                    doc.setFont('helvetica', 'bold');
-                    doc.setFontSize(10.5);
-                    doc.setTextColor(0, 0, 0);
-                    currentY += renderSafeText(exp.title.toUpperCase(), mainX, MAIN_W, 10.5);
-                    
-                    doc.setFont('helvetica', 'italic');
-                    doc.setFontSize(9.5);
-                    doc.setTextColor(COLORS.SUB[0], COLORS.SUB[1], COLORS.SUB[2]);
-                    doc.text(exp.company, mainX, currentY);
-                    doc.text(exp.duration, mainX + MAIN_W, currentY, { align: 'right' });
-                    currentY += 15;
-                    
-                    doc.setTextColor(COLORS.TEXT[0], COLORS.TEXT[1], COLORS.TEXT[2]);
-                    exp.details.forEach(detail => {
-                        currentY += renderSafeText(`• ${detail}`, mainX + 10, MAIN_W - 15, 9);
-                    });
-                    currentY += V_RHYTHM.ENTRY;
-                });
-
-                renderMainHeading("References", 'ref');
-                cvData.references.forEach(ref => {
-                    checkSpace(45);
-                    doc.setFont('helvetica', 'bold');
-                    doc.setFontSize(10);
-                    doc.setTextColor(0, 0, 0);
-                    currentY += renderSafeText(ref.name, mainX, MAIN_W, 10);
-                    doc.setFont('helvetica', 'normal');
-                    doc.setFontSize(9);
-                    doc.setTextColor(COLORS.SUB[0], COLORS.SUB[1], COLORS.SUB[2]);
-                    currentY += renderSafeText(`${ref.title} at ${ref.company}`, mainX, MAIN_W, 9);
-                    const contact = [ref.email, ref.phone].filter(Boolean).join(" | ");
-                    currentY += renderSafeText(contact, mainX, MAIN_W, 8.5) + 10;
-                });
-
-                // --- 4. SKILLS START ON PAGE 2 SIDEBAR ---
-                if (doc.internal.getNumberOfPages() < 2) {
-                    doc.addPage();
-                    drawModernBackdrop();
+                    doc.setTextColor(COLORS.GRAY[0], COLORS.GRAY[1], COLORS.GRAY[2]);
+                    currentY += renderText(edu.note, MARGIN + 10, CONTENT_W - 10, 8.5);
                 }
-                doc.setPage(2);
-                let skillY = MARGIN + 20;
-                skillY = drawSideSectionTitle("Technical Skills", skillY);
-                doc.setFontSize(8.5);
-                doc.setTextColor(255, 255, 255);
-                cvData.skills.forEach(skill => {
-                    if (skillY > PAGE_H - MARGIN) {
-                        doc.addPage();
-                        drawModernBackdrop();
-                        skillY = MARGIN + 20;
-                    }
-                    doc.text(`• ${skill}`, sidebarX, skillY);
-                    skillY += 14;
-                });
+                currentY += 8;
+            });
 
-            } else {
-                // --- CLASSIC ATS LAYOUT ---
-                currentY = MARGIN;
-                currentY += renderSafeText(cvData.name.toUpperCase(), PAGE_W/2, PAGE_W - MARGIN*2, 22, { font: 'times', style: 'bold', align: 'center' }) + 10;
-                const contactStr = `${cvData.email}  |  ${cvData.phone}  |  ${cvData.location}`;
-                currentY += renderSafeText(contactStr, PAGE_W/2, PAGE_W - MARGIN*2, 10, { align: 'center' }) + 25;
+            // --- CERTIFICATIONS ---
+            addSectionHeader("Licences & Certifications");
+            cvData.certifications.forEach(cert => addBullet(cert));
+            
+            checkSpace(30);
+            currentY += 15;
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(9.5);
+            doc.setTextColor(COLORS.ACCENT[0], COLORS.ACCENT[1], COLORS.ACCENT[2]);
+            doc.text("Diplomas of Professional Retraining (2023):", MARGIN, currentY);
+            currentY += 14;
+            cvData.diplomas.forEach(diploma => addBullet(diploma));
 
-                const addClassicSection = (title: string) => {
-                    checkSpace(40);
-                    doc.setFont('times', 'bold');
-                    doc.setFontSize(12);
-                    doc.text(title.toUpperCase(), MARGIN, currentY);
-                    currentY += 5;
-                    doc.setLineWidth(1);
-                    doc.line(MARGIN, currentY, PAGE_W - MARGIN, currentY);
-                    currentY += 15;
-                };
-
-                addClassicSection("Professional Summary");
-                currentY += renderSafeText(cvData.summary, MARGIN, PAGE_W - MARGIN*2, 10) + 20;
-
-                addClassicSection("Professional Experience");
-                cvData.experience.forEach(exp => {
-                    checkSpace(60);
-                    doc.setFont('helvetica', 'bold');
-                    doc.text(exp.title, MARGIN, currentY);
-                    doc.text(exp.duration, PAGE_W - MARGIN, currentY, { align: 'right' });
-                    currentY += 12;
-                    doc.setFont('helvetica', 'italic');
-                    doc.text(exp.company, MARGIN, currentY);
-                    currentY += 15;
-                    exp.details.forEach(detail => {
-                        currentY += renderSafeText(`- ${detail}`, MARGIN + 10, PAGE_W - MARGIN*2 - 10, 10);
-                    });
-                    currentY += 10;
-                });
-
-                addClassicSection("Education");
-                cvData.education.forEach(edu => {
-                    checkSpace(40);
-                    doc.setFont('helvetica', 'bold');
-                    doc.text(edu.degree, MARGIN, currentY);
-                    doc.text(edu.duration, PAGE_W - MARGIN, currentY, { align: 'right' });
-                    currentY += 12;
-                    doc.text(edu.university, MARGIN, currentY);
-                    currentY += 15;
-                });
-            }
+            // --- REFERENCES (NEW PAGE) ---
+            doc.addPage();
+            currentY = MARGIN;
+            addSectionHeader("Professional References");
+            cvData.references.forEach(ref => {
+                checkSpace(45);
+                doc.setFont('helvetica', 'bold');
+                doc.setFontSize(9.5);
+                doc.setTextColor(COLORS.BLACK[0], COLORS.BLACK[1], COLORS.BLACK[2]);
+                doc.text(ref.name, MARGIN, currentY);
+                
+                doc.setFont('helvetica', 'normal');
+                doc.setTextColor(COLORS.GRAY[0], COLORS.GRAY[1], COLORS.GRAY[2]);
+                const roleWidth = doc.getTextWidth(ref.name);
+                doc.text(`  —  ${ref.title}, ${ref.company}`, MARGIN + roleWidth, currentY);
+                currentY += 12;
+                
+                const contact = [ref.email, ref.phone].filter(Boolean).join("  |  ");
+                doc.text(contact, MARGIN, currentY);
+                currentY += 22;
+            });
 
             if (outputType === 'preview') {
                 doc.output('dataurlnewwindow');
@@ -922,49 +763,10 @@ export default function Home() {
             
             {/* --- CV Generator Controls --- */}
             <div className="flex gap-2">
-                <Dialog>
-                    <DialogTrigger asChild>
-                        <Button variant="outline" size="lg">
-                            <Layout className="mr-2 h-5 w-5" />
-                            <TranslatedText text="CV Options" />
-                        </Button>
-                    </DialogTrigger>
-                    <DialogContent className="max-w-md">
-                        <DialogHeader>
-                            <DialogTitle><TranslatedText text="CV Export Settings" /></DialogTitle>
-                            <DialogDescription>
-                                <TranslatedText text="Choose your preferred layout style for the generated PDF." />
-                            </DialogDescription>
-                        </DialogHeader>
-                        <div className="grid gap-4 py-4">
-                            <div className="flex items-center justify-between p-3 border rounded-lg hover:bg-accent cursor-pointer transition-colors" onClick={() => setCvLayout('modern')}>
-                                <div className="flex items-center gap-3">
-                                    <div className={cn("w-4 h-4 rounded-full border-2", cvLayout === 'modern' ? "bg-primary border-primary" : "border-muted-foreground")} />
-                                    <div>
-                                        <p className="font-semibold"><TranslatedText text="Modern Premium" /></p>
-                                        <p className="text-xs text-muted-foreground"><TranslatedText text="Elegant two-column design with navy header." /></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="flex items-center justify-between p-3 border rounded-lg hover:bg-accent cursor-pointer transition-colors" onClick={() => setCvLayout('classic')}>
-                                <div className="flex items-center gap-3">
-                                    <div className={cn("w-4 h-4 rounded-full border-2", cvLayout === 'classic' ? "bg-primary border-primary" : "border-muted-foreground")} />
-                                    <div>
-                                        <p className="font-semibold"><TranslatedText text="Classic ATS" /></p>
-                                        <p className="text-xs text-muted-foreground"><TranslatedText text="Standard professional layout, 100% ATS optimized." /></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <DialogFooter>
-                            <Button onClick={() => generateCv('download')} className="w-full" disabled={isGenerating}>
-                                {isGenerating ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Download className="mr-2 h-4 w-4" />}
-                                <TranslatedText text="Download CV" />
-                            </Button>
-                        </DialogFooter>
-                    </DialogContent>
-                </Dialog>
-                
+                <Button onClick={() => generateCv('download')} size="lg" disabled={isGenerating}>
+                    {isGenerating ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Download className="mr-2 h-5 w-5" />}
+                    <TranslatedText text="Download CV" />
+                </Button>
                 <Button onClick={() => generateCv('preview')} size="lg" variant="outline" disabled={isGenerating}>
                     <Eye className="mr-2 h-5 w-5" />
                     <TranslatedText text="Preview" />
@@ -1223,24 +1025,6 @@ export default function Home() {
                     </Button>
                 </div>
             )}
-            
-            <h3 className="text-2xl font-semibold text-center mt-16 mb-8 border-t pt-12"><TranslatedText text="Tutoring & Teaching"/></h3>
-            <Accordion type="single" collapsible className="w-full" defaultValue="tutor-item">
-              <AccordionItem value="tutor-item">
-                <AccordionTrigger>
-                  <div className="text-left">
-                    <h3 className="text-xl font-bold text-accent"><TranslatedText text={tutoringExperience.title}/></h3>
-                    <p className="font-semibold text-foreground"><TranslatedText text={tutoringExperience.company}/></p>
-                    <p className="text-sm text-muted-foreground"><TranslatedText text={tutoringExperience.duration}/></p>
-                  </div>
-                </AccordionTrigger>
-                <AccordionContent>
-                  <ul className="list-disc list-inside text-muted-foreground space-y-1 pl-4">
-                    {tutoringExperience.details.map((d, i) => <li key={i}><TranslatedText text={d}/></li>)}
-                  </ul>
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
           </div>
         </section>
         
@@ -1279,28 +1063,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Awards Section */}
-        <section id="awards" className="py-20 border-t">
-          <h2 className="text-3xl font-bold text-center mb-12"><TranslatedText text="Awards & Achievements"/></h2>
-          <div className="max-w-4xl mx-auto grid grid-cols-1 gap-6">
-              {awards.map((award, index) => (
-                  <Card key={index} className="bg-card/50">
-                      <CardHeader>
-                          <div className="flex items-start gap-4">
-                              <Award className="h-8 w-8 text-accent flex-shrink-0 mt-1" />
-                              <div>
-                                  <CardTitle className="text-lg text-accent"><TranslatedText text={award.title}/></CardTitle>
-                                  <CardDescription className="mt-1">
-                                      <TranslatedText text="Awarded by "/> <strong><TranslatedText text={award.issuer}/></strong> - <TranslatedText text={award.date}/>
-                                  </CardDescription>
-                              </div>
-                          </div>
-                      </CardHeader>
-                  </Card>
-              ))}
-          </div>
-        </section>
-        
         {/* Certifications Section */}
         <section id="certifications" className="py-20 border-t">
           <div className="text-center mb-12">
@@ -1312,41 +1074,15 @@ export default function Home() {
               </Button>
           </div>
           <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
-              {certifications.slice(0, showAllCerts ? certifications.length : initialCertsToShow).map((cert, index) => (
+              {cvData.certifications.slice(0, showAllCerts ? cvData.certifications.length : initialCertsToShow).map((cert, index) => (
                   <Card key={index} className="bg-card/50">
                       <CardHeader>
-                          <CardTitle className="text-lg text-accent"><TranslatedText text={cert.title}/></CardTitle>
+                          <CardTitle className="text-lg text-accent"><TranslatedText text={cert}/></CardTitle>
                       </CardHeader>
-                      <CardContent>
-                          <p className="text-sm text-muted-foreground">
-                              <TranslatedText text="Issued by "/> <strong><TranslatedText text={cert.issuer}/></strong> - <TranslatedText text={cert.date}/>
-                          </p>
-                          {cert.credentialId && (
-                              <p className="text-xs text-muted-foreground mt-1">
-                                  <TranslatedText text="Credential ID: "/> {cert.credentialId}
-                              </p>
-                          )}
-                          {(cert as any).url && (
-                              <Button variant="link" asChild className="p-0 h-auto text-xs mt-2">
-                                  <a href={(cert as any).url} target="_blank" rel="noopener noreferrer">
-                                      <ExternalLink className="mr-1 h-3 w-3" />
-                                      <TranslatedText text="Verify Certificate" />
-                                  </a>
-                              </Button>
-                          )}
-                          {cert.skills && (
-                              <div className="mt-2">
-                                  <h4 className="text-xs font-semibold text-foreground mb-1"><TranslatedText text="Skills:"/></h4>
-                                  <div className="flex flex-wrap gap-1">
-                                      {cert.skills.map(skill => <Badge key={skill} variant="secondary"><TranslatedText text={skill}/></Badge>)}
-                                  </div>
-                              </div>
-                          )}
-                      </CardContent>
                   </Card>
               ))}
           </div>
-          {!showAllCerts && certifications.length > initialCertsToShow && (
+          {!showAllCerts && cvData.certifications.length > initialCertsToShow && (
               <div className="text-center mt-8">
                   <Button variant="secondary" onClick={() => setShowAllCerts(true)}>
                       <TranslatedText text="View All Certifications" />
@@ -1354,24 +1090,6 @@ export default function Home() {
                   </Button>
               </div>
           )}
-        </section>
-
-        {/* AI Career Portal CTA Section */}
-        <section id="ai-career-portal" className="py-20 border-t">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl font-bold mb-4">
-              <TranslatedText text="Generate Your Own Career Portal" />
-            </h2>
-            <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
-              <TranslatedText text="Curious to see how AI can transform a standard resume into an interactive web portfolio? Upload a PDF resume and watch it generate a personal career page for you in seconds." />
-            </p>
-            <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
-              <Link href="/career-portal">
-                <BrainCircuit className="mr-2 h-5 w-5" />
-                <TranslatedText text="Try the AI Portal Generator" />
-              </Link>
-            </Button>
-          </div>
         </section>
 
         {/* References Section */}
@@ -1416,40 +1134,16 @@ export default function Home() {
                 <a href="mailto:musondasalim@gmail.com">musondasalim@gmail.com</a>
               </Button>
               <div className="flex flex-col sm:flex-row gap-x-6 gap-y-2 text-muted-foreground">
-                <a href="tel:+260966882901" className="flex items-center gap-2 hover:text-primary">
-                  <Phone className="h-4 w-4" />
-                  <span>+260966882901</span>
-                </a>
-                <a href="tel:+260977288260" className="flex items-center gap-2 hover:text-primary">
-                  <Phone className="h-4 w-4" />
-                  <span>+260977288260</span>
-                </a>
-                <a href="tel:+260979287496" className="flex items-center gap-2 hover:text-primary">
-                  <Phone className="h-4 w-4" />
-                  <span>+260979287496</span>
-                </a>
+                {cvData.phones.map(p => (
+                   <a key={p} href={`tel:${p.replace(/\s+/g, '')}`} className="flex items-center gap-2 hover:text-primary">
+                    <Phone className="h-4 w-4" />
+                    <span>{p}</span>
+                  </a>
+                ))}
               </div>
             </div>
             <div className="flex space-x-6 justify-center">
               <SocialIcons className="flex space-x-4 justify-center" />
-            </div>
-
-            <div className="mt-12">
-              <h3 className="text-2xl font-bold text-foreground mb-4">
-                <TranslatedText text="My Location" />
-              </h3>
-              <div className="aspect-video w-full rounded-lg overflow-hidden border shadow-lg">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d246306.66573356066!2d28.1402289658392!3d-15.424626159670605!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1940f513a806e22f%3A0x153b817e06553805!2sLusaka%2C%20Zambia!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen={false}
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Map of Lusaka, Zambia"
-                ></iframe>
-              </div>
             </div>
           </div>
         </section>
@@ -1528,3 +1222,4 @@ export default function Home() {
       </div>
   );
 }
+
