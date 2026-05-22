@@ -381,7 +381,6 @@ export default function Home() {
     const [showAllExperience, setShowAllExperience] = useState(false);
     const [openAccordionItems, setOpenAccordionItems] = useState<string[]>([]);
     const [showAllEducation, setShowAllEducation] = useState(false);
-    const [cvLayout, setCvLayout] = useState<'modern' | 'classic'>('modern');
     
     // --- State for CV Data (Editable) ---
     const [cvData, setCvData] = useState<CvData>({
@@ -525,7 +524,7 @@ export default function Home() {
             // --- CONSTANTS & METRICS ---
             const PAGE_W = doc.internal.pageSize.getWidth();
             const PAGE_H = doc.internal.pageSize.getHeight();
-            const MARGIN = 45;
+            const MARGIN = 46; // Equivalent to 936 twips
             const CONTENT_W = PAGE_W - (MARGIN * 2);
             
             const COLORS = {
@@ -537,28 +536,7 @@ export default function Home() {
 
             let currentY = MARGIN;
 
-            const checkSpace = (needed: number) => {
-                if (currentY + needed > PAGE_H - MARGIN) {
-                    doc.addPage();
-                    currentY = MARGIN;
-                    return true;
-                }
-                return false;
-            };
-
-            const renderText = (text: string, x: number, width: number, size: number, options: { font?: string, style?: string, color?: [number, number, number], align?: 'left'|'center'|'right' } = {}) => {
-                doc.setFont(options.font || 'helvetica', options.style || 'normal');
-                doc.setFontSize(size);
-                doc.setTextColor(options.color?.[0] ?? 0, options.color?.[1] ?? 0, options.color?.[2] ?? 0);
-                
-                const lines = doc.splitTextToSize(text, width);
-                doc.text(lines, x, currentY, { align: options.align || 'left' });
-                const h = lines.length * (size * 1.2);
-                return h;
-            };
-
             const addSectionHeader = (title: string) => {
-                checkSpace(45);
                 currentY += 15;
                 doc.setFont('helvetica', 'bold');
                 doc.setFontSize(11);
@@ -569,11 +547,10 @@ export default function Home() {
                 doc.setDrawColor(COLORS.LIGHT[0], COLORS.LIGHT[1], COLORS.LIGHT[2]);
                 doc.setLineWidth(1);
                 doc.line(MARGIN, currentY, PAGE_W - MARGIN, currentY);
-                currentY += 18;
+                currentY += 14;
             };
 
-            const addJobTitle = (title: string, org: string, dates: string) => {
-                checkSpace(35);
+            const addJobTitleLine = (title: string, org: string, dates: string) => {
                 doc.setFont('helvetica', 'bold');
                 doc.setFontSize(10);
                 doc.setTextColor(COLORS.BLACK[0], COLORS.BLACK[1], COLORS.BLACK[2]);
@@ -588,88 +565,111 @@ export default function Home() {
                 doc.setFont('helvetica', 'italic');
                 doc.setFontSize(9);
                 doc.text(dates, PAGE_W - MARGIN, currentY, { align: 'right' });
-                currentY += 14;
+                currentY += 12;
             };
 
             const addBullet = (text: string) => {
-                const bulletChar = "•";
-                const bulletSize = 9.5;
-                checkSpace(bulletSize * 1.5);
                 doc.setFont('helvetica', 'normal');
-                doc.setFontSize(bulletSize);
+                doc.setFontSize(9.5);
                 doc.setTextColor(COLORS.BLACK[0], COLORS.BLACK[1], COLORS.BLACK[2]);
                 
-                const lines = doc.splitTextToSize(text, CONTENT_W - 20);
-                doc.text(bulletChar, MARGIN + 5, currentY);
+                const lines = doc.splitTextToSize(text, CONTENT_W - 25);
+                doc.text("•", MARGIN + 8, currentY);
                 doc.text(lines, MARGIN + 18, currentY);
-                currentY += (lines.length * bulletSize * 1.2) + 2;
+                currentY += (lines.length * 9.5 * 1.2) + 2;
             };
 
-            // --- HEADER ---
-            currentY = MARGIN + 10;
-            currentY += renderText(cvData.name.toUpperCase(), PAGE_W/2, CONTENT_W, 23, { align: 'center', style: 'bold', color: COLORS.ACCENT }) + 8;
-            currentY += renderText(cvData.jobTitle, PAGE_W/2, CONTENT_W, 10.5, { align: 'center', color: COLORS.LIGHT }) + 10;
-            
-            const contactRow1 = `${cvData.email}   |   ${cvData.phones.join("  /  ")}`;
-            currentY += renderText(contactRow1, PAGE_W/2, CONTENT_W, 9, { align: 'center', color: COLORS.GRAY }) + 5;
-            
-            const contactRow2 = `${cvData.github}   |   ${cvData.portfolio}   |   ${cvData.linkedin}`;
-            currentY += renderText(contactRow2, PAGE_W/2, CONTENT_W, 9, { align: 'center', color: COLORS.GRAY }) + 15;
+            const addPara = (text: string) => {
+                doc.setFont('helvetica', 'normal');
+                doc.setFontSize(9.5);
+                doc.setTextColor(COLORS.BLACK[0], COLORS.BLACK[1], COLORS.BLACK[2]);
+                const lines = doc.splitTextToSize(text, CONTENT_W);
+                doc.text(lines, MARGIN, currentY);
+                currentY += (lines.length * 9.5 * 1.2) + 4;
+            };
 
-            // --- SUMMARY ---
-            addSectionHeader("Professional Summary");
-            currentY += renderText(cvData.summary, MARGIN, CONTENT_W, 9.5, { color: COLORS.BLACK }) + 15;
-
-            // --- CORE COMPETENCIES ---
-            addSectionHeader("Core Competencies");
-            cvData.skillCategories.forEach(cat => {
-                checkSpace(18);
+            const addSkillRow = (label: string, value: string) => {
                 doc.setFont('helvetica', 'bold');
                 doc.setFontSize(9.5);
                 doc.setTextColor(COLORS.ACCENT[0], COLORS.ACCENT[1], COLORS.ACCENT[2]);
-                doc.text(`${cat.label}:`, MARGIN, currentY);
+                doc.text(`${label}:`, MARGIN, currentY);
                 
                 doc.setFont('helvetica', 'normal');
                 doc.setTextColor(COLORS.BLACK[0], COLORS.BLACK[1], COLORS.BLACK[2]);
-                const lines = doc.splitTextToSize(cat.value, CONTENT_W - 100);
+                const lines = doc.splitTextToSize(value, CONTENT_W - 100);
                 doc.text(lines, MARGIN + 100, currentY);
                 currentY += (lines.length * 9.5 * 1.2) + 2;
-            });
+            };
 
-            // --- EXPERIENCE ---
+            // ─── PAGE 1 ───────────────────────────────────────────────────
+            currentY = MARGIN + 15;
+            
+            // Header
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(23); // size 46 / 2
+            doc.setTextColor(COLORS.ACCENT[0], COLORS.ACCENT[1], COLORS.ACCENT[2]);
+            doc.text(cvData.name.toUpperCase(), PAGE_W/2, currentY, { align: 'center' });
+            currentY += 18;
+
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(10.5);
+            doc.setTextColor(COLORS.LIGHT[0], COLORS.LIGHT[1], COLORS.LIGHT[2]);
+            doc.text(cvData.jobTitle, PAGE_W/2, currentY, { align: 'center' });
+            currentY += 15;
+
+            doc.setFontSize(9);
+            doc.setTextColor(COLORS.GRAY[0], COLORS.GRAY[1], COLORS.GRAY[2]);
+            const contact1 = `${cvData.email}   |   ${cvData.phones.join("  /  ")}`;
+            doc.text(contact1, PAGE_W/2, currentY, { align: 'center' });
+            currentY += 12;
+
+            const contact2 = `${cvData.github}   |   ${cvData.portfolio}   |   ${cvData.linkedin}`;
+            doc.text(contact2, PAGE_W/2, currentY, { align: 'center' });
+            currentY += 15;
+
+            // Summary
+            addSectionHeader("Professional Summary");
+            addPara(cvData.summary);
+
+            // Competencies
+            addSectionHeader("Core Competencies");
+            cvData.skillCategories.forEach(cat => addSkillRow(cat.label, cat.value));
+
+            // Experience
             addSectionHeader("Professional Experience");
             cvData.experience.forEach(exp => {
-                addJobTitle(exp.title, exp.company, exp.duration);
+                addJobTitleLine(exp.title, exp.company, exp.duration);
                 exp.details.forEach(d => addBullet(d));
-                currentY += 8;
+                currentY += 4;
             });
 
-            // --- COMMUNITY ---
+            // ─── PAGE 2 ───────────────────────────────────────────────────
+            doc.addPage();
+            currentY = MARGIN;
+
             addSectionHeader("Community Involvement & Volunteering");
             cvData.community.forEach(vol => {
-                addJobTitle(vol.title, vol.company, vol.duration);
+                addJobTitleLine(vol.title, vol.company, vol.duration);
                 vol.details.forEach(d => addBullet(d));
-                currentY += 8;
+                currentY += 4;
             });
 
-            // --- EDUCATION ---
             addSectionHeader("Education");
             cvData.education.forEach(edu => {
-                addJobTitle(edu.degree, edu.university, edu.duration);
+                addJobTitleLine(edu.degree, edu.university, edu.duration);
                 if (edu.note) {
                     doc.setFont('helvetica', 'italic');
                     doc.setFontSize(8.5);
                     doc.setTextColor(COLORS.GRAY[0], COLORS.GRAY[1], COLORS.GRAY[2]);
-                    currentY += renderText(edu.note, MARGIN + 10, CONTENT_W - 10, 8.5);
+                    doc.text(edu.note, MARGIN + 10, currentY);
+                    currentY += 10;
                 }
-                currentY += 8;
+                currentY += 4;
             });
 
-            // --- CERTIFICATIONS ---
             addSectionHeader("Licences & Certifications");
             cvData.certifications.forEach(cert => addBullet(cert));
             
-            checkSpace(30);
             currentY += 15;
             doc.setFont('helvetica', 'bold');
             doc.setFontSize(9.5);
@@ -678,12 +678,11 @@ export default function Home() {
             currentY += 14;
             cvData.diplomas.forEach(diploma => addBullet(diploma));
 
-            // --- REFERENCES (NEW PAGE) ---
+            // ─── PAGE 3 ───────────────────────────────────────────────────
             doc.addPage();
             currentY = MARGIN;
             addSectionHeader("Professional References");
             cvData.references.forEach(ref => {
-                checkSpace(45);
                 doc.setFont('helvetica', 'bold');
                 doc.setFontSize(9.5);
                 doc.setTextColor(COLORS.BLACK[0], COLORS.BLACK[1], COLORS.BLACK[2]);
@@ -691,13 +690,13 @@ export default function Home() {
                 
                 doc.setFont('helvetica', 'normal');
                 doc.setTextColor(COLORS.GRAY[0], COLORS.GRAY[1], COLORS.GRAY[2]);
-                const roleWidth = doc.getTextWidth(ref.name);
-                doc.text(`  —  ${ref.title}, ${ref.company}`, MARGIN + roleWidth, currentY);
+                const nameWidth = doc.getTextWidth(ref.name);
+                doc.text(`  —  ${ref.title}, ${ref.company}`, MARGIN + nameWidth, currentY);
                 currentY += 12;
                 
                 const contact = [ref.email, ref.phone].filter(Boolean).join("  |  ");
                 doc.text(contact, MARGIN, currentY);
-                currentY += 22;
+                currentY += 20;
             });
 
             if (outputType === 'preview') {
@@ -1222,4 +1221,3 @@ export default function Home() {
       </div>
   );
 }
-
