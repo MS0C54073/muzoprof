@@ -100,10 +100,9 @@ const skills = [
     { name: 'Networking', icon: <Network className="h-6 w-6" /> },
     { name: 'Databases (PostgreSQL, Supabase, MongoDB, Firebase)', icon: <Database className="h-6 w-6" /> },
     { name: 'AI & Automation', icon: <BrainCircuit className="h-6 w-6" /> },
-    { name: 'AI SDK by Vercel', icon: <BrainCircuit className="h-6 w-6" /> },
+    { name: 'AI SDK (Vercel)', icon: <BrainCircuit className="h-6 w-6" /> },
     { name: 'Firebase Studio', icon: <BrainCircuit className="h-6 w-6" /> },
     { name: 'Google AI Studio', icon: <BrainCircuit className="h-6 w-6" /> },
-    { name: 'AI SDK (Vercel)', icon: <BrainCircuit className="h-6 w-6" /> },
     { name: 'RAG', icon: <BrainCircuit className="h-6 w-6" /> },
     { name: 'Cybersecurity', icon: <Shield className="h-6 w-6" /> },
     { name: 'System Admin', icon: <Server className="h-6 w-6" /> },
@@ -269,15 +268,6 @@ const professionalExperiences = [
 
 const communityInvolvement = [
     {
-        title: "Technical & Community Development Volunteer",
-        company: "AKZAM Community, Zambia",
-        duration: "Ongoing",
-        details: [
-            "Assist with technical development programmes supporting local community growth",
-            "Contribute to capacity-building activities and community development projects in Zambia"
-        ]
-    },
-    {
         title: "City Representative & Student Welfare Volunteer",
         company: "Zambian Student Community, Russia",
         duration: "2017 – 2025",
@@ -430,7 +420,6 @@ export default function Home() {
         community: communityInvolvement,
         education: educationData,
         certifications: [
-            "Introduction to Software Engineering — IBM / Coursera (https://www.coursera.org/account/accomplishments/certificate/FA7LTGBWF47V)",
             "AI Agents and Agentic AI in Python: Powered by Generative AI — Vanderbilt University (Specialisation)",
             "Prompt Engineering for ChatGPT — Vanderbilt University",
             "Developing Front-End Apps with React — IBM / Coursera",
@@ -547,7 +536,6 @@ export default function Home() {
             
             // --- CONSTANTS & METRICS ---
             const PAGE_W = doc.internal.pageSize.getWidth();
-            const PAGE_H = doc.internal.pageSize.getHeight();
             const MARGIN = 46; 
             const CONTENT_W = PAGE_W - (MARGIN * 2);
             
@@ -747,7 +735,7 @@ export default function Home() {
         <section id="home" className="py-20 text-center">
           <Image
             src="https://drive.google.com/uc?id=18haKNolQwC6XQxH3weaKMkvFEV_rBYc6"
-            alt="Muzo's Profile Picture"
+            alt="Musonda Salimu Profile"
             width={150}
             height={150}
             data-ai-hint="profile picture"
