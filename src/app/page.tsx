@@ -5,7 +5,7 @@ import Link from 'next/link';
 import TranslatedText from '@/app/components/translated-text';
 import { Button } from '@/components/ui/button';
 import { SocialIcons } from '@/components/social-icons';
-import { ArrowRight, Award, BrainCircuit, Calendar, Code, Database, Download, Eye, ExternalLink, Github, Globe, GraduationCap, Loader2, Mail, Network, Phone, Server, Shield, Smartphone, Star, Users, Check, UserCog, ChevronDown, Calculator, Terminal, Gamepad, Film, Edit, Layout } from 'lucide-react';
+import { ArrowRight, Award, BrainCircuit, Calendar, Code, Database, Download, Eye, ExternalLink, Github, Globe, GraduationCap, Loader2, Mail, Network, Phone, Server, Shield, Smartphone, Star, Users, Check, UserCog, ChevronDown, Calculator, Terminal, Gamepad, Film, Edit, Layout, BookOpen, HeartHandshake, Zap } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
@@ -324,6 +324,29 @@ const educationData = [
     },
 ];
 
+const retrainingDiplomasData = [
+    {
+        title: "Management in the Digital Economy",
+        institution: "Novosibirsk State Technical University",
+        year: "2023",
+    },
+    {
+        title: "Technological Entrepreneurship and Innovation Management",
+        institution: "Novosibirsk State Technical University",
+        year: "2023",
+    },
+    {
+        title: "Management of High Tech Programmes and Projects",
+        institution: "Pskov State University",
+        year: "2023",
+    },
+    {
+        title: "Development of Digital Twins: Machine Learning with Orange Data Mining",
+        institution: "Novosibirsk State Technical University",
+        year: "2023",
+    },
+];
+
 const references = [
     {
         name: "Innocent Mukupa",
@@ -407,6 +430,7 @@ export default function Home() {
         community: communityInvolvement,
         education: educationData,
         certifications: [
+            "Introduction to Software Engineering — IBM / Coursera (https://www.coursera.org/account/accomplishments/certificate/FA7LTGBWF47V)",
             "AI Agents and Agentic AI in Python: Powered by Generative AI — Vanderbilt University (Specialisation)",
             "Prompt Engineering for ChatGPT — Vanderbilt University",
             "Developing Front-End Apps with React — IBM / Coursera",
@@ -524,20 +548,20 @@ export default function Home() {
             // --- CONSTANTS & METRICS ---
             const PAGE_W = doc.internal.pageSize.getWidth();
             const PAGE_H = doc.internal.pageSize.getHeight();
-            const MARGIN = 46; // Equivalent to 936 twips
+            const MARGIN = 46; 
             const CONTENT_W = PAGE_W - (MARGIN * 2);
             
             const COLORS = {
-                ACCENT: [31, 78, 121] as [number, number, number], // #1F4E79
-                LIGHT: [46, 117, 182] as [number, number, number],  // #2E75B6
-                GRAY: [85, 85, 85] as [number, number, number],    // #555555
-                BLACK: [17, 17, 17] as [number, number, number]    // #111111
+                ACCENT: [31, 78, 121] as [number, number, number], 
+                LIGHT: [46, 117, 182] as [number, number, number],  
+                GRAY: [85, 85, 85] as [number, number, number],    
+                BLACK: [17, 17, 17] as [number, number, number]    
             };
 
             let currentY = MARGIN;
 
             const addSectionHeader = (title: string) => {
-                currentY += 15;
+                currentY += 22;
                 doc.setFont('helvetica', 'bold');
                 doc.setFontSize(11);
                 doc.setTextColor(COLORS.ACCENT[0], COLORS.ACCENT[1], COLORS.ACCENT[2]);
@@ -547,7 +571,7 @@ export default function Home() {
                 doc.setDrawColor(COLORS.LIGHT[0], COLORS.LIGHT[1], COLORS.LIGHT[2]);
                 doc.setLineWidth(1);
                 doc.line(MARGIN, currentY, PAGE_W - MARGIN, currentY);
-                currentY += 14;
+                currentY += 16;
             };
 
             const addJobTitleLine = (title: string, org: string, dates: string) => {
@@ -606,7 +630,7 @@ export default function Home() {
             
             // Header
             doc.setFont('helvetica', 'bold');
-            doc.setFontSize(23); // size 46 / 2
+            doc.setFontSize(23); 
             doc.setTextColor(COLORS.ACCENT[0], COLORS.ACCENT[1], COLORS.ACCENT[2]);
             doc.text(cvData.name.toUpperCase(), PAGE_W/2, currentY, { align: 'center' });
             currentY += 18;
@@ -1026,10 +1050,45 @@ export default function Home() {
             )}
           </div>
         </section>
+
+        {/* Community Involvement Section */}
+        <section id="community" className="py-20 border-t bg-muted/30">
+          <h2 className="text-3xl font-bold text-center mb-12 flex items-center justify-center gap-3">
+              <HeartHandshake className="h-8 w-8 text-primary" />
+              <TranslatedText text="Community Involvement & Volunteering" />
+          </h2>
+          <div className="max-w-3xl mx-auto">
+             <div className="space-y-6">
+                {communityInvolvement.map((item, index) => (
+                    <Card key={index} className="bg-card/50 border-primary/10">
+                        <CardHeader className="pb-3">
+                            <div className="flex justify-between items-start">
+                                <div>
+                                    <CardTitle className="text-xl text-accent"><TranslatedText text={item.title}/></CardTitle>
+                                    <CardDescription className="text-foreground font-medium"><TranslatedText text={item.company}/></CardDescription>
+                                </div>
+                                <Badge variant="outline" className="border-primary text-primary">{item.duration}</Badge>
+                            </div>
+                        </CardHeader>
+                        <CardContent>
+                             <ul className="list-disc list-inside text-muted-foreground space-y-1 text-sm">
+                                {item.details.map((detail, dIdx) => (
+                                    <li key={dIdx}><TranslatedText text={detail}/></li>
+                                ))}
+                            </ul>
+                        </CardContent>
+                    </Card>
+                ))}
+             </div>
+          </div>
+        </section>
         
         {/* Education Section */}
         <section id="education" className="py-20 border-t bg-muted/50 rounded-lg">
-          <h2 className="text-3xl font-bold text-center mb-12"><TranslatedText text="Education" /></h2>
+          <h2 className="text-3xl font-bold text-center mb-12 flex items-center justify-center gap-3">
+              <GraduationCap className="h-8 w-8 text-primary" />
+              <TranslatedText text="Academic Education" />
+          </h2>
           <div className="max-w-3xl mx-auto relative pl-8">
             <div className="absolute left-0 top-0 h-full w-0.5 bg-border"></div>
             {(showAllEducation ? educationData : educationData.slice(0, initialEducationToShow)).map((edu, index) => (
@@ -1039,7 +1098,9 @@ export default function Home() {
                 <h3 className="text-xl font-bold text-accent"><TranslatedText text={edu.degree}/></h3>
                 <p className="font-semibold text-foreground"><TranslatedText text={edu.university}/></p>
                 {edu.note && (
-                  <p className="text-sm text-muted-foreground italic mt-1"><TranslatedText text={edu.note}/></p>
+                  <p className="text-sm text-muted-foreground italic mt-1 font-medium border-l-2 border-primary/30 pl-2">
+                      <TranslatedText text={edu.note}/>
+                  </p>
                 )}
               </div>
             ))}
@@ -1062,8 +1123,36 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Professional Retraining Section */}
+        <section id="retraining" className="py-20 border-t">
+            <h2 className="text-3xl font-bold text-center mb-12 flex items-center justify-center gap-3">
+                <Zap className="h-8 w-8 text-primary" />
+                <TranslatedText text="Diplomas of Professional Retraining (2023)" />
+            </h2>
+            <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+                {retrainingDiplomasData.map((diploma, index) => (
+                    <Card key={index} className="bg-card/50 hover:shadow-md transition-shadow group">
+                        <CardHeader className="flex-row gap-4 items-center space-y-0">
+                            <div className="bg-primary/10 p-3 rounded-lg group-hover:bg-primary/20 transition-colors">
+                                <BookOpen className="h-6 w-6 text-primary" />
+                            </div>
+                            <div>
+                                <CardTitle className="text-lg text-accent leading-tight"><TranslatedText text={diploma.title}/></CardTitle>
+                                <CardDescription className="font-medium text-foreground mt-1">
+                                    <TranslatedText text={diploma.institution}/>
+                                </CardDescription>
+                            </div>
+                        </CardHeader>
+                        <CardContent>
+                            <Badge variant="secondary" className="font-mono">{diploma.year}</Badge>
+                        </CardContent>
+                    </Card>
+                ))}
+            </div>
+        </section>
+
         {/* Certifications Section */}
-        <section id="certifications" className="py-20 border-t">
+        <section id="certifications" className="py-20 border-t bg-muted/20">
           <div className="text-center mb-12">
               <Button asChild size="lg" className="text-3xl font-bold h-auto py-3 px-6">
                   <Link href="https://www.coursera.org/user/d5bf15915278f56a6f96c3b5195c6d11" target="_blank">
@@ -1073,13 +1162,29 @@ export default function Home() {
               </Button>
           </div>
           <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
-              {cvData.certifications.slice(0, showAllCerts ? cvData.certifications.length : initialCertsToShow).map((cert, index) => (
-                  <Card key={index} className="bg-card/50">
-                      <CardHeader>
-                          <CardTitle className="text-lg text-accent"><TranslatedText text={cert}/></CardTitle>
-                      </CardHeader>
-                  </Card>
-              ))}
+              {cvData.certifications.slice(0, showAllCerts ? cvData.certifications.length : initialCertsToShow).map((cert, index) => {
+                  const urlMatch = cert.match(/\((https?:\/\/[^\)]+)\)/);
+                  const cleanText = cert.replace(/\s?\(https?:\/\/[^\)]+\)/, '');
+                  const certUrl = urlMatch ? urlMatch[1] : null;
+
+                  return (
+                      <Card key={index} className="bg-card/50 flex flex-col">
+                          <CardHeader className="flex-grow">
+                              <CardTitle className="text-lg text-accent"><TranslatedText text={cleanText}/></CardTitle>
+                          </CardHeader>
+                          {certUrl && (
+                              <CardContent className="pt-0">
+                                  <Button variant="link" asChild className="p-0 h-auto text-primary">
+                                      <a href={certUrl} target="_blank" rel="noopener noreferrer">
+                                          <ExternalLink className="mr-1 h-3 w-3" />
+                                          <TranslatedText text="Verify Certificate" />
+                                      </a>
+                                  </Button>
+                              </CardContent>
+                          )}
+                      </Card>
+                  );
+              })}
           </div>
           {!showAllCerts && cvData.certifications.length > initialCertsToShow && (
               <div className="text-center mt-8">
