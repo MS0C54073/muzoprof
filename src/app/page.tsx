@@ -293,7 +293,7 @@ const communityInvolvement = [
 
 const educationData = [
     {
-        degree: "Master of Science, Information Science and Computer Engineering",
+        degree: "Associate of Science, Information Science and Computer Engineering",
         university: "Novosibirsk State Technical University",
         duration: "Sep 2022 - Jul 2024",
         note: "Awaiting Official Translation and Validation (Legalization).",
@@ -545,7 +545,8 @@ export default function Home() {
                 ACCENT: [15, 23, 42] as [number, number, number], // Slate 900
                 LIGHT: [51, 65, 85] as [number, number, number],  // Slate 700
                 GRAY: [85, 85, 85] as [number, number, number],
-                BLACK: [17, 17, 17] as [number, number, number]
+                BLACK: [17, 17, 17] as [number, number, number],
+                BLUE_LINE: [46, 117, 182] as [number, number, number] // #2E75B6
             };
 
             let currentY = MARGIN;
@@ -558,7 +559,7 @@ export default function Home() {
                 doc.text(title.toUpperCase(), MARGIN, currentY);
                 
                 currentY += 4;
-                doc.setDrawColor(COLORS.LIGHT[0], COLORS.LIGHT[1], COLORS.LIGHT[2]);
+                doc.setDrawColor(COLORS.BLUE_LINE[0], COLORS.BLUE_LINE[1], COLORS.BLUE_LINE[2]);
                 doc.setLineWidth(1);
                 doc.line(MARGIN, currentY, PAGE_W - MARGIN, currentY);
                 currentY += 16;
@@ -574,7 +575,7 @@ export default function Home() {
                 doc.setFont('helvetica', 'normal');
                 doc.setFontSize(9.5);
                 doc.setTextColor(COLORS.GRAY[0], COLORS.GRAY[1], COLORS.GRAY[2]);
-                doc.text(`  |  ${org}`, MARGIN + titleWidth, currentY);
+                doc.text(`  |  ${org}`, MARGIN + titleWidth + 5, currentY);
                 
                 doc.setFont('helvetica', 'italic');
                 doc.setFontSize(9);
@@ -618,16 +619,7 @@ export default function Home() {
             // ─── PAGE 1 ───────────────────────────────────────────────────
             currentY = MARGIN + 15;
             
-            // Header with Circular 'M' Mark
-            const circleRadius = 12;
-            doc.setDrawColor(COLORS.ACCENT[0], COLORS.ACCENT[1], COLORS.ACCENT[2]);
-            doc.setFillColor(COLORS.ACCENT[0], COLORS.ACCENT[1], COLORS.ACCENT[2]);
-            doc.circle(MARGIN + circleRadius, currentY - 5, circleRadius, 'F');
-            doc.setFont('times', 'bold');
-            doc.setFontSize(14);
-            doc.setTextColor(255, 255, 255);
-            doc.text("M", MARGIN + circleRadius, currentY - 2, { align: 'center' });
-
+            // Header
             doc.setFont('helvetica', 'bold');
             doc.setFontSize(23); 
             doc.setTextColor(COLORS.ACCENT[0], COLORS.ACCENT[1], COLORS.ACCENT[2]);
@@ -642,7 +634,7 @@ export default function Home() {
 
             doc.setFontSize(9);
             doc.setTextColor(COLORS.GRAY[0], COLORS.GRAY[1], COLORS.GRAY[2]);
-            const contact1 = `${cvData.email}   |   ${cvData.phones.join("  |  ")}`;
+            const contact1 = `${cvData.email}   |   ${cvData.phones.join("  /  ")}`;
             doc.text(contact1, PAGE_W/2, currentY, { align: 'center' });
             currentY += 12;
 
@@ -714,7 +706,7 @@ export default function Home() {
                 doc.setFont('helvetica', 'normal');
                 doc.setTextColor(COLORS.GRAY[0], COLORS.GRAY[1], COLORS.GRAY[2]);
                 const nameWidth = doc.getTextWidth(ref.name);
-                doc.text(`  —  ${ref.title}, ${ref.company}`, MARGIN + nameWidth, currentY);
+                doc.text(`  —  ${ref.title}, ${ref.company}`, MARGIN + nameWidth + 5, currentY);
                 currentY += 12;
                 
                 const contact = [ref.email, ref.phone].filter(Boolean).join("  |  ");
