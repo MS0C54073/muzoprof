@@ -542,10 +542,10 @@ export default function Home() {
             const CONTENT_W = PAGE_W - (MARGIN * 2);
             
             const COLORS = {
-                ACCENT: [31, 78, 121] as [number, number, number], // #1F4E79
-                LIGHT: [46, 117, 182] as [number, number, number],  // #2E75B6
-                GRAY: [85, 85, 85] as [number, number, number],    // #555555
-                BLACK: [17, 17, 17] as [number, number, number]    // #111111
+                ACCENT: [15, 23, 42] as [number, number, number], // Slate 900
+                LIGHT: [51, 65, 85] as [number, number, number],  // Slate 700
+                GRAY: [85, 85, 85] as [number, number, number],
+                BLACK: [17, 17, 17] as [number, number, number]
             };
 
             let currentY = MARGIN;
@@ -618,7 +618,16 @@ export default function Home() {
             // ─── PAGE 1 ───────────────────────────────────────────────────
             currentY = MARGIN + 15;
             
-            // Header
+            // Header with Circular 'M' Mark
+            const circleRadius = 12;
+            doc.setDrawColor(COLORS.ACCENT[0], COLORS.ACCENT[1], COLORS.ACCENT[2]);
+            doc.setFillColor(COLORS.ACCENT[0], COLORS.ACCENT[1], COLORS.ACCENT[2]);
+            doc.circle(MARGIN + circleRadius, currentY - 5, circleRadius, 'F');
+            doc.setFont('times', 'bold');
+            doc.setFontSize(14);
+            doc.setTextColor(255, 255, 255);
+            doc.text("M", MARGIN + circleRadius, currentY - 2, { align: 'center' });
+
             doc.setFont('helvetica', 'bold');
             doc.setFontSize(23); 
             doc.setTextColor(COLORS.ACCENT[0], COLORS.ACCENT[1], COLORS.ACCENT[2]);
@@ -633,7 +642,7 @@ export default function Home() {
 
             doc.setFontSize(9);
             doc.setTextColor(COLORS.GRAY[0], COLORS.GRAY[1], COLORS.GRAY[2]);
-            const contact1 = `${cvData.email}   |   ${cvData.phones.join("  /  ")}`;
+            const contact1 = `${cvData.email}   |   ${cvData.phones.join("  |  ")}`;
             doc.text(contact1, PAGE_W/2, currentY, { align: 'center' });
             currentY += 12;
 
@@ -790,7 +799,7 @@ export default function Home() {
 
         {/* About Section */}
         <section id="about" className="py-20 border-t">
-            <h2 className="text-3xl font-bold text-center mb-12"><TranslatedText text="About Me"/></h2>
+            <h2 className="text-3xl font-bold text-center mb-12 text-primary"><TranslatedText text="About Me"/></h2>
             <div className="flex flex-col md:flex-row items-center gap-10">
                 <div className="text-lg text-muted-foreground space-y-4">
                     <p><TranslatedText text="I am a versatile and experienced professional with a passion for technology. My journey has taken me through system administration, software engineering, and cutting-edge AI research."/></p>
@@ -802,7 +811,7 @@ export default function Home() {
 
         {/* Hobbies & Interests Section */}
         <section id="hobbies" className="py-20 border-t">
-          <h2 className="text-3xl font-bold text-center mb-12"><TranslatedText text="Hobbies & Interests"/></h2>
+          <h2 className="text-3xl font-bold text-center mb-12 text-primary"><TranslatedText text="Hobbies & Interests"/></h2>
           <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
               <Card className="bg-card/50">
                   <CardHeader>
@@ -836,7 +845,7 @@ export default function Home() {
 
         {/* Skills Section */}
         <section id="skills" className="py-20 border-t bg-muted/50 rounded-lg">
-          <h2 className="text-3xl font-bold text-center mb-12"><TranslatedText text="Technical Skills" /></h2>
+          <h2 className="text-3xl font-bold text-center mb-12 text-primary"><TranslatedText text="Technical Skills" /></h2>
           <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
             {skills.map(skill => (
               <div key={skill.name} className="flex flex-col items-center text-center gap-2">
@@ -999,7 +1008,7 @@ export default function Home() {
 
         {/* Experience Section */}
         <section id="experience" className="py-20 border-t">
-          <h2 className="text-3xl font-bold text-center mb-12"><TranslatedText text="Work Experience" /></h2>
+          <h2 className="text-3xl font-bold text-center mb-12 text-primary"><TranslatedText text="Work Experience" /></h2>
           <div className="max-w-3xl mx-auto">
             <Accordion 
               type="multiple"
@@ -1043,7 +1052,7 @@ export default function Home() {
 
         {/* Community Involvement Section */}
         <section id="community" className="py-20 border-t bg-muted/30">
-          <h2 className="text-3xl font-bold text-center mb-12 flex items-center justify-center gap-3">
+          <h2 className="text-3xl font-bold text-center mb-12 flex items-center justify-center gap-3 text-primary">
               <HeartHandshake className="h-8 w-8 text-primary" />
               <TranslatedText text="Community Involvement & Volunteering" />
           </h2>
@@ -1075,7 +1084,7 @@ export default function Home() {
         
         {/* Education Section */}
         <section id="education" className="py-20 border-t bg-muted/50 rounded-lg">
-          <h2 className="text-3xl font-bold text-center mb-12 flex items-center justify-center gap-3">
+          <h2 className="text-3xl font-bold text-center mb-12 flex items-center justify-center gap-3 text-primary">
               <GraduationCap className="h-8 w-8 text-primary" />
               <TranslatedText text="Academic Education" />
           </h2>
@@ -1115,7 +1124,7 @@ export default function Home() {
 
         {/* Professional Retraining Section */}
         <section id="retraining" className="py-20 border-t">
-            <h2 className="text-3xl font-bold text-center mb-12 flex items-center justify-center gap-3">
+            <h2 className="text-3xl font-bold text-center mb-12 flex items-center justify-center gap-3 text-primary">
                 <Zap className="h-8 w-8 text-primary" />
                 <TranslatedText text="Diplomas of Professional Retraining (2023)" />
             </h2>
@@ -1188,7 +1197,7 @@ export default function Home() {
 
         {/* References Section */}
         <section id="references" className="py-20 border-t bg-muted/50 rounded-lg">
-          <h2 className="text-3xl font-bold text-center mb-12"><TranslatedText text="References"/></h2>
+          <h2 className="text-3xl font-bold text-center mb-12 text-primary"><TranslatedText text="References"/></h2>
           <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {references.map((ref, index) => (
                   <Card key={index} className="flex flex-col bg-card/80">
@@ -1219,7 +1228,7 @@ export default function Home() {
         
         <section id="contact" className="py-20 border-t">
           <div className="text-center max-w-2xl mx-auto">
-            <h2 className="text-3xl font-bold"><TranslatedText text="Let's Connect" /></h2>
+            <h2 className="text-3xl font-bold text-primary"><TranslatedText text="Let's Connect" /></h2>
             <p className="text-muted-foreground mt-4 mb-8">
               <TranslatedText text="I'm always open to discussing new projects, creative ideas, or opportunities to be part of an ambitious vision. Feel free to reach out." />
             </p>
