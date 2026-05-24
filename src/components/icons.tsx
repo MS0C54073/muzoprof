@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { cn } from '@/lib/utils';
+import Image from 'next/image';
 
 export function WhatsappIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -42,11 +43,13 @@ export function MuzoInTechLogo({ className, ...props }: React.HTMLAttributes<HTM
       {/* Moving Shimmer Effect */}
       <div className="absolute inset-0 opacity-30 bg-[linear-gradient(45deg,transparent_25%,rgba(255,107,0,0.15)_50%,transparent_75%)] bg-[length:250%_250%] animate-[slide_4s_linear_infinite]" />
 
-      <img
-        src="https://drive.google.com/uc?id=1FplxN_eRhvtCG9c7D-5u2_v7pDCJSGxg"
+      <Image
+        src="https://lh3.googleusercontent.com/d/1FplxN_eRhvtCG9c7D-5u2_v7pDCJSGxg"
         alt="MUZO"
+        width={48}
+        height={48}
         className="relative z-10 h-[82%] w-[82%] object-contain transition-transform duration-500 group-hover:scale-110"
-        loading="eager"
+        priority
       />
       
       {/* Outer pulsing ring for "living tech" feel */}
@@ -78,7 +81,7 @@ export function TryHackMeIcon(props: React.SVGProps<SVGSVGElement>) {
       xmlns="http://www.w3.org/2000/svg"
       fill="currentColor"
     >
-      <path d="M21.143 2.857H2.857C2.383 2.857 2 3.24 2 3.714v16.572C2 20.76 2.383 21.143 2.857 21.143h18.286c.474 0 .857-.383.857-.857V3.714c0-.474-.383-.857-.857-.857zM12 17.143c-2.828 0-5.143-2.315-5.143-5.143S9.172 6.857 12 6.857c2.828 0 5.143 2.315 5.143 5.143S14.828 17.143 12 17.143zm-2.286-5.143l-3-3h3.857v3zm4.572 0l3-3h-3.857v3zm0 2.286l3 3h-3.857v-3zm-4.572 0l-3 3h3.857v-3z" />
+      <path d="M21.143 2.857H2.857C2.383 2.857 2 3.24 2 3.714v16.572C2 20.76 2.383 21.143 2.857 21.143h18.286c.474 0 .857-.383.857-.857V3.714c0-.474-.383-.857-.857-.857zM12 17.143c-2.828 0-5.143-2.315-5.143-5.143S9.172 6.857 12 6.857c2.828 0 5.143-2.315 5.143-5.143S14.828 17.143 12 17.143zm-2.286-5.143l-3-3h3.857v3zm4.572 0l3-3h-3.857v3zm0 2.286l3 3h-3.857v-3zm-4.572 0l-3 3h3.857v-3z" />
     </svg>
   );
 }
