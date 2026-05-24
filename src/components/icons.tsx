@@ -32,6 +32,7 @@ export function MuzoInTechLogo(props: React.SVGProps<SVGSVGElement>) {
       {...props}
       viewBox="0 0 100 100"
       xmlns="http://www.w3.org/2000/svg"
+      role="img"
       aria-label="MuzoInTech Logo"
     >
       <defs>
@@ -46,15 +47,14 @@ export function MuzoInTechLogo(props: React.SVGProps<SVGSVGElement>) {
       <circle cx="50" cy="50" r="42" fill="hsl(var(--primary))" />
       {/* Minimalist fancy 'M' */}
       <text
-        x="50%"
-        y="50%"
-        dy=".05em"
+        x="50"
+        y="50"
+        dy=".35em"
         fill="white"
         fontSize="52"
-        fontFamily="serif, 'Times New Roman'"
+        fontFamily="Georgia, serif"
         fontWeight="bold"
         textAnchor="middle"
-        dominantBaseline="middle"
       >
         M
       </text>
