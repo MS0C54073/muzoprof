@@ -1,4 +1,3 @@
-
 'use client';
 
 import { Github, Youtube } from 'lucide-react';
@@ -13,11 +12,11 @@ import TranslatedText from '@/app/components/translated-text';
 
 
 export function SocialIcons({ className }: { className?: string }) {
-  const iconWrapperClasses = "h-9 w-9 rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110";
+  const iconWrapperClasses = "h-9 w-9 rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110 shadow-md";
   const iconClasses = "h-5 w-5";
 
   const socialLinks = [
-    { name: 'GitHub', href: 'https://github.com/MS0C54073', icon: <Github className={`${iconClasses} text-background`} />, bgClass: 'bg-foreground hover:bg-muted-foreground' },
+    { name: 'GitHub', href: 'https://github.com/MS0C54073', icon: <Github className={`${iconClasses} text-white`} />, bgClass: 'bg-[#181717] hover:bg-black' },
     { name: 'YouTube', href: 'https://www.youtube.com/@musondasalimu2986', icon: <Youtube className={`${iconClasses} text-white`} />, bgClass: 'bg-[#FF0000] hover:bg-[#CC0000]' },
     { name: 'Whatsapp', href: 'https://wa.me/260966882901', icon: <WhatsappIcon className={`${iconClasses} text-white`} />, bgClass: 'bg-[#25D366] hover:bg-[#1EAE54]' },
     { name: 'Telegram', href: 'https://t.me/MuzoSalim', icon: <TelegramIcon className={`${iconClasses} text-white`} />, bgClass: 'bg-[#229ED9] hover:bg-[#1A87B8]' },
