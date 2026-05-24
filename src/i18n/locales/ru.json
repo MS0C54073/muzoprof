@@ -97,6 +97,8 @@
   "Taught at university-organised summer camps for children with special needs and able-bodied children": "Преподавание в университетских летних лагерях",
   "Delivered TEFL (Teaching English as a Foreign Language) lessons and extracurricular activities": "Уроки TEFL и внеклассные мероприятия",
   "Designed inclusive, engaging learning experiences catering to diverse abilities and learner needs": "Проектирование инклюзивного учебного опыта",
+  "Zambian Student Community, Russia": "Замбийское студенческое сообщество, Россия",
+  "University Volunteer Programme, Russia": "Программа университетского волонтерства, Россия",
   "Web Development": "Веб-разработка",
   "Software Development": "Разработка ПО",
   "AI & Machine Learning": "ИИ и машинное обучение",
@@ -114,6 +116,7 @@
   "Postgraduate Diplomas (2023)": "Дипломы о последипломном образовании (2023)",
   "View All Certifications": "Показать все сертификаты",
   "View All Projects": "Показать все проекты",
+  "Verify Certificate": "Проверить сертификат",
   "Data Collection: Google Forms, Microsoft Forms, REST APIs, webhooks. Databases: SQL/NoSQL (PostgreSQL, MySQL, MongoDB, Supabase). Workflow Automation: n8n, Zapier, Google AI Studio | Gemini API.": "Сбор данных: Google Forms, Microsoft Forms, REST API, вебхуки. Базы данных: SQL/NoSQL (PostgreSQL, MySQL, MongoDB, Supabase). Автоматизация: n8n, Zapier, Google AI Studio | Gemini API.",
   "Creative Tools: Adobe Premiere Pro, Photoshop, Canva.": "Творческие инструменты: Adobe Premiere Pro, Photoshop, Canva.",
   "Tech & Language Tutoring": "Техническое и языковое репетиторство",
@@ -165,5 +168,7 @@
   "Zambian Kwacha": "Замбийская квача",
   "Select a service...": "Выберите услугу...",
   "e.g., Data Analysis Pipeline": "напр., Пайплайн анализа данных",
-  "Please list the features you need...": "Пожалуйста, перечислите необходимые функции..."
+  "Please list the features you need...": "Пожалуйста, перечислите необходимые функции...",
+  "Community Involvement & Volunteering": "Участие в жизни сообщества и волонтерство",
+  "© 2026 Musonda Salimu. All Rights Reserved.": "© 2026 Мусонда Салиму. Все права защищены."
 }

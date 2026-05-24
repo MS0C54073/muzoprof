@@ -97,6 +97,8 @@
   "Taught at university-organised summer camps for children with special needs and able-bodied children": "Taught at university-organised summer camps for children with special needs and able-bodied children",
   "Delivered TEFL (Teaching English as a Foreign Language) lessons and extracurricular activities": "Delivered TEFL (Teaching English as a Foreign Language) lessons and extracurricular activities",
   "Designed inclusive, engaging learning experiences catering to diverse abilities and learner needs": "Designed inclusive, engaging learning experiences catering to diverse abilities and learner needs",
+  "Zambian Student Community, Russia": "Zambian Student Community, Russia",
+  "University Volunteer Programme, Russia": "University Volunteer Programme, Russia",
   "Web Development": "Web Development",
   "Software Development": "Software Development",
   "AI & Machine Learning": "AI & Machine Learning",
@@ -114,6 +116,7 @@
   "Postgraduate Diplomas (2023)": "Postgraduate Diplomas (2023)",
   "View All Certifications": "View All Certifications",
   "View All Projects": "View All Projects",
+  "Verify Certificate": "Verify Certificate",
   "Data Collection: Google Forms, Microsoft Forms, REST APIs, webhooks. Databases: SQL/NoSQL (PostgreSQL, MySQL, MongoDB, Supabase). Workflow Automation: n8n, Zapier, Google AI Studio | Gemini API.": "Data Collection: Google Forms, Microsoft Forms, REST APIs, webhooks. Databases: SQL/NoSQL (PostgreSQL, MySQL, MongoDB, Supabase). Workflow Automation: n8n, Zapier, Google AI Studio | Gemini API.",
   "Creative Tools: Adobe Premiere Pro, Photoshop, Canva.": "Creative Tools: Adobe Premiere Pro, Photoshop, Canva.",
   "Tech & Language Tutoring": "Tech & Language Tutoring",
@@ -165,5 +168,7 @@
   "Zambian Kwacha": "Zambian Kwacha",
   "Select a service...": "Select a service...",
   "e.g., Data Analysis Pipeline": "e.g., Data Analysis Pipeline",
-  "Please list the features you need...": "Please list the features you need..."
+  "Please list the features you need...": "Please list the features you need...",
+  "Community Involvement & Volunteering": "Community Involvement & Volunteering",
+  "© 2026 Musonda Salimu. All Rights Reserved.": "© 2026 Musonda Salimu. All Rights Reserved."
 }
