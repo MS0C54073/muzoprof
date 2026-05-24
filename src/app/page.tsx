@@ -1,3 +1,4 @@
+
 'use client';
 
 import Image from 'next/image';
@@ -542,8 +543,8 @@ export default function Home() {
             const CONTENT_W = PAGE_W - (MARGIN * 2);
             
             const COLORS = {
-                ACCENT: [15, 23, 42] as [number, number, number], // Slate 900
-                LIGHT: [51, 65, 85] as [number, number, number],  // Slate 700
+                ACCENT: [31, 78, 121] as [number, number, number], // #1F4E79 (Deep Navy)
+                LIGHT: [46, 117, 182] as [number, number, number],  // #2E75B6 (Medium Blue)
                 GRAY: [85, 85, 85] as [number, number, number],
                 BLACK: [17, 17, 17] as [number, number, number],
                 BLUE_LINE: [46, 117, 182] as [number, number, number] // #2E75B6

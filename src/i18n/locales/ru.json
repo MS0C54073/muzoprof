@@ -91,5 +91,16 @@
   "Estimated Quote": "Предварительная смета",
   "Service Overview": "Обзор услуги",
   "What We Offer": "Что мы предлагаем",
-  "Request This Service": "Заказать услугу"
+  "Request This Service": "Заказать услугу",
+  "Data Tools & Automation": "Инструменты данных и автоматизация",
+  "Design & Media": "Дизайн и медиа",
+  "Web & Software Development": "Веб-разработка и разработка ПО",
+  "View All Experience": "Показать весь опыт",
+  "View All Education": "Показать все образование",
+  "Education File and CV": "Документы об образовании и резюме",
+  "Postgraduate Diplomas (2023)": "Дипломы о последипломном образовании (2023)",
+  "View All Certifications": "Показать все сертификаты",
+  "View All Projects": "Показать все проекты",
+  "Data Collection: Google Forms, Microsoft Forms, REST APIs, webhooks. Databases: SQL/NoSQL (PostgreSQL, MySQL, MongoDB, Supabase). Workflow Automation: n8n, Zapier, Google AI Studio | Gemini API.": "Сбор данных: Google Forms, Microsoft Forms, REST API, вебхуки. Базы данных: SQL/NoSQL (PostgreSQL, MySQL, MongoDB, Supabase). Автоматизация: n8n, Zapier, Google AI Studio | Gemini API.",
+  "Creative Tools: Adobe Premiere Pro, Photoshop, Canva.": "Творческие инструменты: Adobe Premiere Pro, Photoshop, Canva."
 }

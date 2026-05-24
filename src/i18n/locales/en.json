@@ -91,5 +91,16 @@
   "Estimated Quote": "Estimated Quote",
   "Service Overview": "Service Overview",
   "What We Offer": "What We Offer",
-  "Request This Service": "Request This Service"
+  "Request This Service": "Request This Service",
+  "Data Tools & Automation": "Data Tools & Automation",
+  "Design & Media": "Design & Media",
+  "Web & Software Development": "Web & Software Development",
+  "View All Experience": "View All Experience",
+  "View All Education": "View All Education",
+  "Education File and CV": "Education File and CV",
+  "Postgraduate Diplomas (2023)": "Postgraduate Diplomas (2023)",
+  "View All Certifications": "View All Certifications",
+  "View All Projects": "View All Projects",
+  "Data Collection: Google Forms, Microsoft Forms, REST APIs, webhooks. Databases: SQL/NoSQL (PostgreSQL, MySQL, MongoDB, Supabase). Workflow Automation: n8n, Zapier, Google AI Studio | Gemini API.": "Data Collection: Google Forms, Microsoft Forms, REST APIs, webhooks. Databases: SQL/NoSQL (PostgreSQL, MySQL, MongoDB, Supabase). Workflow Automation: n8n, Zapier, Google AI Studio | Gemini API.",
+  "Creative Tools: Adobe Premiere Pro, Photoshop, Canva.": "Creative Tools: Adobe Premiere Pro, Photoshop, Canva."
 }
