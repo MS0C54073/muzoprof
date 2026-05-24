@@ -172,7 +172,8 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    opacity: 0.15;
+    background-attachment: fixed;
+    opacity: 0.4;
     filter: blur(1px);
     animation: nebula-drift 40s infinite alternate ease-in-out;
 }

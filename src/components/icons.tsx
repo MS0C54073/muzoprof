@@ -26,39 +26,17 @@ export function TelegramIcon(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
-export function MuzoInTechLogo(props: React.SVGProps<SVGSVGElement>) {
+export function MuzoInTechLogo(props: React.HTMLAttributes<HTMLImageElement>) {
   return (
-    <svg
-      {...props}
-      viewBox="0 0 100 100"
-      xmlns="http://www.w3.org/2000/svg"
-      role="img"
-      aria-label="MuzoInTech Logo"
-    >
-      <defs>
-        <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="hsl(var(--primary))" />
-          <stop offset="100%" stopColor="hsl(var(--accent))" />
-        </linearGradient>
-      </defs>
-      {/* Fancy outer ring */}
-      <circle cx="50" cy="50" r="48" fill="none" stroke="url(#logo-gradient)" strokeWidth="3" opacity="0.8" />
-      {/* Solid inner circle */}
-      <circle cx="50" cy="50" r="42" fill="hsl(var(--primary))" />
-      {/* Minimalist fancy 'M' */}
-      <text
-        x="50"
-        y="50"
-        fill="white"
-        fontSize="52"
-        fontFamily="Georgia, serif"
-        fontWeight="bold"
-        textAnchor="middle"
-        dominantBaseline="central"
-      >
-        M
-      </text>
-    </svg>
+    <img
+      src="https://drive.google.com/uc?id=1FplxN_eRhvtCG9c7D-5u2_v7pDCJSGxg"
+      alt="MuzoInTech Logo"
+      className={props.className || "h-full w-full object-contain rounded-full shadow-md"}
+      style={{
+        ...props.style,
+        backgroundColor: 'white' // Provides a clean background for the logo image
+      }}
+    />
   );
 }
 
