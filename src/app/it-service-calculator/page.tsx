@@ -195,6 +195,10 @@ type CurrencyId = keyof typeof serviceConfig.currencies;
 export default function ItServiceCalculatorPage() {
   const { t } = useTranslation();
   const { toast } = useToast();
+  
+  // Hydration state to prevent mismatch errors
+  const [mounted, setMounted] = useState(false);
+
   const [selectedService, setSelectedService] = useState<ServiceId>('web_development');
   const [quantity, setQuantity] = useState(1);
   const [customServiceName, setCustomServiceName] = useState('');
@@ -212,6 +216,12 @@ export default function ItServiceCalculatorPage() {
     selectedService === 'lesson_enrollment' || selectedService === 'lesson_packages', 
   [selectedService]);
 
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Helper to ensure consistent rendering during hydration
+  const safeT = (key: string) => mounted ? t(key) : key;
 
   useEffect(() => {
     const currencyRate = serviceConfig.currencies[selectedCurrency].rate;
@@ -459,7 +469,7 @@ export default function ItServiceCalculatorPage() {
                     {Object.entries(serviceConfig.currencies).map(([id, { name }]) => (
                       <div className="flex items-center space-x-2" key={id}>
                         <RadioGroupItem value={id} id={`curr-${id}`} />
-                        <Label htmlFor={`curr-${id}`} className="font-normal">{t(name)}</Label>
+                        <Label htmlFor={`curr-${id}`} className="font-normal">{safeT(name)}</Label>
                       </div>
                     ))}
                  </RadioGroup>
@@ -470,7 +480,7 @@ export default function ItServiceCalculatorPage() {
                 <Label htmlFor="service-select"><TranslatedText text="Service" /></Label>
                 <Select value={selectedService} onValueChange={handleServiceChange}>
                   <SelectTrigger id="service-select">
-                    <SelectValue placeholder={t("Select a service...")} />
+                    <SelectValue placeholder={safeT("Select a service...")} />
                   </SelectTrigger>
                   <SelectContent>
                     {Object.entries(serviceConfig.services).map(([id, { name }]) => (
@@ -491,7 +501,7 @@ export default function ItServiceCalculatorPage() {
                         id="custom-service-name"
                         value={customServiceName}
                         onChange={(e) => setCustomServiceName(e.target.value)}
-                        placeholder={t("e.g., Data Analysis Pipeline")}
+                        placeholder={safeT("e.g., Data Analysis Pipeline")}
                       />
                     </div>
                      <div className="space-y-2">
@@ -500,7 +510,7 @@ export default function ItServiceCalculatorPage() {
                         id="custom-features"
                         value={customFeatures}
                         onChange={(e) => setCustomFeatures(e.target.value)}
-                        placeholder={t("Please list the features you need...")}
+                        placeholder={safeT("Please list the features you need...")}
                         rows={4}
                       />
                     </div>

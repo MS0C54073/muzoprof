@@ -65,7 +65,7 @@
   "Solved complex coding problems ensuring efficiency and reliability": "Решение сложных задач программирования с обеспечением эффективности",
   "Developed test cases and verification methodologies to validate output quality": "Разработка тестовых сценариев для проверки качества вывода",
   "Provided actionable feedback to optimise AI content generation processes": "Предоставление отзывов для оптимизации процессов генерации контента",
-  "IT Support Volunteer & Technical Assistant": "Волонтер ИТ-поддержки и технический ассистент",
+  "IT Support Volunteer & Technical Assistant": "Волонтер ИТ-поддержки и технический ассиент",
   "Maintained and managed critical embassy IT infrastructure systems": "Обслуживание и управление критической ИТ-инфраструктурой посольства",
   "Provided proactive technical support ensuring seamless digital operations": "Проактивная техническая поддержка цифровых операций",
   "IT Support Freelancer": "ИТ-фрилансер",
@@ -160,5 +160,10 @@
   "Neural Network": "Нейронная сеть",
   "Quantum Matrix": "Квантовая матрица",
   "Circuit Board": "Печатная плата",
-  "Data Center": "Дата-центр"
+  "Data Center": "Дата-центр",
+  "US Dollar": "Доллар США",
+  "Zambian Kwacha": "Замбийская квача",
+  "Select a service...": "Выберите услугу...",
+  "e.g., Data Analysis Pipeline": "напр., Пайплайн анализа данных",
+  "Please list the features you need...": "Пожалуйста, перечислите необходимые функции..."
 }

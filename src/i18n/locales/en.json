@@ -160,5 +160,10 @@
   "Neural Network": "Neural Network",
   "Quantum Matrix": "Quantum Matrix",
   "Circuit Board": "Circuit Board",
-  "Data Center": "Data Center"
+  "Data Center": "Data Center",
+  "US Dollar": "US Dollar",
+  "Zambian Kwacha": "Zambian Kwacha",
+  "Select a service...": "Select a service...",
+  "e.g., Data Analysis Pipeline": "e.g., Data Analysis Pipeline",
+  "Please list the features you need...": "Please list the features you need..."
 }
