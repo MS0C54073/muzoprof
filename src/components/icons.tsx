@@ -37,15 +37,15 @@ export function MuzoInTechLogo({ className, ...props }: React.HTMLAttributes<HTM
       )}
       {...props}
     >
-      {/* Subtle glow effect behind the badge */}
-      <div className="absolute inset-0 bg-accent/5 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      {/* Subtle glow effect behind the logo */}
+      <div className="absolute inset-0 bg-accent/10 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
       <Image
-        src="https://lh3.googleusercontent.com/d/1FplxN_eRhvtCG9c7D-5u2_v7pDCJSGxg"
+        src="https://lh3.googleusercontent.com/d/18Lfcl0Dlti3A_Tsi1BT6tXmrk7GGQ3Cr"
         alt="MuzoInTech Logo"
-        width={64}
-        height={64}
-        className="relative z-10 h-full w-full object-contain transition-transform duration-500 group-hover:scale-110 drop-shadow-[0_4px_10px_rgba(0,0,0,0.3)]"
+        width={128}
+        height={128}
+        className="relative z-10 h-full w-full object-contain transition-transform duration-500 group-hover:scale-110 drop-shadow-[0_4px_12px_rgba(0,0,0,0.4)]"
         priority
       />
     </div>
