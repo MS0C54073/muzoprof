@@ -1,5 +1,3 @@
-
-
 'use client';
 
 import { useState } from 'react';
@@ -83,12 +81,12 @@ const MaterialsAccordion = ({ materials }: { materials: Material[] }) => {
         <Accordion type="multiple" className="w-full">
             {materials.map((material, index) => (
                 <AccordionItem value={`${material.title}-${index}`} key={`${material.title}-${index}`}>
-                    <AccordionTrigger>{material.title}</AccordionTrigger>
+                    <AccordionTrigger><TranslatedText text={material.title} /></AccordionTrigger>
                     <AccordionContent className="pl-4">
                         {material.children && material.children.length > 0 ? (
                             <MaterialsAccordion materials={material.children} />
                         ) : (
-                            <p className="text-muted-foreground italic">End of section.</p>
+                            <p className="text-muted-foreground italic"><TranslatedText text="End of section." /></p>
                         )}
                     </AccordionContent>
                 </AccordionItem>
@@ -122,7 +120,7 @@ export default function TutorPage() {
                 skills: [
                     "English Language Teaching (TEFL)", "Curriculum & Lesson Planning", "Student Assessment & Feedback",
                     "Python Programming", "Web Development (HTML, CSS, JS)", "Roblox & Unity Game Design",
-                    "One-on-One & Group Tutoring", "Online Teaching Platforms", "Communication & Interpersonal Skills"
+                    "One-on-one & Group Tutoring", "Online Teaching Platforms", "Communication & Interpersonal Skills"
                 ],
                 experience: [
                     { title: 'Specialized English Teacher', company: 'Online', duration: '2021 – Present', details: 'Focused on Business English, IT English, and Aviation English, tailoring lessons to individual student needs.' },
@@ -420,8 +418,8 @@ export default function TutorPage() {
                 <div className="space-y-4">
                   {experiences.map((exp, index) => (
                     <div key={index}>
-                        <h4 className="font-semibold text-accent">{exp.title}</h4>
-                        <p className="text-sm text-muted-foreground">{exp.details}</p>
+                        <h4 className="font-semibold text-accent"><TranslatedText text={exp.title} /></h4>
+                        <p className="text-sm text-muted-foreground"><TranslatedText text={exp.details} /></p>
                     </div>
                   ))}
                 </div>
@@ -436,7 +434,7 @@ export default function TutorPage() {
               <CardContent>
                 <ul className="list-disc list-inside space-y-2">
                     {offerings.map((offer, index) => (
-                        <li key={index} className="text-muted-foreground">{offer}</li>
+                        <li key={index} className="text-muted-foreground"><TranslatedText text={offer} /></li>
                     ))}
                 </ul>
                 <div className="mt-6 pt-6 border-t">
@@ -465,15 +463,15 @@ export default function TutorPage() {
                 {tutorCertifications.map((cert, index) => (
                     <Card key={index} className="bg-card/50">
                         <CardHeader>
-                            <CardTitle className="text-lg text-accent">{cert.title}</CardTitle>
+                            <CardTitle className="text-lg text-accent"><TranslatedText text={cert.title} /></CardTitle>
                         </CardHeader>
                         <CardContent>
                             <p className="text-sm text-muted-foreground">
-                                <TranslatedText text="Issued by "/> <strong>{cert.issuer}</strong> - {cert.date}
+                                <TranslatedText text="Issued by "/> <strong><TranslatedText text={cert.issuer} /></strong> - <TranslatedText text={cert.date} />
                             </p>
                             {cert.credentialId && (
                                 <p className="text-xs text-muted-foreground mt-1">
-                                    <TranslatedText text="Credential ID: "/> {cert.credentialId}
+                                    <TranslatedText text="Credential ID: "/> <TranslatedText text={cert.credentialId} />
                                 </p>
                             )}
                         </CardContent>
@@ -488,8 +486,8 @@ export default function TutorPage() {
             </h2>
             <Tabs defaultValue="english" className="w-full max-w-4xl mx-auto">
                 <TabsList className="grid w-full grid-cols-2">
-                    <TabsTrigger value="english">English</TabsTrigger>
-                    <TabsTrigger value="programming">Programming</TabsTrigger>
+                    <TabsTrigger value="english"><TranslatedText text="English" /></TabsTrigger>
+                    <TabsTrigger value="programming"><TranslatedText text="Programming" /></TabsTrigger>
                 </TabsList>
                 <TabsContent value="english">
                     <Card>
@@ -517,8 +515,8 @@ export default function TutorPage() {
                                 <div key={p.title} className="flex items-start">
                                     {p.icon}
                                     <div>
-                                        <h4 className="font-semibold">{p.title}</h4>
-                                        <p className="text-sm text-muted-foreground">{p.description}</p>
+                                        <h4 className="font-semibold"><TranslatedText text={p.title} /></h4>
+                                        <p className="text-sm text-muted-foreground"><TranslatedText text={p.description} /></p>
                                     </div>
                                 </div>
                             ))}
@@ -595,5 +593,3 @@ export default function TutorPage() {
     </div>
   );
 }
-
-    

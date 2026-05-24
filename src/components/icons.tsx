@@ -49,12 +49,12 @@ export function MuzoInTechLogo(props: React.SVGProps<SVGSVGElement>) {
       <text
         x="50"
         y="50"
-        dy=".35em"
         fill="white"
         fontSize="52"
         fontFamily="Georgia, serif"
         fontWeight="bold"
         textAnchor="middle"
+        dominantBaseline="central"
       >
         M
       </text>
