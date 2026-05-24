@@ -20,7 +20,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { ArrowLeft, BookOpen, Check, Loader2, Mail, Send, Bot, Code, Globe, BrainCircuit, Smartphone, Database, Server, Shield, Terminal, Eye, Download, GraduationCap, Sparkles } from 'lucide-react';
+import { Dialog, DialogContent, DialogTrigger, DialogTitle, DialogDescription, DialogHeader } from "@/components/ui/dialog";
+import { ArrowLeft, BookOpen, Check, Loader2, Mail, Send, Bot, Code, Globe, BrainCircuit, Smartphone, Database, Server, Shield, Terminal, Eye, Download, GraduationCap, Sparkles, Maximize2 } from 'lucide-react';
 import TranslatedText from '@/app/components/translated-text';
 import { SocialIcons } from '@/components/social-icons';
 import { englishMaterials, type Material } from './teaching-materials';
@@ -402,18 +403,16 @@ export default function TutorPage() {
 
         <section className="grid md:grid-cols-5 gap-8">
           <div className="md:col-span-3">
-            <Card className="shadow-lg h-full">
-              <CardHeader className="p-0 overflow-hidden">
+            <Card className="shadow-lg h-full overflow-hidden">
+              <div className="relative h-[400px]">
                   <Image
                     src="https://lh3.googleusercontent.com/d/1dteuS0zoNLTLo_oVjkFlPPW5CCyn2Wd9"
                     alt="Online Tutoring Session"
-                    width={800}
-                    height={450}
-                    data-ai-hint="online tutoring"
-                    className="rounded-t-lg w-full h-[400px] object-cover object-top transition-transform duration-500 hover:scale-105"
+                    fill
+                    className="object-cover object-top transition-transform duration-500 hover:scale-105"
                     priority
                   />
-              </CardHeader>
+              </div>
               <CardContent className="p-6">
                 <CardTitle className="mb-4"><TranslatedText text="My Experience Includes" /></CardTitle>
                 <div className="space-y-4">
@@ -456,37 +455,88 @@ export default function TutorPage() {
           </div>
         </section>
 
-        {/* Gallery Section with Animations */}
+        {/* Gallery Section with Animations & Lightbox */}
         <section id="visual-highlights" className="py-20 border-t mt-12">
             <h2 className="text-3xl font-bold text-center mb-12 flex items-center justify-center gap-2">
                 <Sparkles className="h-8 w-8 text-primary" />
                 <TranslatedText text="Learning Environment" />
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                <div className="group relative overflow-hidden rounded-2xl shadow-2xl animate-pulse-slow">
-                    <Image
-                        src="https://lh3.googleusercontent.com/d/1qp_OSRxRq6d5-4DMy71-iN1jA-K8AKXC"
-                        alt="Teaching Excellence"
-                        width={600}
-                        height={400}
-                        className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:brightness-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
-                        <p className="text-white font-medium"><TranslatedText text="Expert Presentation & Methodology" /></p>
-                    </div>
-                </div>
-                <div className="group relative overflow-hidden rounded-2xl shadow-2xl animate-pulse-slow [animation-delay:1s]">
-                    <Image
-                        src="https://lh3.googleusercontent.com/d/1mMEV5VX-Q-05z3k2f303yh831TdKUejd"
-                        alt="Creative Space"
-                        width={600}
-                        height={400}
-                        className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:brightness-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
-                        <p className="text-white font-medium"><TranslatedText text="Inspiring Workspace for Modern Learners" /></p>
-                    </div>
-                </div>
+                {/* Image 1 with Dialog */}
+                <Dialog>
+                    <DialogTrigger asChild>
+                        <div className="group relative overflow-hidden rounded-2xl shadow-2xl animate-pulse-slow cursor-pointer aspect-[4/3] bg-muted">
+                            <Image
+                                src="https://lh3.googleusercontent.com/d/1qp_OSRxRq6d5-4DMy71-iN1jA-K8AKXC"
+                                alt="Teaching Excellence"
+                                fill
+                                className="object-cover transition-all duration-700 group-hover:scale-110 group-hover:brightness-110"
+                            />
+                            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                                <div className="flex items-center gap-2 text-white font-bold bg-primary/80 px-4 py-2 rounded-full shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                                    <Maximize2 className="h-4 w-4" />
+                                    <TranslatedText text="Click to Expand" />
+                                </div>
+                            </div>
+                            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                <p className="text-white font-medium"><TranslatedText text="Expert Presentation & Methodology" /></p>
+                            </div>
+                        </div>
+                    </DialogTrigger>
+                    <DialogContent className="max-w-4xl w-full p-1 bg-background overflow-hidden border-none shadow-2xl">
+                        <DialogHeader className="sr-only">
+                            <DialogTitle>Teaching Excellence</DialogTitle>
+                            <DialogDescription>Full view of educational methodology</DialogDescription>
+                        </DialogHeader>
+                        <div className="relative w-full aspect-[4/3] sm:aspect-video">
+                            <Image
+                                src="https://lh3.googleusercontent.com/d/1qp_OSRxRq6d5-4DMy71-iN1jA-K8AKXC"
+                                alt="Teaching Excellence Full View"
+                                fill
+                                className="object-contain"
+                                priority
+                            />
+                        </div>
+                    </DialogContent>
+                </Dialog>
+
+                {/* Image 2 with Dialog */}
+                <Dialog>
+                    <DialogTrigger asChild>
+                        <div className="group relative overflow-hidden rounded-2xl shadow-2xl animate-pulse-slow [animation-delay:1s] cursor-pointer aspect-[4/3] bg-muted">
+                            <Image
+                                src="https://lh3.googleusercontent.com/d/1mMEV5VX-Q-05z3k2f303yh831TdKUejd"
+                                alt="Creative Space"
+                                fill
+                                className="object-cover transition-all duration-700 group-hover:scale-110 group-hover:brightness-110"
+                            />
+                            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                                <div className="flex items-center gap-2 text-white font-bold bg-primary/80 px-4 py-2 rounded-full shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                                    <Maximize2 className="h-4 w-4" />
+                                    <TranslatedText text="Click to Expand" />
+                                </div>
+                            </div>
+                            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                <p className="text-white font-medium"><TranslatedText text="Inspiring Workspace for Modern Learners" /></p>
+                            </div>
+                        </div>
+                    </DialogTrigger>
+                    <DialogContent className="max-w-4xl w-full p-1 bg-background overflow-hidden border-none shadow-2xl">
+                        <DialogHeader className="sr-only">
+                            <DialogTitle>Creative Space</DialogTitle>
+                            <DialogDescription>Full view of the teaching environment</DialogDescription>
+                        </DialogHeader>
+                        <div className="relative w-full aspect-[4/3] sm:aspect-video">
+                            <Image
+                                src="https://lh3.googleusercontent.com/d/1mMEV5VX-Q-05z3k2f303yh831TdKUejd"
+                                alt="Creative Space Full View"
+                                fill
+                                className="object-contain"
+                                priority
+                            />
+                        </div>
+                    </DialogContent>
+                </Dialog>
             </div>
         </section>
 
