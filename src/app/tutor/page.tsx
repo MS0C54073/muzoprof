@@ -7,14 +7,13 @@ import { useForm, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { jsPDF } from 'jspdf';
-import { app, storage, db } from '@/lib/firebase';
+import { storage, db } from '@/lib/firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
@@ -82,12 +81,12 @@ const MaterialsAccordion = ({ materials }: { materials: Material[] }) => {
         <Accordion type="multiple" className="w-full">
             {materials.map((material, index) => (
                 <AccordionItem value={`${material.title}-${index}`} key={`${material.title}-${index}`}>
-                    <AccordionTrigger><TranslatedText text={material.title} /></AccordionTrigger>
+                    <AccordionTrigger className="text-left font-bold"><TranslatedText text={material.title} /></AccordionTrigger>
                     <AccordionContent className="pl-4">
                         {material.children && material.children.length > 0 ? (
                             <MaterialsAccordion materials={material.children} />
                         ) : (
-                            <p className="text-muted-foreground italic"><TranslatedText text="End of section." /></p>
+                            <p className="text-muted-foreground italic font-medium"><TranslatedText text="End of section." /></p>
                         )}
                     </AccordionContent>
                 </AccordionItem>
@@ -359,93 +358,102 @@ export default function TutorPage() {
   };
 
   return (
-    <div className="container mx-auto py-12 px-4 md:px-6 lg:px-8 min-h-screen flex flex-col">
-      <header className="mb-8">
-        <Button variant="outline" asChild className="mb-4">
+    <div className="container mx-auto py-8 md:py-12 px-4 md:px-8 lg:px-12 min-h-screen flex flex-col">
+      <header className="mb-10 md:mb-16">
+        <Button variant="outline" asChild className="mb-8 rounded-full shadow-sm">
           <Link href="/">
             <ArrowLeft className="mr-2 h-4 w-4" />
             <TranslatedText text="Back to Home" />
           </Link>
         </Button>
-        <div className="flex items-center space-x-3">
-          <BookOpen className="h-10 w-10 text-primary" />
-          <h1 className="text-4xl font-bold text-primary">
-            <TranslatedText text="Tech & Language Tutoring" />
-          </h1>
-        </div>
-        <p className="text-muted-foreground mt-2 text-lg">
-            <TranslatedText text="Personalized online lessons for children, teenagers, and adults." />
-        </p>
-         <div className="mt-6">
-            <Button asChild size="lg" className="border-accent text-accent hover:bg-accent hover:text-black">
-                <a href="https://forms.gle/btbiX7F7n4JndgGy7" target="_blank" rel="noopener noreferrer">
-                    <GraduationCap className="mr-2 h-5 w-5" />
-                    <TranslatedText text="Enroll for Lessons" />
-                </a>
-            </Button>
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div>
+                <div className="flex items-center space-x-3 mb-4">
+                  <div className="p-3 bg-primary/10 rounded-2xl">
+                    <BookOpen className="h-8 w-8 md:h-10 md:w-10 text-primary" />
+                  </div>
+                  <h1 className="text-3xl md:text-5xl font-black text-primary tracking-tight">
+                    <TranslatedText text="Tech & Language Tutoring" />
+                  </h1>
+                </div>
+                <p className="text-muted-foreground text-lg md:text-xl font-medium max-w-2xl">
+                    <TranslatedText text="Personalized online lessons for children, teenagers, and adults." />
+                </p>
+            </div>
+             <div className="flex shrink-0">
+                <Button asChild size="lg" className="h-16 px-10 border-accent text-accent hover:bg-accent hover:text-black rounded-full font-black text-lg shadow-xl animate-bounce-slow">
+                    <a href="https://forms.gle/btbiX7F7n4JndgGy7" target="_blank" rel="noopener noreferrer">
+                        <GraduationCap className="mr-2 h-6 w-6" />
+                        <TranslatedText text="Enroll for Lessons" />
+                    </a>
+                </Button>
+            </div>
         </div>
       </header>
 
       <main className="flex-grow">
       
-        <section className="mb-12">
-            <Card className="shadow-lg">
+        <section className="mb-16">
+            <Card className="shadow-2xl border-none bg-card/60 backdrop-blur-md rounded-2xl md:rounded-[2.5rem] p-4 md:p-8">
                 <CardHeader>
-                    <CardTitle><TranslatedText text="About My Teaching"/></CardTitle>
+                    <CardTitle className="text-2xl md:text-3xl font-black tracking-tight"><TranslatedText text="About My Teaching"/></CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <p className="text-muted-foreground">
+                    <p className="text-muted-foreground text-base md:text-lg leading-relaxed font-medium">
                         <TranslatedText text="As a patient and adaptable TEFL-certified educator with over 6 years of experience, I specialize in creating customized online learning experiences using modern tools like Zoom, Google Meet, and Teams. I have a passion for teaching English and technology to a diverse range of learners, from young children to professionals. My expertise covers General English, Business English, and comprehensive Cambridge Exam Preparations. I am experienced in teaching all age groups, am familiar with CRM systems like Bitrix24 and amoCRM for client management, and I'm committed to building a supportive and confident learning environment for every student."/>
                     </p>
                 </CardContent>
             </Card>
         </section>
 
-        <section className="grid md:grid-cols-5 gap-8">
-          <div className="md:col-span-3">
-            <Card className="shadow-lg h-full overflow-hidden">
-              <div className="relative h-[400px]">
+        <section className="grid grid-cols-1 lg:grid-cols-5 gap-8 mb-16">
+          <div className="lg:col-span-3">
+            <Card className="shadow-xl border-none h-full overflow-hidden rounded-2xl md:rounded-[2.5rem] bg-card/40">
+              <div className="relative h-[300px] md:h-[500px]">
                   <Image
                     src="https://lh3.googleusercontent.com/d/1dteuS0zoNLTLo_oVjkFlPPW5CCyn2Wd9"
                     alt="Online Tutoring Session"
                     fill
-                    className="object-cover object-top transition-transform duration-500 hover:scale-105"
+                    className="object-cover object-top transition-transform duration-700 hover:scale-105"
                     priority
                   />
               </div>
-              <CardContent className="p-6">
-                <CardTitle className="mb-4"><TranslatedText text="My Experience Includes" /></CardTitle>
-                <div className="space-y-4">
+              <CardContent className="p-8 md:p-12">
+                <CardTitle className="mb-8 text-2xl md:text-3xl font-black"><TranslatedText text="My Experience Includes" /></CardTitle>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   {experiences.map((exp, index) => (
-                    <div key={index}>
-                        <h4 className="font-semibold text-accent"><TranslatedText text={exp.title} /></h4>
-                        <p className="text-sm text-muted-foreground"><TranslatedText text={exp.details} /></p>
+                    <div key={index} className="space-y-2 border-l-4 border-accent/20 pl-4">
+                        <h4 className="font-black text-accent text-lg leading-tight"><TranslatedText text={exp.title} /></h4>
+                        <p className="text-sm md:text-base text-muted-foreground font-medium"><TranslatedText text={exp.details} /></p>
                     </div>
                   ))}
                 </div>
               </CardContent>
             </Card>
           </div>
-          <div className="md:col-span-2">
-            <Card className="shadow-lg sticky top-24">
-              <CardHeader>
-                <CardTitle><TranslatedText text="What I Offer" /></CardTitle>
+          <div className="lg:col-span-2">
+            <Card className="shadow-xl border-none lg:sticky lg:top-24 rounded-2xl md:rounded-[2.5rem] bg-primary text-primary-foreground overflow-hidden">
+              <CardHeader className="p-8 md:p-10">
+                <CardTitle className="text-2xl md:text-3xl font-black tracking-tight"><TranslatedText text="What I Offer" /></CardTitle>
               </CardHeader>
-              <CardContent>
-                <ul className="list-disc list-inside space-y-2">
+              <CardContent className="p-8 md:p-10 pt-0">
+                <ul className="space-y-4">
                     {offerings.map((offer, index) => (
-                        <li key={index} className="text-muted-foreground"><TranslatedText text={offer} /></li>
+                        <li key={index} className="text-base md:text-lg font-bold flex items-start">
+                            <Check className="mr-3 h-6 w-6 text-accent shrink-0 mt-0.5" />
+                            <TranslatedText text={offer} />
+                        </li>
                     ))}
                 </ul>
-                <div className="mt-6 pt-6 border-t">
-                    <CardTitle className="mb-4 text-lg"><TranslatedText text="Download My Tutoring CV"/></CardTitle>
-                     <div className="flex flex-col gap-3">
-                         <Button onClick={() => generateTutorCv('preview')} variant="outline" disabled={isGenerating}>
-                             {isGenerating ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Eye className="mr-2 h-4 w-4" />}
+                <div className="mt-10 pt-10 border-t border-primary-foreground/10">
+                    <CardTitle className="mb-6 text-xl font-black uppercase tracking-widest opacity-60"><TranslatedText text="Download My Tutoring CV"/></CardTitle>
+                     <div className="flex flex-col gap-4">
+                         <Button onClick={() => generateTutorCv('preview')} variant="outline" className="h-14 rounded-full border-2 border-white/20 bg-white/10 hover:bg-white/20 text-white font-bold transition-all" disabled={isGenerating}>
+                             {isGenerating ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Eye className="mr-2 h-5 w-5" />}
                              <TranslatedText text="Preview CV" />
                          </Button>
-                         <Button onClick={() => generateTutorCv('download')} disabled={isGenerating}>
-                             {isGenerating ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Download className="mr-2 h-4 w-4" />}
+                         <Button onClick={() => generateTutorCv('download')} className="h-14 rounded-full bg-white text-primary hover:bg-accent hover:text-white font-black text-lg transition-all shadow-xl" disabled={isGenerating}>
+                             {isGenerating ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Download className="mr-2 h-5 w-5" />}
                              <TranslatedText text="Download CV" />
                          </Button>
                     </div>
@@ -455,17 +463,17 @@ export default function TutorPage() {
           </div>
         </section>
 
-        {/* Gallery Section with Animations & Lightbox */}
-        <section id="visual-highlights" className="py-20 border-t mt-12">
-            <h2 className="text-3xl font-bold text-center mb-12 flex items-center justify-center gap-2">
-                <Sparkles className="h-8 w-8 text-primary" />
+        {/* Gallery Section */}
+        <section id="visual-highlights" className="py-16 md:py-24 border-t mt-12">
+            <h2 className="text-2xl md:text-4xl font-black text-center mb-16 flex items-center justify-center gap-3 text-primary tracking-tight">
+                <Sparkles className="h-8 w-8 md:h-10 md:w-10 text-primary" />
                 <TranslatedText text="Learning Environment" />
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-6xl mx-auto px-2">
                 {/* Image 1 with Dialog */}
                 <Dialog>
                     <DialogTrigger asChild>
-                        <div className="group relative overflow-hidden rounded-2xl shadow-2xl animate-pulse-slow cursor-pointer aspect-[4/3] bg-muted">
+                        <div className="group relative overflow-hidden rounded-[2rem] shadow-2xl animate-pulse-slow cursor-pointer aspect-square sm:aspect-[4/3] bg-muted">
                             <Image
                                 src="https://lh3.googleusercontent.com/d/1qp_OSRxRq6d5-4DMy71-iN1jA-K8AKXC"
                                 alt="Teaching Excellence"
@@ -473,22 +481,19 @@ export default function TutorPage() {
                                 className="object-cover transition-all duration-700 group-hover:scale-110 group-hover:brightness-110"
                             />
                             <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-                                <div className="flex items-center gap-2 text-white font-bold bg-primary/80 px-4 py-2 rounded-full shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                                    <Maximize2 className="h-4 w-4" />
+                                <div className="flex items-center gap-2 text-white font-black bg-primary/80 px-6 py-3 rounded-full shadow-2xl transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                                    <Maximize2 className="h-5 w-5" />
                                     <TranslatedText text="Click to Expand" />
                                 </div>
                             </div>
-                            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                                <p className="text-white font-medium"><TranslatedText text="Expert Presentation & Methodology" /></p>
-                            </div>
                         </div>
                     </DialogTrigger>
-                    <DialogContent className="max-w-4xl w-full p-1 bg-background overflow-hidden border-none shadow-2xl">
+                    <DialogContent className="max-w-5xl w-full p-2 bg-black/90 border-none shadow-2xl">
                         <DialogHeader className="sr-only">
                             <DialogTitle>Teaching Excellence</DialogTitle>
                             <DialogDescription>Full view of educational methodology</DialogDescription>
                         </DialogHeader>
-                        <div className="relative w-full aspect-[4/3] sm:aspect-video">
+                        <div className="relative w-full aspect-[4/3] md:aspect-video">
                             <Image
                                 src="https://lh3.googleusercontent.com/d/1qp_OSRxRq6d5-4DMy71-iN1jA-K8AKXC"
                                 alt="Teaching Excellence Full View"
@@ -503,7 +508,7 @@ export default function TutorPage() {
                 {/* Image 2 with Dialog */}
                 <Dialog>
                     <DialogTrigger asChild>
-                        <div className="group relative overflow-hidden rounded-2xl shadow-2xl animate-pulse-slow [animation-delay:1s] cursor-pointer aspect-[4/3] bg-muted">
+                        <div className="group relative overflow-hidden rounded-[2rem] shadow-2xl animate-pulse-slow [animation-delay:1s] cursor-pointer aspect-square sm:aspect-[4/3] bg-muted">
                             <Image
                                 src="https://lh3.googleusercontent.com/d/1mMEV5VX-Q-05z3k2f303yh831TdKUejd"
                                 alt="Creative Space"
@@ -511,22 +516,19 @@ export default function TutorPage() {
                                 className="object-cover transition-all duration-700 group-hover:scale-110 group-hover:brightness-110"
                             />
                             <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-                                <div className="flex items-center gap-2 text-white font-bold bg-primary/80 px-4 py-2 rounded-full shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                                    <Maximize2 className="h-4 w-4" />
+                                <div className="flex items-center gap-2 text-white font-black bg-primary/80 px-6 py-3 rounded-full shadow-2xl transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                                    <Maximize2 className="h-5 w-5" />
                                     <TranslatedText text="Click to Expand" />
                                 </div>
                             </div>
-                            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                                <p className="text-white font-medium"><TranslatedText text="Inspiring Workspace for Modern Learners" /></p>
-                            </div>
                         </div>
                     </DialogTrigger>
-                    <DialogContent className="max-w-4xl w-full p-1 bg-background overflow-hidden border-none shadow-2xl">
+                    <DialogContent className="max-w-5xl w-full p-2 bg-black/90 border-none shadow-2xl">
                         <DialogHeader className="sr-only">
                             <DialogTitle>Creative Space</DialogTitle>
                             <DialogDescription>Full view of the teaching environment</DialogDescription>
                         </DialogHeader>
-                        <div className="relative w-full aspect-[4/3] sm:aspect-video">
+                        <div className="relative w-full aspect-[4/3] md:aspect-video">
                             <Image
                                 src="https://lh3.googleusercontent.com/d/1mMEV5VX-Q-05z3k2f303yh831TdKUejd"
                                 alt="Creative Space Full View"
@@ -540,22 +542,22 @@ export default function TutorPage() {
             </div>
         </section>
 
-        <section id="certifications" className="py-20 border-t mt-12">
-            <h2 className="text-3xl font-bold text-center mb-12">
+        <section id="certifications" className="py-16 md:py-24 border-t mt-12 px-4 md:px-0 bg-muted/30 rounded-2xl md:rounded-[3rem]">
+            <h2 className="text-2xl md:text-4xl font-black text-center mb-16 tracking-tight text-primary">
                 <TranslatedText text="Teaching Certifications" />
             </h2>
-            <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
                 {tutorCertifications.map((cert, index) => (
-                    <Card key={index} className="bg-card/50">
-                        <CardHeader>
-                            <CardTitle className="text-lg text-accent"><TranslatedText text={cert.title} /></CardTitle>
+                    <Card key={index} className="bg-card/50 shadow-sm border-none rounded-2xl hover:shadow-lg transition-all p-4">
+                        <CardHeader className="pb-4">
+                            <CardTitle className="text-lg md:text-xl text-accent font-black tracking-tight"><TranslatedText text={cert.title} /></CardTitle>
                         </CardHeader>
                         <CardContent>
-                            <p className="text-sm text-muted-foreground">
-                                <TranslatedText text="Issued by "/> <strong><TranslatedText text={cert.issuer} /></strong> - <TranslatedText text={cert.date} />
+                            <p className="text-sm md:text-base text-muted-foreground font-bold">
+                                <TranslatedText text="Issued by "/> <strong className="text-foreground"><TranslatedText text={cert.issuer} /></strong> <span className="opacity-50 mx-1">•</span> <TranslatedText text={cert.date} />
                             </p>
                             {cert.credentialId && (
-                                <p className="text-xs text-muted-foreground mt-1">
+                                <p className="text-xs md:text-sm text-muted-foreground mt-3 font-mono bg-muted/50 px-3 py-1 rounded-full w-fit">
                                     <TranslatedText text="Credential ID: "/> <TranslatedText text={cert.credentialId} />
                                 </p>
                             )}
@@ -565,43 +567,45 @@ export default function TutorPage() {
             </div>
         </section>
 
-        <section id="materials" className="py-20 border-t mt-12">
-            <h2 className="text-3xl font-bold text-center mb-12">
+        <section id="materials" className="py-16 md:py-24 border-t mt-12 px-4 md:px-0">
+            <h2 className="text-2xl md:text-4xl font-black text-center mb-16 tracking-tight text-primary">
                 <TranslatedText text="Teaching Areas & Materials" />
             </h2>
-            <Tabs defaultValue="english" className="w-full max-w-4xl mx-auto">
-                <TabsList className="grid w-full grid-cols-2">
-                    <TabsTrigger value="english"><TranslatedText text="English" /></TabsTrigger>
-                    <TabsTrigger value="programming"><TranslatedText text="Programming" /></TabsTrigger>
+            <Tabs defaultValue="english" className="w-full max-w-5xl mx-auto">
+                <TabsList className="grid w-full grid-cols-2 h-16 rounded-full p-2 bg-muted mb-10">
+                    <TabsTrigger value="english" className="rounded-full font-black text-lg"><TranslatedText text="English" /></TabsTrigger>
+                    <TabsTrigger value="programming" className="rounded-full font-black text-lg"><TranslatedText text="Programming" /></TabsTrigger>
                 </TabsList>
                 <TabsContent value="english">
-                    <Card>
-                        <CardHeader>
-                            <CardTitle><TranslatedText text="English Teaching Materials" /></CardTitle>
-                            <CardDescription>
+                    <Card className="border-none shadow-xl bg-card/60 backdrop-blur rounded-[2rem]">
+                        <CardHeader className="p-8">
+                            <CardTitle className="text-2xl font-black"><TranslatedText text="English Teaching Materials" /></CardTitle>
+                            <CardDescription className="text-base font-medium">
                                 <TranslatedText text="A selection of the books and resources I use, tailored to different levels and needs." />
                             </CardDescription>
                         </CardHeader>
-                        <CardContent>
+                        <CardContent className="p-8 pt-0">
                             <MaterialsAccordion materials={englishMaterials} />
                         </CardContent>
                     </Card>
                 </TabsContent>
                 <TabsContent value="programming">
-                    <Card>
-                        <CardHeader>
-                            <CardTitle><TranslatedText text="Programming & Tech Courses" /></CardTitle>
-                            <CardDescription>
+                    <Card className="border-none shadow-xl bg-card/60 backdrop-blur rounded-[2rem]">
+                        <CardHeader className="p-8">
+                            <CardTitle className="text-2xl font-black"><TranslatedText text="Programming & Tech Courses" /></CardTitle>
+                            <CardDescription className="text-base font-medium">
                                 <TranslatedText text="Introduction to programming and technology concepts, taught in English." />
                             </CardDescription>
                         </CardHeader>
-                        <CardContent className="space-y-4 pt-6">
+                        <CardContent className="space-y-6 p-8 pt-0">
                             {programmingOfferings.map(p => (
-                                <div key={p.title} className="flex items-start">
-                                    {p.icon}
-                                    <div>
-                                        <h4 className="font-semibold"><TranslatedText text={p.title} /></h4>
-                                        <p className="text-sm text-muted-foreground"><TranslatedText text={p.description} /></p>
+                                <div key={p.title} className="flex items-start bg-background/40 p-4 rounded-2xl hover:bg-background transition-colors border border-primary/5">
+                                    <div className="p-3 bg-primary/10 rounded-xl mr-4 shrink-0">
+                                        {p.icon}
+                                    </div>
+                                    <div className="space-y-1">
+                                        <h4 className="font-black text-primary text-lg"><TranslatedText text={p.title} /></h4>
+                                        <p className="text-sm md:text-base text-muted-foreground font-medium leading-relaxed"><TranslatedText text={p.description} /></p>
                                     </div>
                                 </div>
                             ))}
@@ -611,66 +615,71 @@ export default function TutorPage() {
             </Tabs>
         </section>
 
-        <section id="contact-tutor" className="py-20 border-t mt-12">
-          <div className="text-center max-w-2xl mx-auto">
-            <h2 className="text-3xl font-bold"><TranslatedText text="Start Your Learning Journey" /></h2>
-            <p className="text-muted-foreground mt-4 mb-8">
+        <section id="contact-tutor" className="py-16 md:py-24 border-t mt-12 px-4 md:px-0">
+          <div className="text-center max-w-3xl mx-auto">
+            <h2 className="text-2xl md:text-5xl font-black text-primary tracking-tighter"><TranslatedText text="Start Your Learning Journey" /></h2>
+            <p className="text-muted-foreground mt-6 mb-12 text-base md:text-xl font-medium leading-relaxed">
               <TranslatedText text="Contact me today to schedule your first lesson. Fill out the form below, and I'll get back to you to discuss your goals and create a customized learning plan." />
             </p>
           </div>
-          <Card className="max-w-xl mx-auto p-6 bg-card/80 backdrop-blur-sm shadow-xl">
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="mb-4">
-                  <Label htmlFor="tutor-name"><TranslatedText text="Your Name" /></Label>
-                  <Input id="tutor-name" {...register("name")} />
-                  {errors.name && <p className="text-destructive text-xs italic mt-1">{errors.name.message}</p>}
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                    <div>
-                        <Label htmlFor="tutor-email"><TranslatedText text="Email Address" /></Label>
-                        <Input id="tutor-email" type="email" {...register("email")} />
-                        {errors.email && <p className="text-destructive text-xs italic mt-1">{errors.email.message}</p>}
+          <Card className="max-w-2xl mx-auto p-2 md:p-6 bg-card/80 backdrop-blur-md shadow-2xl border-none rounded-[2rem]">
+            <CardHeader className="p-6 md:p-8">
+                <CardTitle className="text-xl md:text-2xl font-black tracking-tight"><TranslatedText text="Request Tutoring"/></CardTitle>
+            </CardHeader>
+            <CardContent className="p-6 md:p-8 pt-0">
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                    <div className="space-y-3">
+                      <Label htmlFor="tutor-name" className="text-base font-bold text-primary"><TranslatedText text="Your Name" /></Label>
+                      <Input id="tutor-name" {...register("name")} className="h-14 rounded-xl md:rounded-2xl border-2 bg-background/50 text-lg font-bold" />
+                      {errors.name && <p className="text-destructive text-xs italic font-bold">{errors.name.message}</p>}
                     </div>
-                    <div>
-                        <Label htmlFor="tutor-phone"><TranslatedText text="Phone (Optional)" /></Label>
-                        <Input id="tutor-phone" type="tel" {...register("phone")} />
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="space-y-3">
+                            <Label htmlFor="tutor-email" className="text-base font-bold text-primary"><TranslatedText text="Email Address" /></Label>
+                            <Input id="tutor-email" type="email" {...register("email")} className="h-14 rounded-xl md:rounded-2xl border-2 bg-background/50 text-lg font-bold" />
+                            {errors.email && <p className="text-destructive text-xs italic font-bold">{errors.email.message}</p>}
+                        </div>
+                        <div className="space-y-3">
+                            <Label htmlFor="tutor-phone" className="text-base font-bold text-primary"><TranslatedText text="Phone (Optional)" /></Label>
+                            <Input id="tutor-phone" type="tel" {...register("phone")} className="h-14 rounded-xl md:rounded-2xl border-2 bg-background/50 text-lg font-bold" />
+                        </div>
                     </div>
-                </div>
-                <div className="mb-6">
-                  <Label htmlFor="tutor-details"><TranslatedText text="What would you like to learn?" /></Label>
-                  <Textarea id="tutor-details" {...register("details")} placeholder="e.g., Business English, Python basics for my child, conversational practice..." />
-                  {errors.details && <p className="text-destructive text-xs italic mt-1">{errors.details.message}</p>}
-                </div>
-                <div className="flex items-center justify-end">
-                  <Button
-                    type="submit"
-                    disabled={requestStatus === 'submitting' || requestStatus === 'success'}
-                    className={cn(
-                      'font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition-colors min-w-[160px] justify-center',
-                      requestStatus === 'submitting' && 'opacity-50 cursor-not-allowed',
-                      requestStatus === 'success'
-                        ? 'bg-button-success text-button-success-foreground hover:bg-button-success/90'
-                        : 'bg-accent hover:bg-accent/90 text-accent-foreground'
-                    )}
-                  >
-                    {requestStatus === 'submitting' ? (
-                      <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> <TranslatedText text="Sending..." /></>
-                    ) : requestStatus === 'success' ? (
-                      <><Check className="mr-2 h-4 w-4" /> <TranslatedText text="Sent!" /></>
-                    ) : (
-                      <><Send className="mr-2 h-4 w-4" /> <TranslatedText text="Send Request" /></>
-                    )}
-                  </Button>
-                </div>
-              </form>
+                    <div className="space-y-3">
+                      <Label htmlFor="tutor-details" className="text-base font-bold text-primary"><TranslatedText text="What would you like to learn?" /></Label>
+                      <Textarea id="tutor-details" {...register("details")} placeholder="e.g., Business English, Python basics for my child, conversational practice..." className="rounded-xl md:rounded-2xl border-2 bg-background/50 p-4 text-base font-medium" rows={5} />
+                      {errors.details && <p className="text-destructive text-xs italic font-bold">{errors.details.message}</p>}
+                    </div>
+                    <div className="flex items-center justify-end pt-4">
+                      <Button
+                        type="submit"
+                        disabled={requestStatus === 'submitting' || requestStatus === 'success'}
+                        className={cn(
+                          'h-16 px-10 rounded-full font-black text-xl transition-all shadow-xl min-w-[200px] justify-center',
+                          requestStatus === 'submitting' && 'opacity-50 cursor-not-allowed',
+                          requestStatus === 'success'
+                            ? 'bg-button-success text-button-success-foreground'
+                            : 'bg-accent hover:bg-accent/90 text-accent-foreground'
+                        )}
+                      >
+                        {requestStatus === 'submitting' ? (
+                          <><Loader2 className="mr-2 h-6 w-6 animate-spin" /> <TranslatedText text="Sending..." /></>
+                        ) : requestStatus === 'success' ? (
+                          <><Check className="mr-2 h-6 w-6" /> <TranslatedText text="Sent!" /></>
+                        ) : (
+                          <><Send className="mr-2 h-6 w-6" /> <TranslatedText text="Send Request" /></>
+                        )}
+                      </Button>
+                    </div>
+                  </form>
+            </CardContent>
           </Card>
         </section>
       </main>
 
-      <footer className="text-center py-6 border-t border-border mt-12">
-        <div className="flex flex-col items-center gap-4">
-            <SocialIcons className="flex space-x-4 justify-center" />
-            <p className="text-sm text-muted-foreground">
+      <footer className="text-center py-10 border-t border-border/50 mt-12">
+        <div className="flex flex-col items-center gap-6">
+            <SocialIcons className="flex space-x-6 justify-center" />
+            <p className="text-sm font-bold text-muted-foreground/60 tracking-widest uppercase">
                 <TranslatedText text="© 2026 Musonda Salimu. All Rights Reserved." />
             </p>
         </div>

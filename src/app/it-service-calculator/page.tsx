@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useEffect, useMemo } from 'react';
@@ -423,68 +422,72 @@ export default function ItServiceCalculatorPage() {
   };
 
   return (
-    <div className="container mx-auto py-12 px-4 md:px-6 lg:px-8 min-h-screen">
-      <header className="mb-8">
-        <Button variant="outline" asChild className="mb-4">
+    <div className="container mx-auto py-8 md:py-12 px-4 md:px-8 min-h-screen">
+      <header className="mb-8 md:mb-12">
+        <Button variant="outline" asChild className="mb-6 rounded-full shadow-sm">
           <Link href="/">
             <ArrowLeft className="mr-2 h-4 w-4" />
             <TranslatedText text="Back to Home" />
           </Link>
         </Button>
-        <div className="flex items-center space-x-3">
-          <Calculator className="h-10 w-10 text-primary" />
-          <h1 className="text-4xl font-bold text-primary">
-            <TranslatedText text="Service Quotation Calculator" />
-          </h1>
-        </div>
-         <div className="mt-4 flex gap-4">
-          <Button asChild className="bg-primary hover:bg-primary/90 text-primary-foreground hover:text-black">
-            <a href="https://forms.gle/CteNoni4yi8XCFEx8" target="_blank" rel="noopener noreferrer">
-              <Send className="mr-2 h-4 w-4" />
-              <TranslatedText text="Tell us about your project" />
-            </a>
-          </Button>
-          <Button asChild variant="outline" className="border-accent text-accent hover:bg-accent hover:text-black">
-            <a href="https://forms.gle/btbiX7F7n4JndgGy7" target="_blank" rel="noopener noreferrer">
-              <GraduationCap className="mr-2 h-4 w-4" />
-              <TranslatedText text="Enroll for Lessons" />
-            </a>
-          </Button>
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+            <div className="flex items-center space-x-3">
+              <div className="p-3 bg-primary/10 rounded-2xl">
+                <Calculator className="h-8 w-8 md:h-10 md:w-10 text-primary" />
+              </div>
+              <h1 className="text-2xl md:text-4xl font-black text-primary tracking-tight">
+                <TranslatedText text="Service Quotation Calculator" />
+              </h1>
+            </div>
+             <div className="flex flex-col sm:flex-row gap-3">
+              <Button asChild className="bg-primary hover:bg-primary/90 text-primary-foreground hover:text-black rounded-full shadow-md font-bold">
+                <a href="https://forms.gle/CteNoni4yi8XCFEx8" target="_blank" rel="noopener noreferrer">
+                  <Send className="mr-2 h-4 w-4" />
+                  <TranslatedText text="Tell us about your project" />
+                </a>
+              </Button>
+              <Button asChild variant="outline" className="border-accent text-accent hover:bg-accent hover:text-black rounded-full shadow-sm font-bold">
+                <a href="https://forms.gle/btbiX7F7n4JndgGy7" target="_blank" rel="noopener noreferrer">
+                  <GraduationCap className="mr-2 h-4 w-4" />
+                  <TranslatedText text="Enroll for Lessons" />
+                </a>
+              </Button>
+            </div>
         </div>
       </header>
 
-      <div className="grid md:grid-cols-5 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
         {/* --- Calculator Form --- */}
-        <div className="md:col-span-3">
-          <Card className="shadow-lg">
-            <CardHeader>
-              <CardTitle><TranslatedText text="Configure Your Service" /></CardTitle>
-              <CardDescription><TranslatedText text="Select a service and adjust the options to get a cost estimate." /></CardDescription>
+        <div className="lg:col-span-3">
+          <Card className="shadow-lg border-none bg-card/60 backdrop-blur-md rounded-2xl md:rounded-[2rem]">
+            <CardHeader className="p-6 md:p-8">
+              <CardTitle className="text-xl md:text-2xl font-black text-primary tracking-tight"><TranslatedText text="Configure Your Service" /></CardTitle>
+              <CardDescription className="text-sm md:text-base"><TranslatedText text="Select a service and adjust the options to get a cost estimate." /></CardDescription>
             </CardHeader>
-            <CardContent className="space-y-6">
+            <CardContent className="space-y-8 p-6 md:p-8 pt-0">
               {/* Currency Selection */}
-              <div className="space-y-2">
-                 <Label><TranslatedText text="Currency" /></Label>
-                 <RadioGroup value={selectedCurrency} onValueChange={(value) => setSelectedCurrency(value as CurrencyId)} className="flex gap-4">
+              <div className="space-y-4">
+                 <Label className="text-base font-bold text-primary"><TranslatedText text="Currency" /></Label>
+                 <RadioGroup value={selectedCurrency} onValueChange={(value) => setSelectedCurrency(value as CurrencyId)} className="flex flex-wrap gap-4">
                     {Object.entries(serviceConfig.currencies).map(([id, { name }]) => (
-                      <div className="flex items-center space-x-2" key={id}>
+                      <div className="flex items-center space-x-2 bg-background/50 px-4 py-3 rounded-xl border border-primary/5" key={id}>
                         <RadioGroupItem value={id} id={`curr-${id}`} />
-                        <Label htmlFor={`curr-${id}`} className="font-normal">{safeT(name)}</Label>
+                        <Label htmlFor={`curr-${id}`} className="font-bold cursor-pointer">{safeT(name)}</Label>
                       </div>
                     ))}
                  </RadioGroup>
               </div>
 
               {/* Service Selection */}
-              <div className="space-y-2">
-                <Label htmlFor="service-select"><TranslatedText text="Service" /></Label>
+              <div className="space-y-4">
+                <Label htmlFor="service-select" className="text-base font-bold text-primary"><TranslatedText text="Service" /></Label>
                 <Select value={selectedService} onValueChange={handleServiceChange}>
-                  <SelectTrigger id="service-select">
+                  <SelectTrigger id="service-select" className="h-14 rounded-xl md:rounded-2xl border-2 bg-background/50 text-base font-medium">
                     <SelectValue placeholder={safeT("Select a service...")} />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="rounded-xl border-2">
                     {Object.entries(serviceConfig.services).map(([id, { name }]) => (
-                      <SelectItem key={id} value={id}>
+                      <SelectItem key={id} value={id} className="py-3 font-medium">
                          <TranslatedText text={name} />
                       </SelectItem>
                     ))}
@@ -495,31 +498,33 @@ export default function ItServiceCalculatorPage() {
               {/* Custom Service Name & Features */}
               {selectedService === 'other' && (
                 <>
-                    <div className="space-y-2">
-                      <Label htmlFor="custom-service-name"><TranslatedText text="Custom Service Name" /></Label>
+                    <div className="space-y-4">
+                      <Label htmlFor="custom-service-name" className="text-base font-bold text-primary"><TranslatedText text="Custom Service Name" /></Label>
                       <Input
                         id="custom-service-name"
                         value={customServiceName}
                         onChange={(e) => setCustomServiceName(e.target.value)}
                         placeholder={safeT("e.g., Data Analysis Pipeline")}
+                        className="h-14 rounded-xl border-2 bg-background/50"
                       />
                     </div>
-                     <div className="space-y-2">
-                      <Label htmlFor="custom-features"><TranslatedText text="Describe Your Requirements" /></Label>
+                     <div className="space-y-4">
+                      <Label htmlFor="custom-features" className="text-base font-bold text-primary"><TranslatedText text="Describe Your Requirements" /></Label>
                       <Textarea
                         id="custom-features"
                         value={customFeatures}
                         onChange={(e) => setCustomFeatures(e.target.value)}
                         placeholder={safeT("Please list the features you need...")}
                         rows={4}
+                        className="rounded-xl border-2 bg-background/50"
                       />
                     </div>
                 </>
               )}
 
               {/* Quantity */}
-              <div className="space-y-2">
-                <Label htmlFor="quantity-input">
+              <div className="space-y-4">
+                <Label htmlFor="quantity-input" className="text-base font-bold text-primary">
                   <TranslatedText text={`Number of ${currentService.unit}s`} />
                 </Label>
                 <Input
@@ -528,21 +533,22 @@ export default function ItServiceCalculatorPage() {
                   value={quantity}
                   onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
                   min="1"
+                  className="h-14 rounded-xl border-2 bg-background/50 text-lg font-bold"
                 />
               </div>
 
               {/* Lesson Type Radio Group */}
               {isLessonService && currentService.lessonTypes && currentService.lessonTypes.length > 0 && (
-                 <div className="space-y-2">
-                    <Label><TranslatedText text="Lesson Type" /></Label>
-                    <RadioGroup value={selectedLessonType} onValueChange={setSelectedLessonType} className="rounded-md border p-4 space-y-2">
+                 <div className="space-y-4">
+                    <Label className="text-base font-bold text-primary"><TranslatedText text="Lesson Type" /></Label>
+                    <RadioGroup value={selectedLessonType} onValueChange={setSelectedLessonType} className="rounded-2xl border-2 p-6 space-y-3 bg-background/30">
                         {currentService.lessonTypes.map(lesson => (
-                            <div key={lesson.id} className="flex items-center space-x-2">
+                            <div key={lesson.id} className="flex items-center space-x-3 p-2 hover:bg-primary/5 rounded-lg transition-colors">
                                 <RadioGroupItem value={lesson.id} id={`lesson-${lesson.id}`} />
-                                <Label htmlFor={`lesson-${lesson.id}`} className="font-normal w-full">
-                                    <div className="flex justify-between">
+                                <Label htmlFor={`lesson-${lesson.id}`} className="font-bold cursor-pointer w-full text-base">
+                                    <div className="flex justify-between items-center">
                                         <TranslatedText text={lesson.name} />
-                                        <span className="text-muted-foreground text-xs">{(lesson.price > 0 ? '+' : '')}{currencyInfo.symbol}{(lesson.price * currencyInfo.rate).toFixed(2)}</span>
+                                        <span className="text-primary text-sm font-black bg-primary/10 px-3 py-1 rounded-full">{(lesson.price > 0 ? '+' : '')}{currencyInfo.symbol}{(lesson.price * currencyInfo.rate).toFixed(2)}</span>
                                     </div>
                                 </Label>
                             </div>
@@ -553,19 +559,19 @@ export default function ItServiceCalculatorPage() {
 
               {/* Features Checkboxes */}
               {currentService.features && currentService.features.length > 0 && (
-                <div className="space-y-2">
-                  <Label><TranslatedText text="Additional Features" /></Label>
-                  <div className="space-y-2 rounded-md border p-4">
+                <div className="space-y-4">
+                  <Label className="text-base font-bold text-primary"><TranslatedText text="Additional Features" /></Label>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 rounded-2xl border-2 p-6 bg-background/30">
                      {currentService.features.map(feature => (
-                       <div key={feature.id} className="flex items-center space-x-2">
+                       <div key={feature.id} className="flex items-center space-x-3 p-3 bg-background/50 rounded-xl hover:bg-background transition-colors border border-primary/5">
                          <Checkbox
                            id={`feature-${feature.id}`}
                            checked={!!selectedFeatures[feature.id]}
                            onCheckedChange={() => handleFeatureChange(feature.id)}
                          />
-                         <Label htmlFor={`feature-${feature.id}`} className="font-normal flex justify-between w-full">
+                         <Label htmlFor={`feature-${feature.id}`} className="font-bold cursor-pointer flex flex-col w-full text-sm">
                            <TranslatedText text={feature.name} />
-                           <span className="text-muted-foreground text-xs">{(feature.price >= 0 ? '+' : '')}{currencyInfo.symbol}{(feature.price * currencyInfo.rate).toFixed(2)}</span>
+                           <span className="text-primary font-black text-xs">{(feature.price >= 0 ? '+' : '')}{currencyInfo.symbol}{(feature.price * currencyInfo.rate).toFixed(2)}</span>
                          </Label>
                        </div>
                      ))}
@@ -575,18 +581,18 @@ export default function ItServiceCalculatorPage() {
               
               {/* SLA Tiers */}
               {!isLessonService && (
-                <div className="space-y-2">
-                  <Label><TranslatedText text="Priority / Service Level" /></Label>
-                  <RadioGroup value={selectedSla} onValueChange={(value) => setSelectedSla(value as SlaId)} className="rounded-md border p-4 space-y-2">
+                <div className="space-y-4">
+                  <Label className="text-base font-bold text-primary"><TranslatedText text="Priority / Service Level" /></Label>
+                  <RadioGroup value={selectedSla} onValueChange={(value) => setSelectedSla(value as SlaId)} className="rounded-2xl border-2 p-6 space-y-4 bg-background/30">
                     {Object.entries(serviceConfig.slaTiers).map(([id, { name, description, multiplier }]) => (
-                      <div key={id} className="flex items-center space-x-2">
-                        <RadioGroupItem value={id} id={`sla-${id}`} />
-                        <Label htmlFor={`sla-${id}`} className="font-normal w-full">
-                          <div className="flex justify-between">
+                      <div key={id} className="flex items-start space-x-3 p-3 hover:bg-primary/5 rounded-xl transition-colors">
+                        <RadioGroupItem value={id} id={`sla-${id}`} className="mt-1" />
+                        <Label htmlFor={`sla-${id}`} className="font-bold cursor-pointer w-full">
+                          <div className="flex justify-between items-center">
                             <TranslatedText text={name} />
-                            <span className="text-muted-foreground text-xs">({multiplier}x cost)</span>
+                            <span className="text-primary font-black text-xs bg-primary/10 px-3 py-1 rounded-full">({multiplier}x cost)</span>
                           </div>
-                          <p className="text-xs text-muted-foreground"><TranslatedText text={description} /></p>
+                          <p className="text-xs text-muted-foreground mt-1 font-medium"><TranslatedText text={description} /></p>
                         </Label>
                       </div>
                     ))}
@@ -598,44 +604,48 @@ export default function ItServiceCalculatorPage() {
         </div>
 
         {/* --- Quote Summary --- */}
-        <div className="md:col-span-2">
-          <Card className="shadow-lg sticky top-24">
-            <CardHeader>
-              <CardTitle><TranslatedText text="Estimated Quote" /></CardTitle>
-              <CardDescription><TranslatedText text="This is an estimate. Final pricing may vary." /></CardDescription>
+        <div className="lg:col-span-2">
+          <Card className="shadow-2xl border-none bg-primary text-primary-foreground rounded-2xl md:rounded-[2rem] lg:sticky lg:top-24 overflow-hidden">
+            <div className="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
+                <Calculator className="h-32 w-32 rotate-12" />
+            </div>
+            <CardHeader className="p-8 pb-4 relative z-10">
+              <CardTitle className="text-2xl font-black tracking-tight"><TranslatedText text="Estimated Quote" /></CardTitle>
+              <CardDescription className="text-primary-foreground/70 font-medium"><TranslatedText text="This is an estimate. Final pricing may vary." /></CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="flex justify-between text-muted-foreground">
-                <span><TranslatedText text="Subtotal" /></span>
+            <CardContent className="space-y-6 p-8 relative z-10">
+              <div className="flex justify-between text-lg font-bold border-b border-primary-foreground/10 pb-4">
+                <span className="opacity-80"><TranslatedText text="Subtotal" /></span>
                 <span>{currencyInfo.symbol}{totalCost.subtotal.toFixed(2)}</span>
               </div>
-              <div className="flex justify-between text-muted-foreground">
-                <span><TranslatedText text={`VAT (${serviceConfig.vatRate * 100}%)`} /></span>
+              <div className="flex justify-between text-lg font-bold border-b border-primary-foreground/10 pb-4">
+                <span className="opacity-80"><TranslatedText text={`VAT (${serviceConfig.vatRate * 100}%)`} /></span>
                 <span>{currencyInfo.symbol}{totalCost.vat.toFixed(2)}</span>
               </div>
-              <div className="border-t border-dashed my-2"></div>
-              <div className="flex justify-between text-2xl font-bold text-primary">
-                <span><TranslatedText text="Total" /></span>
-                <span>{currencyInfo.symbol}{totalCost.total.toFixed(2)}</span>
+              <div className="flex flex-col pt-4">
+                <span className="text-xs font-black uppercase tracking-widest opacity-60 mb-1"><TranslatedText text="Total Estimate" /></span>
+                <div className="text-4xl md:text-5xl font-black tracking-tighter">
+                  {currencyInfo.symbol}{totalCost.total.toFixed(2)}
+                </div>
               </div>
             </CardContent>
-            <CardFooter className="flex flex-col gap-3">
-              <Button onClick={generatePdfQuote} className="w-full">
-                <Download className="mr-2" /> <TranslatedText text="Download Quote (PDF)" />
+            <CardFooter className="flex flex-col gap-4 p-8 pt-0 relative z-10">
+              <Button onClick={generatePdfQuote} className="w-full h-16 rounded-full bg-white text-primary hover:bg-accent hover:text-white transition-all font-black text-lg shadow-xl">
+                <Download className="mr-2 h-6 w-6" /> <TranslatedText text="Download Quote (PDF)" />
               </Button>
               <div className="flex w-full gap-3">
-                <Button asChild variant="outline" className="w-full">
+                <Button asChild variant="outline" className="flex-1 h-14 rounded-full border-2 border-white/20 bg-white/10 hover:bg-white/20 transition-all text-white font-bold">
                   <a href={`https://wa.me/?text=${getQuoteText(true)}`} target="_blank" rel="noopener noreferrer">
-                    <WhatsappIcon className="mr-2" /> <TranslatedText text="Share" />
+                    <WhatsappIcon className="mr-2 h-5 w-5" /> <TranslatedText text="Share" />
                   </a>
                 </Button>
-                <Button asChild variant="outline" className="w-full">
+                <Button asChild variant="outline" className="flex-1 h-14 rounded-full border-2 border-white/20 bg-white/10 hover:bg-white/20 transition-all text-white font-bold">
                   <a href={`mailto:?subject=IT Service Quote&body=${getQuoteText(true)}`}>
-                    <Mail className="mr-2" /> <TranslatedText text="Email" />
+                    <Mail className="mr-2 h-5 w-5" /> <TranslatedText text="Email" />
                   </a>
                 </Button>
               </div>
-              <p className="text-xs text-muted-foreground text-center mt-2 px-4">
+              <p className="text-xs font-bold text-center mt-6 px-4 opacity-70 leading-relaxed italic">
                 <TranslatedText text="For more specific requirements or questions, please feel free to reach out directly on WhatsApp!" />
               </p>
             </CardFooter>
