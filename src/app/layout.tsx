@@ -80,7 +80,7 @@ export default function RootLayout({
                 
                 <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm">
                   <div className="container mx-auto flex h-16 md:h-20 items-center justify-between px-4 md:px-6">
-                      <Link href="/" className="flex h-12 w-12 flex-shrink-0 items-center justify-center transition-transform hover:scale-110" aria-label="Go to homepage">
+                      <Link href="/" className="flex h-14 w-16 md:w-20 flex-shrink-0 items-center justify-center transition-transform hover:scale-105" aria-label="Go to homepage">
                           <MuzoInTechLogo className="h-full w-full" />
                       </Link>
                       
