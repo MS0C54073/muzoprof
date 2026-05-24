@@ -173,12 +173,11 @@
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    opacity: 0.4;
-    filter: blur(1px);
-    animation: nebula-drift 40s infinite alternate ease-in-out;
+    opacity: 0.5;
+    animation: nebula-drift 60s infinite alternate ease-in-out;
 }
 
 @keyframes nebula-drift {
-    from { transform: scale(1.02) translate(-0.5%, -0.5%); }
-    to { transform: scale(1.08) translate(0.5%, 0.5%); }
+    from { transform: scale(1.0) translate(0, 0); }
+    to { transform: scale(1.05) translate(1%, 1%); }
 }

@@ -1,11 +1,10 @@
-
 'use client';
 
 import type {Metadata, Viewport} from 'next';
 import { Inter } from 'next/font/google';
 import Head from 'next/head';
 import './globals.css';
-import './social-bar.css'; // <--- Import the CSS file
+import './social-bar.css'; 
 import {ModeToggle} from '@/components/mode-toggle';
 import {ThemeProvider} from '@/components/theme-provider';
 import { Toaster } from "@/components/ui/toaster";
@@ -38,68 +37,6 @@ const inter = Inter({
   subsets: ['latin'],
   variable: '--font-sans',
 })
-
-// Metadata and Viewport are not used in client components but Next.js might still pick them up.
-// For full support, you would move this to a parent layout or a metadata object export.
-// For now, we'll leave it but be aware of this for future refactors.
-/*
-export const metadata: Metadata = {
-  title: "Muzo Salimu - Personal Portfolio",
-  description:
-    'Muzo Salimu - Software Developer, Tech Enthusiast, and Educator',
-  keywords: [
-    'Muzo Salimu',
-    'Software Developer',
-    'Portfolio',
-    'React Developer',
-    'Next.js',
-    'TypeScript'
-  ],
-  authors: [{name: 'Muzo Salimu'}],
-  openGraph: {
-    title: "Muzo Salimu - Personal Portfolio",
-    description:
-      'Muzo Salimu - Software Developer, Tech Enthusiast, and Educator',
-    url: 'https://muzosniche.com',
-    siteName: "Muzo Salimu's Portfolio",
-    images: [
-      {
-        url: 'https://placehold.co/1200x630.png',
-        width: 1200,
-        height: 630,
-        alt: "Muzo Salimu's Portfolio",
-      },
-    ],
-    locale: 'en_US',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: "Muzo Salimu - Personal Portfolio",
-    description:
-      'Muzo Salimu - Software Developer, Tech Enthusiast, and Educator',
-    images: ['https://placehold.co/1200x630.png'],
-    creator: '@MuzoSalim',
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
-};
-
-export const viewport: Viewport = {
-  width: 'device-width',
-  initialScale: 1,
-};
-*/
-
 
 const navLinks = [
     { href: '/', text: 'Home' },
@@ -143,8 +80,8 @@ export default function RootLayout({
                 
                 <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm">
                   <div className="container mx-auto flex h-16 md:h-20 items-center justify-between px-4 md:px-6">
-                      <Link href="/" className="h-12 w-12 transition-transform hover:scale-110" aria-label="Go to homepage">
-                          <MuzoInTechLogo />
+                      <Link href="/" className="flex h-12 w-12 flex-shrink-0 items-center justify-center transition-transform hover:scale-110" aria-label="Go to homepage">
+                          <MuzoInTechLogo className="h-full w-full" />
                       </Link>
                       
                       {/* --- Desktop Nav & Controls --- */}

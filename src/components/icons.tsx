@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { cn } from '@/lib/utils';
 
 export function WhatsappIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -26,17 +27,22 @@ export function TelegramIcon(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
-export function MuzoInTechLogo(props: React.HTMLAttributes<HTMLImageElement>) {
+export function MuzoInTechLogo({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <img
-      src="https://drive.google.com/uc?id=1FplxN_eRhvtCG9c7D-5u2_v7pDCJSGxg"
-      alt="MuzoInTech Logo"
-      className={props.className || "h-full w-full object-contain rounded-full shadow-md"}
-      style={{
-        ...props.style,
-        backgroundColor: 'white' // Provides a clean background for the logo image
-      }}
-    />
+    <div 
+      className={cn(
+        "relative flex h-full w-full items-center justify-center rounded-full bg-white shadow-sm border border-slate-200 overflow-hidden", 
+        className
+      )}
+      {...props}
+    >
+      <img
+        src="https://drive.google.com/uc?id=1FplxN_eRhvtCG9c7D-5u2_v7pDCJSGxg"
+        alt="M"
+        className="h-[80%] w-[80%] object-contain"
+        loading="eager"
+      />
+    </div>
   );
 }
 
