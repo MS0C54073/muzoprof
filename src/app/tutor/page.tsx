@@ -20,7 +20,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { ArrowLeft, BookOpen, Check, Loader2, Mail, Send, Bot, Code, Globe, BrainCircuit, Smartphone, Database, Server, Shield, Terminal, Eye, Download, GraduationCap } from 'lucide-react';
+import { ArrowLeft, BookOpen, Check, Loader2, Mail, Send, Bot, Code, Globe, BrainCircuit, Smartphone, Database, Server, Shield, Terminal, Eye, Download, GraduationCap, Sparkles } from 'lucide-react';
 import TranslatedText from '@/app/components/translated-text';
 import { SocialIcons } from '@/components/social-icons';
 import { englishMaterials, type Material } from './teaching-materials';
@@ -403,14 +403,15 @@ export default function TutorPage() {
         <section className="grid md:grid-cols-5 gap-8">
           <div className="md:col-span-3">
             <Card className="shadow-lg h-full">
-              <CardHeader className="p-0">
+              <CardHeader className="p-0 overflow-hidden">
                   <Image
-                    src="https://drive.google.com/uc?id=1dteuS0zoNLTLo_oVjkFlPPW5CCyn2Wd9"
+                    src="https://lh3.googleusercontent.com/d/1dteuS0zoNLTLo_oVjkFlPPW5CCyn2Wd9"
                     alt="Online Tutoring Session"
                     width={800}
-                    height={400}
+                    height={450}
                     data-ai-hint="online tutoring"
-                    className="rounded-t-lg w-full h-auto object-cover"
+                    className="rounded-t-lg w-full h-[400px] object-cover object-top transition-transform duration-500 hover:scale-105"
+                    priority
                   />
               </CardHeader>
               <CardContent className="p-6">
@@ -453,6 +454,40 @@ export default function TutorPage() {
               </CardContent>
             </Card>
           </div>
+        </section>
+
+        {/* Gallery Section with Animations */}
+        <section id="visual-highlights" className="py-20 border-t mt-12">
+            <h2 className="text-3xl font-bold text-center mb-12 flex items-center justify-center gap-2">
+                <Sparkles className="h-8 w-8 text-primary" />
+                <TranslatedText text="Learning Environment" />
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <div className="group relative overflow-hidden rounded-2xl shadow-2xl animate-pulse-slow">
+                    <Image
+                        src="https://lh3.googleusercontent.com/d/1qp_OSRxRq6d5-4DMy71-iN1jA-K8AKXC"
+                        alt="Teaching Excellence"
+                        width={600}
+                        height={400}
+                        className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:brightness-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
+                        <p className="text-white font-medium"><TranslatedText text="Expert Presentation & Methodology" /></p>
+                    </div>
+                </div>
+                <div className="group relative overflow-hidden rounded-2xl shadow-2xl animate-pulse-slow [animation-delay:1s]">
+                    <Image
+                        src="https://lh3.googleusercontent.com/d/1mMEV5VX-Q-05z3k2f303yh831TdKUejd"
+                        alt="Creative Space"
+                        width={600}
+                        height={400}
+                        className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:brightness-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
+                        <p className="text-white font-medium"><TranslatedText text="Inspiring Workspace for Modern Learners" /></p>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <section id="certifications" className="py-20 border-t mt-12">
