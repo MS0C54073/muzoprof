@@ -162,3 +162,22 @@
     0%, 100% { box-shadow: 0 0 4px 2px hsl(var(--primary) / 0.7); opacity: 1; }
     50% { box-shadow: none; opacity: 0.5; }
 }
+
+/* Nebula Custom Background */
+.nebula-background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://drive.google.com/uc?id=1ntso2mPf8LFVy7SkoL4VeYN9fgxCGLN6');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.15;
+    filter: blur(1px);
+    animation: nebula-drift 40s infinite alternate ease-in-out;
+}
+
+@keyframes nebula-drift {
+    from { transform: scale(1.02) translate(-0.5%, -0.5%); }
+    to { transform: scale(1.08) translate(0.5%, 0.5%); }
+}

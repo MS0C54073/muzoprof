@@ -1,4 +1,3 @@
-
 'use client';
 
 import * as React from 'react';
@@ -17,6 +16,7 @@ import TranslatedText from './translated-text';
 
 const themeOptions: { value: BackgroundTheme; label: string }[] = [
     { value: 'none', label: 'None' },
+    { value: 'nebula', label: 'Nebula' },
     { value: 'neural', label: 'Neural Network' },
     { value: 'matrix', label: 'Quantum Matrix' },
     { value: 'circuit', label: 'Circuit Board' },

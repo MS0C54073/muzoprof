@@ -2,7 +2,7 @@
 
 import React, { createContext, useState, useContext, ReactNode, useMemo } from 'react';
 
-export type BackgroundTheme = 'none' | 'neural' | 'matrix' | 'circuit' | 'datacenter';
+export type BackgroundTheme = 'none' | 'neural' | 'matrix' | 'circuit' | 'datacenter' | 'nebula';
 
 interface BackgroundThemeContextProps {
   theme: BackgroundTheme;

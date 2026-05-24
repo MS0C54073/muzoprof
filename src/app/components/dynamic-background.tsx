@@ -66,6 +66,9 @@ export function DynamicBackground() {
 
     return (
         <div className="fixed top-0 left-0 w-full h-full pointer-events-none z-[-1]">
+            {theme === 'nebula' && (
+                <div className="nebula-background" />
+            )}
             {theme === 'neural' && (
                 <div className="neural-network-nexus">
                     {nodes.map((style, i) => (
