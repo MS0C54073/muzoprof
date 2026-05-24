@@ -31,17 +31,26 @@ export function MuzoInTechLogo({ className, ...props }: React.HTMLAttributes<HTM
   return (
     <div 
       className={cn(
-        "relative flex h-full w-full items-center justify-center rounded-full bg-white shadow-sm border border-slate-200 overflow-hidden", 
+        "relative flex h-full w-full items-center justify-center rounded-full bg-slate-950 shadow-[0_0_15px_rgba(255,107,0,0.3)] border-2 border-accent/40 overflow-hidden group transition-all duration-300", 
         className
       )}
       {...props}
     >
+      {/* Futuristic Background Glow */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-accent/15 via-transparent to-transparent" />
+      
+      {/* Moving Shimmer Effect */}
+      <div className="absolute inset-0 opacity-30 bg-[linear-gradient(45deg,transparent_25%,rgba(255,107,0,0.15)_50%,transparent_75%)] bg-[length:250%_250%] animate-[slide_4s_linear_infinite]" />
+
       <img
         src="https://drive.google.com/uc?id=1FplxN_eRhvtCG9c7D-5u2_v7pDCJSGxg"
-        alt="M"
-        className="h-[80%] w-[80%] object-contain"
+        alt="MUZO"
+        className="relative z-10 h-[82%] w-[82%] object-contain transition-transform duration-500 group-hover:scale-110"
         loading="eager"
       />
+      
+      {/* Outer pulsing ring for "living tech" feel */}
+      <div className="absolute inset-0 rounded-full border border-accent/10 animate-pulse-slow" />
     </div>
   );
 }
