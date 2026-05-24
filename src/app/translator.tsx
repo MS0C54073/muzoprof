@@ -1,17 +1,14 @@
-
 'use client';
 
-import React, { createContext, useContext, useState, useEffect, useCallback, ReactNode, useRef } from 'react';
-import { translateBatch } from '@/ai/flows/translate-batch-flow';
-import type { TranslateBatchInput } from '@/ai/flows/translate-batch.types';
+import React, { createContext, useContext, ReactNode, useEffect, useState } from 'react';
+import { useTranslation as useI18nTranslation } from 'react-i18next';
+import '@/i18n/config'; // Initialize i18next
 
 export type LanguageCode = 'en' | 'ru';
 
 interface TranslationContextProps {
   language: LanguageCode;
   setLanguage: (language: LanguageCode) => void;
-  translations: Map<string, string>; // Cache for translated text
-  requestTranslation: (text: string) => void; // Function for components to register text
 }
 
 const TranslationContext = createContext<TranslationContextProps | undefined>(undefined);
@@ -25,95 +22,24 @@ export const useTranslation = () => {
 };
 
 export const TranslationProvider = ({ children }: { children: ReactNode }) => {
-  // Default to English to avoid hydration mismatches. 
-  // We'll sync with localStorage in a useEffect.
-  const [language, setLanguageState] = useState<LanguageCode>('en');
-  const [translations, setTranslations] = useState<Map<string, string>>(new Map());
+  const { i18n } = useI18nTranslation();
   const [isMounted, setIsMounted] = useState(false);
-  
-  // Use refs for the queue to avoid triggering re-renders on every registration.
-  const queueRef = useRef<Set<string>>(new Set());
-  const inFlightRef = useRef<Set<string>>(new Set());
-  const processingRef = useRef(false);
 
-  // Sync language with localStorage after mount.
   useEffect(() => {
     setIsMounted(true);
-    const storedLang = localStorage.getItem('user-language');
-    if (storedLang === 'ru' || storedLang === 'en') {
-      setLanguageState(storedLang as LanguageCode);
-    }
   }, []);
 
-  // Function for components to register their text
-  const requestTranslation = useCallback((text: string) => {
-    if (!text || language === 'en') return;
-    
-    // Only queue if it's not already translated and not already requested.
-    if (!translations.has(text) && !inFlightRef.current.has(text) && !queueRef.current.has(text)) {
-      queueRef.current.add(text);
-    }
-  }, [language, translations]);
-
   const setLanguage = (newLanguage: LanguageCode) => {
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('user-language', newLanguage);
-    }
-    setLanguageState(newLanguage);
-    // Clear cache and queues on language change
-    setTranslations(new Map());
-    queueRef.current.clear();
-    inFlightRef.current.clear();
-    processingRef.current = false;
+    i18n.changeLanguage(newLanguage);
   };
-
-  // Process the queue in batches every second.
-  useEffect(() => {
-    if (language === 'en' || !isMounted) return;
-
-    const performBatchTranslation = async () => {
-      if (queueRef.current.size === 0 || processingRef.current) return;
-      
-      processingRef.current = true;
-      const textsToTranslate = Array.from(queueRef.current);
-      queueRef.current.clear();
-      
-      // Mark as in-flight
-      textsToTranslate.forEach(t => inFlightRef.current.add(t));
-
-      try {
-        const result = await translateBatch({
-          texts: textsToTranslate,
-          targetLanguage: language,
-        });
-
-        if (result && result.translations) {
-          setTranslations(prev => {
-            const newTranslations = new Map(prev);
-            result.translations.forEach((translatedText, i) => {
-              newTranslations.set(textsToTranslate[i], translatedText);
-            });
-            return newTranslations;
-          });
-        }
-      } catch (error) {
-        console.error("Batch translation failed:", error);
-      } finally {
-        textsToTranslate.forEach(t => inFlightRef.current.delete(t));
-        processingRef.current = false;
-      }
-    };
-
-    const intervalId = setInterval(performBatchTranslation, 1000);
-    return () => clearInterval(intervalId);
-  }, [language, isMounted]);
 
   const contextValue = {
-    language,
+    language: (i18n.language?.split('-')[0] as LanguageCode) || 'en',
     setLanguage,
-    translations,
-    requestTranslation,
   };
+
+  // Prevent hydration mismatches
+  if (!isMounted) return <>{children}</>;
 
   return (
     <TranslationContext.Provider value={contextValue}>
@@ -123,19 +49,8 @@ export const TranslationProvider = ({ children }: { children: ReactNode }) => {
 };
 
 export const useTranslatedText = (text: string): string => {
-  const { translations, requestTranslation, language } = useTranslation();
-
-  useEffect(() => {
-    // Register the text for translation when the component mounts or text/language changes
-    if (text && language !== 'en') {
-      requestTranslation(text);
-    }
-  }, [text, requestTranslation, language]);
-
-  if (language === 'en') {
-    return text;
-  }
-  
-  // Return the translated text from the central cache, or the original text as a fallback.
-  return translations.get(text) || text;
+  const { t } = useI18nTranslation();
+  // We use the text itself as the key. i18next will return the translation if found,
+  // or the text itself (key) if not.
+  return t(text);
 };

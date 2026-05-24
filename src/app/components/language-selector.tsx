@@ -1,14 +1,12 @@
-
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { useTranslation } from '../translator';
+import { useTranslation as useI18nTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import { RussiaFlagIcon, UnitedKingdomFlagIcon } from '@/components/flag-icons';
-import type { LanguageCode } from '../translator';
 
 export function LanguageSelector() {
-  const { language, setLanguage } = useTranslation();
+  const { i18n } = useI18nTranslation();
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -16,16 +14,17 @@ export function LanguageSelector() {
   }, []);
 
   const toggleLanguage = () => {
-    const newLang: LanguageCode = language === 'en' ? 'ru' : 'en';
-    setLanguage(newLang);
+    const currentLang = i18n.language?.split('-')[0];
+    const newLang = currentLang === 'en' ? 'ru' : 'en';
+    i18n.changeLanguage(newLang);
   };
   
   if (!isMounted) {
-    // Render a placeholder to avoid layout shifts
     return <div className="h-10 w-10" />;
   }
 
-  const Icon = language === 'en' ? UnitedKingdomFlagIcon : RussiaFlagIcon;
+  const currentLang = i18n.language?.split('-')[0];
+  const Icon = currentLang === 'en' ? UnitedKingdomFlagIcon : RussiaFlagIcon;
 
   return (
     <Button
