@@ -16,6 +16,7 @@ import TranslatedText from '@/app/components/translated-text';
 import { ArrowLeft, Calculator, Download, GraduationCap, Mail, Send } from 'lucide-react';
 import { WhatsappIcon } from '@/components/icons';
 import { useToast } from '@/hooks/use-toast';
+import { useTranslation } from 'react-i18next';
 
 // --- Configuration Object for easy editing ---
 const serviceConfig = {
@@ -192,6 +193,7 @@ type SlaId = keyof typeof serviceConfig.slaTiers;
 type CurrencyId = keyof typeof serviceConfig.currencies;
 
 export default function ItServiceCalculatorPage() {
+  const { t } = useTranslation();
   const { toast } = useToast();
   const [selectedService, setSelectedService] = useState<ServiceId>('web_development');
   const [quantity, setQuantity] = useState(1);
@@ -457,7 +459,7 @@ export default function ItServiceCalculatorPage() {
                     {Object.entries(serviceConfig.currencies).map(([id, { name }]) => (
                       <div className="flex items-center space-x-2" key={id}>
                         <RadioGroupItem value={id} id={`curr-${id}`} />
-                        <Label htmlFor={`curr-${id}`} className="font-normal">{name}</Label>
+                        <Label htmlFor={`curr-${id}`} className="font-normal">{t(name)}</Label>
                       </div>
                     ))}
                  </RadioGroup>
@@ -468,11 +470,13 @@ export default function ItServiceCalculatorPage() {
                 <Label htmlFor="service-select"><TranslatedText text="Service" /></Label>
                 <Select value={selectedService} onValueChange={handleServiceChange}>
                   <SelectTrigger id="service-select">
-                    <SelectValue placeholder="Select a service..." />
+                    <SelectValue placeholder={t("Select a service...")} />
                   </SelectTrigger>
                   <SelectContent>
                     {Object.entries(serviceConfig.services).map(([id, { name }]) => (
-                      <SelectItem key={id} value={id}>{name}</SelectItem>
+                      <SelectItem key={id} value={id}>
+                         <TranslatedText text={name} />
+                      </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
@@ -487,7 +491,7 @@ export default function ItServiceCalculatorPage() {
                         id="custom-service-name"
                         value={customServiceName}
                         onChange={(e) => setCustomServiceName(e.target.value)}
-                        placeholder="e.g., Data Analysis Pipeline"
+                        placeholder={t("e.g., Data Analysis Pipeline")}
                       />
                     </div>
                      <div className="space-y-2">
@@ -496,7 +500,7 @@ export default function ItServiceCalculatorPage() {
                         id="custom-features"
                         value={customFeatures}
                         onChange={(e) => setCustomFeatures(e.target.value)}
-                        placeholder="Please list the features you need..."
+                        placeholder={t("Please list the features you need...")}
                         rows={4}
                       />
                     </div>
@@ -527,7 +531,7 @@ export default function ItServiceCalculatorPage() {
                                 <RadioGroupItem value={lesson.id} id={`lesson-${lesson.id}`} />
                                 <Label htmlFor={`lesson-${lesson.id}`} className="font-normal w-full">
                                     <div className="flex justify-between">
-                                        {lesson.name}
+                                        <TranslatedText text={lesson.name} />
                                         <span className="text-muted-foreground text-xs">{(lesson.price > 0 ? '+' : '')}{currencyInfo.symbol}{(lesson.price * currencyInfo.rate).toFixed(2)}</span>
                                     </div>
                                 </Label>
@@ -550,7 +554,7 @@ export default function ItServiceCalculatorPage() {
                            onCheckedChange={() => handleFeatureChange(feature.id)}
                          />
                          <Label htmlFor={`feature-${feature.id}`} className="font-normal flex justify-between w-full">
-                           {feature.name}
+                           <TranslatedText text={feature.name} />
                            <span className="text-muted-foreground text-xs">{(feature.price >= 0 ? '+' : '')}{currencyInfo.symbol}{(feature.price * currencyInfo.rate).toFixed(2)}</span>
                          </Label>
                        </div>
@@ -569,10 +573,10 @@ export default function ItServiceCalculatorPage() {
                         <RadioGroupItem value={id} id={`sla-${id}`} />
                         <Label htmlFor={`sla-${id}`} className="font-normal w-full">
                           <div className="flex justify-between">
-                            {name}
+                            <TranslatedText text={name} />
                             <span className="text-muted-foreground text-xs">({multiplier}x cost)</span>
                           </div>
-                          <p className="text-xs text-muted-foreground">{description}</p>
+                          <p className="text-xs text-muted-foreground"><TranslatedText text={description} /></p>
                         </Label>
                       </div>
                     ))}
@@ -631,8 +635,3 @@ export default function ItServiceCalculatorPage() {
     </div>
   );
 }
-
-    
-    
-
-    
