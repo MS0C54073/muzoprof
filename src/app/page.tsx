@@ -315,7 +315,7 @@ const educationData = [
     },
 ];
 
-const retrainingDiplomasData = [
+const postgraduateDiplomasData = [
     {
         title: "Management in the Digital Economy",
         institution: "Novosibirsk State Technical University",
@@ -689,7 +689,7 @@ export default function Home() {
             doc.setFont('helvetica', 'bold');
             doc.setFontSize(9.5);
             doc.setTextColor(COLORS.ACCENT[0], COLORS.ACCENT[1], COLORS.ACCENT[2]);
-            doc.text("Diplomas of Professional Retraining (2023):", MARGIN, currentY);
+            doc.text("Postgraduate Diplomas (2023):", MARGIN, currentY);
             currentY += 14;
             cvData.diplomas.forEach(diploma => addBullet(diploma));
 
@@ -1114,14 +1114,14 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Professional Retraining Section */}
+        {/* Postgraduate Diplomas Section */}
         <section id="retraining" className="py-20 border-t">
             <h2 className="text-3xl font-bold text-center mb-12 flex items-center justify-center gap-3 text-primary">
                 <Zap className="h-8 w-8 text-primary" />
-                <TranslatedText text="Diplomas of Professional Retraining (2023)" />
+                <TranslatedText text="Postgraduate Diplomas (2023)" />
             </h2>
             <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
-                {retrainingDiplomasData.map((diploma, index) => (
+                {postgraduateDiplomasData.map((diploma, index) => (
                     <Card key={index} className="bg-card/50 hover:shadow-md transition-shadow group">
                         <CardHeader className="flex-row gap-4 items-center space-y-0">
                             <div className="bg-primary/10 p-3 rounded-lg group-hover:bg-primary/20 transition-colors">
