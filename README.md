@@ -1,39 +1,24 @@
 # MuzoInTech - Professional Portfolio
 
-A modern, high-performance personal portfolio website built with Next.js, React, and Firebase. This platform showcases technical expertise, professional projects, and educational milestones.
+A modern, high-performance personal portfolio website built with Next.js, React, and Firebase. This platform showcases technical expertise, professional projects, and educational milestones with a focus on AI integration and precision engineering.
 
 ## Core Features
 
-- **Dynamic CV Generation**: High-precision PDF generation engine for professional resumes.
-- **IT Service Calculator**: Interactive tool for project cost estimation across web, software, and AI services.
-- **Bilingual Support**: Real-time language translation capabilities (English/Russian) via Gemini Pro.
-- **AI Career Portal**: Resume analysis flow that transforms PDF uploads into personalized landing pages.
-- **Modern UI/UX**: Responsive design built with Tailwind CSS, Shadcn UI, and dynamic background themes.
+- **Dynamic CV Generation**: High-precision PDF generation engine (`jsPDF`) for professional resumes, supporting specialized templates for both Technical and Tutoring roles.
+- **IT Service Calculator**: Interactive tool for project cost estimation across web, software, and AI services with real-time currency conversion (USD/ZMW) and PDF quote export.
+- **Bilingual Support**: Comprehensive multi-language support (English/Russian) implemented via `i18next` for a seamless global experience.
+- **AI Career Portal**: Intelligent resume analysis flow that transforms PDF uploads into structured personal landing pages using Genkit AI.
+- **Premium UI/UX**: Responsive design built with Tailwind CSS and Shadcn UI, featuring dynamic background themes like "Neural Network" and the custom "Nebula" drift.
 
 ## Tech Stack
 
 - **Framework**: Next.js 15 (App Router)
 - **Language**: TypeScript
-- **Styling**: Tailwind CSS, Shadcn UI
+- **Styling**: Tailwind CSS, Shadcn UI, Framer Motion (animations)
 - **Backend**: Firebase (Firestore, Storage, Authentication)
-- **AI Integration**: Genkit (Google AI)
+- **AI Integration**: Genkit (Google AI / Gemini)
+- **Localization**: i18next & react-i18next
 - **PDF Engine**: jsPDF
-
-## Getting Started
-
-1. Clone the repository.
-2. Set up environment variables in a `.env` file:
-   - `GOOGLE_GENAI_API_KEY`
-   - `NEXT_PUBLIC_FIREBASE_API_KEY`
-   - `RESEND_API_KEY`
-3. Install dependencies:
-   ```bash
-   npm install
-   ```
-4. Start the development server:
-   ```bash
-   npm run dev
-   ```
 
 ## Project Architecture
 
@@ -41,32 +26,57 @@ A modern, high-performance personal portfolio website built with Next.js, React,
 graph TD
     User((User)) --> Router[Next.js App Router]
     
-    subgraph "Frontend Pages"
+    subgraph "Frontend Interface"
         Router --> Home[Home Page /]
-        Router --> Blog[Blog /blog]
+        Router --> Blog[Blog System /blog]
         Router --> Calculator[Service Calculator /it-service-calculator]
         Router --> Portal[AI Career Portal /career-portal]
         Router --> Tutor[Tutor Page /tutor]
-        Router --> Services[MIT Services /mit-services]
     end
 
-    subgraph "Logic Engines"
-        Home --> CVGen[CV Generation Engine]
-        Calculator --> PriceLogic[Quotation Logic]
+    subgraph "Logic & State Engines"
+        Home --> CVGen[CV Generation Engine - jsPDF]
+        Calculator --> PriceLogic[Quotation & PDF Export]
+        Router --> Trans[i18next Localization Engine]
+        Router --> Theme[Background Theme Provider]
     end
 
-    subgraph "AI & Backend"
+    subgraph "AI & Backend Services"
         Router -.-> Genkit[Genkit AI Flows]
-        Router -.-> Firebase[Firebase Services]
+        Router -.-> Firebase[Firebase Core]
         
-        Genkit --> Translate[Batch Translation]
-        Genkit --> CareerGen[Resume Analysis]
+        Genkit --> CareerGen[Resume Analysis Flow]
         
-        Firebase --> Firestore[Database]
-        Firebase --> Storage[File Storage]
-        Firebase --> Auth[Authentication]
+        Firebase --> Firestore[Database - Blog/Orders]
+        Firebase --> Storage[Cloud Storage - Assets/Resumes]
+        Firebase --> Auth[Firebase Authentication]
     end
 ```
+
+## Getting Started
+
+1. **Clone the repository.**
+2. **Configure Environment Variables**:
+   Create a `.env` file in the root directory:
+   - `GOOGLE_GENAI_API_KEY`: For AI analysis and translation.
+   - `NEXT_PUBLIC_FIREBASE_API_KEY`: For client-side Firebase access.
+   - `RESEND_API_KEY`: For project request email notifications.
+3. **Install Dependencies**:
+   ```bash
+   npm install
+   ```
+4. **Launch Development Server**:
+   ```bash
+   npm run dev
+   ```
+
+## Project Structure
+
+- `src/app`: Next.js App Router pages and layouts.
+- `src/ai`: Genkit AI flow definitions and prompts.
+- `src/i18n`: Localization resource files (EN/RU).
+- `src/components`: Reusable UI components and specialized icons.
+- `src/lib`: Firebase configuration and shared TypeScript types.
 
 ## License
 
