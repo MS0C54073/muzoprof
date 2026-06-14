@@ -721,9 +721,9 @@ export default function Home() {
     
 
   return (
-      <div className="container mx-auto py-8 md:py-16 px-4 md:px-8 lg:px-12">
+      <div className="container mx-auto py-8 md:py-12 px-4 md:px-8 lg:px-12">
         {/* Hero Section */}
-        <section id="home" className="py-12 md:py-20 text-center flex flex-col items-center">
+        <section id="home" className="py-8 md:py-16 text-center flex flex-col items-center">
           <div className="relative w-32 h-32 md:w-40 md:h-40 mb-6 group">
               <Image
                 src="https://drive.google.com/uc?id=18haKNolQwC6XQxH3weaKMkvFEV_rBYc6"
@@ -778,20 +778,18 @@ export default function Home() {
         </section>
 
         {/* About Section */}
-        <section id="about" className="py-16 md:py-24 border-t px-4 md:px-0">
-            <h2 className="text-2xl md:text-4xl font-bold text-center mb-10 md:mb-16 text-primary tracking-tight"><TranslatedText text="About Me"/></h2>
+        <section id="about" className="py-10 md:py-16 border-t px-4 md:px-0">
+            <h2 className="text-2xl md:text-4xl font-bold text-center mb-6 md:mb-10 text-primary tracking-tight"><TranslatedText text="About Me"/></h2>
             <div className="max-w-4xl mx-auto">
-                <div className="text-base md:text-lg text-muted-foreground space-y-6 leading-relaxed">
-                    <p><TranslatedText text="I am a curious and driven professional with a background in system administration, software engineering, and AI."/></p>
-                    <p><TranslatedText text="I enjoy solving real problems across the stack, from designing system architecture and managing CI/CD workflows and Kubernetes environments, to connecting LLMs to proprietary databases and automating workflows with platforms like N8N and Supabase."/></p>
-                    <p><TranslatedText text="I make active use of AI tools including Cursor AI, Claude, ChatGPT, and Gemini to move faster and build better, while keeping a strong focus on performance, security, and maintainability."/></p>
-                </div>
+                <p className="text-base md:text-lg text-muted-foreground leading-relaxed text-center">
+                    <TranslatedText text="I am a curious and driven professional with a background in system administration, software engineering, and AI. I enjoy solving real problems across the stack, from designing system architecture and managing CI/CD workflows and Kubernetes environments, to connecting LLMs to proprietary databases and automating workflows with platforms like N8N and Supabase. I make active use of AI tools including Cursor AI, Claude, ChatGPT, and Gemini to move faster and build better, while keeping a strong focus on performance, security, and maintainability."/>
+                </p>
             </div>
         </section>
 
         {/* Hobbies & Interests Section */}
-        <section id="hobbies" className="py-16 md:py-24 border-t px-4 md:px-0 bg-muted/20">
-          <h2 className="text-2xl md:text-4xl font-bold text-center mb-12 text-primary tracking-tight"><TranslatedText text="Hobbies & Interests"/></h2>
+        <section id="hobbies" className="py-10 md:py-16 border-t px-4 md:px-0 bg-muted/20">
+          <h2 className="text-2xl md:text-4xl font-bold text-center mb-10 text-primary tracking-tight"><TranslatedText text="Hobbies & Interests"/></h2>
           <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
               <Card className="bg-card/50 shadow-sm border-primary/5 hover:shadow-md transition-shadow">
                   <CardHeader className="text-center pb-2">
@@ -830,8 +828,8 @@ export default function Home() {
         </section>
 
         {/* Skills Section */}
-        <section id="skills" className="py-16 md:py-24 border-t bg-muted/50 rounded-2xl md:rounded-[3rem] px-4 md:px-8 mx-2 md:mx-0">
-          <h2 className="text-2xl md:text-4xl font-bold text-center mb-16 text-primary tracking-tight"><TranslatedText text="Technical Skills" /></h2>
+        <section id="skills" className="py-10 md:py-16 border-t bg-muted/50 rounded-2xl md:rounded-[3rem] px-4 md:px-8 mx-2 md:mx-0">
+          <h2 className="text-2xl md:text-4xl font-bold text-center mb-10 text-primary tracking-tight"><TranslatedText text="Technical Skills" /></h2>
           <div className="max-w-6xl mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 md:gap-10">
             {skills.map(skill => (
               <div key={skill.name} className="flex flex-col items-center text-center group">
@@ -844,7 +842,7 @@ export default function Home() {
               </div>
             ))}
           </div>
-           <div className="max-w-4xl mx-auto mt-20 grid grid-cols-1 md:grid-cols-2 gap-10">
+           <div className="max-w-4xl mx-auto mt-12 grid grid-cols-1 md:grid-cols-2 gap-10">
             <Card className="bg-background/80 backdrop-blur shadow-sm border-none">
               <CardHeader className="pb-2">
                   <CardTitle className="text-lg md:text-xl flex items-center gap-2"><Database className="h-5 w-5 text-primary" /><TranslatedText text="Data Tools & Automation" /></CardTitle>
@@ -869,8 +867,8 @@ export default function Home() {
         </section>
 
         {/* Projects Section */}
-        <section id="projects" className="py-16 md:py-24 border-t px-4 md:px-0">
-          <div className="text-center mb-16">
+        <section id="projects" className="py-10 md:py-16 border-t px-4 md:px-0">
+          <div className="text-center mb-10">
               <Button asChild size="lg" className="text-2xl md:text-4xl font-black h-auto py-4 px-8 rounded-full shadow-xl">
                   <a href="https://github.com/MS0C54073" target="_blank" rel="noopener noreferrer">
                       <TranslatedText text="Projects" />
@@ -880,7 +878,7 @@ export default function Home() {
           </div>
 
           {/* AI/ML Sub-Section */}
-          <div className="max-w-5xl mx-auto mb-20">
+          <div className="max-w-5xl mx-auto mb-16">
             <h3 className="text-xl md:text-3xl font-extrabold text-primary mb-10 flex items-center justify-center gap-3 border-b-2 border-primary/10 pb-4">
                 <BrainCircuit className="h-8 w-8" />
                 <TranslatedText text="AI & Machine Learning" />
@@ -982,7 +980,7 @@ export default function Home() {
             )}
           </div>
 
-          <div className="max-w-4xl mx-auto mt-20 px-4 md:px-0">
+          <div className="max-w-4xl mx-auto mt-16 px-4 md:px-0">
             <Alert variant="accent" className="rounded-2xl border-2 py-6">
               <Terminal className="h-6 w-6" />
               <AlertTitle className="text-lg font-bold"><TranslatedText text="Explore My Full Portfolio" /></AlertTitle>
@@ -997,8 +995,8 @@ export default function Home() {
         </section>
 
         {/* Experience Section */}
-        <section id="experience" className="py-16 md:py-24 border-t px-4 md:px-0">
-          <h2 className="text-2xl md:text-4xl font-bold text-center mb-16 text-primary tracking-tight"><TranslatedText text="Work Experience" /></h2>
+        <section id="experience" className="py-10 md:py-16 border-t px-4 md:px-0">
+          <h2 className="text-2xl md:text-4xl font-bold text-center mb-10 text-primary tracking-tight"><TranslatedText text="Work Experience" /></h2>
           <div className="max-w-4xl mx-auto">
             <Accordion 
               type="multiple"
@@ -1051,8 +1049,8 @@ export default function Home() {
         </section>
 
         {/* Community Involvement Section */}
-        <section id="community" className="py-16 md:py-24 border-t bg-muted/30 px-4 md:px-0">
-          <h2 className="text-2xl md:text-4xl font-bold text-center mb-16 flex items-center justify-center gap-3 text-primary tracking-tight">
+        <section id="community" className="py-10 md:py-16 border-t bg-muted/30 px-4 md:px-0">
+          <h2 className="text-2xl md:text-4xl font-bold text-center mb-10 flex items-center justify-center gap-3 text-primary tracking-tight">
               <HeartHandshake className="h-8 w-8 md:h-10 md:w-10 text-primary" />
               <TranslatedText text="Community Involvement & Volunteering" />
           </h2>
@@ -1084,8 +1082,8 @@ export default function Home() {
         </section>
         
         {/* Education Section */}
-        <section id="education" className="py-16 md:py-24 border-t bg-muted/50 rounded-2xl md:rounded-[3rem] px-4 md:px-8 mx-2 md:mx-0">
-          <h2 className="text-2xl md:text-4xl font-bold text-center mb-16 flex items-center justify-center gap-3 text-primary tracking-tight">
+        <section id="education" className="py-10 md:py-16 border-t bg-muted/50 rounded-2xl md:rounded-[3rem] px-4 md:px-8 mx-2 md:mx-0">
+          <h2 className="text-2xl md:text-4xl font-bold text-center mb-10 flex items-center justify-center gap-3 text-primary tracking-tight">
               <GraduationCap className="h-8 w-8 md:h-10 md:w-10 text-primary" />
               <TranslatedText text="Academic Education" />
           </h2>
@@ -1117,7 +1115,7 @@ export default function Home() {
                   </Button>
               </div>
           )}
-          <div className="max-w-3xl mx-auto mt-12 text-center">
+          <div className="max-w-3xl mx-auto mt-10 text-center">
               <Button asChild variant="outline" size="lg" className="rounded-full shadow-sm hover:shadow-md transition-all border-2">
                   <a href="https://drive.google.com/drive/folders/1YuzeLBdj9-vTvZcJsEfyTUdH9j_ZqlIV?usp=sharing" target="_blank" rel="noopener noreferrer">
                       <ExternalLink className="mr-2 h-5 w-5" />
@@ -1128,8 +1126,8 @@ export default function Home() {
         </section>
 
         {/* Postgraduate Diplomas Section */}
-        <section id="retraining" className="py-16 md:py-24 border-t px-4 md:px-0">
-            <h2 className="text-2xl md:text-4xl font-bold text-center mb-16 flex items-center justify-center gap-3 text-primary tracking-tight">
+        <section id="retraining" className="py-10 md:py-16 border-t px-4 md:px-0">
+            <h2 className="text-2xl md:text-4xl font-bold text-center mb-10 flex items-center justify-center gap-3 text-primary tracking-tight">
                 <Zap className="h-8 w-8 md:h-10 md:w-10 text-primary" />
                 <TranslatedText text="Postgraduate Diplomas (2023)" />
             </h2>
@@ -1156,8 +1154,8 @@ export default function Home() {
         </section>
 
         {/* Certifications Section */}
-        <section id="certifications" className="py-16 md:py-24 border-t bg-muted/20 px-4 md:px-0">
-          <div className="text-center mb-16">
+        <section id="certifications" className="py-10 md:py-16 border-t bg-muted/20 px-4 md:px-0">
+          <div className="text-center mb-10">
               <Button asChild size="lg" className="text-xl md:text-4xl font-black h-auto py-4 px-10 rounded-full shadow-2xl">
                   <Link href="https://www.coursera.org/user/d5bf15915278f56a6f96c3b5195c6d11" target="_blank">
                       <TranslatedText text="Licenses & Certifications" />
@@ -1201,8 +1199,8 @@ export default function Home() {
         </section>
 
         {/* References Section */}
-        <section id="references" className="py-16 md:py-24 border-t bg-muted/50 rounded-2xl md:rounded-[3rem] px-4 md:px-8 mx-2 md:mx-0">
-          <h2 className="text-2xl md:text-4xl font-bold text-center mb-16 text-primary tracking-tight"><TranslatedText text="References"/></h2>
+        <section id="references" className="py-10 md:py-16 border-t bg-muted/50 rounded-2xl md:rounded-[3rem] px-4 md:px-8 mx-2 md:mx-0">
+          <h2 className="text-2xl md:text-4xl font-bold text-center mb-10 text-primary tracking-tight"><TranslatedText text="References"/></h2>
           <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {references.map((ref, index) => (
                   <Card key={index} className="flex flex-col bg-card/80 border-none shadow-sm rounded-2xl hover:shadow-lg transition-all p-2">
@@ -1231,13 +1229,13 @@ export default function Home() {
           </div>
         </section>
         
-        <section id="contact" className="py-16 md:py-24 border-t px-4 md:px-0">
+        <section id="contact" className="py-10 md:py-16 border-t px-4 md:px-0">
           <div className="text-center max-w-3xl mx-auto">
             <h2 className="text-2xl md:text-5xl font-black text-primary tracking-tighter"><TranslatedText text="Let's Connect" /></h2>
-            <p className="text-muted-foreground mt-6 mb-12 text-base md:text-xl leading-relaxed font-medium">
+            <p className="text-muted-foreground mt-6 mb-10 text-base md:text-xl leading-relaxed font-medium">
               <TranslatedText text="I'm always open to discussing new projects, creative ideas, or opportunities to be part of an ambitious vision. Feel free to reach out." />
             </p>
-            <div className="flex flex-col items-center gap-6 mb-12">
+            <div className="flex flex-col items-center gap-6 mb-10">
               <Button asChild size="lg" className="h-16 px-10 text-xl font-black rounded-full shadow-2xl hover:scale-105 transition-transform">
                 <a href="mailto:musondasalim@gmail.com">musondasalim@gmail.com</a>
               </Button>
