@@ -859,7 +859,7 @@ export default function Home() {
               </CardHeader>
               <CardContent>
                   <p className="text-muted-foreground text-sm md:text-base leading-relaxed">
-                    <TranslatedText text="Creative Tools: Adobe Premiere Pro, Photoshop, Canva. Graphic Design, Videography, Photography (Intermediate)." />
+                    <TranslatedText text="Creative Tools: Adobe Premiere Pro, Photoshop, Canva. Graphic Design, Videography, Photography (Basic)." />
                   </p>
               </CardContent>
             </Card>
@@ -1097,7 +1097,7 @@ export default function Home() {
                 <div className="space-y-1">
                     <p className="text-xs md:text-sm text-primary font-black uppercase tracking-widest bg-primary/10 w-fit px-3 py-1 rounded-full mb-2"><TranslatedText text={edu.duration}/></p>
                     <h3 className="text-xl md:text-2xl font-black text-accent leading-tight"><TranslatedText text={edu.degree}/></h3>
-                    <p className="font-bold text-foreground md:text-lg"><TranslatedText text={edu.university}/></p>
+                    <p className="font-bold text-foreground md:lg"><TranslatedText text={edu.university}/></p>
                     {edu.note && (
                       <p className="text-sm md:text-base text-muted-foreground italic mt-3 font-medium border-l-4 border-accent/40 pl-4 bg-accent/5 py-2 rounded-r-lg">
                           <TranslatedText text={edu.note}/>
