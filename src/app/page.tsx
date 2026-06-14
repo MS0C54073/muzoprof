@@ -284,7 +284,7 @@ const educationData = [
         degree: "Associate of Science, Information Science and Computer Engineering",
         university: "Novosibirsk State Technical University",
         duration: "Sep 2022 - Jul 2024",
-        note: "Awaiting Official Translation and Validation (Legalization).",
+        note: "Awaiting Official Translation and Legalization",
     },
     {
         degree: "BSc Software and Information Systems Administration",
@@ -394,7 +394,7 @@ export default function Home() {
         linkedin: "linkedin.com/in/musonda-salimu",
         github: "github.com/MS0C54073",
         portfolio: "tinyurl.com/muzoslim",
-        summary: "Results-driven IT professional with expertise in software development, system administration, and artificial intelligence. Background in technological entrepreneurship with hands-on experience in modern frameworks and cloud technologies. Active community contributor through technical mentorship, student welfare, and volunteer programmes across Zambia and Russia.",
+        summary: "I am a curious and driven professional with a background in system administration, software engineering, and AI. I enjoy solving real problems across the stack, from designing system architecture and managing CI/CD workflows and Kubernetes environments, to connecting LLMs to proprietary databases and automating workflows with platforms like N8N and Supabase. I make active use of AI tools including Cursor AI, Claude, ChatGPT, and Gemini to move faster and build better, while keeping a strong focus on performance, security, and maintainability.",
         skillCategories: [
             { label: "Languages", value: "Python, JavaScript, TypeScript, C++, C#" },
             { label: "Frameworks", value: "React, Next.js, Node.js/Express, Django, .NET" },
@@ -1229,6 +1229,7 @@ export default function Home() {
           </div>
         </section>
         
+        {/* Contact Section */}
         <section id="contact" className="py-10 md:py-16 border-t px-4 md:px-0">
           <div className="text-center max-w-3xl mx-auto">
             <h2 className="text-2xl md:text-5xl font-black text-primary tracking-tighter"><TranslatedText text="Let's Connect" /></h2>
