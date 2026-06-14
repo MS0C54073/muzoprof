@@ -20,7 +20,9 @@ i18n
       escapeValue: false, // react already safes from xss
     },
     detection: {
-      order: ['localStorage', 'navigator'],
+      // Prioritize localStorage (user choice) and ignore browser settings (navigator)
+      // to ensure English is the default for new visitors.
+      order: ['localStorage', 'htmlTag', 'path', 'subdomain'],
       caches: ['localStorage'],
     },
   });
