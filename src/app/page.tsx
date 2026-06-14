@@ -849,7 +849,7 @@ export default function Home() {
               </CardHeader>
               <CardContent>
                   <p className="text-muted-foreground text-sm md:text-base leading-relaxed">
-                    <TranslatedText text="Data Collection: Google Forms, Microsoft Forms, REST APIs, webhooks. Databases: SQL/NoSQL (PostgreSQL, MySQL, MongoDB, Supabase). Workflow Automation: n8n, Zapier, Google AI Studio | Gemini API." />
+                    <TranslatedText text="Data Collection: Google Forms, Microsoft Forms, REST APIs, webhooks. Databases: SQL/NoSQL (PostgreSQL, MySQL, MongoDB, Supabase). Workflow Automation: n8n, Google AI Studio | Gemini API." />
                   </p>
               </CardContent>
             </Card>
