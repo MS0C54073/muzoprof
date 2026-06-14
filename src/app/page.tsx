@@ -859,7 +859,7 @@ export default function Home() {
               </CardHeader>
               <CardContent>
                   <p className="text-muted-foreground text-sm md:text-base leading-relaxed">
-                    <TranslatedText text="Creative Tools: Adobe Premiere Pro, Photoshop, Canva." />
+                    <TranslatedText text="Creative Tools: Adobe Premiere Pro, Photoshop, Canva. Graphic Design, Videography, Photography (Intermediate)." />
                   </p>
               </CardContent>
             </Card>
