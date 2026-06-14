@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/accordion";
 import { jsPDF } from 'jspdf';
 import { useState } from 'react';
-import { storage, db }from '@/lib/firebase';
+import { storage, db } from '@/lib/firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { useForm, type SubmitHandler } from 'react-hook-form';
@@ -235,7 +235,7 @@ const professionalExperiences = [
     },
     {
         title: "Software Development Trainee",
-        company: "Kursk State University",
+        company: "Kursk State University, Russia",
         duration: "May 2019 – Jul 2021",
         details: [
             "Built, tested, and optimised applications using C++, Python, and C#",
@@ -782,9 +782,9 @@ export default function Home() {
             <h2 className="text-2xl md:text-4xl font-bold text-center mb-10 md:mb-16 text-primary tracking-tight"><TranslatedText text="About Me"/></h2>
             <div className="max-w-4xl mx-auto">
                 <div className="text-base md:text-lg text-muted-foreground space-y-6 leading-relaxed">
-                    <p><TranslatedText text="I am a versatile and experienced professional with a passion for technology. My journey has taken me through system administration, software engineering, and cutting-edge AI research."/></p>
-                    <p><TranslatedText text="I thrive on solving complex problems and am particularly excited by the intersection of AI and practical business solutions. My current focus is on securely connecting LLMs like GPT to proprietary databases, leveraging no-code platforms (N8N, WeWeb, Supabase) for rapid development, and exploring advanced AI concepts like the 'Neuro-secretary' to automate complex workflows."/></p>
-                    <p><TranslatedText text="Driven by a willingness to learn, I am continuously pushing the boundaries of what's possible, merging my skills in full-stack development and AI to create next-generation solutions."/></p>
+                    <p><TranslatedText text="I am a curious and driven professional with a background in system administration, software engineering, and AI."/></p>
+                    <p><TranslatedText text="I enjoy solving real problems across the stack, from designing system architecture and managing CI/CD workflows and Kubernetes environments, to connecting LLMs to proprietary databases and automating workflows with platforms like N8N and Supabase."/></p>
+                    <p><TranslatedText text="I make active use of AI tools including Cursor AI, Claude, ChatGPT, and Gemini to move faster and build better, while keeping a strong focus on performance, security, and maintainability."/></p>
                 </div>
             </div>
         </section>
