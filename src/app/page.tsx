@@ -5,7 +5,13 @@ import Link from 'next/link';
 import TranslatedText from '@/app/components/translated-text';
 import { Button } from '@/components/ui/button';
 import { SocialIcons } from '@/components/social-icons';
-import { ArrowRight, BrainCircuit, Check, Code, Database, Download, Eye, ExternalLink, Github, Globe, GraduationCap, Loader2, Network, Phone, Server, Shield, Smartphone, Terminal, UserCog, ChevronDown, Calculator, Gamepad, Film, Edit, BookOpen, HeartHandshake, Zap, FileText, Mail } from 'lucide-react';
+import { 
+    ArrowRight, BrainCircuit, Check, Code, Database, Download, Eye, ExternalLink, 
+    Github, Globe, GraduationCap, Loader2, Network, Phone, Server, Shield, 
+    Smartphone, Terminal, UserCog, ChevronDown, Calculator, Gamepad, Film, 
+    Edit, BookOpen, HeartHandshake, Zap, FileText, Mail, Stars, Search, 
+    HardDrive, BarChart3, MousePointer2, Flame 
+} from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
@@ -77,30 +83,31 @@ interface CvData {
 
 // --- Data Constants ---
 const skills = [
-    { name: 'Laravel (PHP)', icon: <Server className="h-6 w-6" /> },
-    { name: '.NET (C#)', icon: <Server className="h-6 w-6" /> },
-    { name: 'Javascript', icon: <Code className="h-6 w-6" /> },
-    { name: 'TypeScript', icon: <Code className="h-6 w-6" /> },
-    { name: 'React', icon: <Globe className="h-6 w-6" /> },
-    { name: 'Next.js', icon: <Globe className="h-6 w-6" /> },
-    { name: 'Node.js/Express', icon: <Server className="h-6 w-6" /> },
-    { name: 'C++', icon: <Code className="h-6 w-6" /> },
-    { name: 'Flutter', icon: <Smartphone className="h-6 w-6" /> },
-    { name: 'Networking', icon: <Network className="h-6 w-6" /> },
-    { name: 'Databases (PostgreSQL, Supabase, MongoDB, Firebase)', icon: <Database className="h-6 w-6" /> },
-    { name: 'AI & Automation', icon: <BrainCircuit className="h-6 w-6" /> },
-    { name: 'AI SDK (Vercel)', icon: <BrainCircuit className="h-6 w-6" /> },
-    { name: 'Firebase Studio', icon: <BrainCircuit className="h-6 w-6" /> },
-    { name: 'Google AI Studio', icon: <BrainCircuit className="h-6 w-6" /> },
-    { name: 'RAG', icon: <BrainCircuit className="h-6 w-6" /> },
-    { name: 'Cybersecurity', icon: <Shield className="h-6 w-6" /> },
-    { name: 'System Admin', icon: <Server className="h-6 w-6" /> },
-    { name: 'Data Analysis(Python & SQL)', icon: <Code className="h-6 w-6" /> },
-    { name: 'Django', icon: <Server className="h-6 w-6" /> },
-    { name: 'Tableau (Foundational)', icon: <Code className="h-6 w-6" /> },
-    { name: 'Design & Media', icon: <Edit className="h-6 w-6" /> },
-    { name: 'Microsoft 365/Office', icon: <UserCog className="h-6 w-6" /> },
-    { name: 'Cursor 2.0', icon: <Terminal className="h-6 w-6" /> },
+    // Core Dev
+    { name: 'Javascript', icon: <Code className="h-6 w-6" />, category: 'dev' },
+    { name: 'TypeScript', icon: <Code className="h-6 w-6" />, category: 'dev' },
+    { name: 'React', icon: <Globe className="h-6 w-6" />, category: 'dev' },
+    { name: 'Next.js', icon: <Globe className="h-6 w-6" />, category: 'dev' },
+    { name: 'Node.js/Express', icon: <Server className="h-6 w-6" />, category: 'dev' },
+    { name: 'Django', icon: <Server className="h-6 w-6" />, category: 'dev' },
+    { name: 'C++', icon: <Terminal className="h-6 w-6" />, category: 'dev' },
+    { name: 'Flutter', icon: <Smartphone className="h-6 w-6" />, category: 'dev' },
+    
+    // AI & Data
+    { name: 'AI & Automation', icon: <BrainCircuit className="h-6 w-6" />, category: 'ai' },
+    { name: 'AI SDK (Vercel)', icon: <Zap className="h-6 w-6" />, category: 'ai' },
+    { name: 'Firebase Studio', icon: <Flame className="h-6 w-6" />, category: 'ai' },
+    { name: 'Google AI Studio', icon: <Stars className="h-6 w-6" />, category: 'ai' },
+    { name: 'RAG (basic)', icon: <Search className="h-6 w-6" />, category: 'ai' },
+    { name: 'Data Analysis (Python & SQL)', icon: <BarChart3 className="h-6 w-6" />, category: 'ai' },
+    { name: 'Tableau (Foundational)', icon: <BarChart3 className="h-6 w-6" />, category: 'ai' },
+
+    // Infrastructure & Tools
+    { name: 'Networking', icon: <Network className="h-6 w-6" />, category: 'infra' },
+    { name: 'System Admin', icon: <HardDrive className="h-6 w-6" />, category: 'infra' },
+    { name: 'Cybersecurity (basic)', icon: <Shield className="h-6 w-6" />, category: 'infra' },
+    { name: 'Databases (PostgreSQL, Supabase, MongoDB, Firebase)', icon: <Database className="h-6 w-6" />, category: 'infra' },
+    { name: 'Cursor 2.0', icon: <MousePointer2 className="h-6 w-6" />, category: 'infra' },
 ];
 
 const projects = [
@@ -387,23 +394,23 @@ export default function Home() {
     // --- State for CV Data (Editable) ---
     const [cvData, setCvData] = useState<CvData>({
         name: "MUSONDA SALIMU",
-        jobTitle: "IT Support  |  Software Developer  |  AI Specialist",
+        jobTitle: "IT Professional | Software Developer | AI Specialist",
         email: "musondasalim@gmail.com",
         phones: ["+260 966 882 901", "+260 979 287 496", "+260 977 288 260"],
         location: "Lusaka, Zambia",
         linkedin: "linkedin.com/in/musonda-salimu",
         github: "github.com/MS0C54073",
         portfolio: "tinyurl.com/muzoslim",
-        summary: "Curious IT professional specialized in system architecture, Kubernetes CI/CD, and AI automation. I focus on securely connecting LLMs to data and automating workflows with n8n and Supabase. I leverage modern AI tools to build high-performance, maintainable solutions.",
+        summary: "I am a curious and driven professional specialized in system architecture, Kubernetes CI/CD, and AI automation. I focus on securely connecting LLMs to data and automating workflows with n8n and Supabase while leveraging modern AI tools to build high-performance solutions.",
         skillCategories: [
-            { label: "Languages", value: "Python, JavaScript, TypeScript, C++, C#" },
+            { label: "Languages", value: "Python, JavaScript, TypeScript, C++, C#, SQL" },
             { label: "Frameworks", value: "React, Next.js, Node.js/Express, Django, .NET" },
             { label: "Mobile & Web", value: "Flutter, React Native" },
             { label: "Databases", value: "PostgreSQL (Supabase), MongoDB, Firebase" },
-            { label: "AI & Automation", value: "Genkit, Firebase Studio, Claude Code, n8n, Gemini API, Orange Data Mining, Power BI, SQL" },
-            { label: "Cloud & DevOps", value: "Docker, Git" },
-            { label: "Cybersecurity", value: "SIEM, IDS, Network Security, Cybersecurity Compliance (Basic)" },
-            { label: "Tools & Platforms", value: "Cursor 2.0, Tableau, Microsoft 365/Office, Adobe Creative Suite" },
+            { label: "AI & Automation", value: "Genkit, Firebase Studio, Claude Code, n8n, Gemini API, Orange Data Mining, RAG" },
+            { label: "Cloud & DevOps", value: "Docker, Kubernetes, Git, CI/CD" },
+            { label: "Cybersecurity", value: "Network Security, SIEM, IDS, Compliance (Basic)" },
+            { label: "Tools", value: "Cursor 2.0, Tableau, Microsoft 365/Office" },
         ],
         experience: professionalExperiences,
         community: communityInvolvement,
@@ -785,7 +792,7 @@ export default function Home() {
             <h2 className="text-xl md:text-3xl font-bold text-center mb-4 text-primary tracking-tight"><TranslatedText text="About Me"/></h2>
             <div className="max-w-4xl mx-auto">
                 <p className="text-base md:text-lg text-muted-foreground leading-relaxed text-center">
-                    <TranslatedText text="Curious IT professional specialized in system architecture, Kubernetes CI/CD, and AI automation. I focus on securely connecting LLMs to data and automating workflows with n8n and Supabase. I leverage modern AI tools to build high-performance, maintainable solutions."/>
+                    <TranslatedText text="I am a curious and driven professional specialized in system architecture, Kubernetes CI/CD, and AI automation. I focus on securely connecting LLMs to data and automating workflows with n8n and Supabase while leveraging modern AI tools to build high-performance solutions."/>
                 </p>
             </div>
         </section>
@@ -830,42 +837,75 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Skills Section */}
-        <section id="skills" className="py-6 md:py-8 border-t bg-muted/50 rounded-2xl md:rounded-[3rem] px-4 md:px-8 mx-2 md:mx-0">
-          <h2 className="text-xl md:text-3xl font-bold text-center mb-6 text-primary tracking-tight"><TranslatedText text="Technical Skills" /></h2>
-          <div className="max-w-6xl mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 md:gap-8">
-            {skills.map(skill => (
-              <div key={skill.name} className="flex flex-col items-center text-center group">
-                <div className="w-14 h-14 md:w-16 md:h-16 bg-background rounded-2xl flex items-center justify-center shadow-lg text-primary transform transition-all duration-300 group-hover:scale-110 group-hover:bg-primary group-hover:text-white mb-3">
-                  {skill.icon}
+        {/* Technical Skills Section */}
+        <section id="skills" className="py-8 md:py-12 border-t bg-muted/30 rounded-2xl md:rounded-[3rem] px-4 md:px-8 mx-2 md:mx-0">
+          <h2 className="text-2xl md:text-4xl font-black text-center mb-10 text-primary tracking-tight">
+            <TranslatedText text="Technical Specialist Stack" />
+          </h2>
+          
+          <div className="max-w-6xl mx-auto space-y-10">
+            {/* Skill Group: Core Development */}
+            <div className="space-y-6">
+                <h3 className="text-sm font-black uppercase tracking-widest text-primary/60 border-l-4 border-primary pl-4">
+                    <TranslatedText text="Core Development" />
+                </h3>
+                <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-4">
+                    {skills.filter(s => s.category === 'dev').map(skill => (
+                        <Card key={skill.name} className="group border-none bg-background/50 hover:bg-primary transition-all duration-300 shadow-sm hover:shadow-xl hover:-translate-y-1">
+                            <CardContent className="p-4 flex flex-col items-center text-center gap-3">
+                                <div className="text-primary group-hover:text-white transition-colors">
+                                    {skill.icon}
+                                </div>
+                                <span className="text-[10px] md:text-xs font-bold group-hover:text-white transition-colors">
+                                    <TranslatedText text={skill.name} />
+                                </span>
+                            </CardContent>
+                        </Card>
+                    ))}
                 </div>
-                <p className="font-bold text-foreground text-xs leading-snug px-1">
-                    <TranslatedText text={skill.name} />
-                </p>
-              </div>
-            ))}
-          </div>
-           <div className="max-w-4xl mx-auto mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-            <Card className="bg-background/80 backdrop-blur shadow-sm border-none">
-              <CardHeader className="pb-2">
-                  <CardTitle className="text-md md:text-lg flex items-center gap-2"><Database className="h-5 w-5 text-primary" /><TranslatedText text="Data Tools & Automation" /></CardTitle>
-              </CardHeader>
-              <CardContent>
-                  <p className="text-muted-foreground text-xs md:text-sm leading-relaxed">
-                    <TranslatedText text="Data Collection: Google Forms, Microsoft Forms, REST APIs, webhooks. Databases: SQL/NoSQL (PostgreSQL, MySQL, MongoDB, Supabase). Workflow Automation: n8n, Google AI Studio | Gemini API." />
-                  </p>
-              </CardContent>
-            </Card>
-            <Card className="bg-background/80 backdrop-blur shadow-sm border-none">
-              <CardHeader className="pb-2">
-                  <CardTitle className="text-md md:text-lg flex items-center gap-2"><Edit className="h-5 w-5 text-primary" /><TranslatedText text="Design & Media" /></CardTitle>
-              </CardHeader>
-              <CardContent>
-                  <p className="text-muted-foreground text-xs md:text-sm leading-relaxed">
-                    <TranslatedText text="Creative Tools: Adobe Premiere Pro, Photoshop, Canva. Graphic Design, Videography, Photography (Basic)." />
-                  </p>
-              </CardContent>
-            </Card>
+            </div>
+
+            {/* Skill Group: AI & Machine Learning */}
+            <div className="space-y-6">
+                <h3 className="text-sm font-black uppercase tracking-widest text-accent/60 border-l-4 border-accent pl-4">
+                    <TranslatedText text="AI & Machine Learning" />
+                </h3>
+                <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-4">
+                    {skills.filter(s => s.category === 'ai').map(skill => (
+                        <Card key={skill.name} className="group border-none bg-background/50 hover:bg-accent transition-all duration-300 shadow-sm hover:shadow-xl hover:-translate-y-1">
+                            <CardContent className="p-4 flex flex-col items-center text-center gap-3">
+                                <div className="text-accent group-hover:text-white transition-colors">
+                                    {skill.icon}
+                                </div>
+                                <span className="text-[10px] md:text-xs font-bold group-hover:text-white transition-colors">
+                                    <TranslatedText text={skill.name} />
+                                </span>
+                            </CardContent>
+                        </Card>
+                    ))}
+                </div>
+            </div>
+
+            {/* Skill Group: Infrastructure & Specialist Tools */}
+            <div className="space-y-6">
+                <h3 className="text-sm font-black uppercase tracking-widest text-primary/60 border-l-4 border-primary/40 pl-4">
+                    <TranslatedText text="Infrastructure & Engineering" />
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {skills.filter(s => s.category === 'infra').map(skill => (
+                        <Card key={skill.name} className="group border-none bg-background/50 hover:bg-primary transition-all duration-300 shadow-sm hover:shadow-xl">
+                            <CardContent className="p-4 flex items-center gap-4">
+                                <div className="text-primary group-hover:text-white transition-colors shrink-0">
+                                    {skill.icon}
+                                </div>
+                                <span className="text-xs font-bold group-hover:text-white transition-colors leading-tight">
+                                    <TranslatedText text={skill.name} />
+                                </span>
+                            </CardContent>
+                        </Card>
+                    ))}
+                </div>
+            </div>
           </div>
         </section>
 
