@@ -13,16 +13,16 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter }
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
-import { ArrowLeft, Loader2, Sparkles, Copy, Check, FileText, Send, BrainCircuit, Briefcase } from 'lucide-react';
+import { ArrowLeft, Loader2, Sparkles, Copy, Check, FileText, BrainCircuit, Briefcase } from 'lucide-react';
 import { SocialIcons } from '@/components/social-icons';
 import { Badge } from '@/components/ui/badge';
 
-// Hardcoded profile summary to align with the portfolio
+// Consolidated profile summary synchronized with the main portfolio
 const MY_PROFILE = {
     name: "Musonda Salimu",
-    title: "IT Support | Software Developer | AI Specialist",
-    summary: "I am a curious and driven professional with a background in system administration, software engineering, and AI. I enjoy solving real problems across the stack, from designing system architecture and managing CI/CD workflows and Kubernetes environments, to connecting LLMs to proprietary databases and automating workflows with platforms like N8N and Supabase. I make active use of AI tools including Cursor AI, Claude, ChatGPT, and Gemini to move faster and build better.",
-    skills: ["Laravel", ".NET", "Javascript", "TypeScript", "React", "Next.js", "AI & Automation", "Kubernetes", "CI/CD", "PostgreSQL", "Supabase", "Python"],
+    title: "IT Professional | Software Developer | AI Specialist",
+    summary: "I am a curious and driven professional with a background in system administration, software engineering, and AI. I enjoy solving real problems across the stack, from designing system architecture and managing CI/CD workflows and Kubernetes environments, to connecting LLMs to proprietary databases and automating workflows with platforms like N8N and Supabase. I make active use of AI tools including Cursor AI, Claude, ChatGPT, and Gemini to move faster and build better, while keeping a strong focus on performance, security, and maintainability.",
+    skills: ["Laravel", ".NET", "Javascript", "TypeScript", "React", "Next.js", "AI & Automation", "Kubernetes", "CI/CD", "PostgreSQL", "Supabase", "Python", "N8N", "System Admin"],
     experience: [
         {
             title: "AI Content Evaluation Specialist",
@@ -66,7 +66,7 @@ export default function CoverLetterGeneratorPage() {
             toast({
                 variant: 'success',
                 title: 'Cover Letter Generated!',
-                description: 'Aligned with your portfolio and specialized profile.',
+                description: 'Aligned with your portfolio and specialist profile.',
             });
         } catch (err) {
             console.error(err);
@@ -111,7 +111,6 @@ export default function CoverLetterGeneratorPage() {
             </header>
 
             <main className="grid grid-cols-1 lg:grid-cols-2 gap-8 flex-grow">
-                {/* Input Section */}
                 <div className="space-y-6">
                     <Card className="shadow-lg border-none bg-card/60 backdrop-blur-md rounded-[2rem]">
                         <CardHeader>
@@ -151,7 +150,6 @@ export default function CoverLetterGeneratorPage() {
                     </Card>
                 </div>
 
-                {/* Output Section */}
                 <div className="space-y-6">
                     {result ? (
                         <Card className="shadow-2xl border-none bg-card rounded-[2rem] overflow-hidden sticky top-24">

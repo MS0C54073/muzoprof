@@ -5,7 +5,7 @@ import Link from 'next/link';
 import TranslatedText from '@/app/components/translated-text';
 import { Button } from '@/components/ui/button';
 import { SocialIcons } from '@/components/social-icons';
-import { ArrowRight, Award, BrainCircuit, Calendar, Code, Database, Download, Eye, ExternalLink, Github, Globe, GraduationCap, Loader2, Mail, Network, Phone, Server, Shield, Smartphone, Star, Users, Check, UserCog, ChevronDown, Calculator, Terminal, Gamepad, Film, Edit, Layout, BookOpen, HeartHandshake, Zap } from 'lucide-react';
+import { ArrowRight, BrainCircuit, Check, Code, Database, Download, Eye, ExternalLink, Github, Globe, GraduationCap, Loader2, Network, Phone, Server, Shield, Smartphone, Terminal, UserCog, ChevronDown, Calculator, Gamepad, Film, Edit, BookOpen, HeartHandshake, Zap, FileText, Mail } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
@@ -763,6 +763,12 @@ export default function Home() {
                   <TranslatedText text="Service Cost" />
               </Link>
             </Button>
+            <Button asChild size="lg" variant="secondary" className="w-full sm:w-auto shadow-sm">
+              <Link href="/cover-letter-generator">
+                  <FileText className="mr-2 h-5 w-5" />
+                  <TranslatedText text="AI Cover Letter" />
+              </Link>
+            </Button>
             
             <div className="flex flex-wrap gap-2 w-full justify-center mt-2 sm:mt-0 sm:w-auto">
                 <Button onClick={() => generateCv('download')} size="lg" disabled={isGenerating} className="flex-1 sm:flex-none">
@@ -877,7 +883,6 @@ export default function Home() {
               </Button>
           </div>
 
-          {/* AI/ML Sub-Section */}
           <div className="max-w-5xl mx-auto mb-16">
             <h3 className="text-xl md:text-3xl font-extrabold text-primary mb-10 flex items-center justify-center gap-3 border-b-2 border-primary/10 pb-4">
                 <BrainCircuit className="h-8 w-8" />
@@ -910,7 +915,6 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Web & General Section */}
           <div className="max-w-5xl mx-auto">
             <h3 className="text-xl md:text-3xl font-extrabold text-primary mb-10 flex items-center justify-center gap-3 border-b-2 border-primary/10 pb-4">
                 <Code className="h-8 w-8" />
