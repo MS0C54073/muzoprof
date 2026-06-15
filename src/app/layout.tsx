@@ -50,6 +50,7 @@ const navLinks = [
     { href: '/#certifications', text: 'Certifications' },
     { href: '/it-service-calculator', text: 'IT Service Calculator' },
     { href: '/career-portal', text: 'AI Career Portal' },
+    { href: '/cover-letter-generator', text: 'AI Cover Letter' },
     { href: '/#references', text: 'References' },
     { href: '/#contact', text: 'Contact' },
     { href: '/blog', text: 'Blog' },

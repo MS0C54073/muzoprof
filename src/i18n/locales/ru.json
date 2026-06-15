@@ -10,6 +10,7 @@
   "Certifications": "Сертификаты",
   "IT Service Calculator": "Калькулятор ИТ-услуг",
   "AI Career Portal": "Карьерный ИИ-портал",
+  "AI Cover Letter": "ИИ Сопроводительное письмо",
   "References": "Рекомендации",
   "Contact": "Контакты",
   "Blog": "Блог",
@@ -167,5 +168,18 @@
   "e.g., Data Analysis Pipeline": "напр., Пайплайн анализа данных",
   "Please list the features you need...": "Пожалуйста, перечислите необходимые функции...",
   "Community Involvement & Volunteering": "Участие в жизни сообщества и волонтерство",
-  "© 2026 Musonda Salimu. All Rights Reserved.": "© 2026 Мусонда Салиму. Все права защищены."
+  "© 2026 Musonda Salimu. All Rights Reserved.": "© 2026 Мусонда Салиму. Все права защищены.",
+  "AI Cover Letter Specialist": "ИИ-специалист по письмам",
+  "Align your specialist portfolio with any job advert to generate a powerful, targeted cover letter.": "Сопоставьте свое портфолио с любым объявлением о работе, чтобы создать мощное сопроводительное письмо.",
+  "Job Advertisement": "Объявление о вакансии",
+  "Paste the job requirements or description below.": "Вставьте требования или описание вакансии ниже.",
+  "Description Text": "Текст описания",
+  "Aligning Portfolio...": "Сопоставление портфолио...",
+  "Generate Specialist Letter": "Создать письмо специалиста",
+  "Specialist Profile Used": "Используемый профиль",
+  "Generated Cover Letter": "Созданное письмо",
+  "Positioned as an AI & Software Specialist.": "Позиционирование: специалист по ИИ и ПО.",
+  "AI Reasoning & Alignment": "Обоснование ИИ и соответствие",
+  "Ready to Generate": "Готово к созданию",
+  "Paste a job advert and click generate to see your specialist cover letter here.": "Вставьте текст вакансии и нажмите кнопку, чтобы увидеть письмо."
 }
