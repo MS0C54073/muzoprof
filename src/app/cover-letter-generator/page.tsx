@@ -21,7 +21,7 @@ import { Badge } from '@/components/ui/badge';
 const MY_PROFILE = {
     name: "Musonda Salimu",
     title: "IT Professional | Software Developer | AI Specialist",
-    summary: "I am a curious and driven professional with a background in system administration, software engineering, and AI. I enjoy solving real problems across the stack, from designing system architecture and managing CI/CD workflows and Kubernetes environments, to connecting LLMs to proprietary databases and automating workflows with platforms like N8N and Supabase. I make active use of AI tools including Cursor AI, Claude, ChatGPT, and Gemini to move faster and build better, while keeping a strong focus on performance, security, and maintainability.",
+    summary: "I'm a tech enthusiast exploring system architecture, Kubernetes, and AI. I enjoy experimenting with LLM integrations and automation using n8n and Supabase, constantly learning and looking for practical ways to build better software solutions.",
     skills: ["Laravel", ".NET", "Javascript", "TypeScript", "React", "Next.js", "AI & Automation", "Kubernetes", "CI/CD", "PostgreSQL", "Supabase", "Python", "N8N", "System Admin"],
     experience: [
         {

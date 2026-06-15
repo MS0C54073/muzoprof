@@ -401,7 +401,7 @@ export default function Home() {
         linkedin: "linkedin.com/in/musonda-salimu",
         github: "github.com/MS0C54073",
         portfolio: "tinyurl.com/muzoslim",
-        summary: "I am a curious and driven professional specialized in system architecture, Kubernetes CI/CD, and AI automation. I focus on securely connecting LLMs to data and automating workflows with n8n and Supabase while leveraging modern AI tools to build high-performance solutions.",
+        summary: "I'm a tech enthusiast exploring system architecture, Kubernetes, and AI. I enjoy experimenting with LLM integrations and automation using n8n and Supabase, constantly learning and looking for practical ways to build better software solutions.",
         skillCategories: [
             { label: "Languages", value: "Python, JavaScript, TypeScript, C++, C#, SQL" },
             { label: "Frameworks", value: "React, Next.js, Node.js/Express, Django, .NET" },
@@ -750,11 +750,11 @@ export default function Home() {
           {/* Enhanced Roles Design */}
           <div className="text-lg md:text-2xl text-muted-foreground mt-4 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 max-w-3xl px-4 font-medium tracking-tight">
             <span className="hover:text-primary transition-colors cursor-default whitespace-nowrap"><TranslatedText text="IT Support" /></span>
-            <span className="text-primary/30 select-none hidden sm:inline">/</span>
+            <span className="text-primary/30 select-none hidden sm:inline">|</span>
             <span className="hover:text-primary transition-colors cursor-default whitespace-nowrap"><TranslatedText text="Software Developer" /></span>
-            <span className="text-primary/30 select-none hidden sm:inline">/</span>
+            <span className="text-primary/30 select-none hidden sm:inline">|</span>
             <span className="hover:text-primary transition-colors cursor-default whitespace-nowrap"><TranslatedText text="AI" /></span>
-            <span className="text-primary/30 select-none hidden sm:inline">/</span>
+            <span className="text-primary/30 select-none hidden sm:inline">|</span>
             <Button variant="link" asChild className="text-lg md:text-2xl p-0 h-auto font-bold text-accent hover:text-primary transition-all underline-offset-8">
                 <Link href="/tutor"><TranslatedText text="Tutor" /></Link>
             </Button>
@@ -802,7 +802,7 @@ export default function Home() {
             <h2 className="text-xl md:text-3xl font-bold text-center mb-4 text-primary tracking-tight"><TranslatedText text="About Me"/></h2>
             <div className="max-w-4xl mx-auto">
                 <p className="text-base md:text-lg text-muted-foreground leading-relaxed text-center">
-                    <TranslatedText text="I am a curious and driven professional specialized in system architecture, Kubernetes CI/CD, and AI automation. I focus on securely connecting LLMs to data and automating workflows with n8n and Supabase while leveraging modern AI tools to build high-performance solutions."/>
+                    <TranslatedText text="I'm a tech enthusiast exploring system architecture, Kubernetes, and AI. I enjoy experimenting with LLM integrations and automation using n8n and Supabase, constantly learning and looking for practical ways to build better software solutions."/>
                 </p>
             </div>
         </section>
