@@ -394,7 +394,7 @@ export default function Home() {
     // --- State for CV Data (Editable) ---
     const [cvData, setCvData] = useState<CvData>({
         name: "MUSONDA SALIMU",
-        jobTitle: "IT Professional | Software Developer | AI Specialist",
+        jobTitle: "IT Support | Software Developer | AI | Tutor",
         email: "musondasalim@gmail.com",
         phones: ["+260 966 882 901", "+260 979 287 496", "+260 977 288 260"],
         location: "Lusaka, Zambia",
@@ -746,21 +746,22 @@ export default function Home() {
           <h1 className="text-3xl md:text-5xl font-extrabold text-primary tracking-tight">
             <TranslatedText text="Musonda Salimu" />
           </h1>
-          <div className="text-lg md:text-2xl text-muted-foreground mt-2 flex flex-wrap items-center justify-center gap-2 max-w-2xl px-2">
-            <TranslatedText text="IT Professional" />
-            <span className="hidden md:inline text-primary">|</span>
-            <TranslatedText text="Software Developer" />
-            <span className="hidden md:inline text-primary">|</span>
-            <TranslatedText text="AI Specialist" />
-            <span className="hidden md:inline text-primary">|</span>
-            <Button variant="link" asChild className="text-lg md:text-2xl p-0 h-auto font-semibold">
+          
+          {/* Enhanced Roles Design */}
+          <div className="text-lg md:text-2xl text-muted-foreground mt-4 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 max-w-3xl px-4 font-medium tracking-tight">
+            <span className="hover:text-primary transition-colors cursor-default whitespace-nowrap"><TranslatedText text="IT Support" /></span>
+            <span className="text-primary/30 select-none hidden sm:inline">/</span>
+            <span className="hover:text-primary transition-colors cursor-default whitespace-nowrap"><TranslatedText text="Software Developer" /></span>
+            <span className="text-primary/30 select-none hidden sm:inline">/</span>
+            <span className="hover:text-primary transition-colors cursor-default whitespace-nowrap"><TranslatedText text="AI" /></span>
+            <span className="text-primary/30 select-none hidden sm:inline">/</span>
+            <Button variant="link" asChild className="text-lg md:text-2xl p-0 h-auto font-bold text-accent hover:text-primary transition-all underline-offset-8">
                 <Link href="/tutor"><TranslatedText text="Tutor" /></Link>
             </Button>
           </div>
           
           {/* Redesigned Hero Buttons */}
           <div className="mt-8 flex flex-col items-center gap-6 w-full max-w-4xl px-4">
-              {/* Primary Call to Actions */}
               <div className="flex flex-wrap justify-center gap-4 w-full">
                   <Button asChild size="lg" className="h-14 px-10 rounded-full shadow-xl hover:scale-105 transition-all bg-primary text-primary-foreground font-black text-lg flex-1 sm:flex-none min-w-[200px]">
                       <a href="#contact">
@@ -774,7 +775,6 @@ export default function Home() {
                   </Button>
               </div>
               
-              {/* Secondary Specialist Tools */}
               <div className="flex flex-wrap justify-center items-center gap-3">
                   <Button asChild variant="outline" className="h-12 px-6 rounded-full border-accent text-accent hover:bg-accent hover:text-white font-bold transition-all shadow-sm group">
                       <Link href="/cover-letter-generator">
