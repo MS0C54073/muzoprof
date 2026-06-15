@@ -10,7 +10,7 @@ import {
     Github, Globe, GraduationCap, Loader2, Network, Phone, Server, Shield, 
     Smartphone, Terminal, UserCog, ChevronDown, Calculator, Gamepad, Film, 
     Edit, BookOpen, HeartHandshake, Zap, FileText, Mail, Stars, Search, 
-    HardDrive, BarChart3, MousePointer2, Flame 
+    HardDrive, BarChart3, MousePointer2, Flame, Sparkles
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -757,33 +757,43 @@ export default function Home() {
                 <Link href="/tutor"><TranslatedText text="Tutor" /></Link>
             </Button>
           </div>
-          <div className="mt-6 flex flex-wrap justify-center gap-3 md:gap-4 px-4">
-            <Button asChild size="lg" className="w-full sm:w-auto shadow-md h-12">
-              <a href="#contact"><TranslatedText text="Get in Touch" /></a>
-            </Button>
-            <Button asChild size="lg" variant="outline" className="w-full sm:w-auto shadow-sm h-12">
-              <Link href="/it-service-calculator">
-                  <Calculator className="mr-2 h-5 w-5" />
-                  <TranslatedText text="Service Cost" />
-              </Link>
-            </Button>
-            <Button asChild size="lg" variant="secondary" className="w-full sm:w-auto shadow-sm h-12">
-              <Link href="/cover-letter-generator">
-                  <FileText className="mr-2 h-5 w-5" />
-                  <TranslatedText text="AI Cover Letter" />
-              </Link>
-            </Button>
-            
-            <div className="flex flex-wrap gap-2 w-full justify-center mt-2 sm:mt-0 sm:w-auto">
-                <Button onClick={() => generateCv('download')} size="lg" disabled={isGenerating} className="flex-1 sm:flex-none h-12">
-                    {isGenerating ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Download className="mr-2 h-5 w-5" />}
-                    <TranslatedText text="Download CV" />
-                </Button>
-                <Button onClick={() => generateCv('preview')} size="lg" variant="outline" disabled={isGenerating} className="flex-1 sm:flex-none h-12">
-                    <Eye className="mr-2 h-5 w-5" />
-                    <TranslatedText text="Preview" />
-                </Button>
-            </div>
+          
+          {/* Redesigned Hero Buttons */}
+          <div className="mt-8 flex flex-col items-center gap-6 w-full max-w-4xl px-4">
+              {/* Primary Call to Actions */}
+              <div className="flex flex-wrap justify-center gap-4 w-full">
+                  <Button asChild size="lg" className="h-14 px-10 rounded-full shadow-xl hover:scale-105 transition-all bg-primary text-primary-foreground font-black text-lg flex-1 sm:flex-none min-w-[200px]">
+                      <a href="#contact">
+                          <Mail className="mr-2 h-5 w-5" />
+                          <TranslatedText text="Get in Touch" />
+                      </a>
+                  </Button>
+                  <Button onClick={() => generateCv('download')} size="lg" disabled={isGenerating} className="h-14 px-10 rounded-full shadow-xl hover:scale-105 transition-all border-2 border-primary bg-transparent text-primary hover:bg-primary/5 font-black text-lg flex-1 sm:flex-none min-w-[200px]">
+                      {isGenerating ? <Loader2 className="mr-2 h-5 w-5 animate-spin" /> : <Download className="mr-2 h-5 w-5" />}
+                      <TranslatedText text="Download CV" />
+                  </Button>
+              </div>
+              
+              {/* Secondary Specialist Tools */}
+              <div className="flex flex-wrap justify-center items-center gap-3">
+                  <Button asChild variant="outline" className="h-12 px-6 rounded-full border-accent text-accent hover:bg-accent hover:text-white font-bold transition-all shadow-sm group">
+                      <Link href="/cover-letter-generator">
+                          <Sparkles className="mr-2 h-4 w-4 text-accent group-hover:text-white transition-colors" />
+                          <TranslatedText text="AI Cover Letter" />
+                      </Link>
+                  </Button>
+                  <Button asChild variant="ghost" className="h-12 px-6 rounded-full text-muted-foreground hover:text-primary font-bold transition-all border border-transparent hover:border-border">
+                      <Link href="/it-service-calculator">
+                          <Calculator className="mr-2 h-4 w-4" />
+                          <TranslatedText text="Service Cost" />
+                      </Link>
+                  </Button>
+                  <div className="w-px h-6 bg-border hidden sm:block mx-2" />
+                  <Button onClick={() => generateCv('preview')} variant="link" size="sm" disabled={isGenerating} className="h-12 px-4 text-muted-foreground hover:text-primary font-bold decoration-primary underline-offset-4 flex items-center">
+                      <Eye className="mr-2 h-4 w-4" />
+                      <TranslatedText text="Preview" />
+                  </Button>
+              </div>
           </div>
         </section>
 
