@@ -394,7 +394,7 @@ export default function Home() {
         linkedin: "linkedin.com/in/musonda-salimu",
         github: "github.com/MS0C54073",
         portfolio: "tinyurl.com/muzoslim",
-        summary: "I am a results-driven IT professional specializing in software engineering, system architecture, and AI automation. I focus on securely connecting LLMs to data and automating workflows with n8n and Supabase, leveraging modern AI tools to build high-performance, secure solutions.",
+        summary: "Curious IT professional specialized in system architecture, Kubernetes CI/CD, and AI automation. I focus on securely connecting LLMs to data and automating workflows with n8n and Supabase. I leverage modern AI tools to build high-performance, maintainable solutions.",
         skillCategories: [
             { label: "Languages", value: "Python, JavaScript, TypeScript, C++, C#" },
             { label: "Frameworks", value: "React, Next.js, Node.js/Express, Django, .NET" },
@@ -723,8 +723,8 @@ export default function Home() {
   return (
       <div className="container mx-auto py-8 md:py-12 px-4 md:px-8 lg:px-12">
         {/* Hero Section */}
-        <section id="home" className="py-8 md:py-16 text-center flex flex-col items-center">
-          <div className="relative w-32 h-32 md:w-40 md:h-40 mb-6 group">
+        <section id="home" className="py-6 md:py-10 text-center flex flex-col items-center">
+          <div className="relative w-32 h-32 md:w-40 md:h-40 mb-4 group">
               <Image
                 src="https://drive.google.com/uc?id=18haKNolQwC6XQxH3weaKMkvFEV_rBYc6"
                 alt="Musonda Salimu Profile"
@@ -739,7 +739,7 @@ export default function Home() {
           <h1 className="text-3xl md:text-5xl font-extrabold text-primary tracking-tight">
             <TranslatedText text="Musonda Salimu" />
           </h1>
-          <div className="text-lg md:text-2xl text-muted-foreground mt-3 flex flex-wrap items-center justify-center gap-2 max-w-2xl px-2">
+          <div className="text-lg md:text-2xl text-muted-foreground mt-2 flex flex-wrap items-center justify-center gap-2 max-w-2xl px-2">
             <TranslatedText text="IT Professional" />
             <span className="hidden md:inline text-primary">|</span>
             <TranslatedText text="Software Developer" />
@@ -750,17 +750,17 @@ export default function Home() {
                 <Link href="/tutor"><TranslatedText text="Tutor" /></Link>
             </Button>
           </div>
-          <div className="mt-8 flex flex-wrap justify-center gap-3 md:gap-4 px-4">
-            <Button asChild size="lg" className="w-full sm:w-auto shadow-md">
+          <div className="mt-6 flex flex-wrap justify-center gap-3 md:gap-4 px-4">
+            <Button asChild size="lg" className="w-full sm:w-auto shadow-md h-12">
               <a href="#contact"><TranslatedText text="Get in Touch" /></a>
             </Button>
-            <Button asChild size="lg" variant="outline" className="w-full sm:w-auto shadow-sm">
+            <Button asChild size="lg" variant="outline" className="w-full sm:w-auto shadow-sm h-12">
               <Link href="/it-service-calculator">
                   <Calculator className="mr-2 h-5 w-5" />
                   <TranslatedText text="Service Cost" />
               </Link>
             </Button>
-            <Button asChild size="lg" variant="secondary" className="w-full sm:w-auto shadow-sm">
+            <Button asChild size="lg" variant="secondary" className="w-full sm:w-auto shadow-sm h-12">
               <Link href="/cover-letter-generator">
                   <FileText className="mr-2 h-5 w-5" />
                   <TranslatedText text="AI Cover Letter" />
@@ -768,11 +768,11 @@ export default function Home() {
             </Button>
             
             <div className="flex flex-wrap gap-2 w-full justify-center mt-2 sm:mt-0 sm:w-auto">
-                <Button onClick={() => generateCv('download')} size="lg" disabled={isGenerating} className="flex-1 sm:flex-none">
+                <Button onClick={() => generateCv('download')} size="lg" disabled={isGenerating} className="flex-1 sm:flex-none h-12">
                     {isGenerating ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Download className="mr-2 h-5 w-5" />}
                     <TranslatedText text="Download CV" />
                 </Button>
-                <Button onClick={() => generateCv('preview')} size="lg" variant="outline" disabled={isGenerating} className="flex-1 sm:flex-none">
+                <Button onClick={() => generateCv('preview')} size="lg" variant="outline" disabled={isGenerating} className="flex-1 sm:flex-none h-12">
                     <Eye className="mr-2 h-5 w-5" />
                     <TranslatedText text="Preview" />
                 </Button>
@@ -781,25 +781,25 @@ export default function Home() {
         </section>
 
         {/* About Section */}
-        <section id="about" className="py-10 md:py-16 border-t px-4 md:px-0">
-            <h2 className="text-2xl md:text-4xl font-bold text-center mb-6 md:mb-10 text-primary tracking-tight"><TranslatedText text="About Me"/></h2>
+        <section id="about" className="py-6 md:py-8 border-t px-4 md:px-0">
+            <h2 className="text-xl md:text-3xl font-bold text-center mb-4 text-primary tracking-tight"><TranslatedText text="About Me"/></h2>
             <div className="max-w-4xl mx-auto">
                 <p className="text-base md:text-lg text-muted-foreground leading-relaxed text-center">
-                    <TranslatedText text="I am a results-driven IT professional specializing in software engineering, system architecture, and AI automation. I focus on securely connecting LLMs to data and automating workflows with n8n and Supabase, leveraging modern AI tools to build high-performance, secure solutions."/>
+                    <TranslatedText text="Curious IT professional specialized in system architecture, Kubernetes CI/CD, and AI automation. I focus on securely connecting LLMs to data and automating workflows with n8n and Supabase. I leverage modern AI tools to build high-performance, maintainable solutions."/>
                 </p>
             </div>
         </section>
 
         {/* Hobbies & Interests Section */}
-        <section id="hobbies" className="py-10 md:py-16 border-t px-4 md:px-0 bg-muted/20">
-          <h2 className="text-2xl md:text-4xl font-bold text-center mb-10 text-primary tracking-tight"><TranslatedText text="Hobbies & Interests"/></h2>
-          <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
+        <section id="hobbies" className="py-6 md:py-8 border-t px-4 md:px-0 bg-muted/20">
+          <h2 className="text-xl md:text-3xl font-bold text-center mb-6 text-primary tracking-tight"><TranslatedText text="Hobbies & Interests"/></h2>
+          <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
               <Card className="bg-card/50 shadow-sm border-primary/5 hover:shadow-md transition-shadow">
                   <CardHeader className="text-center pb-2">
-                      <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-2 text-primary">
-                          <Gamepad className="h-7 w-7" />
+                      <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-2 text-primary">
+                          <Gamepad className="h-6 w-6" />
                       </div>
-                      <CardTitle className="text-xl"><TranslatedText text="Gaming"/></CardTitle>
+                      <CardTitle className="text-lg"><TranslatedText text="Gaming"/></CardTitle>
                   </CardHeader>
                   <CardContent className="text-center">
                       <p className="text-muted-foreground text-sm leading-relaxed"><TranslatedText text="I enjoy immersive single-player adventures and competitive multiplayer games."/></p>
@@ -807,10 +807,10 @@ export default function Home() {
               </Card>
               <Card className="bg-card/50 shadow-sm border-primary/5 hover:shadow-md transition-shadow">
                   <CardHeader className="text-center pb-2">
-                      <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-2 text-primary">
-                          <Film className="h-7 w-7" />
+                      <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-2 text-primary">
+                          <Film className="h-6 w-6" />
                       </div>
-                      <CardTitle className="text-xl"><TranslatedText text="Documentaries"/></CardTitle>
+                      <CardTitle className="text-lg"><TranslatedText text="Documentaries"/></CardTitle>
                   </CardHeader>
                   <CardContent className="text-center">
                       <p className="text-muted-foreground text-sm leading-relaxed"><TranslatedText text="Exploring real-world stories and learning about history, science, and culture."/></p>
@@ -818,10 +818,10 @@ export default function Home() {
               </Card>
               <Card className="bg-card/50 shadow-sm border-primary/5 hover:shadow-md transition-shadow sm:col-span-2 md:col-span-1">
                   <CardHeader className="text-center pb-2">
-                      <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-2 text-primary">
-                          <BrainCircuit className="h-7 w-7" />
+                      <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-2 text-primary">
+                          <BrainCircuit className="h-6 w-6" />
                       </div>
-                      <CardTitle className="text-xl"><TranslatedText text="AI Research"/></CardTitle>
+                      <CardTitle className="text-lg"><TranslatedText text="AI Research"/></CardTitle>
                   </CardHeader>
                   <CardContent className="text-center">
                       <p className="text-muted-foreground text-sm leading-relaxed"><TranslatedText text="Staying up-to-date with the latest advancements and tools in artificial intelligence."/></p>
@@ -831,37 +831,37 @@ export default function Home() {
         </section>
 
         {/* Skills Section */}
-        <section id="skills" className="py-10 md:py-16 border-t bg-muted/50 rounded-2xl md:rounded-[3rem] px-4 md:px-8 mx-2 md:mx-0">
-          <h2 className="text-2xl md:text-4xl font-bold text-center mb-10 text-primary tracking-tight"><TranslatedText text="Technical Skills" /></h2>
-          <div className="max-w-6xl mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 md:gap-10">
+        <section id="skills" className="py-6 md:py-8 border-t bg-muted/50 rounded-2xl md:rounded-[3rem] px-4 md:px-8 mx-2 md:mx-0">
+          <h2 className="text-xl md:text-3xl font-bold text-center mb-6 text-primary tracking-tight"><TranslatedText text="Technical Skills" /></h2>
+          <div className="max-w-6xl mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 md:gap-8">
             {skills.map(skill => (
               <div key={skill.name} className="flex flex-col items-center text-center group">
-                <div className="w-16 h-16 md:w-20 md:h-20 bg-background rounded-2xl flex items-center justify-center shadow-lg text-primary transform transition-all duration-300 group-hover:scale-110 group-hover:bg-primary group-hover:text-white mb-4">
+                <div className="w-14 h-14 md:w-16 md:h-16 bg-background rounded-2xl flex items-center justify-center shadow-lg text-primary transform transition-all duration-300 group-hover:scale-110 group-hover:bg-primary group-hover:text-white mb-3">
                   {skill.icon}
                 </div>
-                <p className="font-bold text-foreground text-xs md:text-sm leading-snug px-1">
+                <p className="font-bold text-foreground text-xs leading-snug px-1">
                     <TranslatedText text={skill.name} />
                 </p>
               </div>
             ))}
           </div>
-           <div className="max-w-4xl mx-auto mt-12 grid grid-cols-1 md:grid-cols-2 gap-10">
+           <div className="max-w-4xl mx-auto mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
             <Card className="bg-background/80 backdrop-blur shadow-sm border-none">
               <CardHeader className="pb-2">
-                  <CardTitle className="text-lg md:text-xl flex items-center gap-2"><Database className="h-5 w-5 text-primary" /><TranslatedText text="Data Tools & Automation" /></CardTitle>
+                  <CardTitle className="text-md md:text-lg flex items-center gap-2"><Database className="h-5 w-5 text-primary" /><TranslatedText text="Data Tools & Automation" /></CardTitle>
               </CardHeader>
               <CardContent>
-                  <p className="text-muted-foreground text-sm md:text-base leading-relaxed">
+                  <p className="text-muted-foreground text-xs md:text-sm leading-relaxed">
                     <TranslatedText text="Data Collection: Google Forms, Microsoft Forms, REST APIs, webhooks. Databases: SQL/NoSQL (PostgreSQL, MySQL, MongoDB, Supabase). Workflow Automation: n8n, Google AI Studio | Gemini API." />
                   </p>
               </CardContent>
             </Card>
             <Card className="bg-background/80 backdrop-blur shadow-sm border-none">
               <CardHeader className="pb-2">
-                  <CardTitle className="text-lg md:text-xl flex items-center gap-2"><Edit className="h-5 w-5 text-primary" /><TranslatedText text="Design & Media" /></CardTitle>
+                  <CardTitle className="text-md md:text-lg flex items-center gap-2"><Edit className="h-5 w-5 text-primary" /><TranslatedText text="Design & Media" /></CardTitle>
               </CardHeader>
               <CardContent>
-                  <p className="text-muted-foreground text-sm md:text-base leading-relaxed">
+                  <p className="text-muted-foreground text-xs md:text-sm leading-relaxed">
                     <TranslatedText text="Creative Tools: Adobe Premiere Pro, Photoshop, Canva. Graphic Design, Videography, Photography (Basic)." />
                   </p>
               </CardContent>
@@ -870,22 +870,22 @@ export default function Home() {
         </section>
 
         {/* Projects Section */}
-        <section id="projects" className="py-10 md:py-16 border-t px-4 md:px-0">
-          <div className="text-center mb-10">
-              <Button asChild size="lg" className="text-2xl md:text-4xl font-black h-auto py-4 px-8 rounded-full shadow-xl">
+        <section id="projects" className="py-6 md:py-8 border-t px-4 md:px-0">
+          <div className="text-center mb-6">
+              <Button asChild size="lg" className="text-xl md:text-3xl font-black h-auto py-3 px-6 rounded-full shadow-xl">
                   <a href="https://github.com/MS0C54073" target="_blank" rel="noopener noreferrer">
                       <TranslatedText text="Projects" />
-                      <ArrowRight className="ml-3 h-6 w-6 md:h-8 md:w-8" />
+                      <ArrowRight className="ml-2 h-6 w-6 md:h-8 md:w-8" />
                   </a>
               </Button>
           </div>
 
-          <div className="max-w-5xl mx-auto mb-16">
-            <h3 className="text-xl md:text-3xl font-extrabold text-primary mb-10 flex items-center justify-center gap-3 border-b-2 border-primary/10 pb-4">
-                <BrainCircuit className="h-8 w-8" />
+          <div className="max-w-5xl mx-auto mb-10">
+            <h3 className="text-lg md:text-2xl font-extrabold text-primary mb-6 flex items-center justify-center gap-3 border-b-2 border-primary/10 pb-2">
+                <BrainCircuit className="h-6 w-6" />
                 <TranslatedText text="AI & Machine Learning" />
             </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
                 {projects.filter(p => p.category === 'AI/ML').map((project, index) => (
                     <a 
                       key={index}
@@ -895,13 +895,13 @@ export default function Home() {
                       className="group block"
                     >
                       <Card className="bg-card/50 hover:bg-accent/5 border-primary/5 hover:border-primary transition-all duration-300 h-full shadow-sm hover:shadow-lg">
-                        <CardHeader className="pb-4">
-                          <CardTitle className="text-accent group-hover:text-primary transition-colors text-lg md:text-xl font-bold leading-tight">
+                        <CardHeader className="pb-2">
+                          <CardTitle className="text-accent group-hover:text-primary transition-colors text-base md:text-lg font-bold leading-tight">
                               <TranslatedText text={project.title} />
                           </CardTitle>
                         </CardHeader>
                         <CardContent>
-                            <Button variant="outline" className="w-full bg-background group-hover:bg-primary group-hover:text-white transition-colors">
+                            <Button variant="outline" size="sm" className="w-full bg-background group-hover:bg-primary group-hover:text-white transition-colors">
                                 <Github className="mr-2 h-4 w-4" />
                                 <TranslatedText text="View on GitHub" />
                             </Button>
@@ -913,29 +913,29 @@ export default function Home() {
           </div>
 
           <div className="max-w-5xl mx-auto">
-            <h3 className="text-xl md:text-3xl font-extrabold text-primary mb-10 flex items-center justify-center gap-3 border-b-2 border-primary/10 pb-4">
-                <Code className="h-8 w-8" />
+            <h3 className="text-lg md:text-2xl font-extrabold text-primary mb-6 flex items-center justify-center gap-3 border-b-2 border-primary/10 pb-2">
+                <Code className="h-6 w-6" />
                 <TranslatedText text="Web & Software Development" />
             </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
               {(showAllProjects ? projects.filter(p => !p.category) : projects.filter(p => !p.category).slice(0, initialProjectsToShow)).map((project, index) => {
                 if ((project as any).demo) {
                   return (
                     <Card key={index} className="bg-card/50 hover:bg-accent/5 border-primary/5 hover:border-primary transition-all duration-300 h-full flex flex-col shadow-sm hover:shadow-lg">
-                      <CardHeader className="pb-4">
-                        <CardTitle className="text-accent group-hover:text-primary transition-colors text-lg md:text-xl font-bold leading-tight">
+                      <CardHeader className="pb-2">
+                        <CardTitle className="text-accent group-hover:text-primary transition-colors text-base md:text-lg font-bold leading-tight">
                           <TranslatedText text={project.title} />
                         </CardTitle>
                       </CardHeader>
                       <CardContent className="flex-grow flex items-end">
-                        <div className="mt-4 flex w-full gap-2">
-                            <Button asChild variant="outline" className="flex-grow bg-background">
+                        <div className="mt-2 flex w-full gap-2">
+                            <Button asChild variant="outline" size="sm" className="flex-grow bg-background">
                               <a href={project.link} target="_blank" rel="noopener noreferrer">
                                   <Github className="mr-2 h-4 w-4" />
                                   <TranslatedText text="GitHub" />
                                 </a>
                             </Button>
-                            <Button asChild variant="default" className="flex-grow shadow-md">
+                            <Button asChild variant="default" size="sm" className="flex-grow shadow-md">
                                 <a href={(project as any).demo} target="_blank" rel="noopener noreferrer">
                                     <ExternalLink className="mr-2 h-4 w-4" />
                                     <TranslatedText text="Demo" />
@@ -955,13 +955,13 @@ export default function Home() {
                     className="group block"
                   >
                     <Card className="bg-card/50 hover:bg-accent/5 border-primary/5 hover:border-primary transition-all duration-300 h-full shadow-sm hover:shadow-lg">
-                      <CardHeader className="pb-4">
-                        <CardTitle className="text-accent group-hover:text-primary transition-colors text-lg md:text-xl font-bold leading-tight">
+                      <CardHeader className="pb-2">
+                        <CardTitle className="text-accent group-hover:text-primary transition-colors text-base md:text-lg font-bold leading-tight">
                             <TranslatedText text={project.title} />
                         </CardTitle>
                       </CardHeader>
                       <CardContent>
-                          <Button variant="outline" className="w-full bg-background group-hover:bg-primary group-hover:text-white transition-colors">
+                          <Button variant="outline" size="sm" className="w-full bg-background group-hover:bg-primary group-hover:text-white transition-colors">
                               <Github className="mr-2 h-4 w-4" />
                               <TranslatedText text="View on GitHub" />
                           </Button>
@@ -972,8 +972,8 @@ export default function Home() {
               })}
             </div>
             {!showAllProjects && projects.filter(p => !p.category).length > initialProjectsToShow && (
-                <div className="text-center mt-12">
-                    <Button variant="secondary" size="lg" onClick={() => setShowAllProjects(true)} className="rounded-full px-8 shadow-sm">
+                <div className="text-center mt-8">
+                    <Button variant="secondary" size="md" onClick={() => setShowAllProjects(true)} className="rounded-full px-8 shadow-sm">
                         <TranslatedText text="View All Projects" />
                         <ChevronDown className="ml-2 h-4 w-4" />
                     </Button>
@@ -981,11 +981,11 @@ export default function Home() {
             )}
           </div>
 
-          <div className="max-w-4xl mx-auto mt-16 px-4 md:px-0">
-            <Alert variant="accent" className="rounded-2xl border-2 py-6">
-              <Terminal className="h-6 w-6" />
-              <AlertTitle className="text-lg font-bold"><TranslatedText text="Explore My Full Portfolio" /></AlertTitle>
-              <AlertDescription className="text-sm md:text-base mt-2">
+          <div className="max-w-4xl mx-auto mt-10 px-4 md:px-0">
+            <Alert variant="accent" className="rounded-2xl border-2 py-4">
+              <Terminal className="h-5 w-5" />
+              <AlertTitle className="text-md font-bold"><TranslatedText text="Explore My Full Portfolio" /></AlertTitle>
+              <AlertDescription className="text-xs md:text-sm mt-1">
                 <TranslatedText text="For a deeper dive into my work, including more projects and code samples, please " />
                 <a href="https://github.com/MS0C54073" target="_blank" rel="noopener noreferrer" className="font-bold text-accent underline underline-offset-4 decoration-2">
                   <TranslatedText text="visit my GitHub profile" />
@@ -996,31 +996,31 @@ export default function Home() {
         </section>
 
         {/* Experience Section */}
-        <section id="experience" className="py-10 md:py-16 border-t px-4 md:px-0">
-          <h2 className="text-2xl md:text-4xl font-bold text-center mb-10 text-primary tracking-tight"><TranslatedText text="Work Experience" /></h2>
+        <section id="experience" className="py-6 md:py-8 border-t px-4 md:px-0">
+          <h2 className="text-xl md:text-3xl font-bold text-center mb-6 text-primary tracking-tight"><TranslatedText text="Work Experience" /></h2>
           <div className="max-w-4xl mx-auto">
             <Accordion 
               type="multiple"
-              className="w-full space-y-4"
+              className="w-full space-y-3"
               value={openAccordionItems}
               onValueChange={setOpenAccordionItems}
             >
               {(showAllExperience ? professionalExperiences : professionalExperiences.slice(0, initialExperienceToShow)).map((exp, index) => (
-                <AccordionItem value={`item-${index}`} key={index} className="border rounded-2xl px-6 bg-card/40 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-                  <AccordionTrigger className="hover:no-underline py-6">
+                <AccordionItem value={`item-${index}`} key={index} className="border rounded-2xl px-4 md:px-6 bg-card/40 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                  <AccordionTrigger className="hover:no-underline py-4">
                     <div className="text-left">
-                      <h3 className="text-lg md:text-xl font-black text-accent tracking-tight"><TranslatedText text={exp.title}/></h3>
+                      <h3 className="text-base md:text-lg font-black text-accent tracking-tight"><TranslatedText text={exp.title}/></h3>
                       <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 mt-1">
-                          <p className="font-bold text-foreground text-sm md:text-base"><TranslatedText text={exp.company}/></p>
-                          <span className="hidden sm:inline text-muted-foreground">•</span>
-                          <p className="text-xs md:text-sm text-muted-foreground font-medium uppercase tracking-wider"><TranslatedText text={exp.duration}/></p>
+                          <p className="font-bold text-foreground text-xs md:text-sm"><TranslatedText text={exp.company}/></p>
+                          <span className="hidden sm:inline text-muted-foreground text-xs">•</span>
+                          <p className="text-[10px] md:text-xs text-muted-foreground font-medium uppercase tracking-wider"><TranslatedText text={exp.duration}/></p>
                       </div>
                     </div>
                   </AccordionTrigger>
-                  <AccordionContent className="pb-6">
-                    <ul className="space-y-3 pl-4 border-l-2 border-primary/20 ml-1">
+                  <AccordionContent className="pb-4">
+                    <ul className="space-y-2 pl-4 border-l-2 border-primary/20 ml-1">
                       {exp.details.map((d, i) => (
-                          <li key={i} className="text-muted-foreground text-sm md:text-base flex items-start">
+                          <li key={i} className="text-muted-foreground text-xs md:text-sm flex items-start">
                               <span className="text-primary mr-2 mt-1.5 h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
                               <TranslatedText text={d}/>
                           </li>
@@ -1031,10 +1031,10 @@ export default function Home() {
               ))}
             </Accordion>
             {!showAllExperience && professionalExperiences.length > initialExperienceToShow && (
-                <div className="text-center mt-12">
+                <div className="text-center mt-8">
                     <Button 
                         variant="secondary" 
-                        size="lg"
+                        size="md"
                         className="rounded-full px-8 shadow-sm"
                         onClick={() => {
                             setShowAllExperience(true);
@@ -1050,28 +1050,28 @@ export default function Home() {
         </section>
 
         {/* Community Involvement Section */}
-        <section id="community" className="py-10 md:py-16 border-t bg-muted/30 px-4 md:px-0">
-          <h2 className="text-2xl md:text-4xl font-bold text-center mb-10 flex items-center justify-center gap-3 text-primary tracking-tight">
-              <HeartHandshake className="h-8 w-8 md:h-10 md:w-10 text-primary" />
+        <section id="community" className="py-6 md:py-8 border-t bg-muted/30 px-4 md:px-0">
+          <h2 className="text-xl md:text-3xl font-bold text-center mb-6 flex items-center justify-center gap-3 text-primary tracking-tight">
+              <HeartHandshake className="h-6 w-6 md:h-8 md:w-8 text-primary" />
               <TranslatedText text="Community Involvement & Volunteering" />
           </h2>
-          <div className="max-w-4xl mx-auto space-y-6">
+          <div className="max-w-4xl mx-auto space-y-4">
                 {communityInvolvement.map((item, index) => (
                     <Card key={index} className="bg-card/50 border-primary/10 shadow-sm hover:shadow-md transition-all">
-                        <CardHeader className="pb-4">
-                            <div className="flex flex-col sm:flex-row justify-between items-start gap-4">
+                        <CardHeader className="pb-2">
+                            <div className="flex flex-col sm:flex-row justify-between items-start gap-2">
                                 <div className="space-y-1">
-                                    <CardTitle className="text-lg md:text-xl text-accent font-black tracking-tight"><TranslatedText text={item.title}/></CardTitle>
-                                    <CardDescription className="text-foreground font-bold text-base"><TranslatedText text={item.company}/></CardDescription>
+                                    <CardTitle className="text-base md:text-lg text-accent font-black tracking-tight"><TranslatedText text={item.title}/></CardTitle>
+                                    <CardDescription className="text-foreground font-bold text-sm"><TranslatedText text={item.company}/></CardDescription>
                                 </div>
-                                <Badge variant="outline" className="border-primary/30 text-primary font-mono whitespace-nowrap bg-background">{item.duration}</Badge>
+                                <Badge variant="outline" className="border-primary/30 text-primary font-mono whitespace-nowrap bg-background text-[10px]">{item.duration}</Badge>
                             </div>
                         </CardHeader>
                         <CardContent>
-                             <ul className="space-y-2">
+                             <ul className="space-y-1">
                                 {item.details.map((detail, dIdx) => (
-                                    <li key={dIdx} className="text-muted-foreground text-sm md:text-base flex items-start">
-                                        <Check className="h-4 w-4 text-primary mr-2 mt-1 shrink-0" />
+                                    <li key={dIdx} className="text-muted-foreground text-xs md:text-sm flex items-start">
+                                        <Check className="h-3 w-3 text-primary mr-2 mt-1 shrink-0" />
                                         <TranslatedText text={detail}/>
                                     </li>
                                 ))}
@@ -1083,24 +1083,24 @@ export default function Home() {
         </section>
         
         {/* Education Section */}
-        <section id="education" className="py-10 md:py-16 border-t bg-muted/50 rounded-2xl md:rounded-[3rem] px-4 md:px-8 mx-2 md:mx-0">
-          <h2 className="text-2xl md:text-4xl font-bold text-center mb-10 flex items-center justify-center gap-3 text-primary tracking-tight">
-              <GraduationCap className="h-8 w-8 md:h-10 md:w-10 text-primary" />
+        <section id="education" className="py-6 md:py-8 border-t bg-muted/50 rounded-2xl md:rounded-[3rem] px-4 md:px-8 mx-2 md:mx-0">
+          <h2 className="text-xl md:text-3xl font-bold text-center mb-8 flex items-center justify-center gap-3 text-primary tracking-tight">
+              <GraduationCap className="h-6 w-6 md:h-8 md:w-8 text-primary" />
               <TranslatedText text="Academic Education" />
           </h2>
           <div className="max-w-4xl mx-auto relative pl-8 md:pl-12">
             <div className="absolute left-1 md:left-2 top-0 h-full w-1 bg-gradient-to-b from-primary/40 via-primary/10 to-transparent"></div>
             {(showAllEducation ? educationData : educationData.slice(0, initialEducationToShow)).map((edu, index) => (
-              <div key={index} className={cn("mb-12 relative group")}>
-                <div className="absolute left-[-39px] md:left-[-54px] top-1 w-6 h-6 md:w-8 md:h-8 bg-background rounded-full border-4 border-primary group-hover:bg-primary transition-colors flex items-center justify-center shadow-lg z-10">
-                    <div className="w-1.5 h-1.5 bg-primary group-hover:bg-white rounded-full"></div>
+              <div key={index} className={cn("mb-8 relative group")}>
+                <div className="absolute left-[-39px] md:left-[-54px] top-1 w-5 h-5 md:w-7 md:h-7 bg-background rounded-full border-4 border-primary group-hover:bg-primary transition-colors flex items-center justify-center shadow-lg z-10">
+                    <div className="w-1 h-1 bg-primary group-hover:bg-white rounded-full"></div>
                 </div>
                 <div className="space-y-1">
-                    <p className="text-xs md:text-sm text-primary font-black uppercase tracking-widest bg-primary/10 w-fit px-3 py-1 rounded-full mb-2"><TranslatedText text={edu.duration}/></p>
-                    <h3 className="text-xl md:text-2xl font-black text-accent leading-tight"><TranslatedText text={edu.degree}/></h3>
-                    <p className="font-bold text-foreground md:lg"><TranslatedText text={edu.university}/></p>
+                    <p className="text-[10px] md:text-xs text-primary font-black uppercase tracking-widest bg-primary/10 w-fit px-3 py-1 rounded-full mb-1"><TranslatedText text={edu.duration}/></p>
+                    <h3 className="text-base md:text-lg font-black text-accent leading-tight"><TranslatedText text={edu.degree}/></h3>
+                    <p className="font-bold text-foreground text-sm md:text-base"><TranslatedText text={edu.university}/></p>
                     {edu.note && (
-                      <p className="text-sm md:text-base text-muted-foreground italic mt-3 font-medium border-l-4 border-accent/40 pl-4 bg-accent/5 py-2 rounded-r-lg">
+                      <p className="text-xs md:text-sm text-muted-foreground italic mt-2 font-medium border-l-4 border-accent/40 pl-4 bg-accent/5 py-1.5 rounded-r-lg">
                           <TranslatedText text={edu.note}/>
                       </p>
                     )}
@@ -1109,17 +1109,17 @@ export default function Home() {
             ))}
           </div>
           {!showAllEducation && educationData.length > initialEducationToShow && (
-              <div className="text-center mt-12">
-                  <Button variant="secondary" size="lg" onClick={() => setShowAllEducation(true)} className="rounded-full px-8 shadow-sm">
+              <div className="text-center mt-8">
+                  <Button variant="secondary" size="md" onClick={() => setShowAllEducation(true)} className="rounded-full px-8 shadow-sm">
                       <TranslatedText text="View All Education" />
                       <ChevronDown className="ml-2 h-4 w-4" />
                   </Button>
               </div>
           )}
-          <div className="max-w-3xl mx-auto mt-10 text-center">
-              <Button asChild variant="outline" size="lg" className="rounded-full shadow-sm hover:shadow-md transition-all border-2">
+          <div className="max-w-3xl mx-auto mt-8 text-center">
+              <Button asChild variant="outline" size="md" className="rounded-full shadow-sm hover:shadow-md transition-all border-2">
                   <a href="https://drive.google.com/drive/folders/1YuzeLBdj9-vTvZcJsEfyTUdH9j_ZqlIV?usp=sharing" target="_blank" rel="noopener noreferrer">
-                      <ExternalLink className="mr-2 h-5 w-5" />
+                      <ExternalLink className="mr-2 h-4 w-4" />
                       <TranslatedText text="Education File and CV" />
                   </a>
               </Button>
@@ -1127,27 +1127,27 @@ export default function Home() {
         </section>
 
         {/* Postgraduate Diplomas Section */}
-        <section id="retraining" className="py-10 md:py-16 border-t px-4 md:px-0">
-            <h2 className="text-2xl md:text-4xl font-bold text-center mb-10 flex items-center justify-center gap-3 text-primary tracking-tight">
-                <Zap className="h-8 w-8 md:h-10 md:w-10 text-primary" />
+        <section id="retraining" className="py-6 md:py-8 border-t px-4 md:px-0">
+            <h2 className="text-xl md:text-3xl font-bold text-center mb-8 flex items-center justify-center gap-3 text-primary tracking-tight">
+                <Zap className="h-6 w-6 md:h-8 md:w-8 text-primary" />
                 <TranslatedText text="Postgraduate Diplomas (2023)" />
             </h2>
-            <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 px-2">
+            <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 px-2">
                 {postgraduateDiplomasData.map((diploma, index) => (
                     <Card key={index} className="bg-card/50 hover:shadow-xl transition-all group border-none shadow-sm rounded-2xl">
-                        <CardHeader className="flex-row gap-4 items-center space-y-0 p-5">
-                            <div className="bg-primary/10 p-4 rounded-2xl group-hover:bg-primary/20 transition-colors shadow-inner">
-                                <BookOpen className="h-7 w-7 text-primary" />
+                        <CardHeader className="flex-row gap-4 items-center space-y-0 p-4">
+                            <div className="bg-primary/10 p-3 rounded-2xl group-hover:bg-primary/20 transition-colors shadow-inner">
+                                <BookOpen className="h-6 w-6 text-primary" />
                             </div>
                             <div className="space-y-1">
-                                <CardTitle className="text-lg md:text-xl text-accent font-black leading-snug tracking-tight"><TranslatedText text={diploma.title}/></CardTitle>
-                                <CardDescription className="font-bold text-foreground text-sm">
+                                <CardTitle className="text-sm md:text-base text-accent font-black leading-snug tracking-tight"><TranslatedText text={diploma.title}/></CardTitle>
+                                <CardDescription className="font-bold text-foreground text-xs">
                                     <TranslatedText text={diploma.institution}/>
                                 </CardDescription>
                             </div>
                         </CardHeader>
-                        <CardContent className="px-5 pb-5">
-                            <Badge variant="secondary" className="font-mono text-sm px-4 rounded-full bg-background border shadow-inner">{diploma.year}</Badge>
+                        <CardContent className="px-4 pb-4">
+                            <Badge variant="secondary" className="font-mono text-[10px] px-3 rounded-full bg-background border shadow-inner">{diploma.year}</Badge>
                         </CardContent>
                     </Card>
                 ))}
@@ -1155,16 +1155,16 @@ export default function Home() {
         </section>
 
         {/* Certifications Section */}
-        <section id="certifications" className="py-10 md:py-16 border-t bg-muted/20 px-4 md:px-0">
-          <div className="text-center mb-10">
-              <Button asChild size="lg" className="text-xl md:text-4xl font-black h-auto py-4 px-10 rounded-full shadow-2xl">
+        <section id="certifications" className="py-6 md:py-8 border-t bg-muted/20 px-4 md:px-0">
+          <div className="text-center mb-6">
+              <Button asChild size="lg" className="text-lg md:text-2xl font-black h-auto py-3 px-8 rounded-full shadow-2xl">
                   <Link href="https://www.coursera.org/user/d5bf15915278f56a6f96c3b5195c6d11" target="_blank">
                       <TranslatedText text="Licenses & Certifications" />
-                      <ArrowRight className="ml-3 h-6 w-6 md:h-8 md:w-8" />
+                      <ArrowRight className="ml-2 h-5 w-5 md:h-6 md:w-6" />
                   </Link>
               </Button>
           </div>
-          <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6 px-2">
+          <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4 px-2">
               {cvData.certifications.slice(0, showAllCerts ? cvData.certifications.length : initialCertsToShow).map((cert, index) => {
                   const urlMatch = cert.match(/(?:—\s*|\()(https?:\/\/[^\s\)]+)\)?/);
                   const certUrl = urlMatch ? urlMatch[1] : null;
@@ -1172,14 +1172,14 @@ export default function Home() {
 
                   return (
                       <Card key={index} className="bg-card/50 flex flex-col shadow-sm border-none rounded-2xl hover:shadow-md transition-shadow overflow-hidden">
-                          <CardHeader className="flex-grow p-6">
-                              <CardTitle className="text-base md:text-lg text-accent font-bold leading-tight"><TranslatedText text={cleanText}/></CardTitle>
+                          <CardHeader className="flex-grow p-4">
+                              <CardTitle className="text-xs md:text-sm text-accent font-bold leading-tight"><TranslatedText text={cleanText}/></CardTitle>
                           </CardHeader>
                           {certUrl && (
-                              <CardContent className="pt-0 px-6 pb-6 mt-auto">
-                                  <Button variant="link" asChild className="p-0 h-auto text-primary font-black text-sm uppercase tracking-wider">
+                              <CardContent className="pt-0 px-4 pb-4 mt-auto">
+                                  <Button variant="link" size="sm" asChild className="p-0 h-auto text-primary font-black text-[10px] uppercase tracking-wider">
                                       <a href={certUrl} target="_blank" rel="noopener noreferrer">
-                                          <ExternalLink className="mr-2 h-4 w-4" />
+                                          <ExternalLink className="mr-2 h-3 w-3" />
                                           <TranslatedText text="Verify Certificate" />
                                       </a>
                                   </Button>
@@ -1190,8 +1190,8 @@ export default function Home() {
               })}
           </div>
           {!showAllCerts && cvData.certifications.length > initialCertsToShow && (
-              <div className="text-center mt-12">
-                  <Button variant="secondary" size="lg" onClick={() => setShowAllCerts(true)} className="rounded-full px-8 shadow-sm">
+              <div className="text-center mt-8">
+                  <Button variant="secondary" size="md" onClick={() => setShowAllCerts(true)} className="rounded-full px-8 shadow-sm">
                       <TranslatedText text="View All Certifications" />
                       <ChevronDown className="ml-2 h-4 w-4" />
                   </Button>
@@ -1200,27 +1200,27 @@ export default function Home() {
         </section>
 
         {/* References Section */}
-        <section id="references" className="py-10 md:py-16 border-t bg-muted/50 rounded-2xl md:rounded-[3rem] px-4 md:px-8 mx-2 md:mx-0">
-          <h2 className="text-2xl md:text-4xl font-bold text-center mb-10 text-primary tracking-tight"><TranslatedText text="References"/></h2>
-          <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <section id="references" className="py-6 md:py-8 border-t bg-muted/50 rounded-2xl md:rounded-[3rem] px-4 md:px-8 mx-2 md:mx-0">
+          <h2 className="text-xl md:text-3xl font-bold text-center mb-6 text-primary tracking-tight"><TranslatedText text="References"/></h2>
+          <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {references.map((ref, index) => (
                   <Card key={index} className="flex flex-col bg-card/80 border-none shadow-sm rounded-2xl hover:shadow-lg transition-all p-2">
-                      <CardHeader className="pb-4">
-                          <CardTitle className="text-xl text-primary font-black"><TranslatedText text={ref.name}/></CardTitle>
-                          <CardDescription className="font-bold text-foreground">
+                      <CardHeader className="pb-2">
+                          <CardTitle className="text-lg text-primary font-black"><TranslatedText text={ref.name}/></CardTitle>
+                          <CardDescription className="font-bold text-foreground text-xs">
                               <TranslatedText text={ref.title}/> <span className="text-muted-foreground font-medium px-1">at</span> <TranslatedText text={ref.company}/>
                           </CardDescription>
                       </CardHeader>
-                      <CardContent className="flex-grow space-y-3 p-6 pt-0">
+                      <CardContent className="flex-grow space-y-2 p-4 pt-0">
                           {ref.email && (
-                              <a href={`mailto:${ref.email}`} className="flex items-center gap-3 text-sm text-muted-foreground hover:text-primary transition-colors bg-muted/30 p-2 rounded-lg">
-                                  <Mail className="h-5 w-5 text-primary" />
-                                  <span className="font-medium">{ref.email}</span>
+                              <a href={`mailto:${ref.email}`} className="flex items-center gap-3 text-xs text-muted-foreground hover:text-primary transition-colors bg-muted/30 p-2 rounded-lg">
+                                  <Mail className="h-4 w-4 text-primary" />
+                                  <span className="font-medium truncate">{ref.email}</span>
                               </a>
                           )}
                           {ref.phone && (
-                              <div className="flex items-center gap-3 text-sm text-muted-foreground bg-muted/30 p-2 rounded-lg">
-                                  <Phone className="h-5 w-5 text-primary" />
+                              <div className="flex items-center gap-3 text-xs text-muted-foreground bg-muted/30 p-2 rounded-lg">
+                                  <Phone className="h-4 w-4 text-primary" />
                                   <span className="font-medium">{ref.phone}</span>
                               </div>
                           )}
@@ -1231,20 +1231,20 @@ export default function Home() {
         </section>
         
         {/* Contact Section */}
-        <section id="contact" className="py-10 md:py-16 border-t px-4 md:px-0">
+        <section id="contact" className="py-10 md:py-12 border-t px-4 md:px-0">
           <div className="text-center max-w-3xl mx-auto">
             <h2 className="text-2xl md:text-5xl font-black text-primary tracking-tighter"><TranslatedText text="Let's Connect" /></h2>
-            <p className="text-muted-foreground mt-6 mb-10 text-base md:text-xl leading-relaxed font-medium">
+            <p className="text-muted-foreground mt-4 mb-8 text-base md:text-xl leading-relaxed font-medium">
               <TranslatedText text="I'm always open to discussing new projects, creative ideas, or opportunities to be part of an ambitious vision. Feel free to reach out." />
             </p>
-            <div className="flex flex-col items-center gap-6 mb-10">
-              <Button asChild size="lg" className="h-16 px-10 text-xl font-black rounded-full shadow-2xl hover:scale-105 transition-transform">
+            <div className="flex flex-col items-center gap-4 mb-8">
+              <Button asChild size="lg" className="h-14 px-8 text-lg font-black rounded-full shadow-2xl hover:scale-105 transition-transform">
                 <a href="mailto:musondasalim@gmail.com">musondasalim@gmail.com</a>
               </Button>
-              <div className="flex flex-col sm:flex-row items-center gap-x-10 gap-y-4 text-muted-foreground">
+              <div className="flex flex-col sm:flex-row items-center gap-x-8 gap-y-2 text-muted-foreground">
                 {cvData.phones.map(p => (
-                   <a key={p} href={`tel:${p.replace(/\s+/g, '')}`} className="flex items-center gap-3 hover:text-primary font-black transition-colors text-lg">
-                    <Phone className="h-5 w-5 text-primary" />
+                   <a key={p} href={`tel:${p.replace(/\s+/g, '')}`} className="flex items-center gap-2 hover:text-primary font-black transition-colors text-base md:text-lg">
+                    <Phone className="h-4 w-4 md:h-5 md:w-5 text-primary" />
                     <span>{p}</span>
                   </a>
                 ))}
@@ -1256,8 +1256,8 @@ export default function Home() {
           </div>
         </section>
         
-        <footer className="text-center py-8 mt-12 border-t border-border/50">
-            <p className="text-sm font-bold text-muted-foreground/60 tracking-widest uppercase">
+        <footer className="text-center py-6 mt-8 border-t border-border/50">
+            <p className="text-xs font-bold text-muted-foreground/60 tracking-widest uppercase">
                 <TranslatedText text="© 2026 Musonda Salimu. All Rights Reserved." />
             </p>
         </footer>
