@@ -98,7 +98,7 @@ const skills = [
     { name: 'Data Analysis(Python & SQL)', icon: <Code className="h-6 w-6" /> },
     { name: 'Django', icon: <Server className="h-6 w-6" /> },
     { name: 'Tableau (Foundational)', icon: <Code className="h-6 w-6" /> },
-    { name: 'Design & Photo Editing', icon: <Eye className="h-6 w-6" /> },
+    { name: 'Design & Media', icon: <Edit className="h-6 w-6" /> },
     { name: 'Microsoft 365/Office', icon: <UserCog className="h-6 w-6" /> },
     { name: 'Cursor 2.0', icon: <Terminal className="h-6 w-6" /> },
 ];
@@ -394,7 +394,7 @@ export default function Home() {
         linkedin: "linkedin.com/in/musonda-salimu",
         github: "github.com/MS0C54073",
         portfolio: "tinyurl.com/muzoslim",
-        summary: "I am a curious and driven professional with a background in system administration, software engineering, and AI. I enjoy solving real problems across the stack, from designing system architecture and managing CI/CD workflows and Kubernetes environments, to connecting LLMs to proprietary databases and automating workflows with platforms like N8N and Supabase. I make active use of AI tools including Cursor AI, Claude, ChatGPT, and Gemini to move faster and build better, while keeping a strong focus on performance, security, and maintainability.",
+        summary: "I am a results-driven IT professional specializing in software engineering, system architecture, and AI automation. I focus on securely connecting LLMs to data and automating workflows with n8n and Supabase, leveraging modern AI tools to build high-performance, secure solutions.",
         skillCategories: [
             { label: "Languages", value: "Python, JavaScript, TypeScript, C++, C#" },
             { label: "Frameworks", value: "React, Next.js, Node.js/Express, Django, .NET" },
@@ -750,9 +750,6 @@ export default function Home() {
                 <Link href="/tutor"><TranslatedText text="Tutor" /></Link>
             </Button>
           </div>
-          <p className="max-w-2xl mx-auto mt-6 text-foreground/80 leading-relaxed text-sm md:text-base px-4">
-             <TranslatedText text="A results-driven IT professional with a dynamic educational background in IT, Technological Entrepreneurship and Innovation Management, Management in the Digital Economy, Development of Digital Twins, and Management of High Tech Programs and Projects. This diverse expertise is applied to software development, system administration, and AI, with a special focus on securely connecting large language models to data and conceptualizing advanced AI assistants." />
-          </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3 md:gap-4 px-4">
             <Button asChild size="lg" className="w-full sm:w-auto shadow-md">
               <a href="#contact"><TranslatedText text="Get in Touch" /></a>
@@ -788,7 +785,7 @@ export default function Home() {
             <h2 className="text-2xl md:text-4xl font-bold text-center mb-6 md:mb-10 text-primary tracking-tight"><TranslatedText text="About Me"/></h2>
             <div className="max-w-4xl mx-auto">
                 <p className="text-base md:text-lg text-muted-foreground leading-relaxed text-center">
-                    <TranslatedText text="I am a curious and driven professional with a background in system administration, software engineering, and AI. I enjoy solving real problems across the stack, from designing system architecture and managing CI/CD workflows and Kubernetes environments, to connecting LLMs to proprietary databases and automating workflows with platforms like N8N and Supabase. I make active use of AI tools including Cursor AI, Claude, ChatGPT, and Gemini to move faster and build better, while keeping a strong focus on performance, security, and maintainability."/>
+                    <TranslatedText text="I am a results-driven IT professional specializing in software engineering, system architecture, and AI automation. I focus on securely connecting LLMs to data and automating workflows with n8n and Supabase, leveraging modern AI tools to build high-performance, secure solutions."/>
                 </p>
             </div>
         </section>
