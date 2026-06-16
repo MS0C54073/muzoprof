@@ -4,6 +4,7 @@
  */
 
 import { ai } from '@/ai/ai-instance';
+import { googleAI } from '@genkit-ai/google-genai';
 import {
   CoverLetterInputSchema,
   CoverLetterOutputSchema,
@@ -11,20 +12,9 @@ import {
   type CoverLetterOutput,
 } from './generate-cover-letter.types';
 
-/**
- * A server action that generates a specialist-positioned cover letter.
- */
-export async function generateCoverLetter(
-  input: CoverLetterInput
-): Promise<CoverLetterOutput> {
-  if (!process.env.GOOGLE_GENAI_API_KEY) {
-    throw new Error('The GOOGLE_GENAI_API_KEY environment variable is not set.');
-  }
-  return await coverLetterFlow(input);
-}
-
 const prompt = ai.definePrompt({
   name: 'coverLetterPrompt',
+  model: googleAI.model('gemini-flash-latest'),
   input: { schema: CoverLetterInputSchema },
   output: { schema: CoverLetterOutputSchema },
   prompt: `You are an expert career consultant and professional writer. Your task is to write a highly persuasive, specialist-positioned cover letter for {{userProfile.name}}.
@@ -55,7 +45,7 @@ INSTRUCTIONS:
 7. Return the result as a JSON object with 'coverLetter' (markdown) and 'reasoning' (alignment explanation).`,
 });
 
-const coverLetterFlow = ai.defineFlow(
+const generateCoverLetterFlow = ai.defineFlow(
   {
     name: 'generateCoverLetterFlow',
     inputSchema: CoverLetterInputSchema,
@@ -69,3 +59,15 @@ const coverLetterFlow = ai.defineFlow(
     return output;
   }
 );
+
+/**
+ * A server action that generates a specialist-positioned cover letter.
+ */
+export async function generateCoverLetter(
+  input: CoverLetterInput
+): Promise<CoverLetterOutput> {
+  if (!process.env.GOOGLE_GENAI_API_KEY) {
+    throw new Error('The GOOGLE_GENAI_API_KEY environment variable is not set.');
+  }
+  return await generateCoverLetterFlow(input);
+}
