@@ -21,7 +21,7 @@ import { Badge } from '@/components/ui/badge';
 const MY_PROFILE = {
     name: "Musonda Salimu",
     title: "IT Professional | Software Developer | AI Specialist",
-    summary: "I'm a tech enthusiast exploring system architecture, Kubernetes, and AI. I enjoy experimenting with LLM integrations and automation using n8n and Supabase, constantly learning and looking for practical ways to build better software solutions.",
+    summary: "I'm a tech explorer delving into system architecture, Kubernetes, and AI. I enjoy experimenting with LLM integrations and automation using n8n and Supabase, constantly learning and looking for practical ways to build better software solutions.",
     skills: ["Laravel", ".NET", "Javascript", "TypeScript", "React", "Next.js", "AI & Automation", "Kubernetes", "CI/CD", "PostgreSQL", "Supabase", "Python", "N8N", "System Admin"],
     experience: [
         {

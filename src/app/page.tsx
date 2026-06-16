@@ -401,7 +401,7 @@ export default function Home() {
         linkedin: "linkedin.com/in/musonda-salimu",
         github: "github.com/MS0C54073",
         portfolio: "tinyurl.com/muzoslim",
-        summary: "I'm a tech enthusiast exploring system architecture, Kubernetes, and AI. I enjoy experimenting with LLM integrations and automation using n8n and Supabase, constantly learning and looking for practical ways to build better software solutions.",
+        summary: "I'm a tech explorer delving into system architecture, Kubernetes, and AI. I enjoy experimenting with LLM integrations and automation using n8n and Supabase, constantly learning and looking for practical ways to build better software solutions.",
         skillCategories: [
             { label: "Languages", value: "Python, JavaScript, TypeScript, C++, C#, SQL" },
             { label: "Frameworks", value: "React, Next.js, Node.js/Express, Django, .NET" },
@@ -476,6 +476,7 @@ export default function Home() {
                 attachmentName,
                 attachmentUrl,
                 timestamp: serverTimestamp(),
+                userId: null,
             };
             await addDoc(collection(db, 'orders'), orderPayload);
 
@@ -802,7 +803,7 @@ export default function Home() {
             <h2 className="text-xl md:text-3xl font-bold text-center mb-4 text-primary tracking-tight"><TranslatedText text="About Me"/></h2>
             <div className="max-w-4xl mx-auto">
                 <p className="text-base md:text-lg text-muted-foreground leading-relaxed text-center">
-                    <TranslatedText text="I'm a tech enthusiast exploring system architecture, Kubernetes, and AI. I enjoy experimenting with LLM integrations and automation using n8n and Supabase, constantly learning and looking for practical ways to build better software solutions."/>
+                    <TranslatedText text="I'm a tech explorer delving into system architecture, Kubernetes, and AI. I enjoy experimenting with LLM integrations and automation using n8n and Supabase, constantly learning and looking for practical ways to build better software solutions."/>
                 </p>
             </div>
         </section>
