@@ -71,7 +71,7 @@
   "Document comprehensive solutions and maintain detailed client records": "Документирование решений и ведение записей клиентов",
   "AI Training Methods Researcher": "Исследователь методов обучения ИИ",
   "Tested and evaluated novel training algorithms for Spiking Neural Networks (SNNs)": "Тестирование новых алгоритмов обучения спайковых нейронных сетей (SNN)",
-  "Conducted experiments analysing performance of various SNN training methodologies": "Проведение экспериментов по анализу эффективности методологий обучения SNN",
+  "Conducted experiments по анализу эффективности методологий обучения SNN": "Проведение экспериментов по анализу эффективности методологий обучения SNN",
   "Managed and preprocessed large-scale datasets for neural network models": "Управление и предварительная обработка наборов данных",
   "System Administrator Intern": "Стажер системного администратора",
   "Maintained, secured, and optimised IT infrastructure and organisational websites": "Обслуживание, защита и оптимизация ИТ-инфраструктуры и сайтов",
@@ -188,7 +188,8 @@
   "RAG (basic)": "RAG (базовый)",
   "Cybersecurity (basic)": "Кибербезопасность (базовая)",
   "Data Analysis (Python & SQL)": "Анализ данных (Python и SQL)",
-  "Tableau (Foundational)": "Tableau (основы)",
+  "Tableau (основы)": "Tableau (основы)",
   "Cursor 2.0": "Cursor 2.0",
-  "Databases (PostgreSQL, Supabase, MongoDB, Firebase)": "Базы данных (PostgreSQL, Supabase, MongoDB, Firebase)"
+  "Databases (PostgreSQL, Supabase, MongoDB, Firebase)": "Базы данных (PostgreSQL, Supabase, MongoDB, Firebase)",
+  "CompTIA Cybersecurity Analyst (CySA+) CS0-003 (Specialization) - Pearson Education": "Аналитик по кибербезопасности CompTIA (CySA+) CS0-003 (Специализация) — Pearson Education"
 }

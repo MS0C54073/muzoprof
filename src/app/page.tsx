@@ -416,6 +416,7 @@ export default function Home() {
         community: communityInvolvement,
         education: educationData,
         certifications: [
+            "CompTIA Cybersecurity Analyst (CySA+) CS0-003 (Specialization) - Pearson Education",
             "AI Agents and Agentic AI in Python: Powered by Generative AI — Vanderbilt University (Specialisation)",
             "Prompt Engineering for ChatGPT — Vanderbilt University",
             "Developing Front-End Apps with React — IBM / Coursera",
