@@ -417,6 +417,7 @@ export default function Home() {
         education: educationData,
         certifications: [
             "CompTIA Cybersecurity Analyst (CySA+) CS0-003 (Specialization) - Pearson Education — https://coursera.org/verify/specialization/BEVC4O7ECJ16",
+            "Enterprise Data Integration, Governance and Architecture (Specialization)",
             "Development of Digital Twins: Machine Learning with Orange Data Mining — Novosibirsk State Technical University",
             "AI Agents and Agentic AI in Python: Powered by Generative AI — Vanderbilt University (Specialisation)",
             "Prompt Engineering for ChatGPT — Vanderbilt University",
