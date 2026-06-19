@@ -147,6 +147,11 @@ const projects = [
     demo: 'https://tinyurl.com/muzoslim',
   },
   {
+    title: 'Salem Tailors — Digital Shop Management System',
+    link: 'https://salemtailors.vercel.app/',
+    demo: 'https://salemtailors.vercel.app/',
+  },
+  {
     title: 'AquaView Water Quality Monitoring System',
     link: 'https://github.com/MS0C54073/AquaAnalys',
   },
@@ -154,10 +159,6 @@ const projects = [
     title: 'Career Connect Zambia (CCZ), personal project.',
     link: 'https://github.com/MS0C54073/CCZ',
     demo: 'https://shorturl.at/jLk8n',
-  },
-  {
-    title: 'Circuit Minds Web',
-    link: 'https://github.com/MS0C54073/CM_Electronics',
   },
   {
     title: 'Asset verification System',
