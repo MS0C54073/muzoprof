@@ -39,7 +39,7 @@ INSTRUCTIONS:
 4. HIGHLIGHT the user's ability to use modern AI tools (Cursor, Gemini, etc.) and manage complex infrastructure (Kubernetes, CI/CD).
 5. STRUCTURE:
    - Strong opening that shows immediate value.
-   - 2-3 body paragraphs focusing on technical alignment and specific achievements.
+   - 2-3 body paragraphs focusing pulling from technical alignment and specific achievements.
    - Professional closing with a clear call to action.
 6. DO NOT use generic placeholders like "[Insert Date]". Start directly with the Salutation.
 7. Return the result as a JSON object with 'coverLetter' (markdown) and 'reasoning' (alignment explanation).`,

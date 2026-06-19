@@ -37,9 +37,7 @@ export function MuzoInTechLogo({ className, ...props }: React.HTMLAttributes<HTM
       )}
       {...props}
     >
-      {/* Subtle glow effect behind the logo */}
       <div className="absolute inset-0 bg-accent/10 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
       <Image
         src="https://lh3.googleusercontent.com/d/18Lfcl0Dlti3A_Tsi1BT6tXmrk7GGQ3Cr"
         alt="MuzoInTech Logo"
@@ -61,7 +59,7 @@ export function CourseraIcon(props: React.SVGProps<SVGSVGElement>) {
       xmlns="http://www.w3.org/2000/svg"
       fill="currentColor"
     >
-      <path d="M18.125 15.688l3.125 3.125c-2.016 1.688-4.547 2.688-7.25 2.688-6.078 0-11-4.922-11-11s4.922-11 11-11c2.703 0 5.234 1 7.25 2.688l-3.125 3.125c-1.141-.938-2.609-1.5-4.125-1.5-3.859 0-7 3.141-7 7s3.141 7 7 7c1.516 0 2.984-.562 4.125-1.5z" />
+      <path d="M11.832 23.364C5.409 23.364.208 18.136.208 11.687.208 5.238 5.409 0 11.832 0c2.766 0 5.308.971 7.284 2.592l-3.414 3.411c-1.096-.757-2.428-1.203-3.87-1.203-3.784 0-6.852 3.076-6.852 6.876 0 3.8 3.068 6.876 6.852 6.876 1.442 0 2.774-.446 3.87-1.203l3.414 3.411c-1.976 1.622-4.518 2.592-7.284 2.592Z"/>
     </svg>
   );
 }
