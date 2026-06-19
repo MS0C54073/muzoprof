@@ -148,7 +148,7 @@ const projects = [
   },
   {
     title: 'Salem Tailors — Digital Shop Management System',
-    link: 'https://salemtailors.vercel.app/',
+    link: 'https://github.com/MS0C54073/salemtailors',
     demo: 'https://salemtailors.vercel.app/',
   },
   {
@@ -1173,7 +1173,7 @@ export default function Home() {
           )}
           <div className="max-w-3xl mx-auto mt-8 text-center">
               <Button asChild variant="outline" size="md" className="rounded-full shadow-sm hover:shadow-md transition-all border-2">
-                  <a href="https://drive.google.com/drive/folders/1YuzeLBdj9-vTvZcJsEfyTUdH9j_ZqlIV?usp=sharing" target="_blank" rel="noopener noreferrer">
+                  <a href="https://drive.google.com/drive/folders/1YuzeLBdH9-vTvZcJsEfyTUdH9j_ZqlIV?usp=sharing" target="_blank" rel="noopener noreferrer">
                       <ExternalLink className="mr-2 h-4 w-4" />
                       <TranslatedText text="Education File and CV" />
                   </a>
