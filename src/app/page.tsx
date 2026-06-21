@@ -117,6 +117,11 @@ const projects = [
     category: 'AI/ML'
   },
   {
+    title: 'Salem Tailors — Digital Shop Management System',
+    link: 'https://github.com/MS0C54073/salemtailors',
+    demo: 'https://salemtailors.vercel.app/',
+  },
+  {
     title: 'Machine Learning Disease Predictor',
     link: 'https://github.com/MS0C54073/MLDiseasepredictor',
     category: 'AI/ML'
@@ -145,11 +150,6 @@ const projects = [
     title: 'Personal/Portfolio Website',
     link: 'https://github.com/MS0C54073/muzoprof',
     demo: 'https://tinyurl.com/muzoslim',
-  },
-  {
-    title: 'Salem Tailors — Digital Shop Management System',
-    link: 'https://github.com/MS0C54073/salemtailors',
-    demo: 'https://salemtailors.vercel.app/',
   },
   {
     title: 'AquaView Water Quality Monitoring System',
@@ -736,7 +736,7 @@ export default function Home() {
       <div className="container mx-auto py-8 md:py-12 px-4 md:px-8 lg:px-12">
         {/* Hero Section */}
         <section id="home" className="py-6 md:py-10 text-center flex flex-col items-center">
-          <div className="relative w-32 h-32 md:w-40 md:h-40 mb-4 group">
+          <div className="relative w-40 h-40 md:w-56 md:h-56 mb-6 group">
               <Image
                 src="https://drive.google.com/uc?id=18haKNolQwC6XQxH3weaKMkvFEV_rBYc6"
                 alt="Musonda Salimu Profile"
