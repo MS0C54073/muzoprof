@@ -122,6 +122,11 @@ const projects = [
     demo: 'https://salemtailors.vercel.app/',
   },
   {
+    title: '🐔 Chicken Dodger',
+    link: 'https://github.com/MS0C54073/Chicken_Dodger',
+    demo: 'https://chickendodger.netlify.app/',
+  },
+  {
     title: 'Machine Learning Disease Predictor',
     link: 'https://github.com/MS0C54073/MLDiseasepredictor',
     category: 'AI/ML'
