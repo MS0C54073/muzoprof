@@ -417,6 +417,8 @@ export default function Home() {
         community: communityInvolvement,
         education: educationData,
         certifications: [
+            "ZRA Tax Compliance & Smart Invoicing Certifications — https://online.atingi.org/admin/tool/certificate/index.php?code=6893547292MS",
+            "Zambia Revenue Authority: Smart Invoice & Indirect Taxes — https://online.atingi.org/admin/tool/certificate/index.php?code=1233986026MS",
             "CompTIA Cybersecurity Analyst (CySA+) CS0-003 (Specialization) - Pearson Education — https://coursera.org/verify/specialization/BEVC4O7ECJ16",
             "Enterprise Data Integration, Governance and Architecture (Specialization)",
             "Development of Digital Twins: Machine Learning with Orange Data Mining — Novosibirsk State Technical University",
@@ -736,7 +738,7 @@ export default function Home() {
       <div className="container mx-auto py-8 md:py-12 px-4 md:px-8 lg:px-12">
         {/* Hero Section */}
         <section id="home" className="py-6 md:py-10 text-center flex flex-col items-center">
-          <div className="relative w-64 h-64 md:w-80 md:h-80 mb-8 group">
+          <div className="relative w-72 h-72 md:w-[26rem] md:h-[26rem] mb-8 group">
               <Image
                 src="https://drive.google.com/uc?id=18haKNolQwC6XQxH3weaKMkvFEV_rBYc6"
                 alt="Musonda Salimu Profile"
