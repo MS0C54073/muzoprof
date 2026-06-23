@@ -10,7 +10,7 @@ import {
     Github, Globe, GraduationCap, Loader2, Network, Phone, Server, Shield, 
     Smartphone, Terminal, UserCog, ChevronDown, Calculator, Gamepad, Film, 
     Edit, BookOpen, HeartHandshake, Zap, FileText, Mail, Stars, Search, 
-    HardDrive, BarChart3, MousePointer2, Flame, Sparkles
+    HardDrive, BarChart3, MousePointer2, Flame, Sparkles, Trophy, Star
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -76,6 +76,7 @@ interface CvData {
     experience: CvExperience[];
     community: CvExperience[];
     education: CvEducation[];
+    awards: string[];
     certifications: string[];
     diplomas: string[];
     references: CvReference[];
@@ -414,6 +415,9 @@ export default function Home() {
         experience: professionalExperiences,
         community: communityInvolvement,
         education: educationData,
+        awards: [
+            "WINNER of 'International Olympiad of the Financial University for Youth (Master's Degree - 2023-2024)'"
+        ],
         certifications: [
             "ZRA Tax Compliance & Smart Invoicing Certifications — https://online.atingi.org/admin/tool/certificate/index.php?code=6893547292MS",
             "ZRA PAYE APPRECIATION COURSE — https://online.atingi.org/admin/tool/certificate/view.php?code=0375281015MS",
@@ -1180,6 +1184,28 @@ export default function Home() {
                   </a>
               </Button>
           </div>
+        </section>
+
+        {/* Awards & Achievements Section */}
+        <section id="awards" className="py-6 md:py-8 border-t px-4 md:px-0">
+            <h2 className="text-xl md:text-3xl font-bold text-center mb-8 flex items-center justify-center gap-3 text-primary tracking-tight">
+                <Trophy className="h-6 w-6 md:h-8 md:w-8 text-primary" />
+                <TranslatedText text="Awards & Achievements" />
+            </h2>
+            <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 px-2">
+                {cvData.awards.map((award, index) => (
+                    <Card key={index} className="bg-card/50 hover:shadow-xl transition-all group border-none shadow-sm rounded-2xl">
+                        <CardHeader className="flex-row gap-4 items-center space-y-0 p-4">
+                            <div className="bg-primary/10 p-3 rounded-2xl group-hover:bg-primary/20 transition-colors shadow-inner">
+                                <Star className="h-6 w-6 text-primary" />
+                            </div>
+                            <div className="space-y-1">
+                                <CardTitle className="text-sm md:text-base text-accent font-black leading-snug tracking-tight"><TranslatedText text={award}/></CardTitle>
+                            </div>
+                        </CardHeader>
+                    </Card>
+                ))}
+            </div>
         </section>
 
         {/* Postgraduate Diplomas Section */}
