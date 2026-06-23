@@ -270,11 +270,10 @@ const professionalExperiences = [
 
 const communityInvolvement = [
     {
-        title: "City Representative & Student Welfare Volunteer",
+        title: "Student Welfare Volunteer",
         company: "Zambian Student Community, Russia",
         duration: "2017 – 2025",
         details: [
-            "Served as city representative for Zambian scholarship students studying across Russia",
             "Assisted newly arrived scholarship students with orientation, settlement, and integration",
             "Coordinated and maintained records of outgoing students, ensuring smooth transitions",
             "Provided ongoing pastoral support and guidance to the wider student community"
