@@ -424,6 +424,7 @@ export default function Home() {
         certifications: [
             "ZRA Tax Compliance & Smart Invoicing Certifications — https://online.atingi.org/admin/tool/certificate/index.php?code=6893547292MS",
             "ZRA PAYE APPRECIATION COURSE — https://online.atingi.org/admin/tool/certificate/view.php?code=0375281015MS",
+            "ZRA Customs Appreciation Course — https://online.atingi.org/pluginfile.php/1/tool_certificate/issues/1782245945/6699500449MS.pdf",
             "Zambia Revenue Authority: Smart Invoice & Indirect Taxes — https://online.atingi.org/admin/tool/certificate/index.php?code=1233986026MS",
             "CompTIA Cybersecurity Analyst (CySA+) CS0-003 (Specialization) - Pearson Education — https://coursera.org/verify/specialization/BEVC4O7ECJ16",
             "Enterprise Data Integration, Governance and Architecture (Specialization)",
