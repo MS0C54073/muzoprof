@@ -1,6 +1,6 @@
 'use client';
 
-import { Github, Youtube } from 'lucide-react';
+import { Github, Youtube, Linkedin } from 'lucide-react';
 import { WhatsappIcon, TelegramIcon, CourseraIcon, TryHackMeIcon } from '@/components/icons';
 import {
   Tooltip,
@@ -17,6 +17,7 @@ export function SocialIcons({ className }: { className?: string }) {
 
   const socialLinks = [
     { name: 'GitHub', href: 'https://github.com/MS0C54073', icon: <Github className={`${iconClasses} text-white`} />, bgClass: 'bg-[#181717] hover:bg-black' },
+    { name: 'LinkedIn', href: 'https://www.linkedin.com/in/musonda-salimu-a4a0b31b9/', icon: <Linkedin className={`${iconClasses} text-white`} />, bgClass: 'bg-[#0A66C2] hover:bg-[#084B9F]' },
     { name: 'YouTube', href: 'https://www.youtube.com/@musondasalimu2986', icon: <Youtube className={`${iconClasses} text-white`} />, bgClass: 'bg-[#FF0000] hover:bg-[#CC0000]' },
     { name: 'Whatsapp', href: 'https://wa.me/260966882901', icon: <WhatsappIcon className={`${iconClasses} text-white`} />, bgClass: 'bg-[#25D366] hover:bg-[#1EAE54]' },
     { name: 'Telegram', href: 'https://t.me/MuzoSalim', icon: <TelegramIcon className={`${iconClasses} text-white`} />, bgClass: 'bg-[#229ED9] hover:bg-[#1A87B8]' },
