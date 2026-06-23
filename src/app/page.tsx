@@ -293,12 +293,6 @@ const communityInvolvement = [
 
 const educationData = [
     {
-        degree: "Associate of Science, Information Science and Computer Engineering",
-        university: "Novosibirsk State Technical University",
-        duration: "Sep 2022 - Jul 2024",
-        note: "Awaiting Official Translation and Legalization",
-    },
-    {
         degree: "BSc Software and Information Systems Administration",
         university: "Kursk State University, Russia",
         duration: "2017 – 2021",
