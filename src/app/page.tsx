@@ -424,7 +424,7 @@ export default function Home() {
             "ZRA Customs Appreciation Course — https://online.atingi.org/pluginfile.php/1/tool_certificate/issues/1782245945/6699500449MS.pdf",
             "Zambia Revenue Authority: Smart Invoice & Indirect Taxes — https://online.atingi.org/admin/tool/certificate/index.php?code=1233986026MS",
             "CompTIA Cybersecurity Analyst (CySA+) CS0-003 (Specialization) - Pearson Education — https://coursera.org/verify/specialization/BEVC4O7ECJ16",
-            "Enterprise Data Integration, Governance and Architecture (Specialization)",
+            "Enterprise Data Integration, Governance and Architecture (Specialization) — https://coursera.org/verify/specialization/VQG0M4XP7P47",
             "AI Agents and Agentic AI in Python: Powered by Generative AI — Vanderbilt University (Specialisation) — https://www.coursera.org/account/accomplishments/specialization/K42YL24QMRT3",
             "Prompt Engineering for ChatGPT — Vanderbilt University — https://www.coursera.org/account/accomplishments/certificate/G2PJN56CJCLF",
             "Developing Front-End Apps with React — IBM / Coursera — https://www.coursera.org/account/accomplishments/verify/IN3O7BHB70JS",
