@@ -133,11 +133,13 @@ const projects = [
     title: 'Salem Tailors — Digital Shop Management System',
     link: 'https://github.com/MS0C54073/salemtailors',
     demo: 'https://salemtailors.vercel.app/',
+    description: 'A web-based platform that centralizes customer records, measurements, order tracking, appointments, and financials for tailoring businesses — optimized for mobile and low-connectivity environments. Built as a personal project for my parents, it has grown into a scalable solution with plans for inventory management, analytics, and online payments.',
   },
   {
     title: '🐔 Chicken Dodger',
     link: 'https://github.com/MS0C54073/Chicken_Dodger',
     demo: 'https://chickendodger.netlify.app/',
+    description: 'An emoji-powered arcade dodger game built with Next.js 15 + TypeScript + Supabase. Dodge falling chickens, collect power-ups, climb levels, and compete on a live global leaderboard — playable on both desktop and mobile.',
   },
   {
     title: 'Machine Learning Disease Predictor',
