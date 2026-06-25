@@ -1017,7 +1017,7 @@ export default function Home() {
                             <Button asChild variant="default" size="sm" className="flex-grow shadow-md">
                                 <a href={(project as any).demo} target="_blank" rel="noopener noreferrer">
                                     <ExternalLink className="mr-2 h-4 w-4" />
-                                    <TranslatedText text="Live" />
+                                    <TranslatedText text="Demo" />
                                 </a>
                             </Button>
                         </div>
