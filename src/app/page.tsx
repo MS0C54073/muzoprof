@@ -126,7 +126,7 @@ const projects = [
   {
     title: 'ZamRate — The People\'s Pulse',
     link: 'https://github.com/MS0C54073/zamrate',
-    demo: 'https://zamrate.lovable.app',
+    demo: 'https://zamrate.vercel.app/'
     description: 'A citizen-driven, privacy-first review platform for Zambian companies and public services. Real reviews. Real experiences. Real impact.',
   },
   {
