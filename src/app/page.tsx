@@ -120,13 +120,13 @@ const projects = [
   {
     title: 'ZamFund — Zambia Fund Hub',
     link: 'https://github.com/MS0C54073/zamfundhub',
-    demo: 'https://zamfund.vercel.app/'
+    demo: 'https://zamfund.vercel.app/',
     description: 'A Zambian-first investment marketplace connecting local startups and SMEs with retail and diaspora investors. Founders raise capital through equity, revenue-share, loan, or crowdfunding campaigns, while investors browse verified opportunities, fund campaigns from an in-app wallet, and track returns.',
   },
   {
     title: 'ZamRate — The People\'s Pulse',
     link: 'https://github.com/MS0C54073/zamrate',
-    demo: 'https://zamrate.vercel.app/'
+    demo: 'https://zamrate.vercel.app/',
     description: 'A citizen-driven, privacy-first review platform for Zambian companies and public services. Real reviews. Real experiences. Real impact.',
   },
   {
