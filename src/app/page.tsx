@@ -120,7 +120,7 @@ const projects = [
   {
     title: 'ZamFund — Zambia Fund Hub',
     link: 'https://github.com/MS0C54073/zamfundhub',
-    demo: 'https://zamfundhub.lovable.app/',
+    demo: 'https://zamfund.vercel.app/'
     description: 'A Zambian-first investment marketplace connecting local startups and SMEs with retail and diaspora investors. Founders raise capital through equity, revenue-share, loan, or crowdfunding campaigns, while investors browse verified opportunities, fund campaigns from an in-app wallet, and track returns.',
   },
   {
