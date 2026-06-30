@@ -242,6 +242,19 @@ const professionalExperiences = [
         ]
     },
     {
+        title: "IT Support / Junior Programmer",
+        company: "Webstor (Bitrix24 Gold Partner), Novosibirsk, Russia",
+        duration: "2022 – 2024",
+        details: [
+            "Supported implementation and integration projects for Bitrix24 corporate portals and client systems",
+            "Assisted with onboarding, configuration, testing and troubleshooting for client deployments",
+            "Contributed to development and support of Bitrix24 modules and applications for clients",
+            "Provided technical support for integration-related issues, escalating complex cases as needed",
+            "Documented workflows, configurations and support actions for ongoing client projects",
+            "Gained exposure to CRM/ERP implementation, field-staff management tools and 1C integration projects"
+        ]
+    },
+    {
         title: "AI Training Methods Researcher",
         company: "Novosibirsk State Technical University",
         duration: "2022 – 2024",
