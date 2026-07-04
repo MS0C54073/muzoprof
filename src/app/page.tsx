@@ -323,7 +323,7 @@ const educationData = [
     {
         degree: "🇺🇸 EducationUSA Scholar",
         university: "U.S. Embassy Lusaka / EducationUSA Zambia",
-        duration: "2024",
+        duration: "2026",
     },
     {
         degree: "BSc Software and Information Systems Administration",
@@ -433,7 +433,7 @@ export default function Home() {
         linkedin: "linkedin.com/in/musonda-salimu",
         github: "github.com/MS0C54073",
         portfolio: "tinyurl.com/muzoslim",
-        summary: "I'm a tech explorer and 🇺🇸 EducationUSA Scholar delving into system architecture, Kubernetes, and AI. I enjoy experimenting with LLM integrations and automation using n8n and Supabase, constantly learning and looking for practical ways to build better software solutions.",
+        summary: "AI-enabled Software Engineer (TypeScript Focus) 💻 | CompTIA Cybersecurity Analyst (CySA+) Certified | 🇺🇸 EducationUSA Scholar | Winner of the International Olympiad of the Financial University for Youth (Master's Degree, 2023–2024). Passionate about AI, cybersecurity, and scalable software systems. Committed to community service and empowering young people through technology, with a vision of building a better Zambia and Africa.",
         skillCategories: [
             { label: "Languages", value: "Python, JavaScript, TypeScript, C++, C#, SQL" },
             { label: "Frameworks", value: "React, Next.js, Node.js/Express, Django, .NET" },
@@ -466,7 +466,8 @@ export default function Home() {
             "IT Fundamentals for Cybersecurity — IBM (Specialisation) — https://www.coursera.org/account/accomplishments/specialization/certificate/BDSXYEGVZUWK",
             "Introduction to Cybersecurity — Smart Zambia Institute / Cisco",
             "C++ (Basic) Certificate — https://www.hackerrank.com/certificates/dea4f08fe541",
-            "Python (Basic) Certificate — https://www.hackerrank.com/certificates/6e56080d33f3"
+            "Python (Basic) Certificate — https://www.hackerrank.com/certificates/6e56080d33f3",
+            "Basic Electronics and Arduino Programming — TME EDUCATION"
         ],
         diplomas: [
             "Management in the Digital Economy — Novosibirsk State Technical University",
@@ -844,7 +845,7 @@ export default function Home() {
             <h2 className="text-xl md:text-3xl font-bold text-center mb-4 text-primary tracking-tight"><TranslatedText text="About Me"/></h2>
             <div className="max-w-4xl mx-auto">
                 <p className="text-base md:text-lg text-muted-foreground leading-relaxed text-center">
-                    <TranslatedText text="I'm a tech explorer and 🇺🇸 EducationUSA Scholar delving into system architecture, Kubernetes, and AI. I enjoy experimenting with LLM integrations and automation using n8n and Supabase, constantly learning and looking for practical ways to build better software solutions."/>
+                    <TranslatedText text="💻 AI-enabled Software Engineer (TypeScript) | 🛡️ CompTIA CySA+ Certified | 🇺🇸 EducationUSA Scholar | 🏆 Winner, International Olympiad of the Financial University (2023–2024). Passionate about AI, cybersecurity, and scalable software, while volunteering to empower communities and help build a better Zambia and Africa. 🌍🤝"/>
                 </p>
             </div>
         </section>
