@@ -20,8 +20,8 @@ import { Badge } from '@/components/ui/badge';
 // Consolidated profile summary synchronized with the main portfolio
 const MY_PROFILE = {
     name: "Musonda Salimu",
-    title: "IT Professional | Software Developer | AI Specialist",
-    summary: "I'm a tech explorer delving into system architecture, Kubernetes, and AI. I enjoy experimenting with LLM integrations and automation using n8n and Supabase, constantly learning and looking for practical ways to build better software solutions.",
+    title: "AI-enabled Software Engineer (TypeScript) | CompTIA CySA+ Certified | EducationUSA Scholar",
+    summary: "AI-enabled Software Engineer (TypeScript) | CompTIA CySA+ Certified | EducationUSA Scholar | Winner of the International Olympiad of the Financial University for Youth (Master's Degree, 2023–2024). Passionate about AI, cybersecurity, cloud technologies, and software engineering. Dedicated to community service and empowering young people through ICT education.",
     skills: ["Laravel", ".NET", "Javascript", "TypeScript", "React", "Next.js", "AI & Automation", "Kubernetes", "CI/CD", "PostgreSQL", "Supabase", "Python", "N8N", "System Admin"],
     experience: [
         {
