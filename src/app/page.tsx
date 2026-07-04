@@ -433,7 +433,7 @@ export default function Home() {
         linkedin: "linkedin.com/in/musonda-salimu",
         github: "github.com/MS0C54073",
         portfolio: "tinyurl.com/muzoslim",
-        summary: "AI-enabled Software Engineer (TypeScript Focus) 💻 | CompTIA Cybersecurity Analyst (CySA+) Certified | 🇺🇸 EducationUSA Scholar | Winner of the International Olympiad of the Financial University for Youth (Master's Degree, 2023–2024). Passionate about AI, cybersecurity, and scalable software systems. Committed to community service and empowering young people through technology, with a vision of building a better Zambia and Africa.",
+        summary: "💻 AI-enabled Software Engineer (TypeScript) | 🛡️ CompTIA CySA+ Certified | 👨‍🏫 Tutor & Educator | 🇺🇸 EducationUSA Scholar | 🏆 Winner of the International Olympiad of the Financial University for Youth (Master's Degree, 2023–2024). Passionate about AI, cybersecurity, cloud technologies, and software engineering. Dedicated to community service and empowering young people through ICT education.",
         skillCategories: [
             { label: "Languages", value: "Python, JavaScript, TypeScript, C++, C#, SQL" },
             { label: "Frameworks", value: "React, Next.js, Node.js/Express, Django, .NET" },
@@ -843,9 +843,12 @@ export default function Home() {
         {/* About Section */}
         <section id="about" className="py-6 md:py-8 border-t px-4 md:px-0">
             <h2 className="text-xl md:text-3xl font-bold text-center mb-4 text-primary tracking-tight"><TranslatedText text="About Me"/></h2>
-            <div className="max-w-4xl mx-auto">
-                <p className="text-base md:text-lg text-muted-foreground leading-relaxed text-center">
-                    <TranslatedText text="💻 AI-enabled Software Engineer (TypeScript) | 🛡️ CompTIA CySA+ Certified | 🇺🇸 EducationUSA Scholar | 🏆 Winner, International Olympiad of the Financial University (2023–2024). Passionate about AI, cybersecurity, and scalable software, while volunteering to empower communities and help build a better Zambia and Africa. 🌍🤝"/>
+            <div className="max-w-4xl mx-auto space-y-3 text-center">
+                <p className="text-base md:text-lg font-medium text-foreground leading-relaxed">
+                    <TranslatedText text="💻 AI-enabled Software Engineer (TypeScript) | 🛡️ CompTIA CySA+ Certified | 👨‍🏫 Tutor & Educator | 🇺🇸 EducationUSA Scholar | 🏆 Winner of the International Olympiad of the Financial University for Youth (Master's Degree, 2023–2024)"/>
+                </p>
+                <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
+                    <TranslatedText text="Passionate about AI, cybersecurity, cloud technologies, and software engineering. I enjoy building practical solutions with LLMs, Kubernetes, n8n, and Supabase. Dedicated to community service, volunteering, and empowering young people through ICT education to help build a stronger Zambia and Africa."/>
                 </p>
             </div>
         </section>
@@ -1230,15 +1233,15 @@ export default function Home() {
                 <Trophy className="h-6 w-6 md:h-8 md:w-8 text-primary" />
                 <TranslatedText text="Awards & Achievements" />
             </h2>
-            <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 px-2">
+            <div className="max-w-2xl mx-auto flex flex-col gap-4 px-2">
                 {cvData.awards.map((award, index) => (
                     <Card key={index} className="bg-card/50 hover:shadow-xl transition-all group border-none shadow-sm rounded-2xl">
                         <CardHeader className="flex-row gap-4 items-center space-y-0 p-4">
-                            <div className="bg-primary/10 p-3 rounded-2xl group-hover:bg-primary/20 transition-colors shadow-inner">
+                            <div className="bg-primary/10 p-3 rounded-2xl group-hover:bg-primary/20 transition-colors shadow-inner flex-shrink-0">
                                 <Star className="h-6 w-6 text-primary" />
                             </div>
                             <div className="space-y-1">
-                                <CardTitle className="text-sm md:text-base text-accent font-black leading-snug tracking-tight"><TranslatedText text={award}/></CardTitle>
+                                <CardTitle className="text-sm md:text-base text-accent font-black leading-snug tracking-tight text-center"><TranslatedText text={award}/></CardTitle>
                             </div>
                         </CardHeader>
                     </Card>
