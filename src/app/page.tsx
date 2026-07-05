@@ -321,7 +321,8 @@ const communityInvolvement = [
 
 const educationData = [
     {
-        degree: "🇺🇸 EducationUSA Scholar",
+        degree: "EducationUSA Scholar",
+        emoji: "🇺🇸",
         university: "U.S. Embassy Lusaka / EducationUSA Zambia",
         duration: "2026",
     },
@@ -451,10 +452,10 @@ export default function Home() {
             "WINNER of 'International Olympiad of the Financial University for Youth (Master's Degree - 2023-2024)'"
         ],
         certifications: [
-            "ZRA Tax Compliance & Smart Invoicing Certifications — https://online.atingi.org/admin/tool/certificate/index.php?code=6893547292MS",
-            "ZRA PAYE APPRECIATION COURSE — https://online.atingi.org/admin/tool/certificate/view.php?code=0375281015MS",
             "ZRA Customs Appreciation Course — https://online.atingi.org/pluginfile.php/1/tool_certificate/issues/1782245945/6699500449MS.pdf",
-            "Zambia Revenue Authority: Smart Invoice & Indirect Taxes — https://online.atingi.org/admin/tool/certificate/index.php?code=1233986026MS",
+            "ZRA PAYE Appreciation Course — https://online.atingi.org/pluginfile.php/1/tool_certificate/issues/1782227768/0375281015MS.pdf",
+            "ZRA Smart Invoice Course — https://online.atingi.org/pluginfile.php/1/tool_certificate/issues/1782065027/6893547292MS.pdf",
+            "ZRA Indirect Taxes Course — https://online.atingi.org/pluginfile.php/1/tool_certificate/issues/1782056658/1233986026MS.pdf",
             "CompTIA Cybersecurity Analyst (CySA+) CS0-003 (Specialization) - Pearson Education — https://coursera.org/verify/specialization/BEVC4O7ECJ16",
             "Enterprise Data Integration, Governance and Architecture (Specialization) — https://coursera.org/verify/specialization/VQG0M4XP7P47",
             "AI Agents and Agentic AI in Python: Powered by Generative AI — Vanderbilt University (Specialisation) — https://www.coursera.org/account/accomplishments/specialization/K42YL24QMRT3",
@@ -844,8 +845,16 @@ export default function Home() {
         <section id="about" className="py-6 md:py-8 border-t px-4 md:px-0">
             <h2 className="text-xl md:text-3xl font-bold text-center mb-4 text-primary tracking-tight"><TranslatedText text="About Me"/></h2>
             <div className="max-w-4xl mx-auto space-y-3 text-center">
-                <p className="text-base md:text-lg font-medium text-foreground leading-relaxed">
-                    <TranslatedText text="💻 AI-enabled Software Engineer (TypeScript) | 🛡️ CompTIA CySA+ Certified | 👨‍🏫 Tutor & Educator | 🇺🇸 EducationUSA Scholar | 🏆 Winner of the International Olympiad of the Financial University for Youth (Master's Degree, 2023–2024)"/>
+                <p className="text-base md:text-lg font-medium text-foreground leading-relaxed flex flex-wrap justify-center gap-x-1 gap-y-1">
+                    <span>💻 <TranslatedText text="AI-enabled Software Engineer (TypeScript)"/></span>
+                    <span className="text-muted-foreground/60 mx-1">|</span>
+                    <span>🛡️ <TranslatedText text="CompTIA CySA+ Certified"/></span>
+                    <span className="text-muted-foreground/60 mx-1">|</span>
+                    <span>👨‍🏫 <TranslatedText text="Tutor & Educator"/></span>
+                    <span className="text-muted-foreground/60 mx-1">|</span>
+                    <span>🇺🇸 <TranslatedText text="EducationUSA Scholar"/></span>
+                    <span className="text-muted-foreground/60 mx-1">|</span>
+                    <span>🏆 <TranslatedText text="Winner of the International Olympiad of the Financial University for Youth (Master's Degree, 2023–2024)"/></span>
                 </p>
                 <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
                     <TranslatedText text="Passionate about AI, cybersecurity, cloud technologies, and software engineering. I enjoy building practical solutions with LLMs, Kubernetes, n8n, and Supabase. Dedicated to community service, volunteering, and empowering young people through ICT education to help build a stronger Zambia and Africa."/>
@@ -1198,7 +1207,7 @@ export default function Home() {
                 </div>
                 <div className="space-y-1">
                     <p className="text-[10px] md:text-xs text-primary font-black uppercase tracking-widest bg-primary/10 w-fit px-3 py-1 rounded-full mb-1"><TranslatedText text={edu.duration}/></p>
-                    <h3 className="text-base md:text-lg font-black text-accent leading-tight"><TranslatedText text={edu.degree}/></h3>
+                    <h3 className="text-base md:text-lg font-black text-accent leading-tight">{(edu as any).emoji && <span>{(edu as any).emoji} </span>}<TranslatedText text={edu.degree}/></h3>
                     <p className="font-bold text-foreground text-sm md:text-base"><TranslatedText text={edu.university}/></p>
                     {edu.note && (
                       <p className="text-xs md:text-sm text-muted-foreground italic mt-2 font-medium border-l-4 border-accent/40 pl-4 bg-accent/5 py-1.5 rounded-r-lg">
