@@ -212,33 +212,38 @@ const projects = [
 
 const professionalExperiences = [
     {
-        title: "AI Content Evaluation Specialist",
-        company: "Invisible Technologies & Outlier",
-        duration: "Aug 2024 – Sep 2025",
+        title: "Wealth Management Consultant",
+        company: "Prudential Life Assurance Zambia · Contract",
+        duration: "Jun 2026 – Present",
+        location: "Lusaka, Zambia · Hybrid",
         details: [
-            "Evaluated AI-generated content across code, text, images, and video",
-            "Solved complex coding problems ensuring efficiency and reliability",
-            "Developed test cases and verification methodologies to validate output quality",
-            "Provided actionable feedback to optimise AI content generation processes"
-        ]
+            "Identify clients' financial protection and wealth creation needs and provide tailored financial solutions",
+            "Build and maintain a strong network to generate leads, referrals, and grow a client portfolio",
+            "Conduct financial needs analyses and advise clients on suitable insurance and investment products",
+            "Develop long-term client relationships and serve as the primary point of contact for financial guidance",
+            "Grow client portfolios through relationship management and cross-selling of financial products",
+            "Educate clients on wealth protection, financial planning, and long-term financial security"
+        ],
+        tags: ["Family Wealth Management", "Private Wealth Management"]
     },
     {
         title: "IT Support Volunteer & Technical Assistant",
         company: "Embassy of the Republic of Zambia, Moscow",
-        duration: "May 2025 – Jul 2025",
+        duration: "Jan 2025 – Jul 2025",
         details: [
             "Maintained and managed critical embassy IT infrastructure systems",
             "Provided proactive technical support ensuring seamless digital operations"
         ]
     },
     {
-        title: "IT Support Freelancer",
-        company: "Self-Employed",
-        duration: "2017 – Present",
+        title: "Software Engineer for AI Training Data | AI Content Evaluation Specialist (Project Based)",
+        company: "Invisible Technologies & Outlier",
+        duration: "Aug 2024 – Present · Part-time",
         details: [
-            "Deliver remote and on-site technical assistance to individuals and businesses",
-            "Resolve hardware, software, and network issues across multiple channels",
-            "Document comprehensive solutions and maintain detailed client records"
+            "Evaluated AI-generated content across code, text, images, and video",
+            "Solved complex coding problems ensuring efficiency and reliability",
+            "Developed test cases and verification methodologies to validate output quality",
+            "Provided actionable feedback to optimise AI content generation processes"
         ]
     },
     {
@@ -285,6 +290,16 @@ const professionalExperiences = [
         ]
     },
     {
+        title: "IT Support Freelancer",
+        company: "Self-Employed",
+        duration: "2017 – Present",
+        details: [
+            "Deliver remote and on-site technical assistance to individuals and businesses",
+            "Resolve hardware, software, and network issues across multiple channels",
+            "Document comprehensive solutions and maintain detailed client records"
+        ]
+    },
+    {
         title: "Customer Care Associate",
         company: "Tech Mahindra (Airtel Zambia PLC)",
         duration: "Aug 2015 – Oct 2016",
@@ -292,6 +307,19 @@ const professionalExperiences = [
             "Ensured customer satisfaction through consistent service excellence",
             "Managed customer relationship building and service retention initiatives",
             "Promoted brand value through service delivery aligned to customer needs"
+        ]
+    },
+    {
+        title: "Internet Cafe Operator",
+        company: "AbduTech InterNet Cafe",
+        duration: "Dec 2013 – Aug 2015",
+        details: [
+            "Assisted customers with PC software including Microsoft Office, Adobe suites, Windows OS installation, and other essential programs",
+            "Provided services such as encoding, printing, photocopying, typing, and downloading",
+            "Troubleshot computer applications, hardware, and software issues across a range of customer devices",
+            "Maintained computer systems with routine maintenance, virus removal, and system updates to ensure security and reliability",
+            "Assisted customers with email setup, online applications, account creation, and basic IT guidance",
+            "Delivered excellent customer care and maintained accurate store records and inventories"
         ]
     },
 ];
@@ -1128,6 +1156,12 @@ export default function Home() {
                     </div>
                   </AccordionTrigger>
                   <AccordionContent className="pb-4">
+                    {(exp as any).location && (
+                      <p className="text-[10px] md:text-xs text-muted-foreground/70 italic mb-3 flex items-center gap-1">
+                        <span>📍</span>
+                        {(exp as any).location}
+                      </p>
+                    )}
                     <ul className="space-y-2 pl-4 border-l-2 border-primary/20 ml-1">
                       {exp.details.map((d, i) => (
                           <li key={i} className="text-muted-foreground text-xs md:text-sm flex items-start">
@@ -1136,6 +1170,15 @@ export default function Home() {
                           </li>
                       ))}
                     </ul>
+                    {(exp as any).tags && (exp as any).tags.length > 0 && (
+                      <div className="flex flex-wrap gap-2 mt-4 pl-1">
+                        {(exp as any).tags.map((tag: string, i: number) => (
+                          <span key={i} className="text-[10px] md:text-xs bg-accent/10 text-accent font-semibold px-3 py-1 rounded-full border border-accent/20">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    )}
                   </AccordionContent>
                 </AccordionItem>
               ))}
