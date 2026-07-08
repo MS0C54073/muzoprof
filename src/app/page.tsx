@@ -231,8 +231,13 @@ const professionalExperiences = [
         company: "Embassy of the Republic of Zambia, Moscow",
         duration: "Jan 2025 – Jul 2025",
         details: [
-            "Maintained and managed critical embassy IT infrastructure systems",
-            "Provided proactive technical support ensuring seamless digital operations"
+            "Maintained and supported the embassy's IT infrastructure, ensuring reliable and secure daily operations",
+            "Successfully upgraded legacy Windows 7 systems to Windows 10 and Windows 11, improving system performance, security, and compatibility",
+            "Performed hardware upgrades including RAM installations, driver updates, system optimisation, and disk defragmentation to enhance overall performance",
+            "Installed and configured the latest Microsoft Office, antivirus software, and email accounts for embassy staff",
+            "Advised the mission on modernising its IT infrastructure by recommending the replacement of outdated systems to improve operational efficiency",
+            "Delivered user support and troubleshooting, minimising downtime and ensuring uninterrupted embassy operations",
+            "Promoted cybersecurity awareness by training staff on password security best practices, recognising cyber threats, and implementing regular password update policies"
         ]
     },
     {
