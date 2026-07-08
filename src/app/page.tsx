@@ -393,7 +393,7 @@ const postgraduateDiplomasData = [
         year: "2023",
     },
     {
-        title: "Development of Digital Twins: Machine Learning with Orange Data Mining",
+        title: "Certificate: Development of Digital Twins — Machine Learning with Orange Data Mining",
         institution: "Novosibirsk State Technical University",
         year: "2023",
     },
@@ -507,7 +507,7 @@ export default function Home() {
             "Management in the Digital Economy — Novosibirsk State Technical University",
             "Technological Entrepreneurship and Innovation Management — Novosibirsk State Technical University",
             "Management of High Tech Programmes and Projects — Pskov State University",
-            "Development of Digital Twins: Machine Learning with Orange Data Mining — Novosibirsk State Technical University"
+            "Certificate: Development of Digital Twins — Machine Learning with Orange Data Mining — Novosibirsk State Technical University"
         ],
         references: references
     });
