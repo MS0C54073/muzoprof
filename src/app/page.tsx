@@ -40,6 +40,7 @@ interface CvExperience {
     location?: string;
     duration: string;
     details: string[];
+    tags?: string[];
 }
 
 interface CvEducation {
@@ -446,6 +447,88 @@ const orderSchema = z.object({
 });
 type OrderFormData = z.infer<typeof orderSchema>;
 
+const certificationEntries = [
+    "ZRA Customs Appreciation Course — https://online.atingi.org/pluginfile.php/1/tool_certificate/issues/1782245945/6699500449MS.pdf",
+    "ZRA PAYE Appreciation Course — https://online.atingi.org/pluginfile.php/1/tool_certificate/issues/1782227768/0375281015MS.pdf",
+    "ZRA Smart Invoice Course — https://online.atingi.org/pluginfile.php/1/tool_certificate/issues/1782065027/6893547292MS.pdf",
+    "ZRA Indirect Taxes Course — https://online.atingi.org/pluginfile.php/1/tool_certificate/issues/1782056658/1233986026MS.pdf",
+    "CompTIA Cybersecurity Analyst (CySA+) CS0-003 (Specialization) - Pearson Education — https://coursera.org/verify/specialization/BEVC4O7ECJ16",
+    "Enterprise Data Integration, Governance and Architecture (Specialization) — https://coursera.org/verify/specialization/VQG0M4XP7P47",
+    "AI Agents and Agentic AI in Python: Powered by Generative AI — Vanderbilt University (Specialisation) — https://www.coursera.org/account/accomplishments/specialization/K42YL24QMRT3",
+    "Prompt Engineering for ChatGPT — Vanderbilt University — https://www.coursera.org/account/accomplishments/certificate/G2PJN56CJCLF",
+    "Developing Front-End Apps with React — IBM / Coursera — https://www.coursera.org/account/accomplishments/verify/IN3O7BHB70JS",
+    "Business School's Globalization – Economic Growth and Stability — IE University / Coursera — https://www.coursera.org/account/accomplishments/specialization/Q33ORL130G9S",
+    "Google Cybersecurity Professional Certificate — Google — https://www.coursera.org/account/accomplishments/professional-cert/ZQRFL5JFN79Z",
+    "Key Technologies for Business — IBM (Specialisation) — https://www.coursera.org/account/accomplishments/specialization/ED6HPWDG6QVB",
+    "IT Fundamentals for Cybersecurity — IBM (Specialisation) — https://www.coursera.org/account/accomplishments/specialization/certificate/BDSXYEGVZUWK",
+    "Introduction to Cybersecurity — Smart Zambia Institute / Cisco",
+    "C++ (Basic) Certificate — https://www.hackerrank.com/certificates/dea4f08fe541",
+    "Python (Basic) Certificate — https://www.hackerrank.com/certificates/6e56080d33f3",
+    "Basic Electronics and Arduino Programming — TME EDUCATION",
+];
+
+const buildCvData = (): CvData => ({
+    name: "MUSONDA SALIMU",
+    jobTitle: "AI-enabled Software Engineer (TypeScript) | IT Specialist | Wealth Management Consultant | Tutor",
+    email: "musondasalim@gmail.com",
+    phones: ["+260 966 882 901", "+260 979 287 496", "+260 977 288 260"],
+    location: "Lusaka, Zambia",
+    linkedin: "linkedin.com/in/musonda-salimu",
+    github: "github.com/MS0C54073",
+    portfolio: "tinyurl.com/muzoslim",
+    summary: [
+        "AI-enabled Software Engineer (TypeScript) | CompTIA CySA+ Certified | Tutor & Educator | EducationUSA Scholar | Winner of the International Olympiad of the Financial University for Youth (Master's Degree, 2023–2024).",
+        "Passionate about AI, cybersecurity, cloud technologies, and software engineering. I enjoy building practical solutions with LLMs, Kubernetes, n8n, and Supabase. Dedicated to community service, volunteering, and empowering young people through ICT education to help build a stronger Zambia and Africa.",
+    ].join(" "),
+    skillCategories: [
+        { label: "Languages", value: "Python, JavaScript, TypeScript, C++, C#, SQL" },
+        { label: "Frameworks", value: "React, Next.js, Node.js/Express, Django, .NET" },
+        { label: "Mobile & Web", value: "Flutter, React Native" },
+        { label: "Databases", value: "PostgreSQL (Supabase), MongoDB, Firebase" },
+        { label: "AI & Automation", value: "Genkit, Firebase Studio, Claude Code, n8n, Gemini API, Orange Data Mining, RAG" },
+        { label: "Cloud & DevOps", value: "Docker, Kubernetes, Git, CI/CD, Azure" },
+        { label: "Cybersecurity", value: "CompTIA CySA+, Network Security, SIEM, IDS, Compliance" },
+        { label: "Tools", value: "Cursor 2.0, Tableau, Microsoft 365/Office, Power BI" },
+    ],
+    experience: professionalExperiences.map(({ title, company, duration, details, location, tags }) => ({
+        title,
+        company,
+        duration,
+        details,
+        location,
+        tags,
+    })),
+    community: communityInvolvement,
+    education: educationData.map(({ degree, university, duration }) => ({
+        degree,
+        university,
+        duration,
+    })),
+    awards: [
+        "WINNER of 'International Olympiad of the Financial University for Youth (Master's Degree - 2023-2024)'",
+        "EducationUSA Scholar — U.S. Embassy Lusaka / EducationUSA Zambia (2026)",
+    ],
+    certifications: certificationEntries,
+    diplomas: postgraduateDiplomasData.map(
+        (diploma) => `${diploma.title} — ${diploma.institution} (${diploma.year})`
+    ),
+    references,
+});
+
+const cvData = buildCvData();
+
+const stripPdfText = (text: string) =>
+    text
+        .replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}\u{200D}]/gu, "")
+        .replace(/\s+/g, " ")
+        .trim();
+
+const parseCertificationLine = (cert: string) => {
+    const urlMatch = cert.match(/(?:—\s*|\()(https?:\/\/[^\s)]+)\)?/);
+    const url = urlMatch ? urlMatch[1] : null;
+    const label = cert.split(urlMatch ? urlMatch[0] : "___nonexistent___")[0].replace(/\s*—\s*$/, "").trim();
+    return { label, url };
+};
 
 export default function Home() {
     const [isGenerating, setIsGenerating] = useState(false);
@@ -456,61 +539,6 @@ export default function Home() {
     const [showAllExperience, setShowAllExperience] = useState(false);
     const [openAccordionItems, setOpenAccordionItems] = useState<string[]>([]);
     const [showAllEducation, setShowAllEducation] = useState(false);
-    
-    // --- State for CV Data (Editable) ---
-    const [cvData, setCvData] = useState<CvData>({
-        name: "MUSONDA SALIMU",
-        jobTitle: "IT Support | Software Developer | AI | Tutor",
-        email: "musondasalim@gmail.com",
-        phones: ["+260 966 882 901", "+260 979 287 496", "+260 977 288 260"],
-        location: "Lusaka, Zambia",
-        linkedin: "linkedin.com/in/musonda-salimu",
-        github: "github.com/MS0C54073",
-        portfolio: "tinyurl.com/muzoslim",
-        summary: "💻 AI-enabled Software Engineer (TypeScript) | 🛡️ CompTIA CySA+ Certified | 👨‍🏫 Tutor & Educator | 🇺🇸 EducationUSA Scholar | 🏆 Winner of the International Olympiad of the Financial University for Youth (Master's Degree, 2023–2024). Passionate about AI, cybersecurity, cloud technologies, and software engineering. Dedicated to community service and empowering young people through ICT education.",
-        skillCategories: [
-            { label: "Languages", value: "Python, JavaScript, TypeScript, C++, C#, SQL" },
-            { label: "Frameworks", value: "React, Next.js, Node.js/Express, Django, .NET" },
-            { label: "Mobile & Web", value: "Flutter, React Native" },
-            { label: "Databases", value: "PostgreSQL (Supabase), MongoDB, Firebase" },
-            { label: "AI & Automation", value: "Genkit, Firebase Studio, Claude Code, n8n, Gemini API, Orange Data Mining, RAG" },
-            { label: "Cloud & DevOps", value: "Docker, Kubernetes, Git, CI/CD" },
-            { label: "Cybersecurity", value: "Network Security, SIEM, IDS, Compliance (Basic)" },
-            { label: "Tools", value: "Cursor 2.0, Tableau, Microsoft 365/Office" },
-        ],
-        experience: professionalExperiences,
-        community: communityInvolvement,
-        education: educationData,
-        awards: [
-            "WINNER of 'International Olympiad of the Financial University for Youth (Master's Degree - 2023-2024)'"
-        ],
-        certifications: [
-            "ZRA Customs Appreciation Course — https://online.atingi.org/pluginfile.php/1/tool_certificate/issues/1782245945/6699500449MS.pdf",
-            "ZRA PAYE Appreciation Course — https://online.atingi.org/pluginfile.php/1/tool_certificate/issues/1782227768/0375281015MS.pdf",
-            "ZRA Smart Invoice Course — https://online.atingi.org/pluginfile.php/1/tool_certificate/issues/1782065027/6893547292MS.pdf",
-            "ZRA Indirect Taxes Course — https://online.atingi.org/pluginfile.php/1/tool_certificate/issues/1782056658/1233986026MS.pdf",
-            "CompTIA Cybersecurity Analyst (CySA+) CS0-003 (Specialization) - Pearson Education — https://coursera.org/verify/specialization/BEVC4O7ECJ16",
-            "Enterprise Data Integration, Governance and Architecture (Specialization) — https://coursera.org/verify/specialization/VQG0M4XP7P47",
-            "AI Agents and Agentic AI in Python: Powered by Generative AI — Vanderbilt University (Specialisation) — https://www.coursera.org/account/accomplishments/specialization/K42YL24QMRT3",
-            "Prompt Engineering for ChatGPT — Vanderbilt University — https://www.coursera.org/account/accomplishments/certificate/G2PJN56CJCLF",
-            "Developing Front-End Apps with React — IBM / Coursera — https://www.coursera.org/account/accomplishments/verify/IN3O7BHB70JS",
-            "Business School's Globalization – Economic Growth and Stability — IE University / Coursera — https://www.coursera.org/account/accomplishments/specialization/Q33ORL130G9S",
-            "Google Cybersecurity Professional Certificate — Google — https://www.coursera.org/account/accomplishments/professional-cert/ZQRFL5JFN79Z",
-            "Key Technologies for Business — IBM (Specialisation) — https://www.coursera.org/account/accomplishments/specialization/ED6HPWDG6QVB",
-            "IT Fundamentals for Cybersecurity — IBM (Specialisation) — https://www.coursera.org/account/accomplishments/specialization/certificate/BDSXYEGVZUWK",
-            "Introduction to Cybersecurity — Smart Zambia Institute / Cisco",
-            "C++ (Basic) Certificate — https://www.hackerrank.com/certificates/dea4f08fe541",
-            "Python (Basic) Certificate — https://www.hackerrank.com/certificates/6e56080d33f3",
-            "Basic Electronics and Arduino Programming — TME EDUCATION"
-        ],
-        diplomas: [
-            "Management in the Digital Economy — Novosibirsk State Technical University",
-            "Technological Entrepreneurship and Innovation Management — Novosibirsk State Technical University",
-            "Management of High Tech Programmes and Projects — Pskov State University",
-            "Certificate: Development of Digital Twins — Machine Learning with Orange Data Mining — Novosibirsk State Technical University"
-        ],
-        references: references
-    });
 
     const initialProjectsToShow = 4;
     const initialCertsToShow = 4;
@@ -606,184 +634,188 @@ export default function Home() {
 
         try {
             const doc = new jsPDF({ unit: 'pt', format: 'a4' });
-            
-            // --- CONSTANTS & METRICS ---
+            const FONT = 'helvetica';
+
             const PAGE_W = doc.internal.pageSize.getWidth();
             const PAGE_H = doc.internal.pageSize.getHeight();
-            const MARGIN = 46; 
+            const MARGIN = 46;
             const CONTENT_W = PAGE_W - (MARGIN * 2);
-            
+            const LINE_H = 11.5;
+
             const COLORS = {
-                ACCENT: [31, 78, 121] as [number, number, number], // #1F4E79 (Deep Navy)
-                LIGHT: [46, 117, 182] as [number, number, number],  // #2E75B6 (Medium Blue)
+                ACCENT: [31, 78, 121] as [number, number, number],
+                LIGHT: [46, 117, 182] as [number, number, number],
                 GRAY: [85, 85, 85] as [number, number, number],
                 BLACK: [17, 17, 17] as [number, number, number],
-                BLUE_LINE: [46, 117, 182] as [number, number, number] // #2E75B6
+                BLUE_LINE: [46, 117, 182] as [number, number, number],
             };
 
             let currentY = MARGIN;
 
+            const ensureSpace = (needed: number) => {
+                if (currentY + needed > PAGE_H - MARGIN) {
+                    doc.addPage();
+                    currentY = MARGIN;
+                }
+            };
+
             const addSectionHeader = (title: string) => {
-                currentY += 22;
-                doc.setFont('helvetica', 'bold');
+                ensureSpace(40);
+                currentY += 18;
+                doc.setFont(FONT, 'bold');
                 doc.setFontSize(11);
                 doc.setTextColor(COLORS.ACCENT[0], COLORS.ACCENT[1], COLORS.ACCENT[2]);
-                doc.text(title.toUpperCase(), MARGIN, currentY);
-                
+                doc.text(stripPdfText(title).toUpperCase(), MARGIN, currentY);
+
                 currentY += 4;
                 doc.setDrawColor(COLORS.BLUE_LINE[0], COLORS.BLUE_LINE[1], COLORS.BLUE_LINE[2]);
                 doc.setLineWidth(1);
                 doc.line(MARGIN, currentY, PAGE_W - MARGIN, currentY);
-                currentY += 16;
+                currentY += 14;
             };
 
-            const addJobTitleLine = (title: string, org: string, dates: string) => {
-                doc.setFont('helvetica', 'bold');
-                doc.setFontSize(10);
-                doc.setTextColor(COLORS.BLACK[0], COLORS.BLACK[1], COLORS.BLACK[2]);
-                doc.text(title, MARGIN, currentY);
-                
-                const titleWidth = doc.getTextWidth(title);
-                doc.setFont('helvetica', 'normal');
-                doc.setFontSize(9.5);
-                doc.setTextColor(COLORS.GRAY[0], COLORS.GRAY[1], COLORS.GRAY[2]);
-                doc.text(`  |  ${org}`, MARGIN + titleWidth + 5, currentY);
-                
-                doc.setFont('helvetica', 'italic');
-                doc.setFontSize(9);
-                doc.text(dates, PAGE_W - MARGIN, currentY, { align: 'right' });
-                currentY += 12;
+            const addWrappedText = (
+                text: string,
+                x: number,
+                maxWidth: number,
+                fontSize: number,
+                style: 'normal' | 'bold' | 'italic' = 'normal',
+                color: [number, number, number] = COLORS.BLACK
+            ) => {
+                const clean = stripPdfText(text);
+                doc.setFont(FONT, style);
+                doc.setFontSize(fontSize);
+                doc.setTextColor(color[0], color[1], color[2]);
+                const lines = doc.splitTextToSize(clean, maxWidth);
+                lines.forEach((line: string) => {
+                    ensureSpace(LINE_H + 2);
+                    doc.text(line, x, currentY);
+                    currentY += LINE_H;
+                });
             };
 
             const addBullet = (text: string) => {
-                doc.setFont('helvetica', 'normal');
+                const clean = stripPdfText(text);
+                doc.setFont(FONT, 'normal');
                 doc.setFontSize(9.5);
                 doc.setTextColor(COLORS.BLACK[0], COLORS.BLACK[1], COLORS.BLACK[2]);
-                
-                const lines = doc.splitTextToSize(text, CONTENT_W - 25);
-                doc.text("•", MARGIN + 8, currentY);
+                const lines = doc.splitTextToSize(clean, CONTENT_W - 25);
+                ensureSpace(lines.length * LINE_H + 4);
+                doc.text('•', MARGIN + 8, currentY);
                 doc.text(lines, MARGIN + 18, currentY);
-                currentY += (lines.length * 9.5 * 1.2) + 2;
+                currentY += lines.length * LINE_H + 2;
             };
 
-            const addPara = (text: string) => {
-                doc.setFont('helvetica', 'normal');
-                doc.setFontSize(9.5);
-                doc.setTextColor(COLORS.BLACK[0], COLORS.BLACK[1], COLORS.BLACK[2]);
-                const lines = doc.splitTextToSize(text, CONTENT_W);
-                doc.text(lines, MARGIN, currentY);
-                currentY += (lines.length * 9.5 * 1.2) + 4;
+            const addJobEntry = (exp: CvExperience) => {
+                ensureSpace(40);
+                addWrappedText(exp.title, MARGIN, CONTENT_W - 110, 10, 'bold', COLORS.BLACK);
+
+                doc.setFont(FONT, 'italic');
+                doc.setFontSize(9);
+                doc.setTextColor(COLORS.LIGHT[0], COLORS.LIGHT[1], COLORS.LIGHT[2]);
+                ensureSpace(LINE_H);
+                doc.text(stripPdfText(exp.duration), PAGE_W - MARGIN, currentY);
+                currentY += LINE_H;
+
+                addWrappedText(exp.company, MARGIN, CONTENT_W, 9.5, 'normal', COLORS.GRAY);
+                if (exp.location) {
+                    addWrappedText(exp.location, MARGIN, CONTENT_W, 9, 'italic', COLORS.GRAY);
+                }
+                exp.details.forEach((detail) => addBullet(detail));
+                if (exp.tags?.length) {
+                    addWrappedText(`Focus: ${exp.tags.join(' · ')}`, MARGIN + 10, CONTENT_W - 10, 9, 'italic', COLORS.GRAY);
+                }
+                currentY += 6;
             };
 
             const addSkillRow = (label: string, value: string) => {
-                doc.setFont('helvetica', 'bold');
+                ensureSpace(LINE_H * 2);
+                doc.setFont(FONT, 'bold');
                 doc.setFontSize(9.5);
                 doc.setTextColor(COLORS.ACCENT[0], COLORS.ACCENT[1], COLORS.ACCENT[2]);
-                doc.text(`${label}:`, MARGIN, currentY);
-                
-                doc.setFont('helvetica', 'normal');
+                doc.text(`${stripPdfText(label)}:`, MARGIN, currentY);
+
+                doc.setFont(FONT, 'normal');
                 doc.setTextColor(COLORS.BLACK[0], COLORS.BLACK[1], COLORS.BLACK[2]);
-                const lines = doc.splitTextToSize(value, CONTENT_W - 100);
+                const lines = doc.splitTextToSize(stripPdfText(value), CONTENT_W - 100);
                 doc.text(lines, MARGIN + 100, currentY);
-                currentY += (lines.length * 9.5 * 1.2) + 2;
+                currentY += lines.length * LINE_H + 2;
             };
 
-            // ─── PAGE 1 ───────────────────────────────────────────────────
-            currentY = MARGIN + 15;
-            
-            // Header
-            doc.setFont('helvetica', 'bold');
-            doc.setFontSize(23); 
-            doc.setTextColor(COLORS.ACCENT[0], COLORS.ACCENT[1], COLORS.ACCENT[2]);
-            doc.text(cvData.name.toUpperCase(), PAGE_W/2, currentY, { align: 'center' });
-            currentY += 18;
-
-            doc.setFont('helvetica', 'normal');
-            doc.setFontSize(10.5);
-            doc.setTextColor(COLORS.LIGHT[0], COLORS.LIGHT[1], COLORS.LIGHT[2]);
-            doc.text(cvData.jobTitle, PAGE_W/2, currentY, { align: 'center' });
-            currentY += 15;
-
-            doc.setFontSize(9);
-            doc.setTextColor(COLORS.GRAY[0], COLORS.GRAY[1], COLORS.GRAY[2]);
-            const contact1 = `${cvData.email}   |   ${cvData.phones.join("  /  ")}`;
-            doc.text(contact1, PAGE_W/2, currentY, { align: 'center' });
-            currentY += 12;
-
-            const contact2 = `${cvData.github}   |   ${cvData.portfolio}   |   ${cvData.linkedin}`;
-            doc.text(contact2, PAGE_W/2, currentY, { align: 'center' });
-            currentY += 15;
-
-            // Summary
-            addSectionHeader("Professional Summary");
-            addPara(cvData.summary);
-
-            // Competencies
-            addSectionHeader("Core Competencies");
-            cvData.skillCategories.forEach(cat => addSkillRow(cat.label, cat.value));
-
-            // Experience
-            addSectionHeader("Professional Experience");
-            cvData.experience.forEach(exp => {
-                addJobTitleLine(exp.title, exp.company, exp.duration);
-                exp.details.forEach(d => addBullet(d));
-                currentY += 4;
-            });
-
-            // ─── PAGE 2 ───────────────────────────────────────────────────
-            doc.addPage();
-            currentY = MARGIN;
-
-            addSectionHeader("Community Involvement & Volunteering");
-            cvData.community.forEach(vol => {
-                addJobTitleLine(vol.title, vol.company, vol.duration);
-                vol.details.forEach(d => addBullet(d));
-                currentY += 4;
-            });
-
-            addSectionHeader("Education");
-            cvData.education.forEach(edu => {
-                addJobTitleLine(edu.degree, edu.university, edu.duration);
-                if (edu.note) {
-                    doc.setFont('helvetica', 'italic');
-                    doc.setFontSize(8.5);
-                    doc.setTextColor(COLORS.GRAY[0], COLORS.GRAY[1], COLORS.GRAY[2]);
-                    doc.text(edu.note, MARGIN + 10, currentY);
-                    currentY += 10;
+            const addCertification = (cert: string) => {
+                const { label, url } = parseCertificationLine(cert);
+                addBullet(label);
+                if (url) {
+                    addWrappedText(url, MARGIN + 18, CONTENT_W - 18, 8.5, 'normal', COLORS.GRAY);
                 }
-                currentY += 4;
+            };
+
+            currentY = MARGIN + 10;
+            doc.setFont(FONT, 'bold');
+            doc.setFontSize(22);
+            doc.setTextColor(COLORS.ACCENT[0], COLORS.ACCENT[1], COLORS.ACCENT[2]);
+            doc.text(stripPdfText(cvData.name).toUpperCase(), PAGE_W / 2, currentY, { align: 'center' });
+            currentY += 20;
+
+            addWrappedText(cvData.jobTitle, MARGIN, CONTENT_W, 10.5, 'normal', COLORS.LIGHT);
+            currentY += 2;
+            addWrappedText(`${cvData.location}  |  ${cvData.email}`, MARGIN, CONTENT_W, 9, 'normal', COLORS.GRAY);
+            addWrappedText(cvData.phones.join('  /  '), MARGIN, CONTENT_W, 9, 'normal', COLORS.GRAY);
+            addWrappedText(`${cvData.github}  |  ${cvData.portfolio}  |  ${cvData.linkedin}`, MARGIN, CONTENT_W, 9, 'normal', COLORS.GRAY);
+            currentY += 4;
+
+            addSectionHeader('Professional Summary');
+            addWrappedText(cvData.summary, MARGIN, CONTENT_W, 9.5, 'normal', COLORS.BLACK);
+            currentY += 4;
+
+            addSectionHeader('Core Competencies');
+            cvData.skillCategories.forEach((cat) => addSkillRow(cat.label, cat.value));
+
+            addSectionHeader('Professional Experience');
+            cvData.experience.forEach((exp) => addJobEntry(exp));
+
+            addSectionHeader('Community Involvement & Volunteering');
+            cvData.community.forEach((vol) => addJobEntry(vol));
+
+            addSectionHeader('Education');
+            cvData.education.forEach((edu) => {
+                addJobEntry({
+                    title: edu.degree,
+                    company: edu.university,
+                    duration: edu.duration,
+                    details: edu.note ? [edu.note] : [],
+                });
             });
 
-            addSectionHeader("Licences & Certifications");
-            cvData.certifications.forEach(cert => addBullet(cert));
-            
-            currentY += 15;
-            doc.setFont('helvetica', 'bold');
+            addSectionHeader('Awards & Achievements');
+            cvData.awards.forEach((award) => addBullet(award));
+
+            addSectionHeader('Licences & Certifications');
+            cvData.certifications.forEach((cert) => addCertification(cert));
+
+            ensureSpace(30);
+            doc.setFont(FONT, 'bold');
             doc.setFontSize(9.5);
             doc.setTextColor(COLORS.ACCENT[0], COLORS.ACCENT[1], COLORS.ACCENT[2]);
-            doc.text("Postgraduate Diplomas (2023):", MARGIN, currentY);
+            doc.text('Postgraduate Diplomas & Certificates (2023):', MARGIN, currentY);
             currentY += 14;
-            cvData.diplomas.forEach(diploma => addBullet(diploma));
+            cvData.diplomas.forEach((diploma) => addBullet(diploma));
 
-            // ─── PAGE 3 ───────────────────────────────────────────────────
-            doc.addPage();
-            currentY = MARGIN;
-            addSectionHeader("Professional References");
-            cvData.references.forEach(ref => {
-                doc.setFont('helvetica', 'bold');
+            addSectionHeader('Professional References');
+            cvData.references.forEach((ref) => {
+                ensureSpace(36);
+                doc.setFont(FONT, 'bold');
                 doc.setFontSize(9.5);
                 doc.setTextColor(COLORS.BLACK[0], COLORS.BLACK[1], COLORS.BLACK[2]);
-                doc.text(ref.name, MARGIN, currentY);
-                
-                doc.setFont('helvetica', 'normal');
-                doc.setTextColor(COLORS.GRAY[0], COLORS.GRAY[1], COLORS.GRAY[2]);
-                const nameWidth = doc.getTextWidth(ref.name);
-                doc.text(`  —  ${ref.title}, ${ref.company}`, MARGIN + nameWidth + 5, currentY);
-                currentY += 12;
-                
-                const contact = [ref.email, ref.phone].filter(Boolean).join("  |  ");
-                doc.text(contact, MARGIN, currentY);
-                currentY += 20;
+                doc.text(stripPdfText(ref.name), MARGIN, currentY);
+                currentY += LINE_H;
+
+                addWrappedText(`${ref.title}, ${ref.company}`, MARGIN, CONTENT_W, 9.5, 'normal', COLORS.GRAY);
+                const contact = [ref.email, ref.phone].filter(Boolean).join('  |  ');
+                if (contact) {
+                    addWrappedText(contact, MARGIN, CONTENT_W, 9, 'normal', COLORS.GRAY);
+                }
+                currentY += 6;
             });
 
             if (outputType === 'preview') {
