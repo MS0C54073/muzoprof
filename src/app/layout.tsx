@@ -23,7 +23,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Menu, ChevronDown, Sparkles } from 'lucide-react';
+import { Menu, ChevronDown } from 'lucide-react';
 import TranslatedText from './components/translated-text';
 import { FloatingCalculatorButton } from './components/floating-calculator-button';
 import { useState } from 'react';
@@ -36,22 +36,23 @@ const inter = Inter({
   variable: '--font-sans',
 })
 
-const navLinks = [
+const primaryNavLinks = [
+    { href: '/#projects', text: 'Projects' },
+    { href: '/#experience', text: 'Experience' },
+    { href: '/tutor', text: 'Tutor' },
+    { href: '/blog', text: 'Blog' },
+    { href: '/products', text: 'Products' },
+    { href: '/#contact', text: 'Contact' },
+];
+
+const moreNavLinks = [
     { href: '/', text: 'Home' },
     { href: '/#about', text: 'About' },
     { href: '/#skills', text: 'Skills' },
-    { href: '/#projects', text: 'Projects' },
-    { href: '/#experience', text: 'Experience' },
-    { href: '/#education', text: 'Education' },
-    { href: '/tutor', text: 'Tutor' },
     { href: '/#awards', text: 'Awards' },
     { href: '/#certifications', text: 'Certifications' },
-    { href: '/it-service-calculator', text: 'IT Service Calculator' },
-    { href: '/career-portal', text: 'AI Career Portal' },
-    { href: '/cover-letter-generator', text: 'AI Cover Letter' },
-    { href: '/#references', text: 'References' },
-    { href: '/#contact', text: 'Contact' },
-    { href: '/blog', text: 'Blog' },
+    { href: '/#education', text: 'Education' },
+    { href: '/projects', text: 'All Projects' },
 ];
 
 export default function RootLayout({
@@ -66,7 +67,7 @@ export default function RootLayout({
       <head>
           <script defer src="https://app.fastbots.ai/embed.js" data-bot-id="cmh8c3c0903nhqq1lewbb5fyu"></script>
       </head>
-      <body className={`${inter.variable} antialiased selection:bg-primary/20`}>
+      <body className={`${inter.variable} font-sans antialiased selection:bg-primary/20`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
@@ -77,36 +78,34 @@ export default function RootLayout({
               <TranslationProvider>
                 <DynamicBackground />
                 
-                <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/40 bg-background/70 backdrop-blur-md">
-                  <div className="container mx-auto flex h-16 md:h-20 items-center justify-between px-4 md:px-8">
+                <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/40 bg-background/90">
+                  <div className="container mx-auto flex h-14 md:h-16 items-center justify-between px-4 md:px-8">
                       {/* Logo Section */}
                       <Link href="/" className="flex h-12 w-14 md:w-16 flex-shrink-0 items-center justify-center transition-all duration-300 hover:scale-105 active:scale-95" aria-label="Go to homepage">
                           <MuzoInTechLogo className="h-full w-full drop-shadow-md" />
                       </Link>
                       
                       {/* Desktop Navigation & Controls */}
-                      <div className="hidden lg:flex items-center gap-6">
-                          <nav className="flex items-center gap-1">
-                            <Button variant="ghost" asChild className="font-bold text-sm hover:text-primary">
-                              <Link href="/tutor"><TranslatedText text="Tutor" /></Link>
-                            </Button>
-                            <Button variant="ghost" asChild className="font-bold text-sm hover:text-primary">
-                              <Link href="/blog"><TranslatedText text="Blog" /></Link>
-                            </Button>
-                            <Button variant="ghost" asChild className="font-bold text-sm hover:text-primary">
-                              <Link href="/cover-letter-generator"><Sparkles className="mr-2 h-4 w-4 text-accent" /><TranslatedText text="AI Cover Letter" /></Link>
-                            </Button>
-                            
+                      <div className="hidden lg:flex items-center gap-4">
+                          <nav className="flex items-center gap-0.5">
+                            {primaryNavLinks.map((link) => (
+                              <Button key={link.href} variant="ghost" asChild className="text-sm font-medium">
+                                <Link href={link.href}>
+                                  <TranslatedText text={link.text} />
+                                </Link>
+                              </Button>
+                            ))}
+
                             <DropdownMenu onOpenChange={setNavDropdownOpen}>
                                 <DropdownMenuTrigger asChild>
-                                    <Button variant="ghost" className="font-bold text-sm">
+                                    <Button variant="ghost" className="text-sm font-medium">
                                         <TranslatedText text="More" />
-                                        <ChevronDown className={cn("ml-1.5 h-4 w-4 transition-transform duration-300", isNavDropdownOpen && "rotate-180")} />
+                                        <ChevronDown className={cn("ml-1 h-4 w-4 transition-transform duration-200", isNavDropdownOpen && "rotate-180")} />
                                     </Button>
                                 </DropdownMenuTrigger>
-                                <DropdownMenuContent align="end" className="w-56 mt-2 rounded-xl shadow-xl border-border/40">
-                                    {navLinks.filter(l => !['Home', 'Tutor', 'Blog', 'AI Cover Letter'].includes(l.text)).map(link => (
-                                        <DropdownMenuItem key={link.href} asChild className="py-2.5 cursor-pointer font-medium">
+                                <DropdownMenuContent align="end" className="w-52 mt-2">
+                                    {moreNavLinks.map(link => (
+                                        <DropdownMenuItem key={link.href} asChild className="cursor-pointer">
                                             <Link href={link.href}>
                                                 <TranslatedText text={link.text} />
                                             </Link>
@@ -144,11 +143,11 @@ export default function RootLayout({
                                       </SheetTitle>
                                   </SheetHeader>
                                   <nav className="flex flex-col gap-1">
-                                      {navLinks.map(link => (
-                                          <SheetClose asChild key={link.href}>
+                                      {[...primaryNavLinks, ...moreNavLinks].map(link => (
+                                          <SheetClose asChild key={`${link.href}-${link.text}`}>
                                               <Link 
                                                 href={link.href} 
-                                                className="flex items-center py-3 px-4 text-lg font-bold text-foreground/80 hover:text-primary hover:bg-primary/5 rounded-xl transition-all"
+                                                className="flex items-center py-3 px-4 text-base font-medium text-foreground/80 hover:text-primary hover:bg-muted rounded-lg transition-colors"
                                               >
                                                   <TranslatedText text={link.text} />
                                               </Link>
@@ -177,7 +176,7 @@ export default function RootLayout({
                 <ViewModeWrapper>
                    <SocialIcons className="social-bar" />
                    <FloatingCalculatorButton />
-                  <main className="pt-16 md:pt-20">
+                  <main className="pt-14 md:pt-16">
                       {children}
                   </main>
                 </ViewModeWrapper>

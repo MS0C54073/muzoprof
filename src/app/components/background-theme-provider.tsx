@@ -20,7 +20,7 @@ export const useBackgroundTheme = () => {
 };
 
 export const BackgroundThemeProvider = ({ children }: { children: ReactNode }) => {
-  const [theme, setTheme] = useState<BackgroundTheme>('circuit');
+  const [theme, setTheme] = useState<BackgroundTheme>('none');
 
   const value = useMemo(() => ({ theme, setTheme }), [theme]);
 
