@@ -54,6 +54,16 @@ export interface SkillCategory {
     skills: string[];
 }
 
+export interface CertificationItem {
+    label: string;
+    url?: string;
+}
+
+export interface CertificationGroup {
+    category: string;
+    items: CertificationItem[];
+}
+
 export interface CvData {
     name: string;
     jobTitle: string;
@@ -237,7 +247,22 @@ export const projects: Project[] = [
     },
 ];
 
-export const featuredProjects = projects.filter((p) => p.featured);
+const FEATURED_PROJECT_ORDER = [
+    'ZamFund — Zambia Fund Hub',
+    "ZamRate — The People's Pulse",
+    'Salem Tailors — Digital Shop Management System',
+    'Personal/Portfolio Website',
+    'Chicken Dodger',
+    'ai-chatBot using AI SDK by Vercel',
+] as const;
+
+export const featuredProjects = FEATURED_PROJECT_ORDER.map((title) => {
+    const project = projects.find((entry) => entry.title === title);
+    if (!project) {
+        throw new Error(`Featured project not found: ${title}`);
+    }
+    return project;
+});
 
 // --- Professional Experience ---
 
@@ -478,25 +503,109 @@ export const references: CvReference[] = [
 
 // --- Certifications ---
 
-export const certificationEntries: string[] = [
-    'ZRA Customs Appreciation Course — https://online.atingi.org/pluginfile.php/1/tool_certificate/issues/1782245945/6699500449MS.pdf',
-    'ZRA PAYE Appreciation Course — https://online.atingi.org/pluginfile.php/1/tool_certificate/issues/1782227768/0375281015MS.pdf',
-    'ZRA Smart Invoice Course — https://online.atingi.org/pluginfile.php/1/tool_certificate/issues/1782065027/6893547292MS.pdf',
-    'ZRA Indirect Taxes Course — https://online.atingi.org/pluginfile.php/1/tool_certificate/issues/1782056658/1233986026MS.pdf',
-    'CompTIA Cybersecurity Analyst (CySA+) CS0-003 (Specialization) - Pearson Education — https://coursera.org/verify/specialization/BEVC4O7ECJ16',
-    'Enterprise Data Integration, Governance and Architecture (Specialization) — https://coursera.org/verify/specialization/VQG0M4XP7P47',
-    'AI Agents and Agentic AI in Python: Powered by Generative AI — Vanderbilt University (Specialisation) — https://www.coursera.org/account/accomplishments/specialization/K42YL24QMRT3',
-    'Prompt Engineering for ChatGPT — Vanderbilt University — https://www.coursera.org/account/accomplishments/certificate/G2PJN56CJCLF',
-    'Developing Front-End Apps with React — IBM / Coursera — https://www.coursera.org/account/accomplishments/verify/IN3O7BHB70JS',
-    "Business School's Globalization – Economic Growth and Stability — IE University / Coursera — https://www.coursera.org/account/accomplishments/specialization/Q33ORL130G9S",
-    'Google Cybersecurity Professional Certificate — Google — https://www.coursera.org/account/accomplishments/professional-cert/ZQRFL5JFN79Z',
-    'Key Technologies for Business — IBM (Specialisation) — https://www.coursera.org/account/accomplishments/specialization/ED6HPWDG6QVB',
-    'IT Fundamentals for Cybersecurity — IBM (Specialisation) — https://www.coursera.org/account/accomplishments/specialization/certificate/BDSXYEGVZUWK',
-    'Introduction to Cybersecurity — Smart Zambia Institute / Cisco',
-    'C++ (Basic) Certificate — https://www.hackerrank.com/certificates/dea4f08fe541',
-    'Python (Basic) Certificate — https://www.hackerrank.com/certificates/6e56080d33f3',
-    'Basic Electronics and Arduino Programming — TME EDUCATION',
+export const certificationGroups: CertificationGroup[] = [
+    {
+        category: 'Cybersecurity',
+        items: [
+            {
+                label: 'CompTIA Cybersecurity Analyst (CySA+) CS0-003 (Specialization) - Pearson Education',
+                url: 'https://coursera.org/verify/specialization/BEVC4O7ECJ16',
+            },
+            {
+                label: 'Google Cybersecurity Professional Certificate — Google',
+                url: 'https://www.coursera.org/account/accomplishments/professional-cert/ZQRFL5JFN79Z',
+            },
+            {
+                label: 'IT Fundamentals for Cybersecurity — IBM (Specialisation)',
+                url: 'https://www.coursera.org/account/accomplishments/specialization/certificate/BDSXYEGVZUWK',
+            },
+            { label: 'Introduction to Cybersecurity — Smart Zambia Institute / Cisco' },
+        ],
+    },
+    {
+        category: 'AI & Machine Learning',
+        items: [
+            {
+                label: 'AI Agents and Agentic AI in Python: Powered by Generative AI — Vanderbilt University (Specialisation)',
+                url: 'https://www.coursera.org/account/accomplishments/specialization/K42YL24QMRT3',
+            },
+            {
+                label: 'Prompt Engineering for ChatGPT — Vanderbilt University',
+                url: 'https://www.coursera.org/account/accomplishments/certificate/G2PJN56CJCLF',
+            },
+        ],
+    },
+    {
+        category: 'Software Engineering',
+        items: [
+            {
+                label: 'Developing Front-End Apps with React — IBM / Coursera',
+                url: 'https://www.coursera.org/account/accomplishments/verify/IN3O7BHB70JS',
+            },
+        ],
+    },
+    {
+        category: 'Cloud & Data',
+        items: [
+            {
+                label: 'Enterprise Data Integration, Governance and Architecture (Specialization)',
+                url: 'https://coursera.org/verify/specialization/VQG0M4XP7P47',
+            },
+            {
+                label: 'Key Technologies for Business — IBM (Specialisation)',
+                url: 'https://www.coursera.org/account/accomplishments/specialization/ED6HPWDG6QVB',
+            },
+        ],
+    },
+    {
+        category: 'Programming',
+        items: [
+            {
+                label: 'C++ (Basic) Certificate',
+                url: 'https://www.hackerrank.com/certificates/dea4f08fe541',
+            },
+            {
+                label: 'Python (Basic) Certificate',
+                url: 'https://www.hackerrank.com/certificates/6e56080d33f3',
+            },
+            { label: 'Basic Electronics and Arduino Programming — TME EDUCATION' },
+        ],
+    },
+    {
+        category: 'Business & Entrepreneurship',
+        items: [
+            {
+                label: "Business School's Globalization – Economic Growth and Stability — IE University / Coursera",
+                url: 'https://www.coursera.org/account/accomplishments/specialization/Q33ORL130G9S',
+            },
+        ],
+    },
+    {
+        category: 'Taxation & Compliance',
+        items: [
+            {
+                label: 'ZRA Customs Appreciation Course',
+                url: 'https://online.atingi.org/pluginfile.php/1/tool_certificate/issues/1782245945/6699500449MS.pdf',
+            },
+            {
+                label: 'ZRA PAYE Appreciation Course',
+                url: 'https://online.atingi.org/pluginfile.php/1/tool_certificate/issues/1782227768/0375281015MS.pdf',
+            },
+            {
+                label: 'ZRA Smart Invoice Course',
+                url: 'https://online.atingi.org/pluginfile.php/1/tool_certificate/issues/1782065027/6893547292MS.pdf',
+            },
+            {
+                label: 'ZRA Indirect Taxes Course',
+                url: 'https://online.atingi.org/pluginfile.php/1/tool_certificate/issues/1782056658/1233986026MS.pdf',
+            },
+        ],
+    },
 ];
+
+export const certificationEntries: string[] = certificationGroups.flatMap((group) =>
+    group.items.map((item) => (item.url ? `${item.label} — ${item.url}` : item.label))
+);
 
 // --- CV Data ---
 

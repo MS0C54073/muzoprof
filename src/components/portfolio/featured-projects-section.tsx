@@ -19,7 +19,7 @@ export function FeaturedProjectsSection() {
           <ProjectCard key={project.title} project={project} />
         ))}
       </div>
-      <div className="mt-10">
+      <div className="motion-reveal mt-8">
         <Button asChild variant="outline">
           <Link href="/projects">
             <TranslatedText text="View All Projects" />

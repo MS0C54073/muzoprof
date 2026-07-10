@@ -13,7 +13,7 @@ export function SkillsSection() {
       />
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
         {skillCategories.map((group) => (
-          <div key={group.category}>
+          <div key={group.category} className="motion-reveal">
             <h3 className="mb-3 text-sm font-medium uppercase tracking-wide text-muted-foreground">
               <TranslatedText text={group.category} />
             </h3>
@@ -22,7 +22,7 @@ export function SkillsSection() {
                 <Badge
                   key={skill}
                   variant="secondary"
-                  className="rounded-md border-0 bg-muted px-2.5 py-1 text-xs font-normal text-foreground"
+                  className="rounded-md px-2.5 py-1 text-xs font-normal"
                 >
                   {skill}
                 </Badge>

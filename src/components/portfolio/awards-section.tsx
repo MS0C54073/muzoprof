@@ -12,7 +12,7 @@ export function AwardsSection() {
         {cvData.awards.map((award) => (
           <li
             key={award}
-            className="flex items-start gap-3 rounded-lg border border-border/80 bg-card px-4 py-4"
+            className="motion-reveal flex items-start gap-3 rounded-lg border border-border/80 bg-card px-4 py-4"
           >
             <Award className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden />
             <p className="text-sm leading-relaxed text-foreground md:text-base">

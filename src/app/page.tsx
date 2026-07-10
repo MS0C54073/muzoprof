@@ -7,12 +7,13 @@ import { EducationSection } from '@/components/portfolio/education-section';
 import { ExperienceSection } from '@/components/portfolio/experience-section';
 import { FeaturedProjectsSection } from '@/components/portfolio/featured-projects-section';
 import { HeroSection } from '@/components/portfolio/hero-section';
+import { PortfolioMotionShell } from '@/components/portfolio/portfolio-motion-shell';
 import { ProfessionalSummarySection } from '@/components/portfolio/professional-summary-section';
 import { SkillsSection } from '@/components/portfolio/skills-section';
 
 export default function HomePage() {
   return (
-    <>
+    <PortfolioMotionShell>
       <HeroSection />
       <FeaturedProjectsSection />
       <ProfessionalSummarySection />
@@ -28,6 +29,6 @@ export default function HomePage() {
           <TranslatedText text="© 2026 Musonda Salimu. All Rights Reserved." />
         </p>
       </footer>
-    </>
+    </PortfolioMotionShell>
   );
 }

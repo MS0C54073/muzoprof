@@ -9,7 +9,7 @@ export function EducationSection() {
       <SectionHeading title="Education" />
       <div className="relative max-w-3xl space-y-8 before:absolute before:left-[7px] before:top-2 before:h-[calc(100%-1rem)] before:w-px before:bg-border">
         {educationData.map((entry) => (
-          <div key={`${entry.degree}-${entry.duration}`} className="relative pl-8">
+          <div key={`${entry.degree}-${entry.duration}`} className="motion-reveal relative pl-8">
             <span
               className="absolute left-0 top-1.5 h-[15px] w-[15px] rounded-full border-2 border-primary bg-background"
               aria-hidden
@@ -36,7 +36,7 @@ export function EducationSection() {
             {postgraduateDiplomasData.map((diploma) => (
               <div
                 key={diploma.title}
-                className="rounded-lg border border-border/80 bg-card px-4 py-4"
+                className="motion-reveal rounded-lg border border-border/80 bg-card px-4 py-4"
               >
                 <p className="text-sm font-medium text-foreground">
                   <TranslatedText text={diploma.title} />

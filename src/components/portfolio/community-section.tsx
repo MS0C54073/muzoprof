@@ -12,7 +12,7 @@ export function CommunitySection() {
       />
       <div className="max-w-3xl space-y-8">
         {communityInvolvement.map((entry) => (
-          <div key={`${entry.title}-${entry.duration}`}>
+          <div key={`${entry.title}-${entry.duration}`} className="motion-reveal">
             <h3 className="text-base font-semibold text-foreground">
               <TranslatedText text={entry.title} />
             </h3>

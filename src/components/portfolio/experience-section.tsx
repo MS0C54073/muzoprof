@@ -33,7 +33,7 @@ export function ExperienceSection() {
           <AccordionItem
             key={`${exp.title}-${exp.duration}`}
             value={`exp-${index}`}
-            className="rounded-lg border border-border/80 px-4 md:px-5"
+            className="motion-reveal rounded-lg border border-border/80 bg-card px-4 md:px-5"
           >
             <AccordionTrigger className="py-4 hover:no-underline">
               <div className="text-left">

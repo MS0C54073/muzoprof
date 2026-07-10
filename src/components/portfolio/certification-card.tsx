@@ -1,24 +1,22 @@
 import TranslatedText from '@/app/components/translated-text';
 import { Card, CardContent } from '@/components/ui/card';
-import { parseCertificationLine } from '@/lib/generate-cv';
+import type { CertificationItem } from '@/data/portfolio';
 import { ExternalLink } from 'lucide-react';
 
 interface CertificationCardProps {
-  certification: string;
+  item: CertificationItem;
 }
 
-export function CertificationCard({ certification }: CertificationCardProps) {
-  const { label, url } = parseCertificationLine(certification);
-
+export function CertificationCard({ item }: CertificationCardProps) {
   return (
-    <Card className="border border-border/80 bg-card transition-shadow duration-200 hover:shadow-sm">
+    <Card className="motion-reveal motion-card border border-border/80 bg-card text-card-foreground transition-shadow duration-200 hover:shadow-sm">
       <CardContent className="flex items-start justify-between gap-4 p-4">
         <p className="text-sm leading-relaxed text-foreground">
-          <TranslatedText text={label} />
+          <TranslatedText text={item.label} />
         </p>
-        {url && (
+        {item.url && (
           <a
-            href={url}
+            href={item.url}
             target="_blank"
             rel="noopener noreferrer"
             className="shrink-0 text-muted-foreground transition-colors hover:text-foreground"

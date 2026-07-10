@@ -11,7 +11,7 @@ interface ProjectCardProps {
 
 export function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <Card className="group flex h-full flex-col border border-border/80 bg-card transition-shadow duration-200 hover:shadow-md">
+    <Card className="motion-card motion-reveal group flex h-full flex-col border border-border/80 bg-card text-card-foreground transition-shadow duration-200 hover:shadow-md">
       <CardHeader className="space-y-3 pb-3">
         <CardTitle className="text-lg font-semibold leading-snug tracking-tight text-foreground">
           <TranslatedText text={project.title} />
@@ -27,7 +27,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
               <Badge
                 key={tech}
                 variant="secondary"
-                className="rounded-md border-0 bg-muted px-2 py-0.5 text-xs font-normal text-muted-foreground"
+                className="rounded-md px-2 py-0.5 text-xs font-normal"
               >
                 {tech}
               </Badge>
@@ -36,14 +36,14 @@ export function ProjectCard({ project }: ProjectCardProps) {
         )}
       </CardHeader>
       <CardContent className="mt-auto flex gap-2 pt-0">
-        <Button asChild variant="outline" size="sm" className="flex-1">
+        <Button asChild variant="outline" size="sm" className="flex-1 transition-transform hover:-translate-y-0.5">
           <a href={project.link} target="_blank" rel="noopener noreferrer">
             <Github className="mr-2 h-4 w-4" />
             <TranslatedText text="GitHub" />
           </a>
         </Button>
         {project.demo && (
-          <Button asChild size="sm" className="flex-1">
+          <Button asChild size="sm" className="flex-1 transition-transform hover:-translate-y-0.5">
             <a href={project.demo} target="_blank" rel="noopener noreferrer">
               <ExternalLink className="mr-2 h-4 w-4" />
               <TranslatedText text="Live Demo" />

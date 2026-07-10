@@ -12,7 +12,7 @@ import { useState } from 'react';
 const GITHUB_URL = 'https://github.com/MS0C54073';
 const LINKEDIN_URL = 'https://linkedin.com/in/musonda-salimu';
 const PROFILE_IMAGE_URL =
-  'https://drive.google.com/uc?id=18haKNolQwC6XQxH3weaKMkvFEV_rBYc6';
+  'https://drive.google.com/thumbnail?id=18haKNolQwC6XQxH3weaKMkvFEV_rBYc6&sz=w800';
 
 export function HeroSection() {
   const [isGenerating, setIsGenerating] = useState(false);
@@ -34,9 +34,9 @@ export function HeroSection() {
   };
 
   return (
-    <section id="home" className="py-16 md:py-24">
-      <div className="mx-auto flex max-w-5xl flex-col items-start gap-10 px-4 md:flex-row md:items-center md:gap-14 md:px-6">
-        <div className="relative h-36 w-36 shrink-0 overflow-hidden rounded-full border border-border bg-muted md:h-44 md:w-44">
+    <section id="home" data-motion-section className="py-12 md:py-16">
+      <div className="mx-auto flex max-w-5xl flex-col items-start gap-8 px-4 md:flex-row md:items-center md:gap-12 md:px-6">
+        <div className="motion-reveal relative h-36 w-36 shrink-0 overflow-hidden rounded-full border border-border bg-muted md:h-44 md:w-44">
           <Image
             src={PROFILE_IMAGE_URL}
             alt="Musonda Salimu"
@@ -44,49 +44,49 @@ export function HeroSection() {
             sizes="(max-width: 768px) 144px, 176px"
             className="object-cover"
             priority
-            crossOrigin="anonymous"
+            unoptimized
           />
         </div>
 
         <div className="min-w-0 flex-1">
-        <p className="text-sm font-medium text-muted-foreground">
-          <TranslatedText text="Musonda Salimu" />
-        </p>
-        <h1 className="mt-3 text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
-          <TranslatedText text="AI Software Engineer" />
-        </h1>
-        <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
-          <TranslatedText text="Building practical AI-powered software, automation tools, and scalable web applications with TypeScript, Python, and cloud technologies." />
-        </p>
+          <h1 className="motion-reveal text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl">
+            <TranslatedText text="MUSONDA SALIMU" />
+          </h1>
+          <p className="motion-reveal mt-3 text-lg font-medium text-muted-foreground md:text-xl">
+            <TranslatedText text="AI Software Engineer" />
+          </p>
+          <p className="motion-reveal mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
+            <TranslatedText text="Building practical AI-powered software, automation tools, and scalable web applications with TypeScript, Python, and cloud technologies." />
+          </p>
 
-        <div className="mt-8 flex flex-wrap gap-3">
-          <Button onClick={handleDownload} disabled={isGenerating}>
-            {isGenerating ? (
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-            ) : (
-              <Download className="mr-2 h-4 w-4" />
-            )}
-            <TranslatedText text="Download Resume" />
-          </Button>
-          <Button asChild variant="outline">
-            <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer">
-              <Github className="mr-2 h-4 w-4" />
-              GitHub
-            </a>
-          </Button>
-          <Button asChild variant="outline">
-            <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer">
-              <Linkedin className="mr-2 h-4 w-4" />
-              LinkedIn
-            </a>
-          </Button>
-          <Button asChild variant="outline">
-            <a href={`mailto:${cvData.email}`}>
-              <Mail className="mr-2 h-4 w-4" />
-              Email
-            </a>
-          </Button>
-        </div>
+          <div className="motion-reveal mt-7 flex flex-wrap gap-3">
+            <Button onClick={handleDownload} disabled={isGenerating} className="transition-transform hover:-translate-y-0.5">
+              {isGenerating ? (
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              ) : (
+                <Download className="mr-2 h-4 w-4" />
+              )}
+              <TranslatedText text="Download Resume" />
+            </Button>
+            <Button asChild variant="outline" className="transition-transform hover:-translate-y-0.5">
+              <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer">
+                <Github className="mr-2 h-4 w-4" />
+                GitHub
+              </a>
+            </Button>
+            <Button asChild variant="outline" className="transition-transform hover:-translate-y-0.5">
+              <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer">
+                <Linkedin className="mr-2 h-4 w-4" />
+                LinkedIn
+              </a>
+            </Button>
+            <Button asChild variant="outline" className="transition-transform hover:-translate-y-0.5">
+              <a href={`mailto:${cvData.email}`}>
+                <Mail className="mr-2 h-4 w-4" />
+                Email
+              </a>
+            </Button>
+          </div>
         </div>
       </div>
     </section>

@@ -20,6 +20,7 @@
   "Menu": "Меню",
   "Navigation": "Навигация",
   "Musonda Salimu": "Мусонда Салиму",
+  "MUSONDA SALIMU": "Мусонда Салиму",
   "IT Support": "ИТ-поддержка",
   "Software Developer": "Разработчик ПО",
   "AI": "ИИ",
@@ -288,5 +289,12 @@
   "Cybersecurity": "Кибербезопасность",
   "Databases": "Базы данных",
   "Tools": "Инструменты",
-  "More": "Ещё"
+  "More": "Ещё",
+  "Cybersecurity": "Кибербезопасность",
+  "AI & Machine Learning": "ИИ и машинное обучение",
+  "Software Engineering": "Разработка ПО",
+  "Cloud & Data": "Облако и данные",
+  "Programming": "Программирование",
+  "Business & Entrepreneurship": "Бизнес и предпринимательство",
+  "Taxation & Compliance": "Налогообложение и соответствие"
 }

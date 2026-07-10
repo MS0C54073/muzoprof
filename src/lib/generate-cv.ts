@@ -4,6 +4,9 @@ import { cvData, type CvData, type CvExperience } from '@/data/portfolio';
 export const stripPdfText = (text: string) =>
     text
         .replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}\u{200D}]/gu, '')
+        .replace(/\u2013/g, '-')
+        .replace(/\u2014/g, '-')
+        .replace(/\u00b7/g, ' | ')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -31,6 +34,8 @@ export function generateCv(
     const MARGIN = 46;
     const CONTENT_W = PAGE_W - MARGIN * 2;
     const LINE_H = 11.5;
+    const DATE_COL_W = 118;
+    const TITLE_COL_W = CONTENT_W - DATE_COL_W - 10;
 
     const COLORS = {
         ACCENT: [31, 78, 121] as [number, number, number],
@@ -98,14 +103,37 @@ export function generateCv(
 
     const addJobEntry = (exp: CvExperience) => {
         ensureSpace(40);
-        addWrappedText(exp.title, MARGIN, CONTENT_W - 110, 10, 'bold', COLORS.BLACK);
+
+        const rowStartY = currentY;
+        const titleText = stripPdfText(exp.title);
+        const durationText = stripPdfText(exp.duration);
+
+        doc.setFont(FONT, 'bold');
+        doc.setFontSize(10);
+        const titleLines: string[] = doc.splitTextToSize(titleText, TITLE_COL_W);
 
         doc.setFont(FONT, 'italic');
         doc.setFontSize(9);
-        doc.setTextColor(COLORS.LIGHT[0], COLORS.LIGHT[1], COLORS.LIGHT[2]);
-        ensureSpace(LINE_H);
-        doc.text(stripPdfText(exp.duration), PAGE_W - MARGIN, currentY);
-        currentY += LINE_H;
+        const durationLines: string[] = doc.splitTextToSize(durationText, DATE_COL_W);
+
+        const headerRows = Math.max(titleLines.length, durationLines.length, 1);
+        ensureSpace(headerRows * LINE_H + 6);
+
+        titleLines.forEach((line, index) => {
+            doc.setFont(FONT, 'bold');
+            doc.setFontSize(10);
+            doc.setTextColor(COLORS.BLACK[0], COLORS.BLACK[1], COLORS.BLACK[2]);
+            doc.text(line, MARGIN, rowStartY + index * LINE_H);
+        });
+
+        durationLines.forEach((line, index) => {
+            doc.setFont(FONT, 'italic');
+            doc.setFontSize(9);
+            doc.setTextColor(COLORS.LIGHT[0], COLORS.LIGHT[1], COLORS.LIGHT[2]);
+            doc.text(line, PAGE_W - MARGIN, rowStartY + index * LINE_H, { align: 'right' });
+        });
+
+        currentY = rowStartY + headerRows * LINE_H;
 
         addWrappedText(exp.company, MARGIN, CONTENT_W, 9.5, 'normal', COLORS.GRAY);
         if (exp.location) {
@@ -114,7 +142,7 @@ export function generateCv(
         exp.details.forEach((detail) => addBullet(detail));
         if (exp.tags?.length) {
             addWrappedText(
-                `Focus: ${exp.tags.join(' · ')}`,
+                `Focus: ${exp.tags.join(' | ')}`,
                 MARGIN + 10,
                 CONTENT_W - 10,
                 9,

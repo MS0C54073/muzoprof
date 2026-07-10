@@ -49,11 +49,11 @@ body {
     --highlight: 203 58% 75%;
   }
   .dark {
-    --background: 222.2 84% 4.9%; /* Deep Slate Black */
+    --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
+    --card: 217.2 32.6% 11%;
     --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
+    --popover: 217.2 32.6% 11%;
     --popover-foreground: 210 40% 98%;
     --primary: 210 40% 98%; /* White contrast in dark mode */
     --primary-foreground: 222.2 47.4% 11.2%;
@@ -96,6 +96,14 @@ body {
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-reveal,
+  .motion-card {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
 

@@ -20,6 +20,7 @@
   "Menu": "Menu",
   "Navigation": "Navigation",
   "Musonda Salimu": "Musonda Salimu",
+  "MUSONDA SALIMU": "MUSONDA SALIMU",
   "IT Support": "IT Support",
   "Software Developer": "Software Developer",
   "AI": "AI",
@@ -289,5 +290,11 @@
   "Cybersecurity": "Cybersecurity",
   "Databases": "Databases",
   "Tools": "Tools",
-  "More": "More"
+  "More": "More",
+  "AI & Machine Learning": "AI & Machine Learning",
+  "Software Engineering": "Software Engineering",
+  "Cloud & Data": "Cloud & Data",
+  "Programming": "Programming",
+  "Business & Entrepreneurship": "Business & Entrepreneurship",
+  "Taxation & Compliance": "Taxation & Compliance"
 }
