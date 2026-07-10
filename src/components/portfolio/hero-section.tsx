@@ -6,10 +6,13 @@ import { cvData } from '@/data/portfolio';
 import { generateCv } from '@/lib/generate-cv';
 import { useToast } from '@/hooks/use-toast';
 import { Download, Github, Linkedin, Loader2, Mail } from 'lucide-react';
+import Image from 'next/image';
 import { useState } from 'react';
 
 const GITHUB_URL = 'https://github.com/MS0C54073';
 const LINKEDIN_URL = 'https://linkedin.com/in/musonda-salimu';
+const PROFILE_IMAGE_URL =
+  'https://drive.google.com/uc?id=18haKNolQwC6XQxH3weaKMkvFEV_rBYc6';
 
 export function HeroSection() {
   const [isGenerating, setIsGenerating] = useState(false);
@@ -32,7 +35,20 @@ export function HeroSection() {
 
   return (
     <section id="home" className="py-16 md:py-24">
-      <div className="mx-auto max-w-3xl px-4 md:px-6">
+      <div className="mx-auto flex max-w-5xl flex-col items-start gap-10 px-4 md:flex-row md:items-center md:gap-14 md:px-6">
+        <div className="relative h-36 w-36 shrink-0 overflow-hidden rounded-full border border-border bg-muted md:h-44 md:w-44">
+          <Image
+            src={PROFILE_IMAGE_URL}
+            alt="Musonda Salimu"
+            fill
+            sizes="(max-width: 768px) 144px, 176px"
+            className="object-cover"
+            priority
+            crossOrigin="anonymous"
+          />
+        </div>
+
+        <div className="min-w-0 flex-1">
         <p className="text-sm font-medium text-muted-foreground">
           <TranslatedText text="Musonda Salimu" />
         </p>
@@ -70,6 +86,7 @@ export function HeroSection() {
               Email
             </a>
           </Button>
+        </div>
         </div>
       </div>
     </section>
