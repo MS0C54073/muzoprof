@@ -26,6 +26,17 @@ import { SocialIcons } from '@/components/social-icons';
 import { englishMaterials, type Material } from './teaching-materials';
 import type { Order } from '@/lib/types';
 
+const TUTORING_SESSION_IMAGE = '/tutor/tutoring-session.jpg';
+
+const learningEnvironmentImages = [
+  {
+    src: '/tutor/teaching-excellence.png',
+    alt: 'Teaching Excellence',
+    title: 'Teaching Excellence',
+    description: 'Full view of educational methodology',
+  },
+] as const;
+
 
 const requestSchema = z.object({
   name: z.string().min(1, { message: 'Name is required' }),
@@ -411,10 +422,11 @@ export default function TutorPage() {
             <Card className="shadow-xl border-none h-full overflow-hidden rounded-2xl md:rounded-[2.5rem] bg-card/40">
               <div className="relative h-[300px] md:h-[500px]">
                   <Image
-                    src="https://lh3.googleusercontent.com/d/1dteuS0zoNLTLo_oVjkFlPPW5CCyn2Wd9"
+                    src={TUTORING_SESSION_IMAGE}
                     alt="Online Tutoring Session"
                     fill
                     className="object-cover object-top transition-transform duration-700 hover:scale-105"
+                    sizes="(max-width: 1024px) 100vw, 60vw"
                     priority
                   />
               </div>
@@ -469,76 +481,47 @@ export default function TutorPage() {
                 <Sparkles className="h-8 w-8 md:h-10 md:w-10 text-primary" />
                 <TranslatedText text="Learning Environment" />
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-6xl mx-auto px-2">
-                {/* Image 1 with Dialog */}
-                <Dialog>
+            <div className="grid grid-cols-1 gap-8 max-w-3xl mx-auto px-2 sm:max-w-4xl sm:grid-cols-2">
+                {learningEnvironmentImages.map((image) => (
+                <Dialog key={image.src}>
                     <DialogTrigger asChild>
-                        <div className="group relative overflow-hidden rounded-[2rem] shadow-2xl animate-pulse-slow cursor-pointer aspect-square sm:aspect-[4/3] bg-muted">
+                        <button
+                          type="button"
+                          className="group relative w-full overflow-hidden rounded-2xl border border-border/80 bg-muted/40 shadow-sm cursor-pointer aspect-[4/3] min-h-[260px] text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                        >
                             <Image
-                                src="https://lh3.googleusercontent.com/d/1qp_OSRxRq6d5-4DMy71-iN1jA-K8AKXC"
-                                alt="Teaching Excellence"
+                                src={image.src}
+                                alt={image.alt}
                                 fill
-                                className="object-cover transition-all duration-700 group-hover:scale-110 group-hover:brightness-110"
+                                sizes="(max-width: 640px) 100vw, 50vw"
+                                className="object-contain p-2 transition-transform duration-300 group-hover:scale-[1.02]"
                             />
-                            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-                                <div className="flex items-center gap-2 text-white font-black bg-primary/80 px-6 py-3 rounded-full shadow-2xl transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                                    <Maximize2 className="h-5 w-5" />
+                            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                <div className="flex items-center gap-2 text-white text-sm font-medium bg-primary/90 px-5 py-2.5 rounded-full shadow-lg">
+                                    <Maximize2 className="h-4 w-4" />
                                     <TranslatedText text="Click to Expand" />
                                 </div>
                             </div>
-                        </div>
+                        </button>
                     </DialogTrigger>
                     <DialogContent className="max-w-5xl w-full p-2 bg-black/90 border-none shadow-2xl">
                         <DialogHeader className="sr-only">
-                            <DialogTitle>Teaching Excellence</DialogTitle>
-                            <DialogDescription>Full view of educational methodology</DialogDescription>
+                            <DialogTitle>{image.title}</DialogTitle>
+                            <DialogDescription>{image.description}</DialogDescription>
                         </DialogHeader>
-                        <div className="relative w-full aspect-[4/3] md:aspect-video">
+                        <div className="relative w-full aspect-[4/3] md:aspect-video min-h-[320px]">
                             <Image
-                                src="https://lh3.googleusercontent.com/d/1qp_OSRxRq6d5-4DMy71-iN1jA-K8AKXC"
-                                alt="Teaching Excellence Full View"
+                                src={image.src}
+                                alt={`${image.alt} Full View`}
                                 fill
-                                className="object-contain"
                                 priority
+                                sizes="100vw"
+                                className="object-contain"
                             />
                         </div>
                     </DialogContent>
                 </Dialog>
-
-                {/* Image 2 with Dialog */}
-                <Dialog>
-                    <DialogTrigger asChild>
-                        <div className="group relative overflow-hidden rounded-[2rem] shadow-2xl animate-pulse-slow [animation-delay:1s] cursor-pointer aspect-square sm:aspect-[4/3] bg-muted">
-                            <Image
-                                src="https://lh3.googleusercontent.com/d/1mMEV5VX-Q-05z3k2f303yh831TdKUejd"
-                                alt="Creative Space"
-                                fill
-                                className="object-cover transition-all duration-700 group-hover:scale-110 group-hover:brightness-110"
-                            />
-                            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-                                <div className="flex items-center gap-2 text-white font-black bg-primary/80 px-6 py-3 rounded-full shadow-2xl transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                                    <Maximize2 className="h-5 w-5" />
-                                    <TranslatedText text="Click to Expand" />
-                                </div>
-                            </div>
-                        </div>
-                    </DialogTrigger>
-                    <DialogContent className="max-w-5xl w-full p-2 bg-black/90 border-none shadow-2xl">
-                        <DialogHeader className="sr-only">
-                            <DialogTitle>Creative Space</DialogTitle>
-                            <DialogDescription>Full view of the teaching environment</DialogDescription>
-                        </DialogHeader>
-                        <div className="relative w-full aspect-[4/3] md:aspect-video">
-                            <Image
-                                src="https://lh3.googleusercontent.com/d/1mMEV5VX-Q-05z3k2f303yh831TdKUejd"
-                                alt="Creative Space Full View"
-                                fill
-                                className="object-contain"
-                                priority
-                            />
-                        </div>
-                    </DialogContent>
-                </Dialog>
+                ))}
             </div>
         </section>
 
