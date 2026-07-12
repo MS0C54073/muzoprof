@@ -523,6 +523,15 @@ export const certificationGroups: CertificationGroup[] = [
         ],
     },
     {
+        category: 'Networking',
+        items: [
+            {
+                label: 'Cisco CCNA (200-301) Specialization - Coursera',
+                url: 'https://coursera.org/verify/specialization/3IP35A6BG3KL',
+            },
+        ],
+    },
+    {
         category: 'AI & Machine Learning',
         items: [
             {
