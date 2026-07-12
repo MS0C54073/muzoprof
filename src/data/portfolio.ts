@@ -57,6 +57,8 @@ export interface SkillCategory {
 export interface CertificationItem {
     label: string;
     url?: string;
+    /** Sortable completion date: YYYY, YYYY-MM, or YYYY-MM-DD */
+    completed: string;
 }
 
 export interface CertificationGroup {
@@ -503,26 +505,63 @@ export const references: CvReference[] = [
 
 // --- Certifications ---
 
-export const certificationGroups: CertificationGroup[] = [
+const parseCompletedDate = (value: string): number => {
+    if (/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+        return new Date(value).getTime();
+    }
+    if (/^\d{4}-\d{2}$/.test(value)) {
+        return new Date(`${value}-01`).getTime();
+    }
+    if (/^\d{4}$/.test(value)) {
+        return new Date(`${value}-12-31`).getTime();
+    }
+    return 0;
+};
+
+const sortByCompletedDesc = <T extends { completed: string }>(items: T[]): T[] =>
+    [...items].sort(
+        (a, b) => parseCompletedDate(b.completed) - parseCompletedDate(a.completed)
+    );
+
+const sortCertificationGroups = (groups: CertificationGroup[]): CertificationGroup[] =>
+    [...groups]
+        .map((group) => ({
+            ...group,
+            items: sortByCompletedDesc(group.items),
+        }))
+        .sort((a, b) => {
+            const aLatest = Math.max(...a.items.map((item) => parseCompletedDate(item.completed)));
+            const bLatest = Math.max(...b.items.map((item) => parseCompletedDate(item.completed)));
+            return bLatest - aLatest;
+        });
+
+const rawCertificationGroups: CertificationGroup[] = [
     {
         category: 'Cybersecurity',
         items: [
             {
+                label: 'Cisco CCNA (200-301) Specialization - Coursera',
+                url: 'https://coursera.org/verify/specialization/3IP35A6BG3KL',
+                completed: '2026-07',
+            },
+            {
                 label: 'CompTIA Cybersecurity Analyst (CySA+) CS0-003 (Specialization) - Pearson Education',
                 url: 'https://coursera.org/verify/specialization/BEVC4O7ECJ16',
+                completed: '2025-11',
             },
             {
                 label: 'Google Cybersecurity Professional Certificate — Google',
                 url: 'https://www.coursera.org/account/accomplishments/professional-cert/ZQRFL5JFN79Z',
+                completed: '2023-11',
             },
             {
                 label: 'IT Fundamentals for Cybersecurity — IBM (Specialisation)',
                 url: 'https://www.coursera.org/account/accomplishments/specialization/certificate/BDSXYEGVZUWK',
+                completed: '2023-05',
             },
-            { label: 'Introduction to Cybersecurity — Smart Zambia Institute / Cisco' },
             {
-                label: 'Cisco CCNA (200-301) Specialization - Coursera',
-                url: 'https://coursera.org/verify/specialization/3IP35A6BG3KL',
+                label: 'Introduction to Cybersecurity — Smart Zambia Institute / Cisco',
+                completed: '2018-06',
             },
         ],
     },
@@ -532,10 +571,12 @@ export const certificationGroups: CertificationGroup[] = [
             {
                 label: 'AI Agents and Agentic AI in Python: Powered by Generative AI — Vanderbilt University (Specialisation)',
                 url: 'https://www.coursera.org/account/accomplishments/specialization/K42YL24QMRT3',
+                completed: '2025-08',
             },
             {
                 label: 'Prompt Engineering for ChatGPT — Vanderbilt University',
                 url: 'https://www.coursera.org/account/accomplishments/certificate/G2PJN56CJCLF',
+                completed: '2024-06',
             },
         ],
     },
@@ -545,6 +586,7 @@ export const certificationGroups: CertificationGroup[] = [
             {
                 label: 'Developing Front-End Apps with React — IBM / Coursera',
                 url: 'https://www.coursera.org/account/accomplishments/verify/IN3O7BHB70JS',
+                completed: '2024-04',
             },
         ],
     },
@@ -554,10 +596,12 @@ export const certificationGroups: CertificationGroup[] = [
             {
                 label: 'Enterprise Data Integration, Governance and Architecture (Specialization)',
                 url: 'https://coursera.org/verify/specialization/VQG0M4XP7P47',
+                completed: '2025-10',
             },
             {
                 label: 'Key Technologies for Business — IBM (Specialisation)',
                 url: 'https://www.coursera.org/account/accomplishments/specialization/ED6HPWDG6QVB',
+                completed: '2023-08',
             },
         ],
     },
@@ -567,12 +611,17 @@ export const certificationGroups: CertificationGroup[] = [
             {
                 label: 'C++ (Basic) Certificate',
                 url: 'https://www.hackerrank.com/certificates/dea4f08fe541',
+                completed: '2022-08',
             },
             {
                 label: 'Python (Basic) Certificate',
                 url: 'https://www.hackerrank.com/certificates/6e56080d33f3',
+                completed: '2022-06',
             },
-            { label: 'Basic Electronics and Arduino Programming — TME EDUCATION' },
+            {
+                label: 'Basic Electronics and Arduino Programming — TME EDUCATION',
+                completed: '2019-01',
+            },
         ],
     },
     {
@@ -581,6 +630,7 @@ export const certificationGroups: CertificationGroup[] = [
             {
                 label: "Business School's Globalization – Economic Growth and Stability — IE University / Coursera",
                 url: 'https://www.coursera.org/account/accomplishments/specialization/Q33ORL130G9S',
+                completed: '2024-02',
             },
         ],
     },
@@ -590,26 +640,33 @@ export const certificationGroups: CertificationGroup[] = [
             {
                 label: 'ZRA Customs Appreciation Course',
                 url: 'https://online.atingi.org/pluginfile.php/1/tool_certificate/issues/1782245945/6699500449MS.pdf',
+                completed: '2026-06-23',
             },
             {
                 label: 'ZRA PAYE Appreciation Course',
                 url: 'https://online.atingi.org/pluginfile.php/1/tool_certificate/issues/1782227768/0375281015MS.pdf',
+                completed: '2026-06-23',
             },
             {
                 label: 'ZRA Smart Invoice Course',
                 url: 'https://online.atingi.org/pluginfile.php/1/tool_certificate/issues/1782065027/6893547292MS.pdf',
+                completed: '2026-06-21',
             },
             {
                 label: 'ZRA Indirect Taxes Course',
                 url: 'https://online.atingi.org/pluginfile.php/1/tool_certificate/issues/1782056658/1233986026MS.pdf',
+                completed: '2026-06-21',
             },
         ],
     },
 ];
 
-export const certificationEntries: string[] = certificationGroups.flatMap((group) =>
-    group.items.map((item) => (item.url ? `${item.label} — ${item.url}` : item.label))
-);
+export const certificationGroups: CertificationGroup[] =
+    sortCertificationGroups(rawCertificationGroups);
+
+export const certificationEntries: string[] = sortByCompletedDesc(
+    certificationGroups.flatMap((group) => group.items)
+).map((item) => (item.url ? `${item.label} — ${item.url}` : item.label));
 
 // --- CV Data ---
 

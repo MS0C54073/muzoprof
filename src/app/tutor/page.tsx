@@ -78,9 +78,9 @@ const programmingOfferings = [
 ];
 
 const tutorCertifications = [
-    { title: 'Teacher Of English To Speakers Of Other Languages (TEFL)', issuer: 'Teacher Record', date: 'Issued Sep 2023', credentialId: 'TR2672252278' },
-    { title: 'EF SET English Certificate', issuer: 'EF SET', date: 'Issued Sep 2024', credentialId: null },
-    { title: 'Teach English Now! Foundational Principles', issuer: 'Arizona State University (via Coursera)', date: 'Completed Sep 2024', credentialId: null },
+    { title: 'EF SET English Certificate', issuer: 'EF SET', date: 'Issued Sep 2024', completed: '2024-09', credentialId: null },
+    { title: 'Teach English Now! Foundational Principles', issuer: 'Arizona State University (via Coursera)', date: 'Completed Sep 2024', completed: '2024-09', credentialId: null },
+    { title: 'Teacher Of English To Speakers Of Other Languages (TEFL)', issuer: 'Teacher Record', date: 'Issued Sep 2023', completed: '2023-09', credentialId: 'TR2672252278' },
 ];
 
 const MaterialsAccordion = ({ materials }: { materials: Material[] }) => {
@@ -144,11 +144,12 @@ export default function TutorPage() {
                 education: [
                     { degree: "BSc, Software and Administration of Information Systems", university: "Kursk State University", duration: "2017 - 2021" },
                 ],
-                certifications: [
-                    { title: 'Teacher Of English To Speakers Of Other Languages (TEFL)', issuer: 'Teacher Record', date: 'Issued Sep 2023', credentialId: 'TR2672252278' },
-                    { title: 'EF SET English Certificate', issuer: 'EF SET', date: 'Issued Sep 2024' },
-                    { title: 'Teach English Now! Foundational Principles', issuer: 'Arizona State University (via Coursera)', date: 'Completed Sep 2024' },
-                ]
+                certifications: tutorCertifications.map(({ title, issuer, date, credentialId }) => ({
+                    title,
+                    issuer,
+                    date,
+                    credentialId,
+                })),
             };
 
             const doc = new jsPDF({ unit: 'px', format: 'a4' });
