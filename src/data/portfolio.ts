@@ -520,11 +520,6 @@ export const certificationGroups: CertificationGroup[] = [
                 url: 'https://www.coursera.org/account/accomplishments/specialization/certificate/BDSXYEGVZUWK',
             },
             { label: 'Introduction to Cybersecurity — Smart Zambia Institute / Cisco' },
-        ],
-    },
-    {
-        category: 'Networking',
-        items: [
             {
                 label: 'Cisco CCNA (200-301) Specialization - Coursera',
                 url: 'https://coursera.org/verify/specialization/3IP35A6BG3KL',
