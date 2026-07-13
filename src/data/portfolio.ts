@@ -677,7 +677,7 @@ export const buildCvData = (): CvData => ({
     email: 'musondasalim@gmail.com',
     phones: ['+260 966 882 901', '+260 979 287 496', '+260 977 288 260'],
     location: 'Lusaka, Zambia',
-    linkedin: 'linkedin.com/in/musonda-salimu',
+    linkedin: 'linkedin.com/in/musonda-salimu-a4a0b31b9',
     github: 'github.com/MS0C54073',
     portfolio: 'tinyurl.com/muzoslim',
     summary: [

@@ -10,7 +10,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 const GITHUB_URL = 'https://github.com/MS0C54073';
-const LINKEDIN_URL = 'https://linkedin.com/in/musonda-salimu';
+const LINKEDIN_URL = 'https://www.linkedin.com/in/musonda-salimu-a4a0b31b9/';
 const PROFILE_IMAGE_URL =
   'https://drive.google.com/thumbnail?id=18haKNolQwC6XQxH3weaKMkvFEV_rBYc6&sz=w800';
 

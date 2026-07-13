@@ -11,7 +11,7 @@ import { Download, Github, Linkedin, Loader2, Mail, MapPin } from 'lucide-react'
 import { useState } from 'react';
 
 const GITHUB_URL = 'https://github.com/MS0C54073';
-const LINKEDIN_URL = 'https://linkedin.com/in/musonda-salimu';
+const LINKEDIN_URL = 'https://www.linkedin.com/in/musonda-salimu-a4a0b31b9/';
 
 export function ContactSection() {
   const [isGenerating, setIsGenerating] = useState(false);
@@ -53,7 +53,7 @@ export function ContactSection() {
           className="flex items-center gap-3 text-sm text-foreground transition-colors hover:text-primary md:text-base"
         >
           <Linkedin className="h-4 w-4 shrink-0 text-muted-foreground" />
-          linkedin.com/in/musonda-salimu
+          linkedin.com/in/musonda-salimu-a4a0b31b9
         </a>
         <a
           href={GITHUB_URL}
