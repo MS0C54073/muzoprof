@@ -19,7 +19,7 @@ export default function HomePage() {
       <ProfessionalSummarySection />
       <AwardsSection />
       <SkillsSection />
-      <ExperienceSection />
+      <ExperienceSection /> 
       <CertificationsSection />
       <EducationSection />
       <CommunitySection />

@@ -393,7 +393,7 @@ export default function TutorPage() {
                 </p>
             </div>
              <div className="flex shrink-0">
-                <Button asChild size="lg" className="h-16 px-10 border-accent text-accent hover:bg-accent hover:text-black rounded-full font-black text-lg shadow-xl animate-bounce-slow">
+                <Button asChild size="lg" className="h-16 px-10 rounded-full font-black text-lg shadow-xl animate-bounce-slow">
                     <a href="https://forms.gle/btbiX7F7n4JndgGy7" target="_blank" rel="noopener noreferrer">
                         <GraduationCap className="mr-2 h-6 w-6" />
                         <TranslatedText text="Enroll for Lessons" />
@@ -435,8 +435,8 @@ export default function TutorPage() {
                 <CardTitle className="mb-8 text-2xl md:text-3xl font-black"><TranslatedText text="My Experience Includes" /></CardTitle>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   {experiences.map((exp, index) => (
-                    <div key={index} className="space-y-2 border-l-4 border-accent/20 pl-4">
-                        <h4 className="font-black text-accent text-lg leading-tight"><TranslatedText text={exp.title} /></h4>
+                    <div key={index} className="space-y-2 border-l-4 border-primary/20 pl-4">
+                        <h4 className="font-black text-foreground text-lg leading-tight"><TranslatedText text={exp.title} /></h4>
                         <p className="text-sm md:text-base text-muted-foreground font-medium"><TranslatedText text={exp.details} /></p>
                     </div>
                   ))}
@@ -453,7 +453,7 @@ export default function TutorPage() {
                 <ul className="space-y-4">
                     {offerings.map((offer, index) => (
                         <li key={index} className="text-base md:text-lg font-bold flex items-start">
-                            <Check className="mr-3 h-6 w-6 text-accent shrink-0 mt-0.5" />
+                            <Check className="mr-3 h-6 w-6 text-primary-foreground shrink-0 mt-0.5" />
                             <TranslatedText text={offer} />
                         </li>
                     ))}
@@ -461,11 +461,11 @@ export default function TutorPage() {
                 <div className="mt-10 pt-10 border-t border-primary-foreground/10">
                     <CardTitle className="mb-6 text-xl font-black uppercase tracking-widest opacity-60"><TranslatedText text="Download My Tutoring CV"/></CardTitle>
                      <div className="flex flex-col gap-4">
-                         <Button onClick={() => generateTutorCv('preview')} variant="outline" className="h-14 rounded-full border-2 border-white/20 bg-white/10 hover:bg-white/20 text-white font-bold transition-all" disabled={isGenerating}>
+                         <Button onClick={() => generateTutorCv('preview')} variant="outline" className="h-14 rounded-full border-2 border-primary-foreground/25 bg-primary-foreground/10 hover:bg-primary-foreground/20 text-primary-foreground font-bold transition-all" disabled={isGenerating}>
                              {isGenerating ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Eye className="mr-2 h-5 w-5" />}
                              <TranslatedText text="Preview CV" />
                          </Button>
-                         <Button onClick={() => generateTutorCv('download')} className="h-14 rounded-full bg-white text-primary hover:bg-accent hover:text-white font-black text-lg transition-all shadow-xl" disabled={isGenerating}>
+                         <Button onClick={() => generateTutorCv('download')} className="h-14 rounded-full bg-primary-foreground text-primary hover:bg-primary-foreground/90 font-black text-lg transition-all shadow-xl" disabled={isGenerating}>
                              {isGenerating ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Download className="mr-2 h-5 w-5" />}
                              <TranslatedText text="Download CV" />
                          </Button>
@@ -498,7 +498,7 @@ export default function TutorPage() {
                                 className="object-contain p-2 transition-transform duration-300 group-hover:scale-[1.02]"
                             />
                             <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                <div className="flex items-center gap-2 text-white text-sm font-medium bg-primary/90 px-5 py-2.5 rounded-full shadow-lg">
+                                <div className="flex items-center gap-2 text-primary-foreground text-sm font-medium bg-primary/90 px-5 py-2.5 rounded-full shadow-lg">
                                     <Maximize2 className="h-4 w-4" />
                                     <TranslatedText text="Click to Expand" />
                                 </div>
@@ -534,7 +534,7 @@ export default function TutorPage() {
                 {tutorCertifications.map((cert, index) => (
                     <Card key={index} className="bg-card/50 shadow-sm border-none rounded-2xl hover:shadow-lg transition-all p-4">
                         <CardHeader className="pb-4">
-                            <CardTitle className="text-lg md:text-xl text-accent font-black tracking-tight"><TranslatedText text={cert.title} /></CardTitle>
+                            <CardTitle className="text-lg md:text-xl text-foreground font-black tracking-tight"><TranslatedText text={cert.title} /></CardTitle>
                         </CardHeader>
                         <CardContent>
                             <p className="text-sm md:text-base text-muted-foreground font-bold">
@@ -642,7 +642,7 @@ export default function TutorPage() {
                           requestStatus === 'submitting' && 'opacity-50 cursor-not-allowed',
                           requestStatus === 'success'
                             ? 'bg-button-success text-button-success-foreground'
-                            : 'bg-accent hover:bg-accent/90 text-accent-foreground'
+                            : 'bg-primary text-primary-foreground hover:bg-primary/90'
                         )}
                       >
                         {requestStatus === 'submitting' ? (
