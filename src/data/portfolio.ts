@@ -422,7 +422,7 @@ export const educationData: Education[] = [
         duration: '2026',
     },
     {
-        degree: 'BSc Software and Information Systems Administration',
+        degree: 'BSc Software and Administration of Information Systems',
         university: 'Kursk State University, Russia',
         duration: '2017 – 2021',
     },
