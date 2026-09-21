@@ -26,24 +26,27 @@ function EdusaScholarBadge() {
         >
           <path
             d="M60 10L77 39L109 41L86 63L93 96L60 77L27 96L34 63L11 41L43 39L60 10Z"
-            fill="currentColor"
-            className="text-white"
+            fill="#0a3d5e"
           />
           <path
-            d="M60 36c-7 0-12.5 5.5-12.5 12.5 0 2.5.7 4.9 2 6.9L60 75l10.5-19.6c1.3-2 2-4.4 2-6.9C72.5 41.5 67 36 60 36Z"
-            fill="#eaf7ff"
+            d="M60 32c-8.4 0-15 6.6-15 15 0 2.4.6 4.8 1.8 6.8L60 78l13.2-24.2c1.2-2 1.8-4.4 1.8-6.8 0-8.4-6.6-15-15-15Z"
+            fill="#ffffff"
           />
-          <path
-            d="M47 79c5.2 7.4 15 12.5 13 12.5-2 0-10.5-5.1-13-12.5Z"
-            fill="#eaf7ff"
-          />
-          <path d="M57 44c8 4 18 13 16 27-2 15-10 21-16 23-4-2-12-7-15-17-3-11 1-23 15-33Z" fill="#edf9ff" opacity="0.8"/>
-          <path d="M70 48c7 3 11 9 11 16 0 8-3 15-9 18l-5 2 5-17 2-19Z" fill="#edf9ff"/>
-          <path d="M60 18l7 20h-14l7-20Z" fill="#edf9ff" opacity="0.9"/>
+          <path d="M44 80c7 11 16 15 16 15s9-4 16-15l-16 9-16-9Z" fill="#ffffff" />
+          <path d="M60 45c8 3 17 11 15 25-2 15-9 21-15 24-4-2-11-7-14-17-3-11 2-23 14-32Z" fill="#ffffff" opacity="0.85"/>
+          <path d="M72 46c8 4 12 10 12 18 0 9-5 16-12 20l-7 3 7-19 0-22Z" fill="#ffffff"/>
+          <path d="M60 16l7 21h-14l7-21Z" fill="#ffffff" opacity="0.9"/>
+          <path d="M34 83L56 58L64 76L51 94L34 83Z" fill="#d72638"/>
+          <path d="M38 80L54 60L60 75L47 90L38 80Z" fill="#d72638"/>
+          <path d="M60 52H90V64H60V52Z" fill="#d72638"/>
+          <path d="M64 61H88V72H64V61Z" fill="#d72638"/>
+          <path d="M60 70H84V81H60V70Z" fill="#d72638"/>
         </svg>
       </div>
-      <span className="text-xs font-bold tracking-[0.18em] text-sky-800 uppercase dark:text-sky-100 sm:text-sm">
-        EdUSA Scholar
+      <span className="text-xs font-black tracking-[0.08em] sm:text-sm" aria-label="EdUSA scholar">
+        <span className="text-[#0a3d5e]">Ed</span>
+        <span className="text-[#d72638]">USA</span>
+        <span className="ml-1 text-[#0a3d5e] lowercase">scholar</span>
       </span>
     </div>
   );
